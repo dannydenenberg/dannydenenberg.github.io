@@ -8,6 +8,11 @@ url:                 http://getpoole.com
 paginate:            1
 baseurl:             ""
 
+# math
+markdown: kramdown
+kramdown:
+   math_engine: mathjax
+
 # Assets
 #
 # We specify the directory for Jekyll so we can use @imports.
