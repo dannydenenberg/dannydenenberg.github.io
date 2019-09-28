@@ -7,9 +7,7 @@ _The Strange Case of Dr. Jekyll and Mr. Hyde_ tells the story of a lawyer invest
 
 Here's some inline math \\(a=\frac{\sum F}{m}\\).
 
-<p>$$\f{x} = \int_{-\infty}^\infty
-    \hat \f\xi\,e^{2 \pi i \xi x}
-    \,d\xi$$</p>
+<p>$$a= \int_{-\infty}^\infty  \xi\,e^{2 \pi i  x} ,d$$</p>
 
 ---
 
