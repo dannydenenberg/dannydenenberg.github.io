@@ -1,3 +1,8 @@
+---
+layout: post
+title: Introduction
+permalink: univariate-linear-regression
+---
 
 # Univariate Linear Regression & ML Intro
 
