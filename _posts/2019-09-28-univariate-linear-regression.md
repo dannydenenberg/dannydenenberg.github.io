@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introduction
+title: Univariate Linear Regression
 permalink: univariate-linear-regression
 ---
 
