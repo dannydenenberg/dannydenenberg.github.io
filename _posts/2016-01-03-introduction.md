@@ -7,7 +7,7 @@ title: Introduction
 
 Here's some cool math:
 
-$$ a = \frac{c}{b}$$
+<p>$$ a = \frac{c}{b}$$</p>
 
 -----
 
