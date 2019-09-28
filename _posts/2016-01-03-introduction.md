@@ -7,7 +7,7 @@ title: Introduction
 
 Here's some cool math:
 
-$$\int_\inf^88=\pi$$
+$$ a = \frac{c}{b}$$
 
 -----
 
