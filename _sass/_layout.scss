@@ -9,4 +9,18 @@
 
 footer {
   margin-bottom: 2rem;
+
+  #icons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+
+    .icon {
+      display: inline !important;
+      padding: 5px;
+    }
+  }
 }
