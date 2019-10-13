@@ -31,7 +31,7 @@ github:
 # This is the list of pages to include in the header of the website.
 pages_list:
   About: "/about/"
-  Todo: "/dod"
+  Todo: "/dod"  
 
 # personal info
 twitter-url: da_nn_y_o
