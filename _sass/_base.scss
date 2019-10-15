@@ -45,8 +45,8 @@ h6 {
 }
 
 html {
-  // font-family: $root-font-family;
-  font-family: var(--font-default);
+  font-family: $root-font-family;
+  // font-family: var(--font-default);
   font-size: $root-font-size;
   line-height: $root-line-height;
 
