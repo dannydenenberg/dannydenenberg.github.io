@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-![](/goods/solly.tiff)
+![](/goods/solly.jpg)
 
 > Hey yall! I'm workin' on developing this site into a beautiful flower 🌺 (btw, want this theme? [Here ya go!](https://github.com/dannydenenberg/newcomen))
 
