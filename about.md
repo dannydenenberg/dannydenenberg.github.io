@@ -47,3 +47,10 @@ I also have done some study into the mathematical underworkings of nerual nets a
           <p>Keybase</p>
         </a>
 </div>
+<style>
+        .col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+        </style>
