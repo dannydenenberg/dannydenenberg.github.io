@@ -39,5 +39,7 @@ I also have done some study into the mathematical underworkings of nerual nets a
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
+    padding: 20px;
+    float: left;
 }
         </style>
