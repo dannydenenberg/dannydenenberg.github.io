@@ -13,4 +13,37 @@ I am CRAZY about website themes, and like to develop my own, like this one here.
 
 I also have done some study into the mathematical underworkings of nerual nets as well as database-client relationships in Node.js/Typescript/JavaScript. Some of those findings/explanations you can find [here](https://medium.com/@dannydenenberg).
 
-{% include contact-links.html %}
+     <div class="col small">
+        <a href="https://twitter.com/BenBalter" rel="me" target="_blank" data-proofer-ignore="true" class="text-muted">
+          <i class="fab fa-twitter fa-2x">&nbsp;</i>
+          <p>Twitter</p>
+        </a>
+      </div>
+    
+      <div class="col small">
+        <a href="https://facebook.com/BenBalter" rel="me" target="_blank" data-proofer-ignore="true" class="text-muted">
+          <i class="fab fa-facebook-f fa-2x">&nbsp;</i>
+          <p>Facebook</p>
+        </a>
+      </div>
+    
+      <div class="col small">
+        <a href="https://www.linkedin.com/in/BenBalter" rel="me" target="_blank" data-proofer-ignore="true" class="text-muted">
+          <i class="fab fa-linkedin-in fa-2x">&nbsp;</i>
+          <p>LinkedIn</p>
+        </a>
+      </div>
+    
+      <div class="col small">
+        <a href="https://github.com/benbalter" rel="me" target="_blank" data-proofer-ignore="true" class="text-muted">
+          <i class="fab fa-github fa-2x">&nbsp;</i>
+          <p>GitHub</p>
+        </a>
+      </div>
+    
+      <div class="col small">
+        <a href="https://keybase.io/benbalter" rel="me" target="_blank" data-proofer-ignore="true" class="text-muted">
+          <i class="fab fa-keybase fa-2x">&nbsp;</i>
+          <p>Keybase</p>
+        </a>
+</div>
