@@ -3,6 +3,8 @@ layout: page
 title: About
 ---
 
+![](/goods/solly.tiff)
+
 > Hey yall! I'm workin' on developing this site into a beautiful flower 🌺 (btw, want this theme? [Here ya go!](https://github.com/dannydenenberg/newcomen))
 
 I'm an award winning musician, singer, and actor from Omaha, NE :) (I also do a bit of coding on the side)
