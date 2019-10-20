@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    Automating Backups with Cron & GitHub &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">Automating Backups with Cron & GitHub</h1>
+  <time datetime="2018-05-24T00:00:00-05:00" class="post-date">May 24, 2018</time>
+
+  <p>Back when I was using <a href="https://ghost.org/">Ghost</a> as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.</p>
+
+<p>Being me, I found a <em>hacky</em> way around paying.</p>
+
+<p>I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. <!--more--></p>
+
+<p>To do this, make sure git is installed on your Linux/Unix system.</p>
+
+<p>Then set your username and email in the git preferences through the terminal.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email "MY_NAME@example.com"
+</code></pre></div></div>
+
+<p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
+</code></pre></div></div>
+
+<p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
+
+<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
+<span class="nb">cd</span> /home/mybackupsrepo <span class="c"># go to the backups repo</span>
+git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <span class="nt">-m</span> <span class="s2">"</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> git push origin master <span class="c"># commit, push</span>
+<span class="nb">sudo </span>rm <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
+</code></pre></div></div>
+
+<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
+
+<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
+
+<p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># crontab -e</span>
+<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
+<span class="nv">MAILTO</span><span class="o">=</span>root@example.com
+<span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+<span class="c"># For details see man 4 crontabs</span>
+
+<span class="c"># Example of job definition:</span>
+<span class="c"># .---------------- minute (0 - 59)</span>
+<span class="c"># |  .------------- hour (0 - 23)</span>
+<span class="c"># |  |  .---------- day of month (1 - 31)</span>
+<span class="c"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
+<span class="c"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
+<span class="c"># |  |  |  |  |</span>
+<span class="c"># *  *  *  *  * user-name  command to be executed</span>
+
+<span class="c"># backup using the rsbu program to the internal 4TB HDD and then 4TB external</span>
+01 01 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/rsbu <span class="nt">-vbd1</span> <span class="p">;</span> /usr/local/bin/rsbu <span class="nt">-vbd2</span>
+
+<span class="c"># Set the hardware clock to keep it in sync with the more accurate system clock</span>
+03 05 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /sbin/hwclock <span class="nt">--systohc</span>
+
+<span class="c"># Perform monthly updates on the first of the month</span>
+<span class="c"># 25 04 1 * * /usr/bin/dnf -y update</span>
+</code></pre></div></div>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
+        <small
+          ><time datetime="2019-09-20T00:00:00-05:00">20 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>

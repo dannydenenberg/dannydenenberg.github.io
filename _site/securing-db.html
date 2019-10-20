@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    Securing your database ✵ &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">Securing your database ✵</h1>
+  <time datetime="2019-08-05T00:00:00-05:00" class="post-date">August 05, 2019</time>
+
+  <p><a href="https://github.com/dannydenenberg/mongodb-users">Here</a> is a link to all of the source code WITH authentication and hashing.</p>
+
+<p>This article assumes knowledge of NodeJS, Express.js, MongoDB, and how all of those technologies interact programmatically. I wrote a <a href="https://denenberg.us/creating-and-connecting-a-mongodb-database-and-node-js-server-to-a-front-end">great article</a> on that topic as well.</p>
+
+<p>Let’s start by taking a look at some code for a MongoDB database connection through Node.js and ExpressJS.<!--more--></p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/1/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>It achieves the central goal for that article which was to be able to connect a front end to a Mongo database. It does this by allowing requests to be sent to a server which has the functionality to read, write, and update the database.</p>
+
+<p>Well, now there is a new issue – we have users that each have their own unique information, but ANYONE who sends a get request to the server with a username of some user can acquire their information! That is SUPER unsafe. To combat this, most websites have a password field for each user (as I’m sure you know) which is kept private. This combination of public and private “keys” is a nice way for users to be able to connect with each other using their public usernames, but keep their info secure with a strong password.</p>
+
+<p>Let’s implement this in our NodeJS program by first adding a <code class="highlighter-rouge">pass</code> field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called <code class="highlighter-rouge">deb</code> with the password <code class="highlighter-rouge">1234</code> (I am using JavaScript to send the request to our server – make sure the server is running on port <code class="highlighter-rouge">4567</code>):</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/12/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>Okay, to make sure the <code class="highlighter-rouge">fetch()</code> request worked, look at the data inside of your MongoDB cluster collections in Atlas.</p>
+
+<p>Great. The user has a password, but we can still send a get request and get the information without using a password. To password-protect the user info, every time a get request is sent, a password should be sent along with it. The server will then compare the password sent in the get request with the password stored in the database associated with the user the get request was sent for. If they are equivalent, the server will send back the user information. Otherwise, it will send back some sort of an error code for the wrong password.</p>
+
+<p>In short, in the express server’s response to get requests, it should check that the sent password is correct before allowing the request to access the user’s information.</p>
+
+<p>To send a password along with the get request, we will use simple HTTP url request parameters. The GET request will look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:4567/username?pass=mypassword1
+</code></pre></div></div>
+
+<p><strong>One thing to note</strong> is how to get the query parameters in Express.js (Node.js): <code class="highlighter-rouge">req.query.myparam</code>. Or, in our specific case, <code class="highlighter-rouge">req.query.pass</code> gives the password sent.</p>
+
+<p>Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the <code class="highlighter-rouge">/user</code> and <code class="highlighter-rouge">?pass=__ fields</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s2">"/:user"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Password: </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">pass</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>To test this, run the Node server. In the browser go to <code class="highlighter-rouge">localhost:4567/dan?pass=abc</code>. Switch back to the console and you should see the password printed there.</p>
+
+<p>Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the <code class="highlighter-rouge">/user</code>. If that is the same as the URL <code class="highlighter-rouge">pass</code> parameter, we send back the info on the user.</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/10/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>To test this out, restart your server with updated code. Go to <code class="highlighter-rouge">localhost:4567/deb?pass=1234</code> in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.</p>
+
+<p>Okay, nice! You have now password protected all get requests to recieve data. There are, however, a couple of issues with this method, one of which is the fact that if your database is compromised, you will have leaked a piece of very sensitive information that users have trusted you with: their password (which is likely being reused on different sites). This is why, instead of being stored as they are, passwords are typically <strong>hashed</strong> using a <em>one way</em> function.</p>
+
+<p>The following section will go more in depth into hashing, why it is important, and how to use it to <strong>securely</strong> store data.</p>
+
+<hr />
+
+<p>Hashing algorithms are one way functions. They take any string and turn it into a fixed-length “fingerprint” that is unable to be reversed. This means that if the data is compromised, the onlooker cannot get the user’s passwords if they were hashed. At no point were they ever stored on the drive without being in their hashed form.</p>
+
+<p>Websites using hashing typically have this workflow:</p>
+
+<ol>
+  <li>User creates an account</li>
+  <li>Their password is hashed and stored on the base</li>
+  <li>When the user attempts to log in, the hash of their entered password is compared to the has stored in the database</li>
+  <li>If the hashes match, the user can access the account. If not, a <strong>generic</strong> error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hash("hellu") = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
+hash("danny") = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
+</code></pre></div></div>
+
+<p><strong>NOTE:</strong> Only secure, or <strong>cryptographic hash functions</strong>, can be used for password hashing (SHA256, SHA512, RipeMD, WHIRLPOOL, etc.)</p>
+
+<p>Sadly, just cryptographically hashing passwords does not ensure safety.</p>
+
+<h2 id="cracking-hashes">Cracking Hashes</h2>
+
+<h3 id="brute-force-and-dictionary-attacks">Brute Force and Dictionary Attacks</h3>
+
+<p>The easiest way to decrypt a hash is just to guess the password. The way to do this is to guess the user password, hash the guess, and compare it to the hash of the actual password you are trying to solve. If the two hashes match, the unhashed version of the guess is the right password.</p>
+
+<p>A <strong>brute force</strong> attack goes through every possible combination of characters given a certain length. Even though they will 100% <em>eventually</em> crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying aaa : failed
+Trying aab : failed
+Trying aac : failed
+...
+Trying acb : failed
+Trying acc : success!
+</code></pre></div></div>
+
+<p><strong>Dictionary attacks</strong> use a file containing commonly used words, phrases, or passwords that are likely to be a used password. There are <a href="https://en.wikipedia.org/wiki/Wikipedia:10,000_most_common_passwords">databases you can find</a> that hold the top 100,000 (or however many) most commonly used passwords. The attack hashes these passwords and compares the hash to the password to crack. For cracking the average Joe Shmo, this is sometimes a good method to use and is certainly faster than using a brute force attack.</p>
+
+<p><strong>Lookup tables</strong> can improve cracking performance by pre-computing the hashes so when it comes time to guess the password, the program needs not spend compute time actually hashing the guesses.</p>
+
+<p>In the next section, we will take a look at “salting” which makes these cracking methods impossible to use reliably.</p>
+
+<h2 id="salting">Salting</h2>
+
+<p>The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a <em>salt</em> to the passwords BEFORE hashing.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
+</code></pre></div></div>
+
+<p>The salt doesn’t have to be secret because an attacker doesn’t know what the salt will be and thus cannot make pre computed tables for it.</p>
+
+<h2 id="the-dos-and-donts-of-salting">The Dos and Don’ts of Salting</h2>
+
+<p>Don’t:</p>
+
+<ul>
+  <li>Reuse the same salt for each password hashed</li>
+  <li>Use short salts</li>
+  <li>Use wierd double hashes (ex: hash(hash(hash(‘mypass’)))) in lou of a salt</li>
+</ul>
+
+<p>Do:</p>
+
+<ul>
+  <li>Generate random salts using a <strong>Cryptographically Secure Pseudo-Random Number Generator</strong> (CSPRNG)</li>
+  <li>Generate a new random unique salt for <em>EACH</em> password hashed</li>
+  <li>Generate LONG salts</li>
+</ul>
+
+<h2 id="salting-workflow">Salting Workflow</h2>
+
+<p>Storing a Password:</p>
+
+<ol>
+  <li>Generate super long salt with a CSPRNG</li>
+  <li>Prepend the salt to the user password and hash it</li>
+  <li>Save the salt and the hash in the database</li>
+</ol>
+
+<p>Checking a Password:</p>
+
+<ol>
+  <li>Get the salt and hash from the database</li>
+  <li>Prepend the salt to the submitted password and hash it</li>
+  <li>Compare the hashes. If they are equal, the password is correct</li>
+</ol>
+
+<p><strong>NOTE:</strong> Always always always hash on the server. Sometimes JavaScript isn’t enabled. Also, no one else can access the server so it is ensured to be hashed (You can <em>also</em> hash on the client side if you so choose)</p>
+
+<p>And with that, you have learned the basics of securely hashing data. Now let’s continue on with the (not-as-hashy parts of the) article.</p>
+
+<h2 id="our-hash-function">Our Hash Function</h2>
+
+<p>We will be using the SHA256 hashing function. How, exactly, hashing functions work is beyond the scope of this article, but if you are interested, see <a href="https://en.wikipedia.org/wiki/Hash_function">this</a> and <a href="https://gfredericks.com/blog/98">this</a>.</p>
+
+<p>First of all, install the dependency for our function: <code class="highlighter-rouge">npm i -s crypto</code>. Also, add the import to the top of the NodeJS file: <code class="highlighter-rouge">const crypto = require("crypto");</code></p>
+
+<p>Now add this code to the bottom of the NodeJS file. We will call the function <code class="highlighter-rouge">hash</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hashes strings with sha256 for storing passwords</span>
+<span class="kd">function</span> <span class="nx">hash</span><span class="p">(</span><span class="nx">pwd</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">crypto</span>
+    <span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="s2">"sha256"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">pwd</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s2">"base64"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="the-plan">The Plan</h2>
+
+<p>There are 3 more feature we need to implement before I can call the database “secure”.</p>
+
+<ol>
+  <li>Hash &amp; salt passcodes for new users being stored in response to <code class="highlighter-rouge">post</code> requests</li>
+  <li>Use the salt to hash and check the passwords when a <code class="highlighter-rouge">get</code> request needs info</li>
+  <li>Use the salt to check passwords for updating info on the database in response to <code class="highlighter-rouge">put</code> requests.</li>
+</ol>
+
+<p>Alrighty, let’s get started!</p>
+
+<h2 id="post-request-security">POST Request Security</h2>
+
+<p>Passwords need to be hashed and salted before being stored in the database.</p>
+
+<p>Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: <code class="highlighter-rouge">npm i -s csprng</code>. Also, add the import in the top of the NodeJS file: <code class="highlighter-rouge">const csprng = require('csprng');</code></p>
+
+<p>Here is the <em>well commented</em> code for the server’s response to POST requests. It uses the <code class="highlighter-rouge">hash()</code> function defined earlier.</p>
+
+<p><strong>NOTE:</strong> The user password is sent as the <code class="highlighter-rouge">pass</code> field in the body of the request (contrary to how it was sent before).</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/8/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<h2 id="get-request-security">GET Request Security</h2>
+
+<p>Now to check if an entered passcode is correct, we have to get the stored salt and use that to hash the entered passcode to check against the stored one.</p>
+
+<p>Here is the code for the GET request response.</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/5/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<h2 id="put-request-security">PUT Request Security</h2>
+
+<p>When updating info in the database, like the GET request, a password must be submitted to make sure the user is the right person to update his data. Also like the GET request, we need to use the stored salt associated with the user to hash the entered password for hashing.</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/6/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p><strong>Congrats for getting through this article!! 🎉🥳</strong></p>
+
+<p>Although I used a MongoDB database for storage and NodeJS for the server, the concepts covered here are applicable in ANY technology you may choose.</p>
+
+<p>Have fun with your database!</p>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
+        <small
+          ><time datetime="2019-09-20T00:00:00-05:00">20 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>

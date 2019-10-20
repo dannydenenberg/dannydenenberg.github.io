@@ -13,5 +13,6 @@ I am CRAZY about website themes, and like to develop my own, like this one here.
 
 I also have done some study into the mathematical underworkings of nerual nets as well as database-client relationships in Node.js/Typescript/JavaScript. Some of those findings/explanations you can find [here](https://medium.com/@dannydenenberg).
 
- 
-{% include contact-links.html %}
+### How the hell can I get in touch with this guy??
+
+Email sure works in a jiffy.....`danny@denenberg.com`

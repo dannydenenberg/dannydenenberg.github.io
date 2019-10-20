@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    Gradient descent for univariate linear regression &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">Gradient descent for univariate linear regression</h1>
+  <time datetime="2019-09-20T00:00:00-05:00" class="post-date">September 20, 2019</time>
+
+  <p>Gradient descent is used for many aspects of machine learning. One area in which it is used a ton is in optimizing artificial neural networks. I will explain the concept of how this works once you understand the basic gradient descent operations.</p>
+
+<p>Gradient descent can also be used to minimize arbitrary functions such as more general ones like cost functions with \(n\) number of parameters: \(J(\theta _0, \theta _1, \theta _2, \theta _3, … , \theta _n)\).</p>
+
+<p>Please keep in mind that gradient descent is NOT HARD. Especially understanding how it minimizes functions is super easy to get. So, if you don’t understand a concept right away, keep on trying to see it from different angles and I’m sure it’ll click.</p>
+
+<p>So, without further ado let me give you the general outline for minimizing a function using G.D.:</p>
+
+<ol>
+  <li>Start with some value for \(\theta _0\)and \(\theta _1\)</li>
+  <li>Keep changing \(\theta _0\)and \(\theta _1\)to reduce \((\theta _0, \theta _1) \)until we hopefully find a minimum</li>
+</ol>
+
+<p><strong>Note:</strong> The <em>assignment operator</em> in maths looks like this: “\(:=\)”. It can also be used to reassign variable values. The normal “\(=\)” is a truth assertion.</p>
+
+<p>Here are some variable to know before I get into the algorithm:</p>
+
+<p>\(\alpha=\)”alpha” is the <em>learning rate</em>. It is how much we change the parameter values by each update step. It usually is a constant. Ex: If \(\alpha=10\)whatever value the algorithm gives to update the parameter value by, it is multiplied by a factor of ten.</p>
+
+<p>\(j=\)it is a subscript to \(\theta\)to represent a which parameter we are dealing with. It is a generic form of saying something like \(theta _0$.</p>
+
+<p>And a refresher on the <strong>cost function</strong>:
+$J(\theta _0,\theta _1)=\frac{1}{2m} \sum _{i=1} ^m (h _\theta (x^i) - y^i)^2$</p>
+
+<hr />
+
+<p>Here is the actual algorithm:</p>
+
+<p>$repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{ \\ \hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }\\ \} \hspace{67mm}$</p>
+
+<p>This is repeated simultaneously for \(\theta _0\)and \(\theta _1\). A.K.A this is repeated simultaneously for the \(j\)values of \(0,1\).</p>
+
+<p>Programmatically, you will have to create temporary variables to be able to simulate a simultaneous update.</p>
+
+<p><strong>Correct Simultaneous Update:</strong></p>
+
+<p>$
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } \\ temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } \\ \\ \\ \\ \theta _0 := temp0 \\ \theta _1 := temp1
+$</p>
+
+<p><strong>INcorrect Simultaneous Update:</strong></p>
+
+<p>$
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } \\ \theta _0 := temp0 \\  temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 }  \\ \theta _1 := temp1
+$</p>
+
+<blockquote>
+  <p>The error here occurs because \(\theta _0\)is updated before \(\theta _1\). That means that \(\theta _1\)is using the newly updated value of \(\theta _0\)to calculate the partial derivative with respects to \(\theta _1\)which is NOT what we want to happen.</p>
+</blockquote>
+
+<h2 id="example-using-an-easier-function">Example Using an Easier Function</h2>
+
+<p>Let’s say that our task was to minimize some arbitrary cost function with one parameter \((\theta _1)\)where \(theta _1 \in ℝ\). The graph of the function \((\theta _1)\)(if it is a squared error cost function) might look something like this:</p>
+
+<p><img src="https://i.snap.as/UdTq5I8.png" alt="" /></p>
+
+<p>What we want to find is the value of \(\theta\) that makes the \(y\)component of this graph to be as low as possible – in this case, 0. Just looking at the graph, we can see that that number is 4. But, in more complex cost functions that deal with hundreds of parameters/dimensions, simply graphing the cost function will not yield an easy-to-see answer.</p>
+
+<p>In terms of gradient descent, we start by choosing a random value for \(\theta _1\)(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from \(\theta _1$’s current value. To find the slope we find the derivative of the cost function with respect to \(\theta _1\).</p>
+
+<p><strong>Note:</strong> If you don’t know calc already, THAT’S TOTALLY OKAY! I didn’t either when I started learning about this subject. I taught all I needed to know to myself. I would highly highly recommend 3Blue1Brown’s <a href="https://www.youtube.com/watch?v=WUvTyaaNkzM&amp;list=PL0-GT3co4r2wlh6UHTUeQsrf3mlS2lk6x">“The Essence of Calculus”</a> as a starting point. It has amazing animations and fantastic descriptions of everything you would need to know. If you want to just keep trudging along, though, just note that the derivative of a function allows you to find the slope of any point along that original function.</p>
+
+<p>Okay, back to it.</p>
+
+<p>Here is the expression for updating our parameter:</p>
+
+<p>$
+\theta _1 := \theta _1 - \alpha \frac{d J(\theta _1)}{d\theta _1}
+$</p>
+
+<p>Next:</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Example using easier function, J(theta 1)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Talk about alpha</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Linear regression model review</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />What is the derivative</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />New algorithm with the derivatives</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Cost function will always be a “bowl” function like the image</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Discuss Batch gradient descent using ALL training examples</li>
+</ul>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/securing-db">
+        Securing your database ✵
+        <small
+          ><time datetime="2019-08-05T00:00:00-05:00">05 Aug 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>

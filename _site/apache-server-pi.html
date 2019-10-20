@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    Setting up an Apache server on a Raspberry Pi &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">Setting up an Apache server on a Raspberry Pi</h1>
+  <time datetime="2017-04-23T00:00:00-05:00" class="post-date">April 23, 2017</time>
+
+  <h2 id="contents">Contents</h2>
+
+<ul>
+  <li><a href="#install-apache">Install apache</a></li>
+  <li><a href="#test-the-web-server">Test the web server</a></li>
+  <li><a href="#changing-the-default-page">Changing the default page</a></li>
+  <li><a href="#install-php-if-you-want">Install PHP (If you want)</a></li>
+  <li><a href="#making-it-public">Making it public</a></li>
+  <li><a href="#port-forwarding">Port forwarding</a></li>
+</ul>
+
+<h2 id="install-apache">Install apache</h2>
+
+<ol>
+  <li>Install apache. Head into terminal and update the available packages</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+<span class="sb">```</span>&lt;<span class="o">!</span><span class="nt">--more--</span><span class="o">&gt;</span>
+
+2. Then, install apache2
+
+<span class="sb">```</span>bash
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get install apache2 <span class="nt">-y</span>
+</code></pre></div></div>
+
+<h2 id="test-the-web-server">Test the web server</h2>
+
+<p>By default, Apache puts a test HTML file in the web folder. This default web page is served when you browse to http://localhost/ on the pi itself, or http://192.168.0.6 (whatever the pi’s internal ip address is) from another computer on the local network. To find the pi’s ip address, type <code class="highlighter-rouge">hostname -I</code> at the terminal. Learn more about <a href="https://www.raspberrypi.org/documentation/remote-access/ip-address.md">finding IP’s</a></p>
+
+<p>The default page will look something like this:</p>
+
+<p><img src="https://i.snap.as/btmE04z.png" alt="" /></p>
+
+<p>If you see this, you have apache working!</p>
+
+<h2 id="changing-the-default-page">Changing the default page</h2>
+
+<p>This default web page is an HTML file on the filesystem. It is located at <code class="highlighter-rouge">/var/www/html/index.html</code>.</p>
+
+<p>Navigate to this directory in terminal and see what is in there:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /var/www/html
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-al</span>
+</code></pre></div></div>
+
+<p>This will spit out:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>total 12
+drwxr-xr-x  2 root root 4096 Jan  8 01:29 <span class="nb">.</span>
+drwxr-xr-x 12 root root 4096 Jan  8 01:28 ..
+<span class="nt">-rw-r--r--</span>  1 root root  177 Jan  8 01:29 index.html
+</code></pre></div></div>
+
+<p>This means that there is one file in /var/www/html/ called <code class="highlighter-rouge">index.html</code> and is owned by the <code class="highlighter-rouge">root</code> user. In order to edit the file, you have to change ownership. You could use <code class="highlighter-rouge">sudo</code>. Like this: <code class="highlighter-rouge">sudo chown pi: index.html</code>.</p>
+
+<p>Now, if you want to put files in your website, you can place them in the <code class="highlighter-rouge">/var/www/html</code> folder!</p>
+
+<h2 id="install-php-if-you-want">Install PHP (If you want)</h2>
+
+<p>Go into terminal and type:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get install php libapache2-mod-php <span class="nt">-y</span>
+</code></pre></div></div>
+
+<p>Now, you can run php from your server. We are going to try it!</p>
+
+<p>Go into the web folder where <code class="highlighter-rouge">index.html</code> is stored (<code class="highlighter-rouge">/var/www/html</code>) and remove the index by typing:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>rm index.html
+</code></pre></div></div>
+
+<p>Now, we are going to create an index for our site in php. Create and edit a new index:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>nano index.php
+</code></pre></div></div>
+
+<p><em>NOTE: Nano is a text editor pre-installed on all Raspberry Pi’s (and Linux/Unix devices for that matter)</em></p>
+
+<p>Put some PHP in it (we’ll make it dynamic):</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">"hello world. Today is "</span> <span class="o">.</span> <span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">);</span> <span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<h2 id="making-it-public">Making it public</h2>
+
+<p>This will explain how others can access your web site through port forwarding and your IPv4 address.</p>
+
+<p>Go to terminal. If you type <code class="highlighter-rouge">ifconfig</code> and press enter, you will get something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pi@raspberrypi:~ <span class="nv">$ </span>ifconfig
+eth0      Link encap:Ethernet  HWaddr b8:27:eb:96:cc:5a
+          inet addr:192.168.0.10  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::bb8e:9610:ab7b:7ae5/64 Scope:Link
+          inet6 addr: 2600:8804:1e80:6e30:c8b6:a7d8:c897:cd8f/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:18607 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:8644 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:2282499 <span class="o">(</span>2.1 MiB<span class="o">)</span>  TX bytes:1025772 <span class="o">(</span>1001.7 KiB<span class="o">)</span>
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:101 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:101 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1
+          RX bytes:9505 <span class="o">(</span>9.2 KiB<span class="o">)</span>  TX bytes:9505 <span class="o">(</span>9.2 KiB<span class="o">)</span>
+
+wlan0     Link encap:Ethernet  HWaddr b8:27:eb:c3:99:0f
+          inet addr:192.168.0.200  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::ba27:ebff:fec3:990f/64 Scope:Link
+          inet6 addr: 2600:8804:1e80:6e30:ba27:ebff:fec3:990f/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:58092 errors:0 dropped:48756 overruns:0 frame:0
+          TX packets:830 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:9698158 <span class="o">(</span>9.2 MiB<span class="o">)</span>  TX bytes:90407 <span class="o">(</span>88.2 KiB<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Now, if you want to get your internal ip address, you can search for the value after <code class="highlighter-rouge">inet addr:my.ip.add.ress</code>. Search for it like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ifconfig | <span class="nb">grep</span> <span class="s2">"inet addr:"</span>
+</code></pre></div></div>
+
+<p>This address you can type into any computer attatched to the local network and be able to access your server’s site.</p>
+
+<p><strong>But what if you want for everyone to be able to access your website?</strong></p>
+
+<p>To do this you have to use something called <strong>port forwarding</strong>. Port forwarding makes it so that when a request comes in to your router on a certain port, it can be redirected to a local computer. We will make it so that when you type in the browser <code class="highlighter-rouge">my.routers.ip.address:8090</code> you will be able to access your website from anywhere.</p>
+
+<h2 id="port-forwarding">Port forwarding</h2>
+
+<ol>
+  <li>
+    <p>Log into your router’s configuration page. To do this, go into your browser and type in the ip for the page. Usually the ip is something like this: <code class="highlighter-rouge">192.168.0.1</code>. If it is not that, search the web for your router’s configuration page address and type that as the url.</p>
+  </li>
+  <li>
+    <p>When you get to the login page you will need to input the username and password. Usually, the username is <code class="highlighter-rouge">admin</code> and the password is <code class="highlighter-rouge">password</code></p>
+  </li>
+  <li>
+    <p>When you are in, navigate to a tab called firewalls, and find a page called <code class="highlighter-rouge">port forwarding/virtual servers</code>.</p>
+  </li>
+  <li>
+    <p>To add a port forwarding rule, click <code class="highlighter-rouge">add</code></p>
+  </li>
+  <li>Fill out all of the ports with this number: <code class="highlighter-rouge">8090</code>. <em>NOTE: I would normally use port <code class="highlighter-rouge">80</code> so people would not have to bother with typing the port more than once, but some companies (like cox) do not allow forwarding on 80</em></li>
+  <li>
+    <p>For the IP address, put in the ip for your raspberry pi (inet addr: <strong>my.r.pi’s.ip</strong>). We found our pi’s ip in the previous section.</p>
+  </li>
+  <li>
+    <p>For the option to use <code class="highlighter-rouge">TCP</code>, <code class="highlighter-rouge">UDP</code>, or <code class="highlighter-rouge">BOTH</code>, choose <code class="highlighter-rouge">BOTH</code>.</p>
+  </li>
+  <li>Click the add button</li>
+</ol>
+
+<p>You have now successfully added port forwarding for your website and can access it outside of LAN!</p>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
+        <small
+          ><time datetime="2019-09-20T00:00:00-05:00">20 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>

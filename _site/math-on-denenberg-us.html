@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    About \(m\alef ^tH\) on denenberg.us &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">About \(m\alef ^tH\) on denenberg.us</h1>
+  <time datetime="2014-08-04T00:00:00-05:00" class="post-date">August 04, 2014</time>
+
+  <p><strong>All math on denenberg.us is rendered using <a href="https://katex.org">Katex</a></strong></p>
+
+<p>Here’s some inline \(5x=33x^2-8\pi\) math.</p>
+
+<p>Here’s some display math:
+$
+\int^{88}_\infty \frac{x^2}{\pi^4 x} \dot dx = 4
+$</p>
+
+<ul>
+  <li>To write math inline, enclose the math in <code class="highlighter-rouge">\(</code> to start and <code class="highlighter-rouge">\)</code> to end. Ex: <code class="highlighter-rouge">\(a=\frac{F}{m}\)</code>
+    <ul>
+      <li><strong>Note</strong> that when writing this in Jekyll markdown, you actually have to type 2 backslashes becuase the first acts as an escape character: <code class="highlighter-rouge">\\(a=\frac{F}{m}\\)</code></li>
+    </ul>
+  </li>
+  <li>To write display math, enclose the math in a single dollar sign: <code class="highlighter-rouge">$a=\frac{F}{m}$</code>
+    <ul>
+      <li>Why not 2 dollar signs you ask? It turns out that before Katex can even get to the math, if you are using 2 dollar signs the <strong>markdown parser turns it into a script tag</strong>…so not ideal.</li>
+    </ul>
+  </li>
+</ul>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
+        <small
+          ><time datetime="2019-09-20T00:00:00-05:00">20 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>

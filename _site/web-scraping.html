@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    Web scraping in node.js 101 &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">Web scraping in node.js 101</h1>
+  <time datetime="2018-03-12T00:00:00-05:00" class="post-date">March 12, 2018</time>
+
+  <p>Web scraping is a great way to create dynamic websites or to just be able to get data from sites without having access to their databases. In short, it is an easy method to get info from a site by going through the <strong>front end</strong> (what the user sees) HTML code.</p>
+
+<p>To get started with web scraping you must know how a website is structured. If you right click on a page, and click inspect (on chrome), you can see the developer tools.<!--more--></p>
+
+<p><img src="https://i.snap.as/V8yrpGZ.png" alt="" /></p>
+
+<p>This shows you the structure of the HTML/CSS/JavaScript code as well as network performace, errors, security, and much much more.</p>
+
+<p>Now, let’s say I want to grab the first image that you see on twitter programatically in the JavaScript console.</p>
+
+<p>Well, I could right click on the image, click inspect, right click on the element in the dev tools, and copy the css selector.</p>
+
+<p><img src="https://i.snap.as/XNXJhXa.png" alt="" /></p>
+
+<p>Then I could do a <code class="highlighter-rouge">document.querySelector(&lt;&lt;SELECTOR&gt;&gt;).src</code> and that would give me the URL of the image I want, and I could use that on a web page, for example:</p>
+
+<p><img src="https://i.snap.as/QnJblUJ.png" alt="" /></p>
+
+<p>This IS web scraping! I was able to gather data (an image) from a website without having access to the database. But this is super tedious and long, so to actually webscrape more efficiently, I use Node.js + Puppeteer.</p>
+
+<p>If you don’t already know, <a href="https://nodejs.org/">Node.js</a> is a runtime enviornment that allows JavaScript to be run on the server side. And <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).</p>
+
+<p>Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running <code class="highlighter-rouge">tsc -v</code> works in the terminal, you’re good to go!</p>
+
+<p>Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a <code class="highlighter-rouge">command not found</code> or something related by running one of the following, I suggest that you look at this article on how to install Node.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm -v # should be 6.0.0 or higher
+$ node -v # should be 9.0.0 or higher
+</code></pre></div></div>
+
+<p>Great! Let’s start a new project and install the dependencies:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir Web-Scraping-101 &amp;&amp; cd Web-Scraping-101
+$ npm init # go through all defaults
+$ npm i puppeteer # the google npm scraping package
+$ tsc --init # initialize typescript
+$ npm i @types/puppeteer # type declarations
+</code></pre></div></div>
+
+<p>Now open the folder in the text editor of your choice. Edit the <code class="highlighter-rouge">outDir</code> option in the <code class="highlighter-rouge">tsconfig.json</code> file to be <code class="highlighter-rouge">./build</code> and uncomment the line, so it looks like this:</p>
+
+<p><img src="https://i.snap.as/y1kZn10.png" alt="" /></p>
+
+<p>Create a new file in the root of the folder:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch app.ts
+</code></pre></div></div>
+
+<p>In <code class="highlighter-rouge">app.ts</code> add:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log("Twitter, here we come");
+</code></pre></div></div>
+
+<p>Now, to <strong>run this</strong>, in terminal, write: <code class="highlighter-rouge">tsc &amp;&amp; node build/app.js</code></p>
+
+<p><strong>NOTE:</strong> <code class="highlighter-rouge">tsc</code> builds all TypeScript files into the outDir directory defined in the config file and <code class="highlighter-rouge">node</code> runs a single JavaScript file.</p>
+
+<p>If you see <em>“Twitter, here we come”</em> appear in the terminal, you’ve got it working!</p>
+
+<p>Now, we will start to actually scrape using puppeteer.
+Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.ts</code> file:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">puppeteer</span> <span class="k">from</span> <span class="s2">"puppeteer"</span><span class="p">;</span> <span class="c1">// import the npm package that we installed</span>
+
+<span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// the rest of the code must be enclosed in an `async` function to be able to `await` for results</span>
+  <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span> <span class="c1">// launches an "invisible" chromium browser</span>
+  <span class="kd">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span> <span class="c1">// takes the browser to a new tab (page)</span>
+  <span class="kr">await</span> <span class="nx">page</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="s2">"https://example.com"</span><span class="p">);</span> <span class="c1">// takes the page to a specific url</span>
+
+  <span class="c1">// Get the "viewport" of the page,</span>
+  <span class="c1">// as reported by the page.</span>
+  <span class="c1">// NOTE: Anything inside of the `evaluate` function is DOM manipulation.</span>
+  <span class="c1">// No variables outside of the evaluate function can go in, and none can come out without being returned inside of the return object.</span>
+  <span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="c1">// use DOM manipulation to access the width and height of the page</span>
+      <span class="c1">// if you want to get elements out of the DOM and into the node js code, return theme here</span>
+      <span class="na">width</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span>
+      <span class="na">height</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span>
+      <span class="na">deviceScaleFactor</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span>
+    <span class="p">};</span>
+  <span class="p">});</span>
+
+  <span class="c1">// print out the DOM data</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Dimensions:"</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
+
+  <span class="c1">// remember to close the broser (invisible chromium)</span>
+  <span class="kr">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+<p>Please read through the commented code above to get a feel for what is going on ⬆.</p>
+
+<p>Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.</p>
+
+<p>First, edit the <code class="highlighter-rouge">await page.goto("https://example.com")</code> to be <code class="highlighter-rouge">await page.goto("https://twitter.com")</code></p>
+
+<p>Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span>
+  <span class="s2">"#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div"</span>
+<span class="p">);</span>
+<span class="c1">// the above returns the div for the middle column twitter feed</span>
+</code></pre></div></div>
+
+<p>Here is an image of what that represents:</p>
+
+<p><img src="https://i.snap.as/Taoa3a3.png" alt="" /></p>
+
+<p>To get all of the images from the middle column, I ended up doing this for the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">sources</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// an array of the links to each image</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
+    <span class="s2">"#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div img"</span>
+  <span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">img</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">sources</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">sources</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dimensions</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>There you go! You’ve just scraped image data from a twitter feed. A challenge would be to take this data and integrate it into an express server so that when a user goes to the root site, they are presented with all of these images.</p>
+
+<p>Thanks for reading!</p>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
+        <small
+          ><time datetime="2019-09-20T00:00:00-05:00">20 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>

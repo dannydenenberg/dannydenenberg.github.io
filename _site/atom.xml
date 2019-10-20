@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-10-15T19:03:06-05:00</updated>
+ <updated>2019-10-20T17:05:40-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
@@ -13,9 +13,1576 @@
 
  
  <entry>
+   <title>Gradient descent for univariate linear regression</title>
+   <link href="http://localhost:4000/gradient-descent-univar-lr"/>
+   <updated>2019-09-20T00:00:00-05:00</updated>
+   <id>http://localhost:4000/gradient-descent-univariate-linear-regression</id>
+   <content type="html">&lt;p&gt;Gradient descent is used for many aspects of machine learning. One area in which it is used a ton is in optimizing artificial neural networks. I will explain the concept of how this works once you understand the basic gradient descent operations.&lt;/p&gt;
+
+&lt;p&gt;Gradient descent can also be used to minimize arbitrary functions such as more general ones like cost functions with \(n\) number of parameters: \(J(\theta _0, \theta _1, \theta _2, \theta _3, … , \theta _n)\).&lt;/p&gt;
+
+&lt;p&gt;Please keep in mind that gradient descent is NOT HARD. Especially understanding how it minimizes functions is super easy to get. So, if you don’t understand a concept right away, keep on trying to see it from different angles and I’m sure it’ll click.&lt;/p&gt;
+
+&lt;p&gt;So, without further ado let me give you the general outline for minimizing a function using G.D.:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Start with some value for \(\theta _0\)and \(\theta _1\)&lt;/li&gt;
+  &lt;li&gt;Keep changing \(\theta _0\)and \(\theta _1\)to reduce \((\theta _0, \theta _1) \)until we hopefully find a minimum&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;em&gt;assignment operator&lt;/em&gt; in maths looks like this: “\(:=\)”. It can also be used to reassign variable values. The normal “\(=\)” is a truth assertion.&lt;/p&gt;
+
+&lt;p&gt;Here are some variable to know before I get into the algorithm:&lt;/p&gt;
+
+&lt;p&gt;\(\alpha=\)”alpha” is the &lt;em&gt;learning rate&lt;/em&gt;. It is how much we change the parameter values by each update step. It usually is a constant. Ex: If \(\alpha=10\)whatever value the algorithm gives to update the parameter value by, it is multiplied by a factor of ten.&lt;/p&gt;
+
+&lt;p&gt;\(j=\)it is a subscript to \(\theta\)to represent a which parameter we are dealing with. It is a generic form of saying something like \(theta _0$.&lt;/p&gt;
+
+&lt;p&gt;And a refresher on the &lt;strong&gt;cost function&lt;/strong&gt;:
+$J(\theta _0,\theta _1)=\frac{1}{2m} \sum _{i=1} ^m (h _\theta (x^i) - y^i)^2$&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Here is the actual algorithm:&lt;/p&gt;
+
+&lt;p&gt;$repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{ \\ \hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }\\ \} \hspace{67mm}$&lt;/p&gt;
+
+&lt;p&gt;This is repeated simultaneously for \(\theta _0\)and \(\theta _1\). A.K.A this is repeated simultaneously for the \(j\)values of \(0,1\).&lt;/p&gt;
+
+&lt;p&gt;Programmatically, you will have to create temporary variables to be able to simulate a simultaneous update.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Correct Simultaneous Update:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } \\ temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } \\ \\ \\ \\ \theta _0 := temp0 \\ \theta _1 := temp1
+$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;INcorrect Simultaneous Update:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } \\ \theta _0 := temp0 \\  temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 }  \\ \theta _1 := temp1
+$&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The error here occurs because \(\theta _0\)is updated before \(\theta _1\). That means that \(\theta _1\)is using the newly updated value of \(\theta _0\)to calculate the partial derivative with respects to \(\theta _1\)which is NOT what we want to happen.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;example-using-an-easier-function&quot;&gt;Example Using an Easier Function&lt;/h2&gt;
+
+&lt;p&gt;Let’s say that our task was to minimize some arbitrary cost function with one parameter \((\theta _1)\)where \(theta _1 \in ℝ\). The graph of the function \((\theta _1)\)(if it is a squared error cost function) might look something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/UdTq5I8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What we want to find is the value of \(\theta\) that makes the \(y\)component of this graph to be as low as possible – in this case, 0. Just looking at the graph, we can see that that number is 4. But, in more complex cost functions that deal with hundreds of parameters/dimensions, simply graphing the cost function will not yield an easy-to-see answer.&lt;/p&gt;
+
+&lt;p&gt;In terms of gradient descent, we start by choosing a random value for \(\theta _1\)(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from \(\theta _1$’s current value. To find the slope we find the derivative of the cost function with respect to \(\theta _1\).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you don’t know calc already, THAT’S TOTALLY OKAY! I didn’t either when I started learning about this subject. I taught all I needed to know to myself. I would highly highly recommend 3Blue1Brown’s &lt;a href=&quot;https://www.youtube.com/watch?v=WUvTyaaNkzM&amp;amp;list=PL0-GT3co4r2wlh6UHTUeQsrf3mlS2lk6x&quot;&gt;“The Essence of Calculus”&lt;/a&gt; as a starting point. It has amazing animations and fantastic descriptions of everything you would need to know. If you want to just keep trudging along, though, just note that the derivative of a function allows you to find the slope of any point along that original function.&lt;/p&gt;
+
+&lt;p&gt;Okay, back to it.&lt;/p&gt;
+
+&lt;p&gt;Here is the expression for updating our parameter:&lt;/p&gt;
+
+&lt;p&gt;$
+\theta _1 := \theta _1 - \alpha \frac{d J(\theta _1)}{d\theta _1}
+$&lt;/p&gt;
+
+&lt;p&gt;Next:&lt;/p&gt;
+
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Example using easier function, J(theta 1)&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Talk about alpha&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Linear regression model review&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;What is the derivative&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;New algorithm with the derivatives&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Cost function will always be a “bowl” function like the image&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Discuss Batch gradient descent using ALL training examples&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>A js developer’s view of rust</title>
+   <link href="http://localhost:4000/js-dev-rust"/>
+   <updated>2019-09-13T00:00:00-05:00</updated>
+   <id>http://localhost:4000/js-rust</id>
+   <content type="html">&lt;p&gt;A while ago, I was trying to find something interesting to read about online when I bumped into Rust. Rust is …&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“a language empowering everyone to build reliable and efficient software.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In short, it is a systems programming language. A freaky fast one, at that. It even outperformed C++ in many of the benchmarks tests run by The Computer Language Benchmarks Game (mostly having to do with complex algorithmic tasks like binary trees, etc).&lt;/p&gt;
+
+&lt;p&gt;Before I started to delve more into the language itself, though, I searched about to see what people were thinking of it. Rust was created in 2011 and is backed by Mozilla (the not-for-profit). It has a sort of niche group following it consisting mostly of previous C/C++ developers who wanted a break from the null pointer exceptions, undefined behaviors, language complexity, crazy macros — shall I go on? Although Rust is still in its early stages of maturity, it has a website devoted to following its development of game programming, which is pretty sweet. There are even some games that are gathering a lot of buzz and have even been put into the App Store and the Google Play Store such as A Snake’s Tale. Rust even has an AMAZING package manager called crates.io which is comparable to npm and has had almost 1.5 billion downloads to date.&lt;/p&gt;
+
+&lt;p&gt;After seeing all of this, I decided that I needed to feed my curiosity and learn Rust’s syntax. I started by reading through The Book — a (mostly) complete walkthrough of Rust’s syntax, idioms, and program structure.&lt;/p&gt;
+
+&lt;p&gt;Because I know many c-like languages, the general form of the syntax was simple and easy to grasp. If you are one of those people who use const whenever possible and will punish those who don’t, you’ll love Rust. Its default form of assigning variables makes them immutable.&lt;/p&gt;
+
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// Below is an immutable variable&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;// Below is a mutable variable&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;// General form for variables:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Data types in Rust are straight forward. Integer types consist of 8 through 128 bit unsigned and signed numbers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://miro.medium.com/max/564/1*AesR6b5JntLgZzW7K2_nlA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are also immutable array types, characters, &amp;amp;str (references to a list of characters in memory), tuples, enumerations, structs, collections, etc.&lt;/p&gt;
+
+&lt;p&gt;Functions are declared using the fn keyword like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can specify return values with the -&amp;gt; symbol and if you are returning a value in the last line of the function, there is no need to include the return keyword.&lt;/p&gt;
+
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// returns the 32-bit integer 5&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;my_function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;u32&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I was breezing on through until I hit the concept of ownership. All programs have to manage the way they use a computer’s memory while running. Because Rust doesn’t garbage-collect and programmers don’t have to manually allocate and deallocate memory, memory is managed through a system of ownership.&lt;/p&gt;
+
+&lt;p&gt;Here are the rules of ownership in Rust (right from The Book):&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Each value in Rust has a variable that’s called its owner.&lt;/li&gt;
+  &lt;li&gt;There can only be one owner at a time.&lt;/li&gt;
+  &lt;li&gt;When the owner goes out of scope, the value will be dropped.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let’s have an example:&lt;/p&gt;
+
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;                      &lt;span class=&quot;c&quot;&gt;// s is not valid here, it’s not yet declared&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;// s is valid from this point forward&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;// do stuff with s&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// this scope is now over, and s is no longer valid&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is the jam that I got into when I was first using Rust.&lt;/p&gt;
+
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, world!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// a is the owner&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// ownership has changed to b. What is a?&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// error[E0382]: borrow of moved value: `a`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Because there can only be only one owner at a time, I can’t try to assign the value of a variable to another using the first variable’s name if it was allocated on the heap, like the String type is in Rust. Now, if the variable’s type is a primitive (int, double, bool, etc), doing the reassign will simply copy the value and NOT change ownership.&lt;/p&gt;
+
+&lt;p&gt;When referencing a variable, you use the &amp;amp; symbol as in C/C++. The references allow the programmer to take the value without taking ownership. There can be as many non-mutable references as one wants to a variable at one time, but only ONE mutable reference.&lt;/p&gt;
+
+&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Dude, Rust is sick.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// ok&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// ok&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// mutable reference. ok.&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Different!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// change value. ok&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// ok&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// ERROR. Only one mut reference at a time!&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Even more difficult for me to understand was rust lifetimes which is how Rust can get around using garbage collection. It is also their solution to the all too well known C++ problem of dangling pointers when a variable is “used after free”. I won’t even attempt to explain that concept here. You should read this article to find more.&lt;/p&gt;
+
+&lt;p&gt;Overall, I would say my experience with Rust was rewarding. I was able to understand its syntax and style guide easily, although some of the concepts were difficult to grasp at first. I don’t know if this is just me, but even the way the language looks when typed is elegant. It uses functional programming techniques commonly used in JavaScript (filtering, mapping, etc) and its syntax keywords are short and too the point (&lt;code class=&quot;highlighter-rouge&quot;&gt;fn&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;mut&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;i32&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;str&lt;/code&gt;, etc.)&lt;/p&gt;
+
+&lt;p&gt;Some systems developers are lobbying heavily for Rust to be the next C/C++. I don’t know whether that will happen anytime soon, but one thing is for sure: it will continue to grow and mature. It is backed by Mozilla and has a ‘cult’ following that want to kill off C++.&lt;/p&gt;
+
+&lt;p&gt;So there.&lt;/p&gt;
+
+&lt;p&gt;Go look at Rust.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>A complete guide to password hashing</title>
+   <link href="http://localhost:4000/pass-hashing"/>
+   <updated>2019-09-10T00:00:00-05:00</updated>
+   <id>http://localhost:4000/hashing</id>
+   <content type="html">&lt;p&gt;Hashing algorithms are one-way functions. They take any string and turn it into a fixed-length “fingerprint” that is unable to be reversed. This means that if the data is compromised, the hacker&lt;!--more--&gt; cannot get the user’s passwords if they were hashed because at no point were they ever stored on the drive without being in their hashed form.&lt;/p&gt;
+
+&lt;p&gt;Websites using hashing typically have this workflow:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A user creates an account&lt;/li&gt;
+  &lt;li&gt;Their password is hashed and stored on the base&lt;/li&gt;
+  &lt;li&gt;When the user attempts to log in, the hash of their entered password is compared to the has stored in the database&lt;/li&gt;
+  &lt;li&gt;If the hashes match, the user can access the account. If not, a generic error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hash(&quot;hellu&quot;) = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
+hash(&quot;danny&quot;) = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Only secure, or cryptographic hash functions, can be used for password hashing (SHA256, SHA512, RipeMD, WHIRLPOOL, etc.)&lt;/p&gt;
+
+&lt;p&gt;Sadly, just cryptographically hashing passwords does not ensure safety.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;cracking-hashes&quot;&gt;Cracking Hashes&lt;/h1&gt;
+
+&lt;h2 id=&quot;brute-force-and-dictionary-attacks&quot;&gt;Brute Force and Dictionary Attacks&lt;/h2&gt;
+
+&lt;p&gt;The easiest way to decrypt a hash is just to guess the password. The way to do this is to guess the user password, hash the guess, and compare it to the hash of the actual password you are trying to solve. If the two hashes match, the unhashed version of the guess is the right password.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;brute force attack&lt;/strong&gt; goes through every possible combination of characters given a certain length. Even though they will 100% eventually crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying aaa : failed
+Trying aab : failed
+Trying aac : failed
+...
+Trying acb : failed
+Trying acc : success!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Dictionary attacks&lt;/strong&gt; use a file containing commonly used words, phrases, or passwords that are likely to be a used password. There are databases you can find that hold the top 100,000 (or however many) most commonly used passwords. The attack hashes these passwords and compares the hash to the password to crack. For cracking the average Joe Shmo, this is sometimes a good method to use and is certainly faster than using a brute force attack.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lookup tables&lt;/strong&gt; can improve cracking performance by pre-computing the hashes so when it comes time to guess the password, the program needs not to spend compute time actually hashing the guesses.&lt;/p&gt;
+
+&lt;p&gt;In the next section, we will take a look at “salting” which makes these cracking methods impossible to use reliably.&lt;/p&gt;
+
+&lt;h1 id=&quot;salting&quot;&gt;Salting&lt;/h1&gt;
+
+&lt;p&gt;The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a salt to the passwords BEFORE hashing.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The salt doesn’t have to be secret because an attacker doesn’t know what the salt will be and thus cannot make pre-computed tables for it.
+The Dos and Don’ts of Salting&lt;/p&gt;
+
+&lt;p&gt;Don’t:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Reuse the same salt for each password hashed&lt;/li&gt;
+  &lt;li&gt;Use short salts&lt;/li&gt;
+  &lt;li&gt;Use weird double hashes (ex: hash(hash(hash(‘mypass’)))) in lou of a salt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Do:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Generate random salts using a &lt;em&gt;Cryptographically Secure Pseudo-Random Number Generator&lt;/em&gt; (&lt;strong&gt;CSPRNG&lt;/strong&gt;)&lt;/li&gt;
+  &lt;li&gt;Generate a new random unique salt for EACH password hashed&lt;/li&gt;
+  &lt;li&gt;Generate LONG salts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;salting-workflow&quot;&gt;Salting Workflow&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Storing a Password:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Generate super long salt with a CSPRNG&lt;/li&gt;
+  &lt;li&gt;Prepend the salt to the user password and hash it&lt;/li&gt;
+  &lt;li&gt;Save the salt and the hash in the database&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Checking a Password:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Get the salt and hash from the database&lt;/li&gt;
+  &lt;li&gt;Prepend the salt to the submitted password and hash it&lt;/li&gt;
+  &lt;li&gt;Compare the hashes. If they are equal, the password is correct&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Always always always (shall I add more always’??) hash on the server. Sometimes JavaScript isn’t enabled and a hash won’t work on the client-side. Also, no one else can access the server so it is ensured to be hashed (You can also hash on the client-side if you so choose)&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Securing your database ✵</title>
+   <link href="http://localhost:4000/securing-db"/>
+   <updated>2019-08-05T00:00:00-05:00</updated>
+   <id>http://localhost:4000/securing-db</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/dannydenenberg/mongodb-users&quot;&gt;Here&lt;/a&gt; is a link to all of the source code WITH authentication and hashing.&lt;/p&gt;
+
+&lt;p&gt;This article assumes knowledge of NodeJS, Express.js, MongoDB, and how all of those technologies interact programmatically. I wrote a &lt;a href=&quot;https://denenberg.us/creating-and-connecting-a-mongodb-database-and-node-js-server-to-a-front-end&quot;&gt;great article&lt;/a&gt; on that topic as well.&lt;/p&gt;
+
+&lt;p&gt;Let’s start by taking a look at some code for a MongoDB database connection through Node.js and ExpressJS.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/1/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;It achieves the central goal for that article which was to be able to connect a front end to a Mongo database. It does this by allowing requests to be sent to a server which has the functionality to read, write, and update the database.&lt;/p&gt;
+
+&lt;p&gt;Well, now there is a new issue – we have users that each have their own unique information, but ANYONE who sends a get request to the server with a username of some user can acquire their information! That is SUPER unsafe. To combat this, most websites have a password field for each user (as I’m sure you know) which is kept private. This combination of public and private “keys” is a nice way for users to be able to connect with each other using their public usernames, but keep their info secure with a strong password.&lt;/p&gt;
+
+&lt;p&gt;Let’s implement this in our NodeJS program by first adding a &lt;code class=&quot;highlighter-rouge&quot;&gt;pass&lt;/code&gt; field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called &lt;code class=&quot;highlighter-rouge&quot;&gt;deb&lt;/code&gt; with the password &lt;code class=&quot;highlighter-rouge&quot;&gt;1234&lt;/code&gt; (I am using JavaScript to send the request to our server – make sure the server is running on port &lt;code class=&quot;highlighter-rouge&quot;&gt;4567&lt;/code&gt;):&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/12/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Okay, to make sure the &lt;code class=&quot;highlighter-rouge&quot;&gt;fetch()&lt;/code&gt; request worked, look at the data inside of your MongoDB cluster collections in Atlas.&lt;/p&gt;
+
+&lt;p&gt;Great. The user has a password, but we can still send a get request and get the information without using a password. To password-protect the user info, every time a get request is sent, a password should be sent along with it. The server will then compare the password sent in the get request with the password stored in the database associated with the user the get request was sent for. If they are equivalent, the server will send back the user information. Otherwise, it will send back some sort of an error code for the wrong password.&lt;/p&gt;
+
+&lt;p&gt;In short, in the express server’s response to get requests, it should check that the sent password is correct before allowing the request to access the user’s information.&lt;/p&gt;
+
+&lt;p&gt;To send a password along with the get request, we will use simple HTTP url request parameters. The GET request will look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://localhost:4567/username?pass=mypassword1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;One thing to note&lt;/strong&gt; is how to get the query parameters in Express.js (Node.js): &lt;code class=&quot;highlighter-rouge&quot;&gt;req.query.myparam&lt;/code&gt;. Or, in our specific case, &lt;code class=&quot;highlighter-rouge&quot;&gt;req.query.pass&lt;/code&gt; gives the password sent.&lt;/p&gt;
+
+&lt;p&gt;Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the &lt;code class=&quot;highlighter-rouge&quot;&gt;/user&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;?pass=__ fields&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/:user&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`Password: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To test this, run the Node server. In the browser go to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/dan?pass=abc&lt;/code&gt;. Switch back to the console and you should see the password printed there.&lt;/p&gt;
+
+&lt;p&gt;Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the &lt;code class=&quot;highlighter-rouge&quot;&gt;/user&lt;/code&gt;. If that is the same as the URL &lt;code class=&quot;highlighter-rouge&quot;&gt;pass&lt;/code&gt; parameter, we send back the info on the user.&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/10/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;To test this out, restart your server with updated code. Go to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/deb?pass=1234&lt;/code&gt; in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.&lt;/p&gt;
+
+&lt;p&gt;Okay, nice! You have now password protected all get requests to recieve data. There are, however, a couple of issues with this method, one of which is the fact that if your database is compromised, you will have leaked a piece of very sensitive information that users have trusted you with: their password (which is likely being reused on different sites). This is why, instead of being stored as they are, passwords are typically &lt;strong&gt;hashed&lt;/strong&gt; using a &lt;em&gt;one way&lt;/em&gt; function.&lt;/p&gt;
+
+&lt;p&gt;The following section will go more in depth into hashing, why it is important, and how to use it to &lt;strong&gt;securely&lt;/strong&gt; store data.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Hashing algorithms are one way functions. They take any string and turn it into a fixed-length “fingerprint” that is unable to be reversed. This means that if the data is compromised, the onlooker cannot get the user’s passwords if they were hashed. At no point were they ever stored on the drive without being in their hashed form.&lt;/p&gt;
+
+&lt;p&gt;Websites using hashing typically have this workflow:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;User creates an account&lt;/li&gt;
+  &lt;li&gt;Their password is hashed and stored on the base&lt;/li&gt;
+  &lt;li&gt;When the user attempts to log in, the hash of their entered password is compared to the has stored in the database&lt;/li&gt;
+  &lt;li&gt;If the hashes match, the user can access the account. If not, a &lt;strong&gt;generic&lt;/strong&gt; error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hash(&quot;hellu&quot;) = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
+hash(&quot;danny&quot;) = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Only secure, or &lt;strong&gt;cryptographic hash functions&lt;/strong&gt;, can be used for password hashing (SHA256, SHA512, RipeMD, WHIRLPOOL, etc.)&lt;/p&gt;
+
+&lt;p&gt;Sadly, just cryptographically hashing passwords does not ensure safety.&lt;/p&gt;
+
+&lt;h2 id=&quot;cracking-hashes&quot;&gt;Cracking Hashes&lt;/h2&gt;
+
+&lt;h3 id=&quot;brute-force-and-dictionary-attacks&quot;&gt;Brute Force and Dictionary Attacks&lt;/h3&gt;
+
+&lt;p&gt;The easiest way to decrypt a hash is just to guess the password. The way to do this is to guess the user password, hash the guess, and compare it to the hash of the actual password you are trying to solve. If the two hashes match, the unhashed version of the guess is the right password.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;brute force&lt;/strong&gt; attack goes through every possible combination of characters given a certain length. Even though they will 100% &lt;em&gt;eventually&lt;/em&gt; crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying aaa : failed
+Trying aab : failed
+Trying aac : failed
+...
+Trying acb : failed
+Trying acc : success!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Dictionary attacks&lt;/strong&gt; use a file containing commonly used words, phrases, or passwords that are likely to be a used password. There are &lt;a href=&quot;https://en.wikipedia.org/wiki/Wikipedia:10,000_most_common_passwords&quot;&gt;databases you can find&lt;/a&gt; that hold the top 100,000 (or however many) most commonly used passwords. The attack hashes these passwords and compares the hash to the password to crack. For cracking the average Joe Shmo, this is sometimes a good method to use and is certainly faster than using a brute force attack.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lookup tables&lt;/strong&gt; can improve cracking performance by pre-computing the hashes so when it comes time to guess the password, the program needs not spend compute time actually hashing the guesses.&lt;/p&gt;
+
+&lt;p&gt;In the next section, we will take a look at “salting” which makes these cracking methods impossible to use reliably.&lt;/p&gt;
+
+&lt;h2 id=&quot;salting&quot;&gt;Salting&lt;/h2&gt;
+
+&lt;p&gt;The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a &lt;em&gt;salt&lt;/em&gt; to the passwords BEFORE hashing.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The salt doesn’t have to be secret because an attacker doesn’t know what the salt will be and thus cannot make pre computed tables for it.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-dos-and-donts-of-salting&quot;&gt;The Dos and Don’ts of Salting&lt;/h2&gt;
+
+&lt;p&gt;Don’t:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Reuse the same salt for each password hashed&lt;/li&gt;
+  &lt;li&gt;Use short salts&lt;/li&gt;
+  &lt;li&gt;Use wierd double hashes (ex: hash(hash(hash(‘mypass’)))) in lou of a salt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Do:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Generate random salts using a &lt;strong&gt;Cryptographically Secure Pseudo-Random Number Generator&lt;/strong&gt; (CSPRNG)&lt;/li&gt;
+  &lt;li&gt;Generate a new random unique salt for &lt;em&gt;EACH&lt;/em&gt; password hashed&lt;/li&gt;
+  &lt;li&gt;Generate LONG salts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;salting-workflow&quot;&gt;Salting Workflow&lt;/h2&gt;
+
+&lt;p&gt;Storing a Password:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Generate super long salt with a CSPRNG&lt;/li&gt;
+  &lt;li&gt;Prepend the salt to the user password and hash it&lt;/li&gt;
+  &lt;li&gt;Save the salt and the hash in the database&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Checking a Password:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Get the salt and hash from the database&lt;/li&gt;
+  &lt;li&gt;Prepend the salt to the submitted password and hash it&lt;/li&gt;
+  &lt;li&gt;Compare the hashes. If they are equal, the password is correct&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Always always always hash on the server. Sometimes JavaScript isn’t enabled. Also, no one else can access the server so it is ensured to be hashed (You can &lt;em&gt;also&lt;/em&gt; hash on the client side if you so choose)&lt;/p&gt;
+
+&lt;p&gt;And with that, you have learned the basics of securely hashing data. Now let’s continue on with the (not-as-hashy parts of the) article.&lt;/p&gt;
+
+&lt;h2 id=&quot;our-hash-function&quot;&gt;Our Hash Function&lt;/h2&gt;
+
+&lt;p&gt;We will be using the SHA256 hashing function. How, exactly, hashing functions work is beyond the scope of this article, but if you are interested, see &lt;a href=&quot;https://en.wikipedia.org/wiki/Hash_function&quot;&gt;this&lt;/a&gt; and &lt;a href=&quot;https://gfredericks.com/blog/98&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First of all, install the dependency for our function: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s crypto&lt;/code&gt;. Also, add the import to the top of the NodeJS file: &lt;code class=&quot;highlighter-rouge&quot;&gt;const crypto = require(&quot;crypto&quot;);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now add this code to the bottom of the NodeJS file. We will call the function &lt;code class=&quot;highlighter-rouge&quot;&gt;hash&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// hashes strings with sha256 for storing passwords&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createHash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sha256&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;digest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;base64&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;the-plan&quot;&gt;The Plan&lt;/h2&gt;
+
+&lt;p&gt;There are 3 more feature we need to implement before I can call the database “secure”.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hash &amp;amp; salt passcodes for new users being stored in response to &lt;code class=&quot;highlighter-rouge&quot;&gt;post&lt;/code&gt; requests&lt;/li&gt;
+  &lt;li&gt;Use the salt to hash and check the passwords when a &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; request needs info&lt;/li&gt;
+  &lt;li&gt;Use the salt to check passwords for updating info on the database in response to &lt;code class=&quot;highlighter-rouge&quot;&gt;put&lt;/code&gt; requests.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Alrighty, let’s get started!&lt;/p&gt;
+
+&lt;h2 id=&quot;post-request-security&quot;&gt;POST Request Security&lt;/h2&gt;
+
+&lt;p&gt;Passwords need to be hashed and salted before being stored in the database.&lt;/p&gt;
+
+&lt;p&gt;Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s csprng&lt;/code&gt;. Also, add the import in the top of the NodeJS file: &lt;code class=&quot;highlighter-rouge&quot;&gt;const csprng = require('csprng');&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is the &lt;em&gt;well commented&lt;/em&gt; code for the server’s response to POST requests. It uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;hash()&lt;/code&gt; function defined earlier.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The user password is sent as the &lt;code class=&quot;highlighter-rouge&quot;&gt;pass&lt;/code&gt; field in the body of the request (contrary to how it was sent before).&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/8/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;get-request-security&quot;&gt;GET Request Security&lt;/h2&gt;
+
+&lt;p&gt;Now to check if an entered passcode is correct, we have to get the stored salt and use that to hash the entered passcode to check against the stored one.&lt;/p&gt;
+
+&lt;p&gt;Here is the code for the GET request response.&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/5/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;put-request-security&quot;&gt;PUT Request Security&lt;/h2&gt;
+
+&lt;p&gt;When updating info in the database, like the GET request, a password must be submitted to make sure the user is the right person to update his data. Also like the GET request, we need to use the stored salt associated with the user to hash the entered password for hashing.&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/6/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;strong&gt;Congrats for getting through this article!! 🎉🥳&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Although I used a MongoDB database for storage and NodeJS for the server, the concepts covered here are applicable in ANY technology you may choose.&lt;/p&gt;
+
+&lt;p&gt;Have fun with your database!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Creating &amp; connecting a MongoDB database and node.js server to a front end ✵</title>
+   <link href="http://localhost:4000/creating-mongodb-nodejs"/>
+   <updated>2019-07-29T00:00:00-05:00</updated>
+   <id>http://localhost:4000/creating-mongo-db</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/dannydenenberg/mongodb-users&quot;&gt;Here&lt;/a&gt; is a link to all of the Node.js code for both parts (includes authentication and security features) if you want to jump right in (yes, I comment well).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you are in the situation I was in when I first encountered this problem, you have a working front end (for me, it was a basic todo app) but you need to be able to store user data such as usernames, passwords, &lt;em&gt;todo list items&lt;/em&gt;, etc.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;all-about-databases&quot;&gt;All About Databases&lt;/h2&gt;
+
+&lt;p&gt;When it comes to storing data, luckily, there are many options such as MySQL, NoSQL, GraphQL, public storage on a server, a simple JSON file, or MongoDB.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Okay, okay, back up. Did you say JSON file on a simple server? Easy! I could set that up with Node.js and express in an hour!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ummm, let me think about it – No.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Why not? Why should I use a database?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Well, there are many advantages to using a database over a JSON file or something similar. If you use a cloud hosting option, there is no need to worry about loss of data. Databases are optimized to store, search, and protect data. They will not let unauthorized users to write to your data. Data transactions are &lt;strong&gt;atomic&lt;/strong&gt; meaning that either an entire read/write/update operation on a thread occurs, or nothing at all, which prevents corruption of data.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Okay, fine. I’m convinced. I’ll use a database. Which one?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There are many out there currently, but if you’re looking for an easy-to-use, high performance, high availability database that could automatically scale in size depending on use, I would recommend MongoDB. MongoDB is a document-based database meaning that it stores data in JSON-like documents so it is super easy to work with data in it if you are already familiar with JavaScript objects or JSON:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/L2jZ6Yx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;MongoDB’s query language is also powerful and easy to use. For example, this will find all users with a certain zip code:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;address.zip&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;90404&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;setting-up-mongo&quot;&gt;Setting Up Mongo&lt;/h2&gt;
+
+&lt;p&gt;Let’s get started setting up the MongoDB database.&lt;/p&gt;
+
+&lt;p&gt;To make it simple and easy, we are going to host our database in the cloud using &lt;a href=&quot;https://www.mongodb.com/cloud/atlas&quot;&gt;MongoDB’s Atlas&lt;/a&gt;. This takes away the pain of setting up the actual database and helps us with automatic scaling and not worrying about loss of data (like I said before).&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Go to the MongoDB Atlas website, click “Start Free”, and create an account.&lt;/li&gt;
+  &lt;li&gt;Once you are inside the dashboard looking page, create a new project (name it anything you want).&lt;/li&gt;
+  &lt;li&gt;Make sure you are inside the project (you should see a ‘Clusters’ tab on the left hand nav bar)&lt;/li&gt;
+  &lt;li&gt;Create a new cluster. Leave &lt;strong&gt;Global Cloud Configuration&lt;/strong&gt; with its default parameters. For &lt;strong&gt;Cloud Provider &amp;amp; Region&lt;/strong&gt; select ‘Google Cloud Platform’ and for the region, find the one that says ‘FREE TIER AVAILABLE’ and choose that one (for me, it was Iowa).&lt;/li&gt;
+  &lt;li&gt;In the “Cluster Tier” section make sure that &lt;strong&gt;M0 Sandbox&lt;/strong&gt; is selected&lt;/li&gt;
+  &lt;li&gt;In “Additional Settings” you can leave &lt;strong&gt;Turn on Backups&lt;/strong&gt; &lt;em&gt;unchecked&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;In “Cluster Name”, name it anything you want.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Nice! You have a working database. Just an FYI, it should take about 7-10 minutes for everything to get initialized and up and running properly.&lt;/p&gt;
+
+&lt;h2 id=&quot;database-access&quot;&gt;Database Access&lt;/h2&gt;
+
+&lt;p&gt;To actually use a database, you have to have the proper access to the information. Because I am assuming there is just one person using this database, we are going to give one user full admin access to the information.&lt;/p&gt;
+
+&lt;p&gt;To do this, click on the tab in the side nav bar called “Database Access”. In the upper right hand corner, click “Add New User”. For the username and password, enter anything you want, but make sure the password is long and random (you don’t want anybody being able to put information into the database other than yourself). For the &lt;strong&gt;User Privileges&lt;/strong&gt; select “Read and Write to any database”. Click ‘Add the User’. Make sure you write down the credentials (username + password) you used for the user!&lt;/p&gt;
+
+&lt;p&gt;After you have created a user with read/write privileges, to actually connect to the database, you need to use a &lt;strong&gt;MongoDB URI&lt;/strong&gt;. This is the web address for connecting to the data. The URI of a database is like the URL of a webpage. By convention, the MongoDB URI is as follows:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mongodb://&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;databasename&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, mine would be:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mongodb+srv://danny:secretPassword123@vuecluster5u.gcp.mongodb.net/users&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The final &lt;code class=&quot;highlighter-rouge&quot;&gt;/users&lt;/code&gt; is called a collection in MongoDB idiom. It is a collection of documents (database entries).&lt;/p&gt;
+
+&lt;p&gt;To get your URI, click on the “Clusters” tab of your project and on your main cluster, click &lt;strong&gt;Connect&lt;/strong&gt;. Select ‘Connect Your Application’.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/AN9ygzu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then on ‘Choose your driver version’, set the driver to &lt;strong&gt;Node.js&lt;/strong&gt; and the version to &lt;strong&gt;2.2.12 or later&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/6ikkw2V.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Your connection string (URI) should be under the drivers. To get your real working URI, replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;password&amp;gt;&lt;/code&gt; with your user password, and the &lt;code class=&quot;highlighter-rouge&quot;&gt;/test&lt;/code&gt; after the port number with a collection (database) name you want, eg: &lt;code class=&quot;highlighter-rouge&quot;&gt;/mydb&lt;/code&gt;. There you go! You have your URI. Write it down or copy it in some form because you’ll need it in a bit.&lt;/p&gt;
+
+&lt;h2 id=&quot;nodejs-skeleton&quot;&gt;Node.js Skeleton&lt;/h2&gt;
+
+&lt;p&gt;In this section, we are going to set up the minimum Node.js needed to connect to your database (cluster) using the URI and to read/write to it as well.&lt;/p&gt;
+
+&lt;p&gt;To begin, set up a new Node project using npm (create a new directory and run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt; inside of it). If you don’t already have Node.js installed, please &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;install it&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;After your project is initialized, install the dependencies. For this project, all we are using is &lt;a href=&quot;https://expressjs.com/&quot;&gt;Express.js&lt;/a&gt; and &lt;strong&gt;CORS&lt;/strong&gt;. If you don’t already know, express is one of the most popular ways to create servers in Node. To install it, just run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s express&lt;/code&gt; to install and save express. CORS (&lt;strong&gt;C&lt;/strong&gt;ross &lt;strong&gt;O&lt;/strong&gt;rigin &lt;strong&gt;R&lt;/strong&gt;esource &lt;strong&gt;S&lt;/strong&gt;haring) is a safety feature that we need to bypass to be able to access resources out of localhost (where we are running our server from). To install it, run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s cors&lt;/code&gt;. Now create a new file in the root directory named &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; and put this code in it. I commented it heavily so you can understand what is going on:&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/3/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;After you have read through, the code and know the gist (no pun intended) of what is happening, run the code in &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;. If you configured and installed everything correctly, you should see something almost identical to this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/ChaGQj5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then, open a browser and travel to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4567&lt;/code&gt; and you should see “Home sweet home”.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/VEuNLaB.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Opening a web page from a browser makes a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to a server which is one of the 3 HTTP requests (requests made to a server) we will use for our database:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; requests fetch resources from a server&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; requests create resources on a server (database)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PUT&lt;/code&gt; requests update resources on a server&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;One more thing necessary to know before using our database, is express.js routing parameters. As of now, we are only responding to requests being sent on the base route “/”. Let’s say that we want to respond with user information when a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request is sent with the username being the first route parameter. For example, if I want to get the information stored in the database about the user &lt;code class=&quot;highlighter-rouge&quot;&gt;'danny33'&lt;/code&gt;, I want to be able to send a GET request to &lt;code class=&quot;highlighter-rouge&quot;&gt;https://myserver.com/danny33&lt;/code&gt; to acquire that information.&lt;/p&gt;
+
+&lt;p&gt;To create a dynamic route parameter with express, you change the route to be a colon, and then the name of your parameter. Here is how the example above would look (responding to a GET req.):&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/:user&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`[GET REQUEST TO /&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;] Sending back information about the user &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So, going to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/dooty&lt;/code&gt; will give back&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;[GET REQUEST TO /dooty] Sending back information about the user dooty&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This express route parameter will only work on the text after the first route slash &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;. So going to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/dooty/secondparam&lt;/code&gt;will refuse to connect because we haven’t written a response to the request &lt;code class=&quot;highlighter-rouge&quot;&gt;'/:first/:second'&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now, we are ready to look at how we can connect our MongoDB database to this Node.js and express server we have set up (FYI, this example will include dynamic path parameters). Before, I get to the code, we have to install the Mongo package for Node: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s mongodb&lt;/code&gt;. Now you can read through the heavily commented code below to get a sense of how node.js contacts MongoDB for creating, updating, and receiving database documents.&lt;/p&gt;
+
+&lt;p&gt;NOTE: Before running this code below, you MUST replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;const uri = ....&lt;/code&gt; with your URI that you got in the section about &lt;a href=&quot;#database-access&quot;&gt;Database Access&lt;/a&gt;.&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/5/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Run this code, by copying and pasting it into your &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; file in your node project (remember to replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;uri&lt;/code&gt; variable with yours) and running node &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; in your terminal.&lt;/p&gt;
+
+&lt;h2 id=&quot;testing-the-code&quot;&gt;Testing the Code&lt;/h2&gt;
+
+&lt;p&gt;To test this code, make sure your &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; is running, open up Chrome (or Firefox), click &lt;code class=&quot;highlighter-rouge&quot;&gt;CMD+OPTION+i&lt;/code&gt; to open up the dev tools pane, and click on the ‘console’ tab to run some JavaScript.&lt;/p&gt;
+
+&lt;p&gt;First, let’s test creating a new user by sending a &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; request to our server. To send our requests, I will use the JavaScript &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fetch()&lt;/code&gt;&lt;/a&gt; function.
+Below, I am creating a new user named ‘dan’ with some properties which can be found in the body property of the fetch.&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/6/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Paste this code in the dev tools JavaScript console and click ENTER ↵ to run.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-just-happened&quot;&gt;What Just Happened?&lt;/h2&gt;
+
+&lt;p&gt;When you pressed enter, the code sent a post request to your server (the intent was to create a new user with the username ‘dan’). The server connected to your MongoDB Atlas Database using the URI and created a new document on your database with the &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; field “dan”, the &lt;code class=&quot;highlighter-rouge&quot;&gt;eyeColor&lt;/code&gt; field “blue”, the &lt;code class=&quot;highlighter-rouge&quot;&gt;hairColor&lt;/code&gt; field “brown”, and the pass field “mypassword123”.&lt;/p&gt;
+
+&lt;p&gt;So, theoretically, if everything ran correctly, you should see that user in your MongoDB atlas database online. To test this out, go to your project cluster and click on the “collections” button for the cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/mRfqVqR.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You should be able to see your data there. Click on your collection name (whatever name you used as the last parameter in the URI – &lt;code class=&quot;highlighter-rouge&quot;&gt;/databasename&lt;/code&gt;. For me it was &lt;code class=&quot;highlighter-rouge&quot;&gt;/users&lt;/code&gt;. The newly created user should be sitting right there!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/FjmGgBK.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To &lt;em&gt;get&lt;/em&gt; the data about a user, just put the URL for the user, &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4567/dan&lt;/code&gt;, into a browser and the data will be in the body of the site. Easy!&lt;/p&gt;
+
+&lt;p&gt;And all you have to do for updating the user data in the database, is update your &lt;code class=&quot;highlighter-rouge&quot;&gt;extraDataToStore&lt;/code&gt; variable to hold the new user data and send the request as ‘put’:&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/8/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;And that is how you can use client side JavaScript to interact with a database! Nice work!&lt;/p&gt;
+
+&lt;p&gt;From here you can customize the code to add different fields to your stored data and to show the data in some nice front end design.&lt;/p&gt;
+
+&lt;p&gt;#code #js #node #databases&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>What the heck is a perceptron</title>
+   <link href="http://localhost:4000/what-is-a-perceptron"/>
+   <updated>2019-04-21T00:00:00-05:00</updated>
+   <id>http://localhost:4000/perceptron</id>
+   <content type="html">&lt;p&gt;A quick article about what a perceptron is, how it works, and why it is important.&lt;/p&gt;
+
+&lt;p&gt;In short, the perceptron is an algorithm. A very simple one at that. The algorithm it performs, in machine learning lingo, is known as &lt;em&gt;binary classification&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Binary classification&lt;/strong&gt; is the task of classifying elements into two groups. Hence the word binary — meaning 2.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;All the algorithm does, it &lt;strong&gt;take an input and produce an output&lt;/strong&gt;. The method by which the perceptron produces an output is called the weighted sum. It takes some input X, multiplies it by some weight W, adds in a bias B and then runs that value through some step function which classifies the weighted sum as a 0 or 1 (most of the time).&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If there are multiple inputs, then there is a single weight assigned to each input and all of the inputs are multiplied by their corresponding weight and then summed together and added to the bias before being passed through the step function.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Here is visual of what a simple perceptron with n inputs may look like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/w49eSsS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This image depicts the inputs (represented as subscripts of X) each being multiplied by their corresponding weights, summed together, and passed through some step function that takes the weighted sum and produces either a 0 or a 1. Notice that there is a constant that is fed into the perceptron as well as the other inputs. This constant will always be 1 and when multiplied with the first weight, represents the bias. So, essentially, that weight is the bias — it is added to the sum of the weights without being multiplied first with an input.&lt;/p&gt;
+
+&lt;p&gt;A simple step function is depicted below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/8nEMVgJ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This step function takes some value. If the value is greater than or equal to 0, then it outputs 1, otherwise, it outputs 0.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-is-it-useful-at-classifying-things&quot;&gt;How is it useful at classifying things?&lt;/h2&gt;
+
+&lt;p&gt;The perceptron is a subset of machine learning algorithms known as supervised learning. This means that when you teach a perceptron to learn to classify inputs into 2 categories, you give it the inputs and the labels that you want the perceptron to produce in the end (0 or 1 for binary classification, usually).&lt;/p&gt;
+
+&lt;p&gt;The perceptron initializes its weights randomly and get’s fed the inputs. It takes its final output from the step function and compares it to the label that you gave it for the specified set of inputs.&lt;/p&gt;
+
+&lt;p&gt;The perceptron can then see whether it was wrong at all and how wrong. It can quantify how wrong it is by producing a loss function which takes the perceptron’s output and the target label provided by you and produces a number. In essence, the loss function is saying, “this perceptron is 2.76 wrong” or “this perceptron is 8.92 wrong”, etc. Here is a common loss function for binary classification known as Squared Error:&lt;/p&gt;
+
+&lt;p&gt;$Loss=(predicted-target)^2$&lt;/p&gt;
+&lt;p&gt;So, in a simple example, if the perceptron was fed inputs and produced a 1, but the label assigned to the inputs was 0, then the loss of the perceptron would be:&lt;/p&gt;
+&lt;p&gt;$Loss=(1-0)^2=1$&lt;/p&gt;
+&lt;p&gt;The perceptron in this case was “1 wrong”.&lt;/p&gt;
+
+&lt;blockquote&gt;It can then use this value to adjust the weights is various ways, one of which is known as &lt;strong&gt;Gradient Descent&lt;/strong&gt;. In GD, you adjust the weights by subtracting the partial derivative of the loss function with respect to each weight. To actually figure out the derivatives, you would use the chain rule because the loss function is in actuality a composition of the weighted sum plus the bias, piped through the step function:&lt;/blockquote&gt;
+
+&lt;p&gt;$\frac{\partial Loss}{\partial w_i}=\frac{\partial Loss}{\partial y}\frac{\partial y}{\partial w_i}$&lt;/p&gt;
+
+&lt;blockquote&gt;If you are familiar with Calculus and derivatives, this concept shouldn’t be too difficult to understand and I am planning on writing an article on this soon. But it is beyond the scope of this high-level paper.&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;what-is-a-binary-classifier&quot;&gt;What is a Binary Classifier?&lt;/h2&gt;
+
+&lt;p&gt;This means that the input entered is mapped to 2 different categories.&lt;/p&gt;
+&lt;p&gt;Another way to describe this is by saying that the information entered into a perceptron is linearly separable:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/cQcPrYs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This means that the input entered can be separated by a&lt;strong&gt; single line.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-perceptron-is-just-like-a-linear-function&quot;&gt;A perceptron is just like a linear function&lt;/h2&gt;
+
+&lt;p&gt;One thing to note about a perceptron is that it is functions kind of line a linear function. For example, here is a function in slope-intercept form:&lt;/p&gt;
+&lt;p&gt;$y=mx+b$&lt;/p&gt;
+&lt;p&gt;When comparing this to a perceptron you can see they are much alike. The X is the input, the m is the weight, and the b is the bias. Here is what the perceptron value before it is run through the step function would look like:&lt;/p&gt;
+&lt;p&gt;$y=\sum_{i=0}^{n} X_{i} W_{i}+B$&lt;/p&gt;
+&lt;p&gt;Looks pretty similar, huh?&lt;/p&gt;
+&lt;p&gt;This high level overview of a perceptron is a good prep for learning about &lt;strong&gt;Neural Networks&lt;/strong&gt; which are just perceptrons stacked on top of each other and gathered into layers.&lt;/p&gt;
+&lt;p&gt;Just keep learning!
+
+&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Taking the derivative of sigmoid</title>
+   <link href="http://localhost:4000/sigmoid-deriv"/>
+   <updated>2019-02-20T00:00:00-06:00</updated>
+   <id>http://localhost:4000/derivative-of-sigmoid</id>
+   <content type="html">&lt;p&gt;A comprehensive walk-through of taking the derivative of the sigmoid function.&lt;/p&gt;
+
+&lt;p&gt;One of the most frequently used activation functions in machine learning, or more specifically, neural networks is the sigmoid function. In the backpropagation step in training a neural network, you have to find the derivative of the loss function with respect to each weight in the network. To do this, you have to find the derivative of your activation function. This article aims to clear up any confusion about finding the derivative of the sigmoid function.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;To begin, here is the sigmoid function:&lt;/p&gt;
+
+&lt;p&gt;$\sigma(x)=\frac{1}{1+e^{-x}}$&lt;/p&gt;
+
+&lt;p&gt;For a test, take the sigmoid of 5 on your calculator. You should get 0.99330714907.&lt;/p&gt;
+
+&lt;p&gt;For the purposes of the derivative, this function can also be written as:&lt;/p&gt;
+&lt;p&gt;$\sigma(x)=(1+e^{-x})^{-1}$&lt;/p&gt;
+
+&lt;h3 id=&quot;first-impressions&quot;&gt;First Impressions&lt;/h3&gt;
+
+&lt;p&gt;The first thing I noticed about this function, is that it is a composition of functions. The first function being&lt;/p&gt;
+&lt;p&gt;$\sigma(x)=(m)^{-1}$&lt;/p&gt;
+
+&lt;p&gt;and the second being&lt;/p&gt;
+&lt;p&gt;$m=1+e^{-x}$&lt;/p&gt;
+&lt;p&gt;Recall that in Calculus, when there is a composition of functions, the derivative, is the first function with respect to the second multiplied by the second function with respect to the variable, in this case &lt;em&gt;x.&lt;/em&gt; Like this:&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dx}=\frac{d\sigma}{dm}\frac{dm}{dx}$&lt;/p&gt;
+&lt;p&gt;So, the derivative of the sigmoid with respect to &lt;em&gt;x&lt;/em&gt; is the derivative of the sigmoid function with respect to &lt;em&gt;m&lt;/em&gt; times the derivative of &lt;em&gt;m&lt;/em&gt; with respect to &lt;em&gt;x&lt;/em&gt;. You can think of this function composition rule as a kind of intermediate computation that results in the original derivative that you wanted by cross cancelation:&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dx}=\frac{d\sigma}{\cancel{dm}}\frac{\cancel{dm}}{dx}=\frac{d\sigma}{dx}$&lt;/p&gt;
+&lt;p&gt;Now that we know the sigmoid function is a composition of functions, all we have to do to find the derivative, is:&lt;/p&gt;
+&lt;ol&gt;&lt;li&gt;Find the derivative of the sigmoid function with respect to &lt;em&gt;m&lt;/em&gt;, our intermediate value&lt;/li&gt;&lt;li&gt;Find the derivative of &lt;em&gt;m&lt;/em&gt; with respect to &lt;em&gt;x&lt;/em&gt;&lt;/li&gt;&lt;li&gt;Multiply those values together&lt;/li&gt;&lt;/ol&gt;
+
+&lt;h3 id=&quot;1-derivative-of-the-sigmoid-with-respect-to-m&quot;&gt;1. Derivative of the sigmoid with respect to m&lt;/h3&gt;
+
+&lt;p&gt;Let’s look back to what the sigmoid function looks like with &lt;em&gt;m&lt;/em&gt; as our intermediate value:&lt;/p&gt;
+&lt;p&gt;$\sigma(x)=(m)^{-1}$&lt;/p&gt;
+&lt;p&gt;To find the derivative of this with respect to &lt;em&gt;m&lt;/em&gt; is fairly simple if we can remember the power rule:&lt;/p&gt;
+&lt;p&gt;$\frac{d(x^n)}{dx}=n\times x^{n-1}$&lt;/p&gt;
+&lt;blockquote&gt;&lt;em&gt;The derivative of &lt;/em&gt;x^n&lt;em&gt; is &lt;/em&gt;n&lt;em&gt; times the derivative of &lt;/em&gt;x&lt;em&gt; to the power of &lt;/em&gt;n-1&lt;em&gt;.&lt;/em&gt;&lt;/blockquote&gt;
+&lt;p&gt;So,&lt;/p&gt;
+&lt;p&gt;$\frac{d(x^n)}{dx}=-1\times m^{-1-1}=-m^{-2}$&lt;/p&gt;
+&lt;p&gt;Now, if we substitute our original value of &lt;em&gt;m&lt;/em&gt; back into the equation, we get&lt;/p&gt;
+&lt;p&gt;$-m^{-2}=-(1+e^{-x})^{-2}$&lt;/p&gt;
+&lt;p&gt;Finally,&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dm}=-(1+e^{-x})^{-2}$&lt;/p&gt;
+&lt;p&gt;Yay! We completed step 1.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-find-the-derivative-of-m-with-respect-to-x&quot;&gt;2. Find the derivative of m with respect to x&lt;/h3&gt;
+&lt;p&gt;Here’s m:&lt;/p&gt;
+&lt;p&gt;$m=1+e^{-x}$&lt;/p&gt;
+&lt;p&gt;To find the derivative, we have to find the derivative of each term with respect to &lt;em&gt;x. &lt;/em&gt;The first term is easy:&lt;/p&gt;
+&lt;p&gt;$\frac{d(1)}{dx}=0$&lt;/p&gt;
+&lt;p&gt;The second term is a bit more complicated.&lt;/p&gt;
+&lt;p&gt;Let’s let&lt;/p&gt;
+&lt;p&gt;$y=e^u$&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;$u=-x$&lt;/p&gt;
+&lt;p&gt;We know that&lt;/p&gt;
+&lt;p&gt;$\frac{dy}{du}=e^u     \\      \frac{du}{dx}=-1$&lt;/p&gt;
+&lt;p&gt;If getting to &lt;em&gt;e^u &lt;/em&gt;is not clear, please read &lt;a href=&quot;https://www.themathpage.com/aCalc/exponential.htm&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now, using the chain rule once again,&lt;/p&gt;
+&lt;p&gt;$\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}$&lt;/p&gt;
+&lt;p&gt;So, we just multiply those derivatives we just calculated to get the derivative with respect to &lt;em&gt;x:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;$\frac{dy}{dx}=e^u \times (-1)=-e^u=-e^{-x}$&lt;/p&gt;
+&lt;p&gt;All in all for step 2,&lt;/p&gt;
+&lt;p&gt;$\frac{dm}{dx}=-e^{-x}$&lt;/p&gt;
+
+&lt;h3 id=&quot;3-multiply-the-derivatives&quot;&gt;3. Multiply the derivatives&lt;/h3&gt;
+&lt;p&gt;Recall, that once we found the two intermediate derivatives, we had to multiply them. So, here is a quick summary:&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dx}=\frac{d\sigma}{dm}\frac{dm}{dx}$&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dm}=-(1+e^{-x})^{-2}$&lt;/p&gt;
+&lt;p&gt;$\frac{dm}{dx}=-e^{-x}$&lt;/p&gt;
+&lt;p&gt;Now, if you remember how to multiply :), we can finally finish this!&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dx}=-(1+e^{-x})^{-2} \times -e^{-x}=\frac{e^{-x}}{(1+e^{-x})^2}$&lt;/p&gt;
+&lt;p&gt;You can now take this value and use it as the derivation of the sigmoid function. An interesting thing occurs after you manipulate this result, though. It turns out that you can rewrite the derivative like this:&lt;/p&gt;
+&lt;p&gt;$\frac{d\sigma}{dx}=\sigma(x)(1-\sigma(x))$&lt;/p&gt;
+&lt;p&gt;The derivative of the sigmoid function is the sigmoid times 1 minus the sigmoid. Wow. I feel cheated. :)&lt;/p&gt;
+&lt;p&gt;If you even remotely enjoyed this article, keep learning about AI and deep learning! 👍
+
+&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linear algebra; the how &amp; why ✵</title>
+   <link href="http://localhost:4000/linear-algebra"/>
+   <updated>2018-12-30T00:00:00-06:00</updated>
+   <id>http://localhost:4000/linear-al</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;Abstract&lt;/strong&gt;
+This article aims to give the reader an understanding of the linear algebra aspect of mathematics one needs to know to start programming or developing machine/deep learning models and gain an understanding of them. Each section corresponds to a unique linear algebra operation. I hope this paper is easy to read and understand to a person who has just a basic high school level understanding of mathematics.&lt;/p&gt;
+
+&lt;h2 id=&quot;contents&quot;&gt;Contents&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#dimensions&quot;&gt;Dimensions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#indexing&quot;&gt;Indexing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#vectors&quot;&gt;Vectors&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#simple-operations&quot;&gt;Simple Operations&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#matrix-vector-multiplication&quot;&gt;Matrix-Vector Multiplication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#matrix-matrix-multiplication&quot;&gt;Matrix-Matrix Multiplication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-why&quot;&gt;The Why&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;dimensions&quot;&gt;Dimensions&lt;/h2&gt;
+&lt;p&gt;First of all, what the heck is a matrix? Well, a matrix is a “rectangular array of numbers”. In simpler terms, a matrix is a grid where each square holds a value. You might be familiar with matrices in programming (also known as an “array of arrays”). In Java, for example, to create a matrix, you might type this: &lt;code&gt;int[][] mat = new int[2][2]&lt;/code&gt;. This would initialize a “2 by 2” matrix. Here is an example of a “2 by 2” matrix in math:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{2} &amp;amp; {4} \\\ {1} &amp;amp; {3}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;Above is a “matrix of numbers”. Why did I call it “2 by 2”? It has 2 rows and 2 columns. So, for example, this matrix would be a “3 by 2” or just 3x2:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{1} &amp;amp; {2} \\\ {3} &amp;amp; {4} \\\ {5} &amp;amp; {6}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;Additionally, the symbol commonly used to represent matrix dimensions is the all-real-numbers symbol: \(\mathbb{R}\). The dimensions of the previous example could be written as \(\mathbb{R}^{3 \times 2}\)&lt;/p&gt;
+
+&lt;h2 id=&quot;indexing&quot;&gt;Indexing&lt;/h2&gt;
+
+&lt;p&gt;Another very common operation needed to be performed on matrices is “indexing”. This is where you can get one value from a matrix. So, if I call the &lt;code&gt;3x2&lt;/code&gt; matrix above \(A\) , and I wanted to index the first element (1), I would say \(A_{11}\).
+
+The reason I do this is because matrix indexing occurs by a subscript where the first number corresponds to the row and the second number corresponds the column of the element in the matrix you want to get (eg. \(Nameofmatrix\_{rowcol}\)).
+
+Another example: let's suppose I want to index the 6 in the matrix above. It is in the 3rd row and 2nd column, so to index it I would say \(A\_{32}\) (Assuming my matrix was called \(A\)).&lt;/p&gt;
+
+&lt;h2 id=&quot;vectors&quot;&gt;Vectors&lt;/h2&gt;
+&lt;p&gt;A “vector” is just a matrix but with one column &lt;u&gt;only&lt;/u&gt;. You could say it is an &lt;code&gt;n x 1&lt;/code&gt; matrix because it can have as many rows (n) but only one column. When indexing a vector, you only need one number in the subscript and that corresponds to the row of the number you are indexing. So, if we have this vector&lt;/p&gt;
+&lt;p&gt;$Y=\left[\begin{array}{l}{1} \\\ {2} \\\ {3}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;then, \(Y_{1}=1\), \(Y_{2}=2\), and \(Y_{3}=3\). &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Just a quick note: all the indexing I have written on is what is called “1-indexing” because the first value in the matrix is referred to with a 1. If you are familiar with programming, then you will most likely be familiar with zero-indexing, where the first value in an array (or matrix) is the 0th element. 1-indexed vectors/matrices are the &lt;u&gt;most common&lt;/u&gt;. Another note: matrices and vectors are often named using CAPITOL lettering by convention.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;simple-operations&quot;&gt;Simple Operations&lt;/h2&gt;
+&lt;p&gt;Now we will start to perform operations on matrices. For each simple operator (add, subtract, multiply, divide) there are two different matrix operations associated. The two matrix operations are known as “scalar” and “element-wise”. The scalar operator takes a number and performs one operation with each element in the matrix. For example,&lt;/p&gt;
+&lt;p&gt;$3+\left[\begin{array}{ll}{1} &amp;amp; {2} \\\ {3} &amp;amp; {4}\end{array}\right]=\left[\begin{array}{ll}{1+3} &amp;amp; {2+3} \\\ {3+3} &amp;amp; {4+3}\end{array}\right]=\left[\begin{array}{ll}{4} &amp;amp; {5} \\\ {6} &amp;amp; {7}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;This works the same way for subtraction, multiplication, and division using scalar values. With element wise operations, you take two matrices of the SAME dimensions and perform one operation with each corresponding element in each matrix. For example:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{1} &amp;amp; {2} \\\ {3} &amp;amp; {4}\end{array}\right] *\left[\begin{array}{ll}{5} &amp;amp; {4} \\\ {3} &amp;amp; {2}\end{array}\right]=\left[\begin{array}{ll}{1 * 5} &amp;amp; {2 * 4} \\\ {3 * 3} &amp;amp; {4 * 2}\end{array}\right]=\left[\begin{array}{ll}{4} &amp;amp; {8} \\\ {9} &amp;amp; {8}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;Here is an example where you can't perform the element-wise operation because the two matrices do NOT have the same dimensions:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{2} &amp;amp; {3} \\\ {4} &amp;amp; {5}\end{array}\right]+\left[\begin{array}{lll}{1} &amp;amp; {2} &amp;amp; {3} \\\ {4} &amp;amp; {5} &amp;amp; {6}\end{array}\right]=undefined$&lt;/p&gt;
+
+&lt;h2 id=&quot;matrix-vector-multiplication&quot;&gt;Matrix-Vector Multiplication&lt;/h2&gt;
+&lt;p&gt;When multiplying a matrix by a vector, you take each row of the matrix and multiply each element of that row with the corresponding element in the vector and then add them. You do that for each row in the matrix and you end up with a vector with the number of rows as the original matrix. This is known as the &lt;strong&gt;“dot product”&lt;/strong&gt; and is represented with this symbol: “\(\otimes\)&quot; (or with no symbol like 2x means to multiply 2 with x). It will make more sense once you see this example:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{1} &amp;amp; {3} \\\ {4} &amp;amp; {0} \\\ {2} &amp;amp; {1}\end{array}\right] \otimes\left[\begin{array}{l}{1} \\\ {5}\end{array}\right]=\left[\begin{array}{l}{?} \\\ {?} \\\ {?}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;To perform the dot product, we first take the first row of the matrix, $\left[\begin{array}{ll}{1} &amp;amp; {3}\end{array}\right]$, and multiply each element in it with the corresponding element in the vector like this:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{1} &amp;amp; {3}\end{array}\right] *\left[\begin{array}{ll}{1} &amp;amp; {5}\end{array}\right]=\left[\begin{array}{lll}{1 * 1} &amp;amp; {3 * 5}\end{array}\right]=\left[\begin{array}{ll}{1} &amp;amp; {15}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;Now you add the values up, $1+15=16$. This becomes the first value in the resulting matrix.&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{1} &amp;amp; {3} \\\ {4} &amp;amp; {0} \\\ {2} &amp;amp; {1}\end{array}\right] \otimes\left[\begin{array}{l}{1} \\\ {5}\end{array}\right]=\left[\begin{array}{c}{16} \\\ {?} \\\ {?}\end{array}\right]$	&lt;/p&gt;
+&lt;p&gt;You now perform these same steps with the rest of the rows in the matrix. For the sake of brevity, I will put the final operations in the matrix:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{ll}{1} &amp;amp; {3} \\\ {4} &amp;amp; {0} \\\ {2} &amp;amp; {1}\end{array}\right] \otimes\left[\begin{array}{l}{1} \\\ {5}\end{array}\right]=\left[\begin{array}{c}{16} \\\ {(4 * 1+0 * 5)} \\\ {(2 * 1+1 * 5)}\end{array}\right]=\left[\begin{array}{c}{16} \\\ {4} \\\ {7}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;And that final matrix is the answer. It's not difficult to understand, just tedious to execute. This is why NO ONE does this by hand, we use computers to do this for us. In python, using the &lt;a href=&quot;https://www.numpy.org/&quot;&gt;numpy&lt;/a&gt; library, you can just say this to perform that entire dot product: &lt;code&gt;numpy.dot(matrix_A, matrix_B)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Additionally, because the operations for dot product are so specific, you cannot perform them with just two randomly dimensioned matrices, they have to be specific as well. If the matrix has dimensions \(\mathbb{R}^{m\times n}\) (\(m\) rows, \(n\) columns), then the vector must have the dimensions \(\mathbb{R}^{n\times 1}\) (n dimensional vector). The answer would then be a vector with the dimensions \(\mathbb{R}^{m \times 1}\).&lt;/p&gt;
+
+&lt;h2 id=&quot;matrix-matrix-multiplication&quot;&gt;Matrix-Matrix Multiplication&lt;/h2&gt;
+&lt;p&gt;To multiply a matrix &lt;strong&gt;by another matrix&lt;/strong&gt; we need to do the &lt;strong&gt;&quot;dot product&quot;&lt;/strong&gt; of the rows and columns ... what does that mean? Well, in the previous section, we took a matrix and a vector, and for each row in the matrix, we found the dot product of that row with the vector and ended up with a vector as the result. For multiplying matrices, you do that EXACT same thing, but repeat it for each column in the second matrix acting as individual vectors. &lt;/p&gt;
+&lt;p&gt;This will make more sense in an example. To work out the answer for the &lt;strong&gt;1st row &lt;/strong&gt;and&lt;strong&gt; 1st column&lt;/strong&gt; of the resulting matrix in this problem, I would find the dot product of the &lt;strong&gt;1st row &lt;/strong&gt;of the first matrix and the&lt;strong&gt; 1st column &lt;/strong&gt;of the second matrix like so: &lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{lll}\color{blue}{1} &amp;amp; \color{blue}{2} &amp;amp; \color{blue}{3} \\\ {4} &amp;amp; {5} &amp;amp; {6}\end{array}\right] \times\left[\begin{array}{cc}\color{blue}{7} &amp;amp; {8} \\\ \color{blue}{9} &amp;amp; {10} \\\ \color{blue}{11} &amp;amp; {12}\end{array}\right]=\left[\begin{array}{c}\color{blue}{58} &amp;amp; {}\\\ {} &amp;amp;{}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;$\begin{aligned}(1,2,3) \otimes(7,9,11) &amp;amp;=1 \times 7+2 \times 9+3 \times 11 \\\ &amp;amp;=58 \end{aligned}$&lt;/p&gt;
+&lt;p&gt;To work out the answer for the &lt;strong&gt;2nd row &lt;/strong&gt;and&lt;strong&gt; 1st column &lt;/strong&gt;of the resulting matrix, I would find the dot product of the &lt;strong&gt;2nd row&lt;/strong&gt; of the first matrix and the &lt;strong&gt;1st column &lt;/strong&gt;of the second like so:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{lll}{1} &amp;amp; {2} &amp;amp;{3} \\\ \color{blue}{4} &amp;amp; \color {blue}{5} &amp;amp; \color {blue}{6}\end{array}\right] \times\left[\begin{array}{cc}\color{blue}{7} &amp;amp; {8} \\\ \color{blue}{9} &amp;amp; {10} \\\ \color{blue}{11} &amp;amp; {12}\end{array}\right]=\left[\begin{array}{c} {58} &amp;amp; {}\\\ \color{blue}{139} &amp;amp; {}\end{array}\right]$&lt;/p&gt;
+&lt;p&gt;$\begin{aligned}(4,5,6) \otimes(7,9,11) &amp;amp;=4 \times 7+5 \times 9+6 \times 11 \\\ &amp;amp;=139 \end{aligned}$&lt;/p&gt;
+&lt;p&gt;We can do the same thing for the &lt;strong&gt;1st row &lt;/strong&gt; and the &lt;strong&gt;2nd column:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$\begin{aligned}(1,2,3) \otimes(8,10,12) &amp;amp;=1 \times 8+2 \times 10+3 \times 12 \\\ &amp;amp;=64 \end{aligned}$&lt;/p&gt;
+&lt;p&gt;And for the &lt;strong&gt;2nd row &lt;/strong&gt;and &lt;strong&gt;2nd column: &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$\begin{aligned}(4,5,6) \otimes(8,10,12) &amp;amp;=4 \times 8+5 \times 10+6 \times 12 \\\ &amp;amp;=154 \end{aligned}$&lt;/p&gt;
+&lt;p&gt;And finally, we get:&lt;/p&gt;
+&lt;p&gt;$\left[\begin{array}{lll}{1} &amp;amp; {2} &amp;amp; {3} \\\ {4} &amp;amp; {5} &amp;amp; {6}\end{array}\right] \times\left[\begin{array}{cc}{7} &amp;amp; {8} \\\ {9} &amp;amp; {10} \\\ {11} &amp;amp; {12}\end{array}\right]=\left[\begin{array}{cc}{58} &amp;amp; {64} \\\ {139} &amp;amp; {154}\end{array}\right]$&lt;/p&gt;
+
+&lt;h2 id=&quot;the-why&quot;&gt;The Why&lt;/h2&gt;
+
+&lt;p&gt;Why is this important to know?&lt;/p&gt;
+&lt;p&gt;Well, to be honest if you aren't doing something related to mathematics or computer science (machine learning) I would struggle to give you a good reason that you need to know it. But, for machine learning, it is EXTREMELY useful. &lt;/p&gt;
+&lt;p&gt;When modeling the layers of a neural network in a program on a computer, each layer can be represented by a vector and the weights as a matrix. Then, when it comes time to forward propagate, the next layer of the network is calculated by the dot product of the previous layer (the vector) and the weights. There are actually many cloud computing services that have computers you can access that are specially designed to be able to perform matrix operations quickly which greatly improves the training process for a network.&lt;/p&gt;
+&lt;p&gt;This is all I got for this one! Please feel free to email me with any questions 👍📬&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Recursive programming ✵</title>
+   <link href="http://localhost:4000/recursion"/>
+   <updated>2018-12-14T00:00:00-06:00</updated>
+   <id>http://localhost:4000/recursion</id>
+   <content type="html">&lt;p&gt;Let’s begin with the definition of recursion: “A function is recursive if it is defined in terms of itself”.&lt;/p&gt;
+
+&lt;p&gt;Or, in other words, a function is recursive if it calls itself.&lt;/p&gt;
+
+&lt;p&gt;The classic math example is the factorial function. The factorial of a number is the product of all whole numbers below it down to 1. This can also be restated as: the factorial of a number is itself multiplied with the factorial of itself minus one. The factorial of 0 is 1. The factorial function is denoted by an exclamation mark.&lt;/p&gt;
+
+&lt;p&gt;$0!=1  \\ n!=n\times (n-1)!$&lt;/p&gt;
+
+&lt;p&gt;Here is the factorial function for the first 5 numbers (0, 1, 2, 3, 4):&lt;/p&gt;
+
+&lt;p&gt;$
+3!=3\times (3-1)!=3\times 2 \\
+2!=2\times (2-1)!=2\times 1 \\
+1!=1\times (1-1)!=1\times 1 \\
+0!=1
+$&lt;/p&gt;
+
+&lt;p&gt;So, because \( 0!=1\):&lt;/p&gt;
+
+&lt;p&gt;Recursive function have a &lt;strong&gt;base case&lt;/strong&gt; and a &lt;strong&gt;general case&lt;/strong&gt;. The base case typically returns a value but &lt;em&gt;always&lt;/em&gt; doesn’t call the enclosed function. The general case calls the enclosed function (itself). Here is the previously discussed factorial function written in Typescript (so you can see the parameter and return types):&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// base case: 0! = 1&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// general case, uses a call to itself&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And here is the factorial function programmed iteratively (with loops), not recursively:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Take a minute to go through both programs, find how they differ, and try to figure out how the recursive implementation works (that’s how I first got my “Oh! I understand”).&lt;/p&gt;
+
+&lt;p&gt;For now, we are going to backtrack (no pun intended) and take a look at a super simple function called &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom&lt;/code&gt;. This function takes a positive integer as the parameter and counts down to 0 (exluding 0). So if you enter &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom(5)&lt;/code&gt;, it will print:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5
+4
+3
+2
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is the iterative implementation (Javascript):&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;countDownFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pretty simple and straightforeward, right?!
+Now let’s take a look at the recursive solution:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;countDownFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// base case, if n is 0, end the function call&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// general case.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// print the number and make a call for n-1&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;countDownFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To figure out exactly how this function works, we will trace each call using a table. Here is a trace table for the call &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom(3)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Call Number&lt;/th&gt;
+      &lt;th&gt;Function Call&lt;/th&gt;
+      &lt;th&gt;Console Output&lt;/th&gt;
+      &lt;th&gt;n = 0&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;countDownFrom(3)&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;countDownFrom(2)&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;countDownFrom(1)&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;countDownFrom(0)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;TRUE&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;This tracing method also shows us the call stack after the function was executed. The call stack is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_(abstract_data_type)&quot;&gt;Stack&lt;/a&gt; (data structure) that function calls get pushed (added) on to after they are called. Stacks are a list of things that can be &lt;em&gt;pushed&lt;/em&gt; to or &lt;em&gt;popped&lt;/em&gt; from. A push adds something to the end of the list and a pop takes that last thing off. Picture a stack like a stack of plates. You can put one on top of the other, but you can’t just take off the bottom one. You first have to take off the top ones or else the stack will collapse. So, because stacks have LIFO (Last In First Out) priority, the most recent function called will ALWAYS be the first to return a value (returning void/nothing counts as a return). When the functions in a recursive call begin to return values and get popped off of the call stack, it is called unwinding. So, the actual FULL (including unwinding) function trace for &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom(3)&lt;/code&gt; would be:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Call Number&lt;/th&gt;
+      &lt;th&gt;Function Call&lt;/th&gt;
+      &lt;th&gt;Console Output&lt;/th&gt;
+      &lt;th&gt;n = 0&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;countDownFrom(3)&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;countDownFrom(2)&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;countDownFrom(1)&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;countDownFrom(0)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;TRUE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(3)&lt;/td&gt;
+      &lt;td&gt;countDownFrom(1)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(2)&lt;/td&gt;
+      &lt;td&gt;countDownFrom(2)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(1)&lt;/td&gt;
+      &lt;td&gt;countDownFrom(3)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If you are interested, here is the trace table for the call &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(4)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Call Number&lt;/th&gt;
+      &lt;th&gt;Function Call&lt;/th&gt;
+      &lt;th&gt;n = 0&lt;/th&gt;
+      &lt;th&gt;Result&lt;/th&gt;
+      &lt;th&gt;Return Value&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;factorial(4)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;4 * factorial(3)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;factorial(3)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;3 * factorial(2)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;factorial(2)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;2 * factorial(1)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;factorial(1)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;1 * factorial(0)&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;factorial(0)&lt;/td&gt;
+      &lt;td&gt;TRUE&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(4)&lt;/td&gt;
+      &lt;td&gt;factorial(1)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;1 * 1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(3)&lt;/td&gt;
+      &lt;td&gt;factorial(2)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;2 * 1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(2)&lt;/td&gt;
+      &lt;td&gt;factorial(3)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;3 * 2&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(3)&lt;/td&gt;
+      &lt;td&gt;factorial(4)&lt;/td&gt;
+      &lt;td&gt;FALSE&lt;/td&gt;
+      &lt;td&gt;4 * 6&lt;/td&gt;
+      &lt;td&gt;24&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The last 5 rows represent the unwinding (call numbers in parenthesis). Row 5 is when the base case was reached (it returned 1 because the input was 0 and the factorial of 0 is 1).&lt;/p&gt;
+
+&lt;h2 id=&quot;an-interesting-example&quot;&gt;An Interesting Example&lt;/h2&gt;
+
+&lt;p&gt;My uncle gave me an interesting problem one time: “create a function to tell if a number is even or odd without using the modulus operator”. I came up with a set of functions that uses recursion to bounce a number back and forth until it reaches zero, then the function it lands on when it is at zero returns true or false (even or odd).&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you call &lt;code class=&quot;highlighter-rouge&quot;&gt;odd(3)&lt;/code&gt; it will return true. &lt;code class=&quot;highlighter-rouge&quot;&gt;odd(4)&lt;/code&gt; returns false. &lt;code class=&quot;highlighter-rouge&quot;&gt;even(3)&lt;/code&gt; returns false. &lt;code class=&quot;highlighter-rouge&quot;&gt;even(4)&lt;/code&gt; returns true!&lt;/p&gt;
+
+&lt;p&gt;It’s probably my favorite set of recursive functions because of its simplicity and sheer elegance. Implement it in whatever language you want. It works!&lt;/p&gt;
+
+&lt;h2 id=&quot;benefits-and-drawbacks&quot;&gt;Benefits and Drawbacks&lt;/h2&gt;
+
+&lt;p&gt;When figuring out a solution to a math problem that is inherently recursive, the recursive solution is typically the simplest to implement. Recursive solutions are often more elegant and use less code than iterative solutions.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; ANY, yes ANY recursive program/function can be rewritten iteratively (although it is, at times, more difficult to find than the iterative algorithm).&lt;/p&gt;
+
+&lt;p&gt;The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment’s largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a &lt;code class=&quot;highlighter-rouge&quot;&gt;StackOverflow&lt;/code&gt; error will be thrown. Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Here is one of &lt;strong&gt;my favorite coding problems&lt;/strong&gt; with a nice recursive solution. Please note that it is a more advanced problem that requires several recursive helper functions to solve. &lt;strong&gt;If I were you, I would go through some &lt;a href=&quot;https://codingbat.com/java&quot;&gt;Javabat&lt;/a&gt; recursive problems before I take a whack at this doozy&lt;/strong&gt;. I will include the code after the problem statement.&lt;/p&gt;
+
+&lt;h2 id=&quot;island-on-an-island&quot;&gt;Island on an Island&lt;/h2&gt;
+
+&lt;p&gt;A satellite photograph displays a section of the South Pacific Ocean and various islands. Some islands contain lakes within the island, and some of these lakes have an island in that lake. Write a program to count the number of islands which have an island within that island’s lake. No island will touch the border of the photograph. No island will have more than one lake. No lake will have more than one island.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Input:&lt;/strong&gt; This first line of the file contains two integers indicating the height and width of the map. The next height number of lines contain one row of data for the map represented as characters ‘~’ for water and ‘*’ for land. No map is larger than 80 x 80.&lt;/p&gt;
+
+&lt;p&gt;Your goal is to output the number of islands which are surrounded by water within a bigger island. A square of land is connected to another square if they are adjacent in directions, north, east, south or west. (left, right, up, down)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Output:&lt;/strong&gt; The number of islands contained within an island.&lt;/p&gt;
+
+&lt;p&gt;Sample Input:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;20 30
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~********~~~~~~~********~~~~
+~~~~****~~~~~~~~~~**~~*~**~~~~
+~~~~*~~~*~~~~~~~~~**~~~~**~~~~
+~~~~*~~~*~~~~~~~~~********~~~~
+~~~~~~~*~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~***~~~~~~**********~~~~~~~~~~
+~*~*~~~~~~*~~~~~~~~*~~~~~~~~~~
+~***~~~~~~*~~****~~*~~~~*****~
+~~~~~~~~~~*~~*~~*~~*~~~~*~~~*~
+~~******~~*~~~~~~~~*~~~~**~~*~
+~~*~~~**~~**********~~~***~~*~
+~~*~*~~*~~~~~~~~~~~~~~**~~~~*~
+~~*~~~~*~~~~~~*********~~~*~*~
+~~*~~***~~~~~~*~~~~~~~~~***~*~
+~~*~~*~~~~~~~~***~~~~~~~~~~~*~
+~~****~~~~~~~~~~*************~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Sample Output: &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;And…..here is the code I used to solve the problem (JavaScript):&lt;/p&gt;
+
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Typescript quickstart</title>
+   <link href="http://localhost:4000/get-started-typescript"/>
+   <updated>2018-06-10T00:00:00-05:00</updated>
+   <id>http://localhost:4000/get-starter-with-typescript</id>
+   <content type="html">&lt;p&gt;Typescript is a programming language that compiles into JavaScript. This means that any valid JS (JavaScript) code is valid TS (Typescript). TS is a language for the developer. If you have every written a bunch of Javascript code and started to wonder, “hey, what was the type of that function parameter, again?”, you understand.&lt;/p&gt;
+
+&lt;p&gt;Typescript is “JavaScript that scales” meaning it enforces types on all variables/return values, allows for interface use, and much much more. Typescript also implements some feature that are supposed to come to Javascript in the future.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;Typescript is a compiled language which means it needs a compiler. You will first need NodeJS installed (TS is almost always used with Node). Then type &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -g typescript&lt;/code&gt; to install TS globally on your computer.
+If typing &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; works and yields the version number of your TS installation, you’re good to go!&lt;/p&gt;
+
+&lt;h2 id=&quot;the-basics&quot;&gt;The Basics&lt;/h2&gt;
+
+&lt;p&gt;All you really need to use Typescript is the compiler. So, create a new file called hello.ts and put this code in it:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;mes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello, TS 🌏😍&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, there is one difference here from vanilla JS – the :string type annotation after the message variable name. The general form for type annotations go like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;let variableName: type&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The string type would have been inferred as the type without the annotation, just like in this case, let a = 9, the inerred type would be number.&lt;/p&gt;
+
+&lt;p&gt;Now to compile the TS file into JavaScript, run &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc hello.ts&lt;/code&gt;. This generates a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.js&lt;/code&gt; with the compiled JS code.&lt;/p&gt;
+
+&lt;p&gt;Let’s run that: &lt;code class=&quot;highlighter-rouge&quot;&gt;node hello.js&lt;/code&gt;. You should see in the console “Hello, TS ♥️”.
+To learn more about Typescript syntax and cool features, check out the handbook.&lt;/p&gt;
+
+&lt;h2 id=&quot;workflow-with-node&quot;&gt;Workflow with Node&lt;/h2&gt;
+
+&lt;p&gt;Because TS is primarily used in NodeJS environments, it is important to know how they work together.&lt;/p&gt;
+
+&lt;p&gt;Create a new project with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next, add the TS configure file with &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -init&lt;/code&gt;. This creates a new file in the root of your project called &lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt;. In it are all sorts of configure variables that you can play with. All we are interested in for the time being is one called outDir. This is the folder that the compiled TS is put into. Find the line where it is defined, uncomment it, and assign it the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;./build&quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now, you can put your TS files anywhere and they will all be compiled into the &lt;code class=&quot;highlighter-rouge&quot;&gt;./build&lt;/code&gt; directory with the command &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Copy your &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.ts&lt;/code&gt; file into the root of your project and run tsc (just those 3 letters). Now in the build folder, there should be a hello.js file. You can run it with &lt;code class=&quot;highlighter-rouge&quot;&gt;node build/hello.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is the general workflow for creating TS files, compiling, and running them. Remember, you can name the &lt;code class=&quot;highlighter-rouge&quot;&gt;outDir&lt;/code&gt; directory anything you want!&lt;/p&gt;
+
+&lt;h2 id=&quot;editors-and-types&quot;&gt;Editors and @types&lt;/h2&gt;
+
+&lt;p&gt;For editing Typescript, I would highly, highly recommend Visual Studio Code. It is the editor I use for almost everything. I used to use Atom, but when I made the switch, I realized just how much better VSC is. It is SUPER fast ⚡️. Has thousands of amazing plugins. Runs on almost every platform.
+For intellisense, VSC’s default Typescript package works extremely well. But, when is comes to working with npm packages in Typescript, you will have to install the type definitions for the package (if they are available). Let’s take express.js for example. The type definition package for express is &lt;code class=&quot;highlighter-rouge&quot;&gt;@types/express&lt;/code&gt;. So, to get autocomplete, intellisense, etc. just install the package with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i @types/express&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Without the type definitions installed, the packages have the type any by default.&lt;/p&gt;
+
+&lt;p&gt;A great website for finding type definitions for your favorite npm packages is definitelytyped.org. Click on the search and it will take you to TypeSearch where you can find your package’s types and how to install them (it usually is @types/package).
+Have fun with TS ❤️.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Automating Backups with Cron &amp; GitHub</title>
+   <link href="http://localhost:4000/cron-github"/>
+   <updated>2018-05-24T00:00:00-05:00</updated>
+   <id>http://localhost:4000/cronjobs-github</id>
+   <content type="html">&lt;p&gt;Back when I was using &lt;a href=&quot;https://ghost.org/&quot;&gt;Ghost&lt;/a&gt; as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.&lt;/p&gt;
+
+&lt;p&gt;Being me, I found a &lt;em&gt;hacky&lt;/em&gt; way around paying.&lt;/p&gt;
+
+&lt;p&gt;I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using &lt;a href=&quot;https://en.wikipedia.org/wiki/Cron&quot;&gt;cron&lt;/a&gt;, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. &lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;To do this, make sure git is installed on your Linux/Unix system.&lt;/p&gt;
+
+&lt;p&gt;Then set your username and email in the git preferences through the terminal.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config --global user.name &quot;FIRST_NAME LAST_NAME&quot;
+git config --global user.email &quot;MY_NAME@example.com&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next create an empty secret repo in your GitHub and clone it on your machine locally.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/dannydenenberg/mybackupsrepo.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use &lt;a href=&quot;https://help.github.com/en/articles/connecting-to-github-with-ssh&quot;&gt;ssh keys&lt;/a&gt; to do this.&lt;/p&gt;
+
+&lt;p&gt;Make sure you have &lt;code class=&quot;highlighter-rouge&quot;&gt;zip&lt;/code&gt; installed with &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt install zip&lt;/code&gt;, then write your bash script looking something like this (example from my Ghost blog):&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+zip /home/mybackupsrepo/mybackup.zip /var/www/ghost &lt;span class=&quot;c&quot;&gt;# zip the folder&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /home/mybackupsrepo &lt;span class=&quot;c&quot;&gt;# go to the backups repo&lt;/span&gt;
+git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;date&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git push origin master &lt;span class=&quot;c&quot;&gt;# commit, push&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rm &lt;span class=&quot;nt&quot;&gt;-Rf&lt;/span&gt; /home/mybackupsrepo/mybackup.zip &lt;span class=&quot;c&quot;&gt;# clean&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Make it executable: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod +x /home/whereveryoustoredthisbashscript&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;And add it to your cronjobs. To edit the cronjobs running, execute &lt;code class=&quot;highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt; (the actual file is stored in &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/spool/cron&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Here is a quick reference for creating new cronjobs and how to schedule them properly:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# crontab -e&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;SHELL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin/bash
+&lt;span class=&quot;nv&quot;&gt;MAILTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;root@example.com
+&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+&lt;span class=&quot;c&quot;&gt;# For details see man 4 crontabs&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Example of job definition:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# .---------------- minute (0 - 59)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# |  .------------- hour (0 - 23)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# |  |  .---------- day of month (1 - 31)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# |  |  |  |  |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# *  *  *  *  * user-name  command to be executed&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# backup using the rsbu program to the internal 4TB HDD and then 4TB external&lt;/span&gt;
+01 01 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; /usr/local/bin/rsbu &lt;span class=&quot;nt&quot;&gt;-vbd1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; /usr/local/bin/rsbu &lt;span class=&quot;nt&quot;&gt;-vbd2&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Set the hardware clock to keep it in sync with the more accurate system clock&lt;/span&gt;
+03 05 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; /sbin/hwclock &lt;span class=&quot;nt&quot;&gt;--systohc&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Perform monthly updates on the first of the month&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 25 04 1 * * /usr/bin/dnf -y update&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Proof of the Squeeze Theorem (and why I like it)</title>
+   <link href="http://localhost:4000/squeeze-theorem"/>
+   <updated>2018-04-15T00:00:00-05:00</updated>
+   <id>http://localhost:4000/squeeze</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;An intuitive explanation of an awesome theorem.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;While I was studying calculus, I came across this statement:&lt;/p&gt;
+&lt;p&gt;$$\lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta}=1$$&lt;/p&gt;
+&lt;p&gt;This amazed my because of the fact that sin of 0 is 0, so with substitution of theta in the fraction next to the limit, it would end up as 0/0 or undefined. Now, I had already studied limits a bit and knew about &lt;a href=&quot;https://dannydenenberg.com/lhopitals-rule/&quot;&gt;l’hopital’s rule&lt;/a&gt;. So, I proceeded to take the derivative of the top and bottom of the fraction with respect to theta and checked out what I got. This got me to the expected answer of 1/1 = 1 because the derivative of sin(x) is cos(x) and cos(0) is 1. &lt;!--more--&gt;Now this was all fine and dandy, but as I did more research into the limit listed above, I found a theorem called The Squeeze Theorem which I thought was a much more fun way to solve this same problem. &lt;/p&gt;
+
+&lt;p&gt;This article is my shot at fully explaining the proof that accompanies the limit shown above using the Squeeze Theorem.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-proof&quot;&gt;The Proof&lt;/h2&gt;
+
+&lt;p&gt;To begin, take a look at this picture of a few triangles drawn using different points around a unit circle. If you don’t already know, a unit circle is one with a radius of 1. The point A is at (0,0), point C is at some point on the edge of the circle, point D is at (1,0), and point E is at some point (1, x).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/ceBMvID.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Using this visual, let us compare the &lt;strong&gt;areas&lt;/strong&gt; of two triangles and a sector.&lt;/p&gt;
+
+&lt;p&gt;$$△ACD \le ⌔ACD \le △AED$$&lt;/p&gt;
+
+&lt;p&gt;We can see that this is true by just looking at the graph. Next, I will define the values of the &lt;strong&gt;areas&lt;/strong&gt;. Note that theta will refer to the angle made on the unit circle with each of the shapes (the bottom left angle of the triangle or sector).&lt;/p&gt;
+
+&lt;p&gt;$$\begin{array}{c}{\triangle ACD=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \sin \theta=\frac{\sin \theta}{2}} \\ {⌔ACD=\frac{1}{2} r^{2} \theta=\frac{1}{2} \cdot 1^{2} \cdot \theta=\frac{\theta}{2}} \\ {\triangle AED=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \tan \theta=\frac{\tan \theta}{2}}\end{array}$$&lt;/p&gt;
+
+&lt;p&gt;Just FYI, the hight of triangle △AED is tan(x) because tan(x) is opposite over adjacent and adjacent is 1, so it is really just &lt;strong&gt;the side opposite the angle&lt;/strong&gt;, which is the hight. (That confused me at first too 😂)&lt;/p&gt;
+
+&lt;p&gt;Now that we have this, we can re-compare (is that a word?) the areas using actual values.&lt;/p&gt;
+
+&lt;p&gt;$$\frac{\sin \theta}{2} \leq \frac{\theta}{2} \leq \frac{\tan \theta}{2}$$&lt;/p&gt;
+&lt;p&gt;Next, I am going to perform a set of operation to all of the elements in the inequality. This is legal as it preserves the &lt;em&gt;truthfulness&lt;/em&gt; of the inequality like applying the same operation to each side of an equals sign preserves the equality.&lt;/p&gt;
+
+&lt;p&gt;First, I will multiply each element by 2.&lt;/p&gt;
+
+&lt;p&gt;$$\sin \theta \leq \theta \leq \tan \theta$$&lt;/p&gt;
+
+&lt;p&gt;Second, I will divide by sin(𝜃).&lt;/p&gt;
+&lt;p&gt;$$1 \leq \frac{\theta}{\sin \theta} \leq \frac{1}{\cos \theta}$$&lt;/p&gt;
+
+&lt;p&gt;Finally, I will take the reciprocal of each.&lt;/p&gt;
+&lt;p&gt;$$1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta$$&lt;/p&gt;
+
+&lt;p&gt;These reciprocals will get us to the final result that we want. All we have to do now is take the limit as listed at the top and analyze the results.&lt;/p&gt;
+&lt;p&gt;$$\begin{array}{c}{\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta\right]} \\ {\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq 1\right]} \\ {1 \geq \lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta} \geq 1}\end{array}$$&lt;/p&gt;
+
+&lt;p&gt;As you can most likely see (I highlighted it), by substitution of the limit value into each element of the inequality, we get 1 is greater than or equal to the limit of sin theta over theta as theta approaches 0 which is greater than or equal to 1.&lt;/p&gt;
+&lt;p&gt;Because we know this:&lt;/p&gt;
+&lt;p&gt;$$\begin{array}{c}{\text {if}} \\ {1 \geq x \geq 1} \\ {\text {then,}} \\{x=1}\end{array}$$&lt;/p&gt;
+
+&lt;p&gt;Now we can say that the limit of sin of theta over theta as theta approaches 0 &lt;strong&gt;has to be 1&lt;/strong&gt; because of what I just stated above. Kinda cool, right?&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Web scraping in node.js 101</title>
+   <link href="http://localhost:4000/web-scraping"/>
+   <updated>2018-03-12T00:00:00-05:00</updated>
+   <id>http://localhost:4000/web-scraping</id>
+   <content type="html">&lt;p&gt;Web scraping is a great way to create dynamic websites or to just be able to get data from sites without having access to their databases. In short, it is an easy method to get info from a site by going through the &lt;strong&gt;front end&lt;/strong&gt; (what the user sees) HTML code.&lt;/p&gt;
+
+&lt;p&gt;To get started with web scraping you must know how a website is structured. If you right click on a page, and click inspect (on chrome), you can see the developer tools.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/V8yrpGZ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This shows you the structure of the HTML/CSS/JavaScript code as well as network performace, errors, security, and much much more.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s say I want to grab the first image that you see on twitter programatically in the JavaScript console.&lt;/p&gt;
+
+&lt;p&gt;Well, I could right click on the image, click inspect, right click on the element in the dev tools, and copy the css selector.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/XNXJhXa.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then I could do a &lt;code class=&quot;highlighter-rouge&quot;&gt;document.querySelector(&amp;lt;&amp;lt;SELECTOR&amp;gt;&amp;gt;).src&lt;/code&gt; and that would give me the URL of the image I want, and I could use that on a web page, for example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/QnJblUJ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This IS web scraping! I was able to gather data (an image) from a website without having access to the database. But this is super tedious and long, so to actually webscrape more efficiently, I use Node.js + Puppeteer.&lt;/p&gt;
+
+&lt;p&gt;If you don’t already know, &lt;a href=&quot;https://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; is a runtime enviornment that allows JavaScript to be run on the server side. And &lt;a href=&quot;https://github.com/GoogleChrome/puppeteer&quot;&gt;Puppeteer&lt;/a&gt; is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).&lt;/p&gt;
+
+&lt;p&gt;Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; works in the terminal, you’re good to go!&lt;/p&gt;
+
+&lt;p&gt;Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a &lt;code class=&quot;highlighter-rouge&quot;&gt;command not found&lt;/code&gt; or something related by running one of the following, I suggest that you look at this article on how to install Node.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm -v # should be 6.0.0 or higher
+$ node -v # should be 9.0.0 or higher
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Great! Let’s start a new project and install the dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir Web-Scraping-101 &amp;amp;&amp;amp; cd Web-Scraping-101
+$ npm init # go through all defaults
+$ npm i puppeteer # the google npm scraping package
+$ tsc --init # initialize typescript
+$ npm i @types/puppeteer # type declarations
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now open the folder in the text editor of your choice. Edit the &lt;code class=&quot;highlighter-rouge&quot;&gt;outDir&lt;/code&gt; option in the &lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt; file to be &lt;code class=&quot;highlighter-rouge&quot;&gt;./build&lt;/code&gt; and uncomment the line, so it looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/y1kZn10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Create a new file in the root of the folder:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ touch app.ts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;app.ts&lt;/code&gt; add:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;console.log(&quot;Twitter, here we come&quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, to &lt;strong&gt;run this&lt;/strong&gt;, in terminal, write: &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc &amp;amp;&amp;amp; node build/app.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc&lt;/code&gt; builds all TypeScript files into the outDir directory defined in the config file and &lt;code class=&quot;highlighter-rouge&quot;&gt;node&lt;/code&gt; runs a single JavaScript file.&lt;/p&gt;
+
+&lt;p&gt;If you see &lt;em&gt;“Twitter, here we come”&lt;/em&gt; appear in the terminal, you’ve got it working!&lt;/p&gt;
+
+&lt;p&gt;Now, we will start to actually scrape using puppeteer.
+Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-rouge&quot;&gt;app.ts&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;puppeteer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;puppeteer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// import the npm package that we installed&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// the rest of the code must be enclosed in an `async` function to be able to `await` for results&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;puppeteer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;launch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// launches an &quot;invisible&quot; chromium browser&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// takes the browser to a new tab (page)&lt;/span&gt;
+  &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;goto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://example.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// takes the page to a specific url&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// Get the &quot;viewport&quot; of the page,&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// as reported by the page.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// NOTE: Anything inside of the `evaluate` function is DOM manipulation.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// No variables outside of the evaluate function can go in, and none can come out without being returned inside of the return object.&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dimensions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// use DOM manipulation to access the width and height of the page&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// if you want to get elements out of the DOM and into the node js code, return theme here&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;deviceScaleFactor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;devicePixelRatio&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// print out the DOM data&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Dimensions:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dimensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// remember to close the broser (invisible chromium)&lt;/span&gt;
+  &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Please read through the commented code above to get a feel for what is going on ⬆.&lt;/p&gt;
+
+&lt;p&gt;Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.&lt;/p&gt;
+
+&lt;p&gt;First, edit the &lt;code class=&quot;highlighter-rouge&quot;&gt;await page.goto(&quot;https://example.com&quot;)&lt;/code&gt; to be &lt;code class=&quot;highlighter-rouge&quot;&gt;await page.goto(&quot;https://twitter.com&quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;#react-root &amp;gt; div &amp;gt; div &amp;gt; div &amp;gt; main &amp;gt; div &amp;gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &amp;gt; div &amp;gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &amp;gt; div &amp;gt; div &amp;gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &amp;gt; div &amp;gt; section &amp;gt; div &amp;gt; div &amp;gt; div&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// the above returns the div for the middle column twitter feed&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is an image of what that represents:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/Taoa3a3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To get all of the images from the middle column, I ended up doing this for the &lt;code class=&quot;highlighter-rouge&quot;&gt;page.evaluate()&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dimensions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// an array of the links to each image&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelectorAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;#react-root &amp;gt; div &amp;gt; div &amp;gt; div &amp;gt; main &amp;gt; div &amp;gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &amp;gt; div &amp;gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &amp;gt; div &amp;gt; div &amp;gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &amp;gt; div &amp;gt; section &amp;gt; div &amp;gt; div &amp;gt; div img&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nx&quot;&gt;sources&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;sources&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the &lt;code class=&quot;highlighter-rouge&quot;&gt;page.evaluate()&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dimensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sources&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There you go! You’ve just scraped image data from a twitter feed. A challenge would be to take this data and integrate it into an express server so that when a user goes to the root site, they are presented with all of these images.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>How to create a Ghost blog with docker 🐳+ AWS ❤️</title>
    <link href="http://localhost:4000/ghost-blog-aws-docker"/>
-   <updated>2019-06-25T00:00:00-05:00</updated>
+   <updated>2017-06-25T00:00:00-05:00</updated>
    <id>http://localhost:4000/docker-and-aws</id>
    <content type="html">&lt;ol&gt;&lt;li&gt;Login to the AWS website&lt;/li&gt;&lt;li&gt;Click on Services  (top bar)&lt;/li&gt;&lt;li&gt;Click on EC2&lt;/li&gt;&lt;li&gt;Click on Launch Instance&lt;/li&gt;&lt;li&gt;Search and choose Ubuntu Server (18 or up)&lt;/li&gt;&lt;li&gt;Leave selected the free tear (unless you have upwards of $10000000000)&lt;/li&gt;&lt;li&gt;Edit security groups (by clicking on &lt;code&gt;edit security groups&lt;/code&gt;)&lt;/li&gt;&lt;li&gt;Click Add rule - &lt;code&gt;http&lt;/code&gt; - leave other defaults&lt;/li&gt;&lt;li&gt;Click Add rule - &lt;code&gt;https&lt;/code&gt; -leave other defaults&lt;/li&gt;&lt;li&gt;Click Launch Instance&lt;/li&gt;&lt;li&gt;Choose Create new pair key from the drop down selector (name it and download it)&lt;/li&gt;&lt;li&gt;Open terminal&lt;/li&gt;&lt;li&gt;CD into the directory where the pair key was downloaded to and do this&lt;/li&gt;&lt;li&gt;Change the .pem file permissions with: &lt;code&gt;sudo chmod 600 &amp;lt;&amp;lt;MYPAIRKEYFILENAME&amp;gt;&amp;gt;.pem&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Go to your AWS instances tab in the EC2 page and find the Public DNS (IPv4) of your instance &lt;/li&gt;&lt;li&gt;&lt;code&gt;ssh &lt;a href=&quot;/cdn-cgi/l/email-protection#7c091e091208093c191f4e514948514e4e48514d4f4e51454f521f13110c090819514d521d111d0613121d0b0f521f1311&quot;&gt;&lt;span class=&quot;__cf_email__&quot; data-cfemail=&quot;790c1b0c170d0c39&quot;&gt;[email&amp;#160;protected]&lt;/span&gt;&amp;lt;&lt;/a&gt;&amp;lt;INSERT.Public.Dns.IPv4&amp;gt;&amp;gt; -i PairKeyName.pem&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Type &lt;code&gt;yes&lt;/code&gt; to get into the ubuntu computer&lt;/li&gt;&lt;li&gt;Install docker: &lt;code&gt;sudo snap install docker&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Make a start file: &lt;code&gt;vim startserver&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Put this in the script👇: &lt;/li&gt;&lt;li&gt;&lt;code&gt;#!/bin/bash; docker run -d --name website -e url=https://&amp;lt;&amp;lt;websitename&amp;gt;&amp;gt; -p 80:2386 -v /home/ubuntu/website:/var/lib/ghost/content ghost&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Create a /website directory: &lt;code&gt;mkdir website&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Go to &lt;code&gt;cloudflare.com&lt;/code&gt; and link your website to it by creating an account (or signing in) and going through the steps to link it to your URL that you used in step &lt;strong&gt;21&lt;/strong&gt;&lt;/li&gt;&lt;li&gt;Make a &lt;code&gt;CNAME&lt;/code&gt; record with the name being &lt;code&gt;@&lt;/code&gt; and the address being the public IPv4 of the aws instance that you found in step &lt;strong&gt;15&lt;/strong&gt; (example: &lt;code&gt;ec2-54-224-132-93.compute-1.amazonaws.com&lt;/code&gt;)&lt;/li&gt;&lt;li&gt;Go to your domain service (mine is google domains) and set the nameservers to be cloudflare’s (you should have already done this step while setting up cloudflare in step &lt;strong&gt;23&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;Change the permissions of the &lt;code&gt;startserver&lt;/code&gt; script to be able to execute: &lt;code&gt;chmod +x startscript&lt;/code&gt;&lt;/li&gt;&lt;li&gt;Now run it: &lt;code&gt;./startscript&lt;/code&gt;&lt;/li&gt;&lt;li&gt;It will take a bit to complete because docker needs to pull the image off of their website, but when it does everything should be up and running&lt;/li&gt;&lt;/ol&gt;
 &lt;h2 id=&quot;please-note&quot;&gt;Please Note&lt;/h2&gt;
@@ -26,7 +1593,7 @@
  <entry>
    <title>How to contribute on GitHub</title>
    <link href="http://localhost:4000/contributing"/>
-   <updated>2019-04-23T00:00:00-05:00</updated>
+   <updated>2017-04-23T00:00:00-05:00</updated>
    <id>http://localhost:4000/git-contributing</id>
    <content type="html">&lt;p&gt;This guide assumes that you have a &lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt; account and &lt;a href=&quot;https://git-scm.com/book/en/v2/Getting-Started-Installing-Git&quot;&gt;git installed&lt;/a&gt; on your machine.&lt;/p&gt;
 
@@ -74,13 +1641,181 @@ git commit -m &quot;🚀 I made this software better!&quot;
 &lt;p&gt;When you go back to Github you should automatically see a button labeled &lt;strong&gt;Create New Pull Request for my-cool-thing&lt;/strong&gt;. Go ahead and push that button. Add additional details as needed and it will show up in the list of PRs once submitted.&lt;/p&gt;
 
 &lt;p&gt;Many larger projects have their own “Contributor Guidelines” and may require you to sign a &lt;a href=&quot;https://en.wikipedia.org/wiki/Contributor_License_Agreement&quot;&gt;CLA&lt;/a&gt; before participating.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;&lt;/script&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Setting up an Apache server on a Raspberry Pi</title>
+   <link href="http://localhost:4000/apache-server-pi"/>
+   <updated>2017-04-23T00:00:00-05:00</updated>
+   <id>http://localhost:4000/apache-server</id>
+   <content type="html">&lt;h2 id=&quot;contents&quot;&gt;Contents&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-apache&quot;&gt;Install apache&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#test-the-web-server&quot;&gt;Test the web server&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#changing-the-default-page&quot;&gt;Changing the default page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-php-if-you-want&quot;&gt;Install PHP (If you want)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#making-it-public&quot;&gt;Making it public&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#port-forwarding&quot;&gt;Port forwarding&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;install-apache&quot;&gt;Install apache&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install apache. Head into terminal and update the available packages&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;sb&quot;&gt;```&lt;/span&gt;&amp;lt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--more--&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+2. Then, install apache2
+
+&lt;span class=&quot;sb&quot;&gt;```&lt;/span&gt;bash
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install apache2 &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;test-the-web-server&quot;&gt;Test the web server&lt;/h2&gt;
+
+&lt;p&gt;By default, Apache puts a test HTML file in the web folder. This default web page is served when you browse to http://localhost/ on the pi itself, or http://192.168.0.6 (whatever the pi’s internal ip address is) from another computer on the local network. To find the pi’s ip address, type &lt;code class=&quot;highlighter-rouge&quot;&gt;hostname -I&lt;/code&gt; at the terminal. Learn more about &lt;a href=&quot;https://www.raspberrypi.org/documentation/remote-access/ip-address.md&quot;&gt;finding IP’s&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The default page will look something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.snap.as/btmE04z.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you see this, you have apache working!&lt;/p&gt;
+
+&lt;h2 id=&quot;changing-the-default-page&quot;&gt;Changing the default page&lt;/h2&gt;
+
+&lt;p&gt;This default web page is an HTML file on the filesystem. It is located at &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/www/html/index.html&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Navigate to this directory in terminal and see what is in there:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /var/www/html
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-al&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will spit out:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;total 12
+drwxr-xr-x  2 root root 4096 Jan  8 01:29 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+drwxr-xr-x 12 root root 4096 Jan  8 01:28 ..
+&lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt;  1 root root  177 Jan  8 01:29 index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This means that there is one file in /var/www/html/ called &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; and is owned by the &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; user. In order to edit the file, you have to change ownership. You could use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo&lt;/code&gt;. Like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo chown pi: index.html&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now, if you want to put files in your website, you can place them in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/www/html&lt;/code&gt; folder!&lt;/p&gt;
+
+&lt;h2 id=&quot;install-php-if-you-want&quot;&gt;Install PHP (If you want)&lt;/h2&gt;
+
+&lt;p&gt;Go into terminal and type:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install php libapache2-mod-php &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, you can run php from your server. We are going to try it!&lt;/p&gt;
+
+&lt;p&gt;Go into the web folder where &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; is stored (&lt;code class=&quot;highlighter-rouge&quot;&gt;/var/www/html&lt;/code&gt;) and remove the index by typing:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rm index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, we are going to create an index for our site in php. Create and edit a new index:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nano index.php
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;NOTE: Nano is a text editor pre-installed on all Raspberry Pi’s (and Linux/Unix devices for that matter)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Put some PHP in it (we’ll make it dynamic):&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hello world. Today is &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Y-m-d H:i:s'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;making-it-public&quot;&gt;Making it public&lt;/h2&gt;
+
+&lt;p&gt;This will explain how others can access your web site through port forwarding and your IPv4 address.&lt;/p&gt;
+
+&lt;p&gt;Go to terminal. If you type &lt;code class=&quot;highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt; and press enter, you will get something like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pi@raspberrypi:~ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ifconfig
+eth0      Link encap:Ethernet  HWaddr b8:27:eb:96:cc:5a
+          inet addr:192.168.0.10  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::bb8e:9610:ab7b:7ae5/64 Scope:Link
+          inet6 addr: 2600:8804:1e80:6e30:c8b6:a7d8:c897:cd8f/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:18607 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:8644 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:2282499 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.1 MiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:1025772 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1001.7 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:101 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:101 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1
+          RX bytes:9505 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9.2 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:9505 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9.2 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+wlan0     Link encap:Ethernet  HWaddr b8:27:eb:c3:99:0f
+          inet addr:192.168.0.200  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::ba27:ebff:fec3:990f/64 Scope:Link
+          inet6 addr: 2600:8804:1e80:6e30:ba27:ebff:fec3:990f/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:58092 errors:0 dropped:48756 overruns:0 frame:0
+          TX packets:830 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:9698158 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9.2 MiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  TX bytes:90407 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;88.2 KiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, if you want to get your internal ip address, you can search for the value after &lt;code class=&quot;highlighter-rouge&quot;&gt;inet addr:my.ip.add.ress&lt;/code&gt;. Search for it like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ifconfig | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;inet addr:&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This address you can type into any computer attatched to the local network and be able to access your server’s site.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;But what if you want for everyone to be able to access your website?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To do this you have to use something called &lt;strong&gt;port forwarding&lt;/strong&gt;. Port forwarding makes it so that when a request comes in to your router on a certain port, it can be redirected to a local computer. We will make it so that when you type in the browser &lt;code class=&quot;highlighter-rouge&quot;&gt;my.routers.ip.address:8090&lt;/code&gt; you will be able to access your website from anywhere.&lt;/p&gt;
+
+&lt;h2 id=&quot;port-forwarding&quot;&gt;Port forwarding&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Log into your router’s configuration page. To do this, go into your browser and type in the ip for the page. Usually the ip is something like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.0.1&lt;/code&gt;. If it is not that, search the web for your router’s configuration page address and type that as the url.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;When you get to the login page you will need to input the username and password. Usually, the username is &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; and the password is &lt;code class=&quot;highlighter-rouge&quot;&gt;password&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;When you are in, navigate to a tab called firewalls, and find a page called &lt;code class=&quot;highlighter-rouge&quot;&gt;port forwarding/virtual servers&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To add a port forwarding rule, click &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fill out all of the ports with this number: &lt;code class=&quot;highlighter-rouge&quot;&gt;8090&lt;/code&gt;. &lt;em&gt;NOTE: I would normally use port &lt;code class=&quot;highlighter-rouge&quot;&gt;80&lt;/code&gt; so people would not have to bother with typing the port more than once, but some companies (like cox) do not allow forwarding on 80&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For the IP address, put in the ip for your raspberry pi (inet addr: &lt;strong&gt;my.r.pi’s.ip&lt;/strong&gt;). We found our pi’s ip in the previous section.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For the option to use &lt;code class=&quot;highlighter-rouge&quot;&gt;TCP&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;UDP&lt;/code&gt;, or &lt;code class=&quot;highlighter-rouge&quot;&gt;BOTH&lt;/code&gt;, choose &lt;code class=&quot;highlighter-rouge&quot;&gt;BOTH&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Click the add button&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You have now successfully added port forwarding for your website and can access it outside of LAN!&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>How to install Node.js</title>
    <link href="http://localhost:4000/installing-node"/>
-   <updated>2019-03-14T00:00:00-05:00</updated>
+   <updated>2017-03-14T00:00:00-05:00</updated>
    <id>http://localhost:4000/installing-node</id>
    <content type="html">&lt;p&gt;It is likely that you already have &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;NodeJS&lt;/a&gt; installed on your machine. Try running &lt;code class=&quot;highlighter-rouge&quot;&gt;node -v&lt;/code&gt; from the command line. If that does not work or the version is older than &lt;code class=&quot;highlighter-rouge&quot;&gt;8.15&lt;/code&gt;, follow the install instructions below.&lt;/p&gt;
 
@@ -105,6 +1840,35 @@ nvm use 10
 &lt;h3 id=&quot;windows&quot;&gt;Windows&lt;/h3&gt;
 
 &lt;p&gt;NVM is not available on Windows, but there is a solid alternative with &lt;a href=&quot;https://github.com/coreybutler/nvm-windows&quot;&gt;nvm-windows&lt;/a&gt;. It provides an installer than you can download from the repo. Once installed you will have access commands similar to those above.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>About \(m\alef ^tH\) on denenberg.us</title>
+   <link href="http://localhost:4000/math-on-denenberg-us"/>
+   <updated>2014-08-04T00:00:00-05:00</updated>
+   <id>http://localhost:4000/math-doc</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;All math on denenberg.us is rendered using &lt;a href=&quot;https://katex.org&quot;&gt;Katex&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s some inline \(5x=33x^2-8\pi\) math.&lt;/p&gt;
+
+&lt;p&gt;Here’s some display math:
+$
+\int^{88}_\infty \frac{x^2}{\pi^4 x} \dot dx = 4
+$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;To write math inline, enclose the math in &lt;code class=&quot;highlighter-rouge&quot;&gt;\(&lt;/code&gt; to start and &lt;code class=&quot;highlighter-rouge&quot;&gt;\)&lt;/code&gt; to end. Ex: &lt;code class=&quot;highlighter-rouge&quot;&gt;\(a=\frac{F}{m}\)&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Note&lt;/strong&gt; that when writing this in Jekyll markdown, you actually have to type 2 backslashes becuase the first acts as an escape character: &lt;code class=&quot;highlighter-rouge&quot;&gt;\\(a=\frac{F}{m}\\)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;To write display math, enclose the math in a single dollar sign: &lt;code class=&quot;highlighter-rouge&quot;&gt;$a=\frac{F}{m}$&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Why not 2 dollar signs you ask? It turns out that before Katex can even get to the math, if you are using 2 dollar signs the &lt;strong&gt;markdown parser turns it into a script tag&lt;/strong&gt;…so not ideal.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  

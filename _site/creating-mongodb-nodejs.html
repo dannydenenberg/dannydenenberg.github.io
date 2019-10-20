@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+  
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    
+    Creating & connecting a MongoDB database and node.js server to a front end ✵ &middot; Danny Denenberg
+    
+  </title>
+
+  <!-- Font Awesome Icon Support -->
+ <script src="https://kit.fontawesome.com/b0b051f3df.js" crossorigin="anonymous"></script>
+  </head>
+
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    title="Danny Denenberg"
+    href="/atom.xml"
+  />
+
+
+</head>
+
+
+  <body>
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+          <small></small>
+        </h3>
+
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/about/">About</a></span
+        >
+         &nbsp;&nbsp;&nbsp;<span
+          class="nav-bar-item"
+          ><a href="/dod">Todo</a></span
+        >
+        
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">Creating & connecting a MongoDB database and node.js server to a front end ✵</h1>
+  <time datetime="2019-07-29T00:00:00-05:00" class="post-date">July 29, 2019</time>
+
+  <blockquote>
+  <p><a href="https://github.com/dannydenenberg/mongodb-users">Here</a> is a link to all of the Node.js code for both parts (includes authentication and security features) if you want to jump right in (yes, I comment well).</p>
+</blockquote>
+
+<p>If you are in the situation I was in when I first encountered this problem, you have a working front end (for me, it was a basic todo app) but you need to be able to store user data such as usernames, passwords, <em>todo list items</em>, etc.<!--more--></p>
+
+<h2 id="all-about-databases">All About Databases</h2>
+
+<p>When it comes to storing data, luckily, there are many options such as MySQL, NoSQL, GraphQL, public storage on a server, a simple JSON file, or MongoDB.</p>
+
+<blockquote>
+  <p>Okay, okay, back up. Did you say JSON file on a simple server? Easy! I could set that up with Node.js and express in an hour!</p>
+</blockquote>
+
+<p>Ummm, let me think about it – No.</p>
+
+<blockquote>
+  <p>Why not? Why should I use a database?</p>
+</blockquote>
+
+<p>Well, there are many advantages to using a database over a JSON file or something similar. If you use a cloud hosting option, there is no need to worry about loss of data. Databases are optimized to store, search, and protect data. They will not let unauthorized users to write to your data. Data transactions are <strong>atomic</strong> meaning that either an entire read/write/update operation on a thread occurs, or nothing at all, which prevents corruption of data.</p>
+
+<blockquote>
+  <p>Okay, fine. I’m convinced. I’ll use a database. Which one?</p>
+</blockquote>
+
+<p>There are many out there currently, but if you’re looking for an easy-to-use, high performance, high availability database that could automatically scale in size depending on use, I would recommend MongoDB. MongoDB is a document-based database meaning that it stores data in JSON-like documents so it is super easy to work with data in it if you are already familiar with JavaScript objects or JSON:</p>
+
+<p><img src="https://i.snap.as/L2jZ6Yx.png" alt="" /></p>
+
+<p>MongoDB’s query language is also powerful and easy to use. For example, this will find all users with a certain zip code:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">"address.zip"</span><span class="p">:</span> <span class="s2">"90404"</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="setting-up-mongo">Setting Up Mongo</h2>
+
+<p>Let’s get started setting up the MongoDB database.</p>
+
+<p>To make it simple and easy, we are going to host our database in the cloud using <a href="https://www.mongodb.com/cloud/atlas">MongoDB’s Atlas</a>. This takes away the pain of setting up the actual database and helps us with automatic scaling and not worrying about loss of data (like I said before).</p>
+
+<ol>
+  <li>Go to the MongoDB Atlas website, click “Start Free”, and create an account.</li>
+  <li>Once you are inside the dashboard looking page, create a new project (name it anything you want).</li>
+  <li>Make sure you are inside the project (you should see a ‘Clusters’ tab on the left hand nav bar)</li>
+  <li>Create a new cluster. Leave <strong>Global Cloud Configuration</strong> with its default parameters. For <strong>Cloud Provider &amp; Region</strong> select ‘Google Cloud Platform’ and for the region, find the one that says ‘FREE TIER AVAILABLE’ and choose that one (for me, it was Iowa).</li>
+  <li>In the “Cluster Tier” section make sure that <strong>M0 Sandbox</strong> is selected</li>
+  <li>In “Additional Settings” you can leave <strong>Turn on Backups</strong> <em>unchecked</em>.</li>
+  <li>In “Cluster Name”, name it anything you want.</li>
+</ol>
+
+<p>Nice! You have a working database. Just an FYI, it should take about 7-10 minutes for everything to get initialized and up and running properly.</p>
+
+<h2 id="database-access">Database Access</h2>
+
+<p>To actually use a database, you have to have the proper access to the information. Because I am assuming there is just one person using this database, we are going to give one user full admin access to the information.</p>
+
+<p>To do this, click on the tab in the side nav bar called “Database Access”. In the upper right hand corner, click “Add New User”. For the username and password, enter anything you want, but make sure the password is long and random (you don’t want anybody being able to put information into the database other than yourself). For the <strong>User Privileges</strong> select “Read and Write to any database”. Click ‘Add the User’. Make sure you write down the credentials (username + password) you used for the user!</p>
+
+<p>After you have created a user with read/write privileges, to actually connect to the database, you need to use a <strong>MongoDB URI</strong>. This is the web address for connecting to the data. The URI of a database is like the URL of a webpage. By convention, the MongoDB URI is as follows:</p>
+
+<p><code class="highlighter-rouge">mongodb://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;databasename&gt;</code></p>
+
+<p>For example, mine would be:</p>
+
+<p><code class="highlighter-rouge">mongodb+srv://danny:secretPassword123@vuecluster5u.gcp.mongodb.net/users</code></p>
+
+<p><strong>NOTE:</strong> The final <code class="highlighter-rouge">/users</code> is called a collection in MongoDB idiom. It is a collection of documents (database entries).</p>
+
+<p>To get your URI, click on the “Clusters” tab of your project and on your main cluster, click <strong>Connect</strong>. Select ‘Connect Your Application’.</p>
+
+<p><img src="https://i.snap.as/AN9ygzu.png" alt="" /></p>
+
+<p>Then on ‘Choose your driver version’, set the driver to <strong>Node.js</strong> and the version to <strong>2.2.12 or later</strong>.</p>
+
+<p><img src="https://i.snap.as/6ikkw2V.png" alt="" /></p>
+
+<p>Your connection string (URI) should be under the drivers. To get your real working URI, replace the <code class="highlighter-rouge">&lt;password&gt;</code> with your user password, and the <code class="highlighter-rouge">/test</code> after the port number with a collection (database) name you want, eg: <code class="highlighter-rouge">/mydb</code>. There you go! You have your URI. Write it down or copy it in some form because you’ll need it in a bit.</p>
+
+<h2 id="nodejs-skeleton">Node.js Skeleton</h2>
+
+<p>In this section, we are going to set up the minimum Node.js needed to connect to your database (cluster) using the URI and to read/write to it as well.</p>
+
+<p>To begin, set up a new Node project using npm (create a new directory and run <code class="highlighter-rouge">npm init</code> inside of it). If you don’t already have Node.js installed, please <a href="https://nodejs.org/en/">install it</a>.</p>
+
+<p>After your project is initialized, install the dependencies. For this project, all we are using is <a href="https://expressjs.com/">Express.js</a> and <strong>CORS</strong>. If you don’t already know, express is one of the most popular ways to create servers in Node. To install it, just run <code class="highlighter-rouge">npm i -s express</code> to install and save express. CORS (<strong>C</strong>ross <strong>O</strong>rigin <strong>R</strong>esource <strong>S</strong>haring) is a safety feature that we need to bypass to be able to access resources out of localhost (where we are running our server from). To install it, run <code class="highlighter-rouge">npm i -s cors</code>. Now create a new file in the root directory named <code class="highlighter-rouge">app.js</code> and put this code in it. I commented it heavily so you can understand what is going on:</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/5nr6w4mg/3/embedded/js/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>After you have read through, the code and know the gist (no pun intended) of what is happening, run the code in <code class="highlighter-rouge">app.js</code>. If you configured and installed everything correctly, you should see something almost identical to this:</p>
+
+<p><img src="https://i.snap.as/ChaGQj5.png" alt="" /></p>
+
+<p>Then, open a browser and travel to <code class="highlighter-rouge">http://localhost:4567</code> and you should see “Home sweet home”.</p>
+
+<p><img src="https://i.snap.as/VEuNLaB.png" alt="" /></p>
+
+<p><strong>NOTE:</strong> Opening a web page from a browser makes a <code class="highlighter-rouge">GET</code> request to a server which is one of the 3 HTTP requests (requests made to a server) we will use for our database:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">GET</code> requests fetch resources from a server</li>
+  <li><code class="highlighter-rouge">POST</code> requests create resources on a server (database)</li>
+  <li><code class="highlighter-rouge">PUT</code> requests update resources on a server</li>
+</ol>
+
+<p>One more thing necessary to know before using our database, is express.js routing parameters. As of now, we are only responding to requests being sent on the base route “/”. Let’s say that we want to respond with user information when a <code class="highlighter-rouge">GET</code> request is sent with the username being the first route parameter. For example, if I want to get the information stored in the database about the user <code class="highlighter-rouge">'danny33'</code>, I want to be able to send a GET request to <code class="highlighter-rouge">https://myserver.com/danny33</code> to acquire that information.</p>
+
+<p>To create a dynamic route parameter with express, you change the route to be a colon, and then the name of your parameter. Here is how the example above would look (responding to a GET req.):</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s2">"/:user"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`[GET REQUEST TO /</span><span class="p">${</span><span class="nx">user</span><span class="p">}</span><span class="s2">] Sending back information about the user </span><span class="p">${</span><span class="nx">user</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>So, going to <code class="highlighter-rouge">localhost:4567/dooty</code> will give back</p>
+
+<p><code class="highlighter-rouge">"[GET REQUEST TO /dooty] Sending back information about the user dooty"</code></p>
+
+<p>This express route parameter will only work on the text after the first route slash <code class="highlighter-rouge">/</code>. So going to <code class="highlighter-rouge">localhost:4567/dooty/secondparam</code>will refuse to connect because we haven’t written a response to the request <code class="highlighter-rouge">'/:first/:second'</code>.</p>
+
+<p>Now, we are ready to look at how we can connect our MongoDB database to this Node.js and express server we have set up (FYI, this example will include dynamic path parameters). Before, I get to the code, we have to install the Mongo package for Node: <code class="highlighter-rouge">npm i -s mongodb</code>. Now you can read through the heavily commented code below to get a sense of how node.js contacts MongoDB for creating, updating, and receiving database documents.</p>
+
+<p>NOTE: Before running this code below, you MUST replace the <code class="highlighter-rouge">const uri = ....</code> with your URI that you got in the section about <a href="#database-access">Database Access</a>.</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/5nr6w4mg/5/embedded/js/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>Run this code, by copying and pasting it into your <code class="highlighter-rouge">app.js</code> file in your node project (remember to replace the <code class="highlighter-rouge">uri</code> variable with yours) and running node <code class="highlighter-rouge">app.js</code> in your terminal.</p>
+
+<h2 id="testing-the-code">Testing the Code</h2>
+
+<p>To test this code, make sure your <code class="highlighter-rouge">app.js</code> is running, open up Chrome (or Firefox), click <code class="highlighter-rouge">CMD+OPTION+i</code> to open up the dev tools pane, and click on the ‘console’ tab to run some JavaScript.</p>
+
+<p>First, let’s test creating a new user by sending a <code class="highlighter-rouge">POST</code> request to our server. To send our requests, I will use the JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"><code class="highlighter-rouge">fetch()</code></a> function.
+Below, I am creating a new user named ‘dan’ with some properties which can be found in the body property of the fetch.</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/5nr6w4mg/6/embedded/js/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>Paste this code in the dev tools JavaScript console and click ENTER ↵ to run.</p>
+
+<h2 id="what-just-happened">What Just Happened?</h2>
+
+<p>When you pressed enter, the code sent a post request to your server (the intent was to create a new user with the username ‘dan’). The server connected to your MongoDB Atlas Database using the URI and created a new document on your database with the <code class="highlighter-rouge">user</code> field “dan”, the <code class="highlighter-rouge">eyeColor</code> field “blue”, the <code class="highlighter-rouge">hairColor</code> field “brown”, and the pass field “mypassword123”.</p>
+
+<p>So, theoretically, if everything ran correctly, you should see that user in your MongoDB atlas database online. To test this out, go to your project cluster and click on the “collections” button for the cluster.</p>
+
+<p><img src="https://i.snap.as/mRfqVqR.png" alt="" /></p>
+
+<p>You should be able to see your data there. Click on your collection name (whatever name you used as the last parameter in the URI – <code class="highlighter-rouge">/databasename</code>. For me it was <code class="highlighter-rouge">/users</code>. The newly created user should be sitting right there!</p>
+
+<p><img src="https://i.snap.as/FjmGgBK.png" alt="" /></p>
+
+<p>To <em>get</em> the data about a user, just put the URL for the user, <code class="highlighter-rouge">http://localhost:4567/dan</code>, into a browser and the data will be in the body of the site. Easy!</p>
+
+<p>And all you have to do for updating the user data in the database, is update your <code class="highlighter-rouge">extraDataToStore</code> variable to hold the new user data and send the request as ‘put’:</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/5nr6w4mg/8/embedded/js/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+
+<p>And that is how you can use client side JavaScript to interact with a database! Nice work!</p>
+
+<p>From here you can customize the code to add different fields to your stored data and to show the data in some nice front end design.</p>
+
+<p>#code #js #node #databases</p>
+
+</article>
+
+<hr />
+<div class="qna" style="text-align: center">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, js, GitHub, or anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or by 🔫-ing me an
+    <a href="/about#how-the-hell-can-i-get-in-touch-with-this-guy">email</a>.
+  </p>
+</div>
+
+
+<!-- 
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+    <li>
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
+        <small
+          ><time datetime="2019-09-20T00:00:00-05:00">20 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
+        <small
+          ><time datetime="2019-09-13T00:00:00-05:00">13 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+    <li>
+      <a href="/pass-hashing">
+        A complete guide to password hashing
+        <small
+          ><time datetime="2019-09-10T00:00:00-05:00">10 Sep 2019</time></small
+        >
+      </a>
+    </li>
+    
+  </ul>
+</aside>
+ -->
+
+      </main>
+
+      <div class="footer" style="text-align: center">
+  <hr />
+  <p>
+    Be notified of new posts.
+    <a href="/atom.xml">Subscribe to the RSS feed.</a>
+  </p>
+
+  <div id="icons">
+    <a href="http://github.com/dannydenenberg">
+      <img
+        class="icon"
+        style="display:inline;"
+        src="/goods/github.svg"
+        width="25"
+        alt=""
+        srcset=""
+      />
+    </a>
+    <!-- <img
+      class="icon"
+      style="display:inline;"
+      src="/goods/youtube.svg"
+      width="25"
+      alt=""
+      srcset=""
+    /> -->
+  </div>
+</div>
+
+    </div>
+
+    
+  </body>
+</html>
