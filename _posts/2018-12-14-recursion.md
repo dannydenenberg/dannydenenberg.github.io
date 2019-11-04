@@ -146,7 +146,9 @@ When figuring out a solution to a math problem that is inherently recursive, the
 
 **Note:** ANY, yes ANY recursive program/function can be rewritten iteratively (although it is, at times, more difficult to find than the iterative algorithm).
 
-The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment's largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a `StackOverflow` error will be thrown. Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.
+The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment's largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a `StackOverflow` error will be thrown. 
+
+Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.
 
 ---
 
