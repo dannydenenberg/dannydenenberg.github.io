@@ -3,9 +3,7 @@ layout: page
 title: About
 ---
 
-![](/goods/solly.jpg)
-
-> Hey yall! I'm workin' on developing this site into a beautiful flower 🌺 (btw, want this theme? [Here ya go!](https://github.com/dannydenenberg/newcomen))
+<p style="font-size: 1.25rem">Hey yall! I'm workin' on developing this site into a beautiful flower 🌺 (btw, want this theme? <a href="https://github.com/dannydenenberg/newcomen">Here ya go!</a>)</p>
 
 I'm an award winning musician, singer, and actor from Omaha, NE :) (I also do a bit of coding on the side)
 

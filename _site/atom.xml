@@ -4,26 +4,13 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-11-05T21:03:26-06:00</updated>
+ <updated>2019-11-05T22:02:55-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
    <email>dannydenenberg@gmail.com</email>
  </author>
 
- 
- <entry>
-   <title>MERN stack boilderplate code for login system</title>
-   <link href="http://localhost:4000/mern-stack-login-system-boilerplate-code"/>
-   <updated>2019-10-22T00:00:00-05:00</updated>
-   <id>http://localhost:4000/best-mern-boilderplate</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/dannydenenberg/MERN-boilerplate-login-system&quot;&gt;Here&lt;/a&gt; is all of the MERN code.&lt;/p&gt;
-
-&lt;p&gt;About two years ago, ‘Kieth the Coder’ (Youtuber) released &lt;a href=&quot;https://www.youtube.com/watch?v=s1swJLYxLAA&quot;&gt;this&lt;/a&gt; video on creating a login system using the MERN stack (Mongodb, Express, React, Node). I watched it and loved it. However, I searched and searched, yet couldn’t find the code that he wrote in the actual video.&lt;/p&gt;
-
-&lt;p&gt;This frustrated me A TON, so….I typed it all out and fixed a couple of errors that were present in the video. It is a great boilerplate for anyone wanting to use Webpack to make a MERN login system. &lt;strong&gt;&lt;a href=&quot;https://github.com/dannydenenberg/MERN-boilerplate-login-system&quot;&gt;Here&lt;/a&gt; is the code in its entirety.&lt;/strong&gt; All instructions on running the app are in the README.md.&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>Gradient descent for univariate linear regression</title>
@@ -319,7 +306,7 @@ The Dos and Don’ts of Salting&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Securing your database ✵</title>
+   <title>Securing your database</title>
    <link href="http://localhost:4000/securing-db"/>
    <updated>2019-08-05T00:00:00-05:00</updated>
    <id>http://localhost:4000/securing-db</id>
@@ -529,7 +516,7 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
  </entry>
  
  <entry>
-   <title>Connecting MongoDB and node.js to a front end ✵</title>
+   <title>Mongo database+nodejs with a front end</title>
    <link href="http://localhost:4000/creating-mongodb-nodejs"/>
    <updated>2019-07-29T00:00:00-05:00</updated>
    <id>http://localhost:4000/creating-mongo-db</id>
@@ -853,7 +840,7 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
  </entry>
  
  <entry>
-   <title>Linear algebra for machine learning ✵</title>
+   <title>Linear algebra for machine learning</title>
    <link href="http://localhost:4000/linear-algebra"/>
    <updated>2018-12-30T00:00:00-06:00</updated>
    <id>http://localhost:4000/linear-al</id>
@@ -938,7 +925,7 @@ Another example: let's suppose I want to index the 6 in the matrix above. It is 
  </entry>
  
  <entry>
-   <title>Recursive programming ✵</title>
+   <title>Recursive programming</title>
    <link href="http://localhost:4000/recursion"/>
    <updated>2018-12-14T00:00:00-06:00</updated>
    <id>http://localhost:4000/recursion</id>

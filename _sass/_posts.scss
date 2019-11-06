@@ -12,6 +12,10 @@
   }
 }
 
+.page-body > p:first-child {
+  font-size: 1.25rem;
+}
+
 // Blog post or page title
 .page-title,
 .post-title,
@@ -55,7 +59,7 @@
     }
 
     a:hover {
-      color: #268bd2;
+      color: var(--link-color-hover) !important;
       text-decoration: none;
 
       small {

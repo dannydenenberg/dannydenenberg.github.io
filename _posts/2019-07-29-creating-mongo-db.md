@@ -1,5 +1,5 @@
 ---
-title: Connecting MongoDB and node.js to a front end ✵
+title: Mongo database+nodejs with a front end
 permalink: creating-mongodb-nodejs
 ---
 

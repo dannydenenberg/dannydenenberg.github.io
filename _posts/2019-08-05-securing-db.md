@@ -1,5 +1,5 @@
 ---
-title: Securing your database ✵
+title: Securing your database
 permalink: securing-db
 ---
 

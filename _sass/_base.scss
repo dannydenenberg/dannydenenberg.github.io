@@ -44,6 +44,10 @@ h6 {
   }
 }
 
+a:hover {
+  color: var(--link-color-hover) !important;
+}
+
 html {
   font-family: $root-font-family;
   // font-family: var(--font-default);
