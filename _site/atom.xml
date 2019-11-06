@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-10-22T14:48:27-05:00</updated>
+ <updated>2019-11-05T21:03:26-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
@@ -853,7 +853,7 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
  </entry>
  
  <entry>
-   <title>Linear algebra; the how &amp; why ✵</title>
+   <title>Linear algebra for machine learning ✵</title>
    <link href="http://localhost:4000/linear-algebra"/>
    <updated>2018-12-30T00:00:00-06:00</updated>
    <id>http://localhost:4000/linear-al</id>
@@ -1219,7 +1219,9 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; ANY, yes ANY recursive program/function can be rewritten iteratively (although it is, at times, more difficult to find than the iterative algorithm).&lt;/p&gt;
 
-&lt;p&gt;The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment’s largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a &lt;code class=&quot;highlighter-rouge&quot;&gt;StackOverflow&lt;/code&gt; error will be thrown. Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.&lt;/p&gt;
+&lt;p&gt;The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment’s largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a &lt;code class=&quot;highlighter-rouge&quot;&gt;StackOverflow&lt;/code&gt; error will be thrown.&lt;/p&gt;
+
+&lt;p&gt;Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.&lt;/p&gt;
 
 &lt;hr /&gt;
 

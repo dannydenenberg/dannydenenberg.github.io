@@ -2,18 +2,40 @@
   --font-default: "PT Serif", Georgia, "Times New Roman", serif;
   --font-secondary: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
     Arial, sans-serif;
-  --body-bg: #fafafa;
-  --body-color: #555;
-  --link-color: #222;
+
+  // Light mode
+  // --body-bg: #fafafa;
+  // --body-color: #555;
+  // --link-color: #222;
+  // --link-color-hover: #000;
+  // --link-border-color: rgba(0, 0, 0, 0.25);
+  // --heading-color: #333;
+  // --hr-color: rgba(0, 0, 0, 0.1);
+  // --kbd-color: var(--body-color);
+  // --kbd-bg: #eee;
+  // --code-color: rgba(212, 73, 80, 1);
+  // --code-snippet-border: rgba(0, 0, 0, 0.05);
+  // --blockquote-border: #e5e5e5;
+
+  // Dark mode
+  --body-bg: #26282d;
+  --body-color: #afafaf;
+  --link-color: #fafafa;
   --link-color-hover: #000;
   --link-border-color: rgba(0, 0, 0, 0.25);
-  --heading-color: #333;
+  // --heading-color: #fafafa;
+  --heading-color: #ebcb8b;
+  --strong-color: #fafafa;
   --hr-color: rgba(0, 0, 0, 0.1);
   --kbd-color: var(--body-color);
   --kbd-bg: #eee;
   --code-color: rgba(212, 73, 80, 1);
   --code-snippet-border: rgba(0, 0, 0, 0.05);
   --blockquote-border: #e5e5e5;
+  --masthead-title: #fafafa;
+  --archive-date: #6d6d6d;
+  --code-bg-color: #54333366;
+  --pre-bg-color: #29313547;
 }
 
 $gray-1: #f9f9f9;
@@ -35,8 +57,7 @@ $root-font-family: "PT Serif", Georgia, "Times New Roman", serif;
 $root-font-size: 16px;
 $root-line-height: 1.5;
 
-$body-color: #515151;
-$body-bg: #fff;
+$body-color: #afafaf;
 $link-color: $blue;
 
 $border-color: #e5e5e5;
