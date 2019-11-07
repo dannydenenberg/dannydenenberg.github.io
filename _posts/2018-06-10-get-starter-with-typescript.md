@@ -46,10 +46,11 @@ This is the general workflow for creating TS files, compiling, and running them.
 
 ## Editors and @types
 
-For editing Typescript, I would highly, highly recommend Visual Studio Code. It is the editor I use for almost everything. I used to use Atom, but when I made the switch, I realized just how much better VSC is. It is SUPER fast ⚡️. Has thousands of amazing plugins. Runs on almost every platform.
+For editing Typescript, I would highly, highly recommend [Visual Studio Code](https://code.visualstudio.com/). It is the editor I use for almost everything. I used to use [Atom](https://atom.io/), but when I made the switch, I realized just how much better VSC is. It is SUPER fast ⚡️. Has thousands of amazing plugins. Runs on almost every platform.
 For intellisense, VSC's default Typescript package works extremely well. But, when is comes to working with npm packages in Typescript, you will have to install the type definitions for the package (if they are available). Let's take express.js for example. The type definition package for express is `@types/express`. So, to get autocomplete, intellisense, etc. just install the package with `npm i @types/express`.
 
 Without the type definitions installed, the packages have the type any by default.
 
-A great website for finding type definitions for your favorite npm packages is definitelytyped.org. Click on the search and it will take you to TypeSearch where you can find your package's types and how to install them (it usually is @types/package).
+A great website for finding type definitions for your favorite npm packages is [definitelytyped.org](https://definitelytyped.org). Click on the search and it will take you to TypeSearch where you can find your package's types and how to install them (it usually is @types/package). 
+As an alternative, you could search on [Yarn's](https://yarnpkg.com/lang/en/) website for packages that start with "`@types`".
 Have fun with TS ❤️.
