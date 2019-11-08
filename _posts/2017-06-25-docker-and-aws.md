@@ -1,6 +1,6 @@
 ---
 #layout: post
-title: "How to create a Ghost blog with docker 🐳+ AWS ❤️"
+title: "How to create a Ghost blog with docker+AWS "
 permalink: ghost-blog-aws-docker
 ---
 
