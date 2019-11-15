@@ -33,10 +33,9 @@ pages_list:
   Blog: "/blog"
   About: "/about/"
   Projects: "/projects"
-  Todo: "/dod"
 
 # personal info
-twitter-url: da_nn_y_o
+twitter-url: 
 
 # Gems
 plugins:
