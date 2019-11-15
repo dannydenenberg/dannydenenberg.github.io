@@ -1,7 +1,6 @@
 :root {
-    --font-default: system-ui, "PT Serif", Georgia, "Times New Roman", serif;
-    --font-secondary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Helvetica, Arial, sans-serif;
+    --font-default: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol","PT Serif", Georgia, "Times New Roman", serif;
+    --font-secondary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",Roboto,Helvetica, Arial, sans-serif;
   
     // Light mode
     --body-bg: #fafafa;
