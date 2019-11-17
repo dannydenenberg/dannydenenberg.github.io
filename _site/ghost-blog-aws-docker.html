@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Math -->
+    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142322478-2');
+</script>
+    
+    
+    <!-- Katex Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
 
     <!-- The loading of KaTeX is deferred to speed up page rendering -->
@@ -9,13 +21,17 @@
   
     <!-- To automatically render math in text elements, include the auto-render extension: -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+<!-- END MATH --> 
 
+    <!-- META INFO -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Danny Denenberg's home page on the internet with a programming blog." />
 
+          <!-- END META INFO -->
   <title>
     
-    How to create a Ghost blog with docker 🐳+ AWS ❤️ &middot; Danny Denenberg
+    How to create a Ghost blog with docker+AWS  &middot; Danny Denenberg
     
   </title>
 
@@ -52,7 +68,7 @@
 
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
-          ><a href="/projects">Projects</a></span
+          ><a href="/blog">Blog</a></span
         >
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
@@ -60,15 +76,17 @@
         >
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
-          ><a href="/dod">Todo</a></span
+          ><a href="/projects">Projects</a></span
         >
         
       </header>
 
       <main>
         <article class="post">
-  <h1 class="post-title">How to create a Ghost blog with docker 🐳+ AWS ❤️</h1>
-  <time datetime="2017-06-25T00:00:00-05:00" class="post-date">June 25, 2017</time>
+  <h1 class="post-title">How to create a Ghost blog with docker+AWS </h1>
+  <time datetime="2017-06-25T00:00:00-05:00" class="post-date"
+    >June 25, 2017</time
+  >
 
   <ol><li>Login to the AWS website</li><li>Click on Services  (top bar)</li><li>Click on EC2</li><li>Click on Launch Instance</li><li>Search and choose Ubuntu Server (18 or up)</li><li>Leave selected the free tear (unless you have upwards of $10000000000)</li><li>Edit security groups (by clicking on <code>edit security groups</code>)</li><li>Click Add rule - <code>http</code> - leave other defaults</li><li>Click Add rule - <code>https</code> -leave other defaults</li><li>Click Launch Instance</li><li>Choose Create new pair key from the drop down selector (name it and download it)</li><li>Open terminal</li><li>CD into the directory where the pair key was downloaded to and do this</li><li>Change the .pem file permissions with: <code>sudo chmod 600 &lt;&lt;MYPAIRKEYFILENAME&gt;&gt;.pem</code></li><li>Go to your AWS instances tab in the EC2 page and find the Public DNS (IPv4) of your instance </li><li><code>ssh <a href="/cdn-cgi/l/email-protection#7c091e091208093c191f4e514948514e4e48514d4f4e51454f521f13110c090819514d521d111d0613121d0b0f521f1311"><span class="__cf_email__" data-cfemail="790c1b0c170d0c39">[email&#160;protected]</span>&lt;</a>&lt;INSERT.Public.Dns.IPv4&gt;&gt; -i PairKeyName.pem</code></li><li>Type <code>yes</code> to get into the ubuntu computer</li><li>Install docker: <code>sudo snap install docker</code></li><li>Make a start file: <code>vim startserver</code></li><li>Put this in the script👇: </li><li><code>#!/bin/bash; docker run -d --name website -e url=https://&lt;&lt;websitename&gt;&gt; -p 80:2386 -v /home/ubuntu/website:/var/lib/ghost/content ghost</code></li><li>Create a /website directory: <code>mkdir website</code></li><li>Go to <code>cloudflare.com</code> and link your website to it by creating an account (or signing in) and going through the steps to link it to your URL that you used in step <strong>21</strong></li><li>Make a <code>CNAME</code> record with the name being <code>@</code> and the address being the public IPv4 of the aws instance that you found in step <strong>15</strong> (example: <code>ec2-54-224-132-93.compute-1.amazonaws.com</code>)</li><li>Go to your domain service (mine is google domains) and set the nameservers to be cloudflare’s (you should have already done this step while setting up cloudflare in step <strong>23</strong>)</li><li>Change the permissions of the <code>startserver</code> script to be able to execute: <code>chmod +x startscript</code></li><li>Now run it: <code>./startscript</code></li><li>It will take a bit to complete because docker needs to pull the image off of their website, but when it does everything should be up and running</li></ol>
 <h2 id="please-note">Please Note</h2>

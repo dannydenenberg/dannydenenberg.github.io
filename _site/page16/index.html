@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Math -->
+    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142322478-2');
+</script>
+    
+    
+    <!-- Katex Math -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
 
     <!-- The loading of KaTeX is deferred to speed up page rendering -->
@@ -9,10 +21,14 @@
   
     <!-- To automatically render math in text elements, include the auto-render extension: -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{ left: '$$', right: '$$', display: true },{ left: '\\[', right: '\\]', display: true },{ left: '$', right: '$', display: true },{ left: '\\(', right: '\\)', display: false },{ left: '$$$', right: '$$$', display: true }]});"></script>
+<!-- END MATH --> 
 
+    <!-- META INFO -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Danny Denenberg's home page on the internet with a programming blog." />
 
+          <!-- END META INFO -->
   <title>
     
     Danny Denenberg &middot; 
@@ -52,7 +68,7 @@
 
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
-          ><a href="/projects">Projects</a></span
+          ><a href="/blog">Blog</a></span
         >
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
@@ -60,198 +76,43 @@
         >
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
-          ><a href="/dod">Todo</a></span
+          ><a href="/projects">Projects</a></span
         >
         
       </header>
 
       <main>
-        <div class="archive">
-  
-  
-  
-  
-      
-      <h2>2019</h2>
-      <ul class="archive-els">
-      
-  
-  <!-- <li><a href="/gradient-descent-univar-lr"><span>September 20, 2019</span> - Gradient descent for univariate linear regression</a></li> -->
-  <li class="archive-link"><a href="/gradient-descent-univar-lr">Gradient descent for univariate linear regression</a> <span class="archive-date">September 20, 2019</span></li>
-  
-  
-  
-  
+        <p>Hi! I'm Danny Denenberg, a software engineer on planet Earth wishing to do good. This website is to share a slice of me, mainly through my <a href="/projects">creations</a> and my <a href="/blog">thoughts</a>.</p>
 
-  
-  
-  <!-- <li><a href="/js-dev-rust"><span>September 13, 2019</span> - A js developer’s view of rust</a></li> -->
-  <li class="archive-link"><a href="/js-dev-rust">A js developer’s view of rust</a> <span class="archive-date">September 13, 2019</span></li>
-  
-  
-  
-  
+<style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
 
-  
-  
-  <!-- <li><a href="/pass-hashing"><span>September 10, 2019</span> - A complete guide to password hashing</a></li> -->
-  <li class="archive-link"><a href="/pass-hashing">A complete guide to password hashing</a> <span class="archive-date">September 10, 2019</span></li>
-  
-  
-  
-  
+<!--The div element for the map -->
+<div id="map"></div>
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var omaha = {lat: 41.291774, lng: -96.2213309};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: omaha});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: omaha, map: map});
+}
+</script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxvZhNCdXTuPbZVtoFk4Q-1DmLBSksjAg&callback=initMap"></script>
 
-  
-  
-  <!-- <li><a href="/securing-db"><span>August 5, 2019</span> - Securing your database</a></li> -->
-  <li class="archive-link"><a href="/securing-db">Securing your database</a> <span class="archive-date">August 5, 2019</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/creating-mongodb-nodejs"><span>July 29, 2019</span> - Mongo database+nodejs with a front end</a></li> -->
-  <li class="archive-link"><a href="/creating-mongodb-nodejs">Mongo database+nodejs with a front end</a> <span class="archive-date">July 29, 2019</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/what-is-a-perceptron"><span>April 21, 2019</span> - What the heck is a perceptron</a></li> -->
-  <li class="archive-link"><a href="/what-is-a-perceptron">What the heck is a perceptron</a> <span class="archive-date">April 21, 2019</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/sigmoid-deriv"><span>February 20, 2019</span> - Taking the derivative of sigmoid</a></li> -->
-  <li class="archive-link"><a href="/sigmoid-deriv">Taking the derivative of sigmoid</a> <span class="archive-date">February 20, 2019</span></li>
-  
-  
-  
-  
-
-  
-  
-      </ul>
-      <h2>2018</h2>
-      <ul class="archive-els">
-      
-  
-  <!-- <li><a href="/linear-algebra"><span>December 30, 2018</span> - Linear algebra for machine learning</a></li> -->
-  <li class="archive-link"><a href="/linear-algebra">Linear algebra for machine learning</a> <span class="archive-date">December 30, 2018</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/recursion"><span>December 14, 2018</span> - Recursive programming</a></li> -->
-  <li class="archive-link"><a href="/recursion">Recursive programming</a> <span class="archive-date">December 14, 2018</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/get-started-typescript"><span>June 10, 2018</span> - Typescript quickstart</a></li> -->
-  <li class="archive-link"><a href="/get-started-typescript">Typescript quickstart</a> <span class="archive-date">June 10, 2018</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/cron-github"><span>May 24, 2018</span> - Automating Backups with Cron & GitHub</a></li> -->
-  <li class="archive-link"><a href="/cron-github">Automating Backups with Cron & GitHub</a> <span class="archive-date">May 24, 2018</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/squeeze-theorem"><span>April 15, 2018</span> - Proof of the Squeeze Theorem (and why I like it)</a></li> -->
-  <li class="archive-link"><a href="/squeeze-theorem">Proof of the Squeeze Theorem (and why I like it)</a> <span class="archive-date">April 15, 2018</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/web-scraping"><span>March 12, 2018</span> - Web scraping in node.js 101</a></li> -->
-  <li class="archive-link"><a href="/web-scraping">Web scraping in node.js 101</a> <span class="archive-date">March 12, 2018</span></li>
-  
-  
-  
-  
-
-  
-  
-      </ul>
-      <h2>2017</h2>
-      <ul class="archive-els">
-      
-  
-  <!-- <li><a href="/ghost-blog-aws-docker"><span>June 25, 2017</span> - How to create a Ghost blog with docker 🐳+ AWS ❤️</a></li> -->
-  <li class="archive-link"><a href="/ghost-blog-aws-docker">How to create a Ghost blog with docker 🐳+ AWS ❤️</a> <span class="archive-date">June 25, 2017</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/contributing"><span>April 23, 2017</span> - How to contribute on GitHub</a></li> -->
-  <li class="archive-link"><a href="/contributing">How to contribute on GitHub</a> <span class="archive-date">April 23, 2017</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/apache-server-pi"><span>April 23, 2017</span> - Setting up an Apache server on a Raspberry Pi</a></li> -->
-  <li class="archive-link"><a href="/apache-server-pi">Setting up an Apache server on a Raspberry Pi</a> <span class="archive-date">April 23, 2017</span></li>
-  
-  
-  
-  
-
-  
-  
-  <!-- <li><a href="/installing-node"><span>March 14, 2017</span> - How to install Node.js</a></li> -->
-  <li class="archive-link"><a href="/installing-node">How to install Node.js</a> <span class="archive-date">March 14, 2017</span></li>
-  
-  
-  
-  
-
-  
-  
-      </ul>
-      <h2>2014</h2>
-      <ul class="archive-els">
-      
-  
-  <!-- <li><a href="/math-on-denenberg-us"><span>August 4, 2014</span> - About \(m\alef ^tH\) on denenberg.us</a></li> -->
-  <li class="archive-link"><a href="/math-on-denenberg-us">About \(m\alef ^tH\) on denenberg.us</a> <span class="archive-date">August 4, 2014</span></li>
-  
-  
-  
-  </ul>
-
-  </div>
       </main>
 
       <div class="footer" style="text-align: center">

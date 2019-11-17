@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2019-11-06T19:57:03-06:00</updated>
+ <updated>2019-11-17T15:08:58-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
@@ -1583,7 +1583,7 @@ Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-roug
  </entry>
  
  <entry>
-   <title>How to create a Ghost blog with docker 🐳+ AWS ❤️</title>
+   <title>How to create a Ghost blog with docker+AWS </title>
    <link href="http://localhost:4000/ghost-blog-aws-docker"/>
    <updated>2017-06-25T00:00:00-05:00</updated>
    <id>http://localhost:4000/docker-and-aws</id>
