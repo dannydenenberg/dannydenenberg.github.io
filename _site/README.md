@@ -1,17 +1,12 @@
-# Newcomen
+# dannydenenberg.github.io
 
-The inspector in the story of Dr. Jekyll and Mr. Hyde.
+My graveyard of ideas.
 
 ---
 
-Newcomen is a Jekyll theme based off of Poole, made by [@mdo](https://twitter.com/mdo).
-
-For more information about **Poole**, see [the demo site](http://demo.getpoole.com).
-
-![Newcomen](/goods/pic1.png)
-
 ## License
 
-Open sourced under the [MIT license](LICENSE.md).
+All content placed in the `_posts` folder is not available for reuse.
+Every thing else is open sourced under the [MIT license](LICENSE.md).
 
 <3
