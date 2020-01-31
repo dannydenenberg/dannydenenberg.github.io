@@ -30,12 +30,12 @@ github:
 
 # This is the list of pages to include in the header of the website.
 pages_list:
-  Blog: "/blog"
+  Writings: "/writings"
   About: "/about/"
   Projects: "/projects"
 
 # personal info
-twitter-url: 
+twitter-url:
 
 # Gems
 plugins:

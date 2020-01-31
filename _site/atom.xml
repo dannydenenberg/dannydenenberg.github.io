@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-01-08T08:04:45-06:00</updated>
+ <updated>2020-01-31T12:19:24-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
@@ -2219,6 +2219,11 @@ $
 \int^{88}_\infty \frac{x^2}{\pi^4 x} \dot dx = 4
 $&lt;/p&gt;
 
+&lt;p&gt;Type some math here test.
+&lt;input id=&quot;katex-element&quot; type=&quot;text&quot; onkeyup=&quot;render()&quot; /&gt;&lt;/p&gt;
+
+&lt;p id=&quot;katex-display&quot;&gt;&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;To write math inline, enclose the math in &lt;code class=&quot;highlighter-rouge&quot;&gt;\(&lt;/code&gt; to start and &lt;code class=&quot;highlighter-rouge&quot;&gt;\)&lt;/code&gt; to end. Ex: &lt;code class=&quot;highlighter-rouge&quot;&gt;\(a=\frac{F}{m}\)&lt;/code&gt;
     &lt;ul&gt;
@@ -2231,6 +2236,21 @@ $&lt;/p&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;script&gt;
+  
+  function render() {
+    let el=document.getElementById('katex-element');
+    let display = document.getElementById(&quot;katex-display&quot;);
+
+    try {
+    katex.render(el.value,display, {displayMode: true});
+    } catch (e) {
+      display.textContent = &quot;error in latex&quot;;
+    }
+  }
+&lt;/script&gt;
+
 </content>
  </entry>
  

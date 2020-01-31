@@ -1,6 +1,6 @@
 ---
 layout: page
-title:
+title: Works
 ---
 
 Here are some projects I've worked on:

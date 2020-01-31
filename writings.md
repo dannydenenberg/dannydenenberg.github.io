@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Blog
+title: Writings
 ---
 
 <div class="archive">
@@ -9,7 +9,7 @@ title: Blog
   {% assign currentDate = post.date | date: "%Y" %}
   {% if currentDate != myDate %}
       {% unless forloop.first %}</ul>{% endunless %}
-      <h2>{{ currentDate }}</h2>
+      <h3>{{ currentDate }}</h3>
       <ul class="archive-els">
       {% assign myDate = currentDate %}
   {% endif %}

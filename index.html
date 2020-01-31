@@ -3,33 +3,39 @@ layout: default
 title: Home
 ---
 
-<p>Hi! I'm Danny Denenberg, a software engineer on planet Earth wishing to do good. This website is to share a slice of me, mainly through my <a href="/projects">creations</a> and my <a href="/blog">thoughts</a>.</p>
+<!-- <p>This is my home page.</p> -->
+<ul>
+  <li>Dad's <a href="http://facialsurgery.com">business page</a></li>
+  <li>Denenberg <a href="http://denenberg.com">home page</a></li>
+  <li>
+    Perhaps,
+    <a href="goods/dadwithgatesandbuffet.png">my favorite image</a>
+    of my dad
+  </li>
+  <li>
+    My
+    <a
+      href="https://drive.google.com/file/d/1b29B0QrxZei-Fpmv96fJhEw-qyBjV3AQ/view?usp=sharing"
+      >theater resume</a
+    >
+  </li>
+</ul>
 
-<style>
-       /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
-    </style>
-
-<!--The div element for the map -->
-<div id="map"></div>
-<script>
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var omaha = {lat: 41.291774, lng: -96.2213309};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: omaha});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: omaha, map: map});
-}
-</script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxvZhNCdXTuPbZVtoFk4Q-1DmLBSksjAg&callback=initMap"></script>
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Danny Denenberg's Home Page</title>
+  </head>
+  <body>
+    <h1>Danny Denenberg's Home Page</h1>
+    <p>
+      My e-mail is <kbd>danny</kbd> at <kbd>denenberg</kbd> dot <kbd>com</kbd>.
+    </p>
+    <ul>
+      <li>first</li>
+    </ul>
+  </body>
+</html> -->
