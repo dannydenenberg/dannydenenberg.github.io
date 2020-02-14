@@ -153,5 +153,3 @@ And all you have to do for updating the user data in the database, is update you
 And that is how you can use client side JavaScript to interact with a database! Nice work!
 
 From here you can customize the code to add different fields to your stored data and to show the data in some nice front end design.
-
-#code #js #node #databases

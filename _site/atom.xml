@@ -4,13 +4,120 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-02-14T02:04:58-06:00</updated>
+ <updated>2020-02-14T10:33:52-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
    <email>dannydenenberg@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Activation functions comparison</title>
+   <link href="http://localhost:4000/activation-functions-comparison"/>
+   <updated>2020-02-14T00:00:00-06:00</updated>
+   <id>http://localhost:4000/activation-functions</id>
+   <content type="html">&lt;style&gt;
+  .post img, .post iframe {;
+    background-color: white;
+}
+&lt;/style&gt;
+
+&lt;p&gt;Consider a neuron. All it does is calculate the sum of its “weighted” inputs and adds the bias on that:&lt;/p&gt;
+
+&lt;p&gt;$y=\sum (weight \times input) + bias$&lt;/p&gt;
+
+&lt;p&gt;Because Y can be any value from (-inf, +inf), activation functions are the deciding factor of whether a neuron should fire or not (be on or off, 0 or 1, etc.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why use an activation function?&lt;/strong&gt; Well, there are a few good reasons, the most important being that activation functions introduce non-linearity into the network. A neural network without activation functions is basically just a linear regression model and is not able to do more complicated tasks such as language translations and image classifications. Also, linear functions are not able to make use of backpropagation which is the way neural networks “learn”.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-function&quot;&gt;Step Function&lt;/h2&gt;
+
+&lt;p&gt;This is a function that says:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;\(Activated=true\) if Y &amp;gt; some number (usually 0), otherwise 0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/goods/step-function.png&quot; alt=&quot;Step Function&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What happens when there are many different neurons that are all 1 or all 0 or some are 1 and some are 0. How do you decide which is most right? This is what activation functions help with.&lt;/p&gt;
+
+&lt;p&gt;What if I had some function that could tell me which is most right….20% right 99% right 87%, etc….&lt;/p&gt;
+
+&lt;p&gt;The first thing that comes to mind is a Linear Function:&lt;/p&gt;
+
+&lt;p&gt;$A=cx$&lt;/p&gt;
+
+&lt;p&gt;This way it gives a range of activations and given many neurons we could choose a max or min or something else.&lt;/p&gt;
+
+&lt;p&gt;The problem with this is that the derivative of this linear function is a constant which means that in the back-propagation of the network, the derivative will never go to zero and find that “minimum”. It will keep climbing slowly to either +inf or -inf.&lt;/p&gt;
+
+&lt;p&gt;Let’s now look at a function that can give us a range of results but is non-linear.&lt;/p&gt;
+
+&lt;h2 id=&quot;sigmoid&quot;&gt;Sigmoid&lt;/h2&gt;
+
+&lt;p&gt;$A=\frac{1}{1+e^{-x}}$&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/goods/sigmoid.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Benefits of this ‘step’ function:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Non-linear&lt;/li&gt;
+  &lt;li&gt;Binary (ever output is either above, below, or equal to 0.5)&lt;/li&gt;
+  &lt;li&gt;Smooth gradient&lt;/li&gt;
+  &lt;li&gt;Always will be in the range (0,1) so values are kept close together&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A downside of the sigmoid function is that towards the ends of the curve, y values (outputs) tend to respond very little to changes in x (\(\frac{dy}{dx}\) is close to zero). This means that the gradient is small or has vanished entirely which gives useless results for inputs that are higher than about 6 in value.&lt;/p&gt;
+
+&lt;h2 id=&quot;tanh&quot;&gt;Tanh&lt;/h2&gt;
+
+&lt;p&gt;$tanh(x)=\frac{2}{1+e^{-2x}}-1$&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/goods/tanh.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you may be able to see, it is a scaled sigmoid function:&lt;/p&gt;
+
+&lt;p&gt;$tanh(x)=2sigmoid(2x)-1$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;About the Tanh function:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Non-linear&lt;/li&gt;
+  &lt;li&gt;Is in range (-1,1)&lt;/li&gt;
+  &lt;li&gt;The gradient is stronger for tanh that sigmoid (the derivatives are much steeper more of the time)&lt;/li&gt;
+  &lt;li&gt;Like sigmoid, tanh also has the vanishing gradient problem towards the ends&lt;/li&gt;
+  &lt;li&gt;Like sigmoid, it is very popular — libraries support it&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;relu-rectified-linear-unit&quot;&gt;ReLu (rectified linear unit)&lt;/h2&gt;
+
+&lt;p&gt;$A(x)=max(0,x)$&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/goods/relu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;About ReLu:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Non-linear in nature.&lt;/li&gt;
+  &lt;li&gt;Not bound (darn!)&lt;/li&gt;
+  &lt;li&gt;Range is [0, inf) — can blow up the activation&lt;/li&gt;
+  &lt;li&gt;Not as computationally costly as the other functions&lt;/li&gt;
+  &lt;li&gt;Involves only simple mathematical operations&lt;/li&gt;
+  &lt;li&gt;Because of the horizontal line for any negative x values, the gradient can go to 0 and nothing changes in the back-propagation step— this is known as the “dying ReLu problem”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;which-one&quot;&gt;Which one??&lt;/h2&gt;
+
+&lt;p&gt;Sigmoid has proven to work well on &lt;a href=&quot;https://en.wikipedia.org/wiki/Statistical_classification&quot;&gt;classification problems&lt;/a&gt;, however, both sigmoid and tanh suffer from the “vanishing gradient” issue. They are generally not recommended nowadays because of loss in performance and accuracy in deep neural networks.&lt;/p&gt;
+
+&lt;p&gt;The ReLu activation function is widely used and is the default choice for many as it yields better results although it should only be used in hidden layers because the model can suffer from dead neurons or infinite max out otherwise. If you have a &lt;a href=&quot;https://en.wikipedia.org/wiki/Linear_regression&quot;&gt;regression problem&lt;/a&gt;, then the final layer of your network could possibly use a linear function (though not recommended a ton when using it in conjunction with an ANN).&lt;/p&gt;
+
+&lt;p&gt;I hope this article helped clear out some misconceptions or confusion around the different activation functions!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Complete approach to neural networks</title>
@@ -1039,8 +1146,6 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
 &lt;p&gt;And that is how you can use client side JavaScript to interact with a database! Nice work!&lt;/p&gt;
 
 &lt;p&gt;From here you can customize the code to add different fields to your stored data and to show the data in some nice front end design.&lt;/p&gt;
-
-&lt;p&gt;#code #js #node #databases&lt;/p&gt;
 </content>
  </entry>
  
