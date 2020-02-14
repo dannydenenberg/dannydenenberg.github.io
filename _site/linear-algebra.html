@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <!-- anchors for headings -->
+  <script src="../anchor.min.js"></script>
+
+  
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-2"></script>
@@ -66,10 +70,6 @@
           <small></small>
         </h3>
 
-         &nbsp;&nbsp;&nbsp;<span
-          class="nav-bar-item"
-          ><a href="/writings">Writings</a></span
-        >
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
           ><a href="/about/">About</a></span
@@ -170,6 +170,18 @@ Another example: let's suppose I want to index the 6 in the matrix above. It is 
 
 <hr />
 
+<div class="qna">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, the right way to tell a theater joke 🎭, or
+    anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or shoot me an <a href="/about" target="_blank">email</a>.
+  </p>
+</div>
+
 
 <!-- 
 <aside class="related">
@@ -214,5 +226,15 @@ Another example: let's suppose I want to index the 6 in the matrix above. It is 
     </div>
 
     
+
+    <!-- PUt the anchors on headings -->
+    <script>
+      anchors.options = {
+        placement: "left",
+        // visible: "always"
+        icon: "§"
+      };
+      anchors.add("main h2, main h3, main h4, main h5");
+    </script>
   </body>
 </html>

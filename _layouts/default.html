@@ -49,5 +49,15 @@
       ga("send", "pageview");
     </script>
     {% endif %}
+
+    <!-- PUt the anchors on headings -->
+    <script>
+      anchors.options = {
+        placement: "left",
+        // visible: "always"
+        icon: "§"
+      };
+      anchors.add("main h2, main h3, main h4, main h5");
+    </script>
   </body>
 </html>

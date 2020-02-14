@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <!-- anchors for headings -->
+  <script src="../anchor.min.js"></script>
+
+  
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-2"></script>
@@ -68,10 +72,6 @@
 
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
-          ><a href="/writings">Writings</a></span
-        >
-         &nbsp;&nbsp;&nbsp;<span
-          class="nav-bar-item"
           ><a href="/about/">About</a></span
         >
          &nbsp;&nbsp;&nbsp;<span
@@ -94,5 +94,15 @@
     </div>
 
     
+
+    <!-- PUt the anchors on headings -->
+    <script>
+      anchors.options = {
+        placement: "left",
+        // visible: "always"
+        icon: "§"
+      };
+      anchors.add("main h2, main h3, main h4, main h5");
+    </script>
   </body>
 </html>

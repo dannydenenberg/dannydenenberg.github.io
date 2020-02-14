@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <!-- anchors for headings -->
+  <script src="../anchor.min.js"></script>
+
+  
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-2"></script>
@@ -66,10 +70,6 @@
           <small></small>
         </h3>
 
-         &nbsp;&nbsp;&nbsp;<span
-          class="nav-bar-item"
-          ><a href="/writings">Writings</a></span
-        >
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
           ><a href="/about/">About</a></span
@@ -295,6 +295,18 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
 
 <hr />
 
+<div class="qna">
+  <h2>Questions?</h2>
+  <p>
+    Have a question about this post, the right way to tell a theater joke 🎭, or
+    anything else? Ask away on
+    <a href="https://github.com/dannydenenberg/ama" target="_blank"
+      >my AMA repo</a
+    >
+    or shoot me an <a href="/about" target="_blank">email</a>.
+  </p>
+</div>
+
 
 <!-- 
 <aside class="related">
@@ -339,5 +351,15 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
     </div>
 
     
+
+    <!-- PUt the anchors on headings -->
+    <script>
+      anchors.options = {
+        placement: "left",
+        // visible: "always"
+        icon: "§"
+      };
+      anchors.add("main h2, main h3, main h4, main h5");
+    </script>
   </body>
 </html>

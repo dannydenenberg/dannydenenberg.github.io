@@ -3,7 +3,28 @@ layout: default
 title: Home
 ---
 
-<!-- <p>This is my home page.</p> -->
+
+<div class="archive">
+  
+  {% for post in site.posts %}
+  {% assign currentDate = post.date | date: "%Y" %}
+  {% if currentDate != myDate %}
+      {% unless forloop.first %}</ul>{% endunless %}
+      <h2 class="archive-year">{{ currentDate }}</h2>
+      <ul class="archive-els">
+      {% assign myDate = currentDate %}
+  {% endif %}
+  <!-- <li><a href="{{ post.url }}"><span>{{ post.date | date: "%B %-d, %Y" }}</span> - {{ post.title }}</a></li> -->
+  <div class="archive-item"><li class="archive-title"><a href="{{ post.url }}">{{ post.title }}</a> <span class="post-date archive-date">{{ post.date | date: "%B %-d, %Y" }}</span></li></div>
+  
+  
+  
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
+  </div>
+
+
+<!-- <p>This is my home page.</p>
 <ul>
   <li>Dad's <a href="http://facialsurgery.com">business page</a></li>
   <li>Denenberg <a href="http://denenberg.com">home page</a></li>
@@ -19,23 +40,6 @@ title: Home
       >theater resume</a
     >
   </li>
-</ul>
+</ul> -->
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Danny Denenberg's Home Page</title>
-  </head>
-  <body>
-    <h1>Danny Denenberg's Home Page</h1>
-    <p>
-      My e-mail is <kbd>danny</kbd> at <kbd>denenberg</kbd> dot <kbd>com</kbd>.
-    </p>
-    <ul>
-      <li>first</li>
-    </ul>
-  </body>
-</html> -->
+

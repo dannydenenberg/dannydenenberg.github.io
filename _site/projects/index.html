@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <!-- anchors for headings -->
+  <script src="../anchor.min.js"></script>
+
+  
     <!-- Google Analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-2"></script>
@@ -31,7 +35,7 @@
           <!-- END META INFO -->
   <title>
     
-    Works &middot; Danny Denenberg
+    Projects &middot; Danny Denenberg
     
   </title>
 
@@ -68,10 +72,6 @@
 
          &nbsp;&nbsp;&nbsp;<span
           class="nav-bar-item"
-          ><a href="/writings">Writings</a></span
-        >
-         &nbsp;&nbsp;&nbsp;<span
-          class="nav-bar-item"
           ><a href="/about/">About</a></span
         >
          &nbsp;&nbsp;&nbsp;<span
@@ -83,16 +83,16 @@
 
       <main>
         <article class="page">
-  <h1 class="page-title">Works</h1>
-  <p>Here are some projects I’ve worked on:</p>
-
-<ul>
-  <li>Starlight [<a href="https://github.com/dannydenenberg/Starlight">source</a>] ‘hackable’ voice command assistant written in Python using Google’s Text-to-speech apis, designed to run on linux/unix enviornments</li>
+  <h1 class="page-title">Projects</h1>
+  <ul>
+  <li>Starlight ⭐️ [<a href="https://github.com/dannydenenberg/Starlight">source</a>] ‘hackable’ voice command assistant written in Python using Google’s Text-to-speech apis, designed to run on linux/unix enviornments</li>
+  <li>Java-Net ☕️ [<a href="https://dannydenenberg.github.io/simple_nn_in_java/">demo</a>][<a href="https://github.com/dannydenenberg/simple_nn_in_java/">source</a>] a neural network built from scratch in Java–has its own full-fledged matrix library.</li>
   <li>MERN Material UI [<a href="https://github.com/dannydenenberg/Material-ui-MERN-boilerplate">source</a>] responsive boilerplate using Material UI and MERN (MongoDB, Express🚉, React, Node) to create a login system (hashing, salting, encrypted requests) with material design</li>
   <li>Ghost-Tufte [<a href="https://github.com/dannydenenberg/ghost-tufte">source</a>] 👻 fantastic looking Ghost blog theme styled after Edward Tufte CSS 👩‍🎨.</li>
-  <li>Java-Net [<a href="https://github.com/dannydenenberg/simple_nn_in_java">source</a>] a neural network built from scratch in Java–has its own full-fledged matrix library.</li>
   <li>Newcomen [<a href="https://github.com/dannydenenberg/newcomen">source</a>] slick and minimal jekyll blog theme for writers/programmers</li>
 </ul>
+
+<p>^^I always try to have good documentation!</p>
 
 </article>
 
@@ -103,5 +103,15 @@
     </div>
 
     
+
+    <!-- PUt the anchors on headings -->
+    <script>
+      anchors.options = {
+        placement: "left",
+        // visible: "always"
+        icon: "§"
+      };
+      anchors.add("main h2, main h3, main h4, main h5");
+    </script>
   </body>
 </html>

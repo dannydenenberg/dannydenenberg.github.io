@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-01-31T12:19:24-06:00</updated>
+ <updated>2020-02-14T01:45:35-06:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Daniel Denenberg</name>
@@ -1116,89 +1116,6 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
  </entry>
  
  <entry>
-   <title>Taking the derivative of sigmoid</title>
-   <link href="http://localhost:4000/sigmoid-deriv"/>
-   <updated>2019-02-20T00:00:00-06:00</updated>
-   <id>http://localhost:4000/derivative-of-sigmoid</id>
-   <content type="html">&lt;p&gt;A comprehensive walk-through of taking the derivative of the sigmoid function.&lt;/p&gt;
-
-&lt;p&gt;One of the most frequently used activation functions in machine learning, or more specifically, neural networks is the sigmoid function. In the backpropagation step in training a neural network, you have to find the derivative of the loss function with respect to each weight in the network. To do this, you have to find the derivative of your activation function. This article aims to clear up any confusion about finding the derivative of the sigmoid function.&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;To begin, here is the sigmoid function:&lt;/p&gt;
-
-&lt;p&gt;$\sigma(x)=\frac{1}{1+e^{-x}}$&lt;/p&gt;
-
-&lt;p&gt;For a test, take the sigmoid of 5 on your calculator. You should get 0.99330714907.&lt;/p&gt;
-
-&lt;p&gt;For the purposes of the derivative, this function can also be written as:&lt;/p&gt;
-&lt;p&gt;$\sigma(x)=(1+e^{-x})^{-1}$&lt;/p&gt;
-
-&lt;h3 id=&quot;first-impressions&quot;&gt;First Impressions&lt;/h3&gt;
-
-&lt;p&gt;The first thing I noticed about this function, is that it is a composition of functions. The first function being&lt;/p&gt;
-&lt;p&gt;$\sigma(x)=(m)^{-1}$&lt;/p&gt;
-
-&lt;p&gt;and the second being&lt;/p&gt;
-&lt;p&gt;$m=1+e^{-x}$&lt;/p&gt;
-&lt;p&gt;Recall that in Calculus, when there is a composition of functions, the derivative, is the first function with respect to the second multiplied by the second function with respect to the variable, in this case &lt;em&gt;x.&lt;/em&gt; Like this:&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dx}=\frac{d\sigma}{dm}\frac{dm}{dx}$&lt;/p&gt;
-&lt;p&gt;So, the derivative of the sigmoid with respect to &lt;em&gt;x&lt;/em&gt; is the derivative of the sigmoid function with respect to &lt;em&gt;m&lt;/em&gt; times the derivative of &lt;em&gt;m&lt;/em&gt; with respect to &lt;em&gt;x&lt;/em&gt;. You can think of this function composition rule as a kind of intermediate computation that results in the original derivative that you wanted by cross cancelation:&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dx}=\frac{d\sigma}{\cancel{dm}}\frac{\cancel{dm}}{dx}=\frac{d\sigma}{dx}$&lt;/p&gt;
-&lt;p&gt;Now that we know the sigmoid function is a composition of functions, all we have to do to find the derivative, is:&lt;/p&gt;
-&lt;ol&gt;&lt;li&gt;Find the derivative of the sigmoid function with respect to &lt;em&gt;m&lt;/em&gt;, our intermediate value&lt;/li&gt;&lt;li&gt;Find the derivative of &lt;em&gt;m&lt;/em&gt; with respect to &lt;em&gt;x&lt;/em&gt;&lt;/li&gt;&lt;li&gt;Multiply those values together&lt;/li&gt;&lt;/ol&gt;
-
-&lt;h3 id=&quot;1-derivative-of-the-sigmoid-with-respect-to-m&quot;&gt;1. Derivative of the sigmoid with respect to m&lt;/h3&gt;
-
-&lt;p&gt;Let’s look back to what the sigmoid function looks like with &lt;em&gt;m&lt;/em&gt; as our intermediate value:&lt;/p&gt;
-&lt;p&gt;$\sigma(x)=(m)^{-1}$&lt;/p&gt;
-&lt;p&gt;To find the derivative of this with respect to &lt;em&gt;m&lt;/em&gt; is fairly simple if we can remember the power rule:&lt;/p&gt;
-&lt;p&gt;$\frac{d(x^n)}{dx}=n\times x^{n-1}$&lt;/p&gt;
-&lt;blockquote&gt;&lt;em&gt;The derivative of &lt;/em&gt;x^n&lt;em&gt; is &lt;/em&gt;n&lt;em&gt; times the derivative of &lt;/em&gt;x&lt;em&gt; to the power of &lt;/em&gt;n-1&lt;em&gt;.&lt;/em&gt;&lt;/blockquote&gt;
-&lt;p&gt;So,&lt;/p&gt;
-&lt;p&gt;$\frac{d(x^n)}{dx}=-1\times m^{-1-1}=-m^{-2}$&lt;/p&gt;
-&lt;p&gt;Now, if we substitute our original value of &lt;em&gt;m&lt;/em&gt; back into the equation, we get&lt;/p&gt;
-&lt;p&gt;$-m^{-2}=-(1+e^{-x})^{-2}$&lt;/p&gt;
-&lt;p&gt;Finally,&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dm}=-(1+e^{-x})^{-2}$&lt;/p&gt;
-&lt;p&gt;Yay! We completed step 1.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-find-the-derivative-of-m-with-respect-to-x&quot;&gt;2. Find the derivative of m with respect to x&lt;/h3&gt;
-&lt;p&gt;Here’s m:&lt;/p&gt;
-&lt;p&gt;$m=1+e^{-x}$&lt;/p&gt;
-&lt;p&gt;To find the derivative, we have to find the derivative of each term with respect to &lt;em&gt;x. &lt;/em&gt;The first term is easy:&lt;/p&gt;
-&lt;p&gt;$\frac{d(1)}{dx}=0$&lt;/p&gt;
-&lt;p&gt;The second term is a bit more complicated.&lt;/p&gt;
-&lt;p&gt;Let’s let&lt;/p&gt;
-&lt;p&gt;$y=e^u$&lt;/p&gt;
-&lt;p&gt;and&lt;/p&gt;
-&lt;p&gt;$u=-x$&lt;/p&gt;
-&lt;p&gt;We know that&lt;/p&gt;
-&lt;p&gt;$\frac{dy}{du}=e^u     \\      \frac{du}{dx}=-1$&lt;/p&gt;
-&lt;p&gt;If getting to &lt;em&gt;e^u &lt;/em&gt;is not clear, please read &lt;a href=&quot;https://www.themathpage.com/aCalc/exponential.htm&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Now, using the chain rule once again,&lt;/p&gt;
-&lt;p&gt;$\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}$&lt;/p&gt;
-&lt;p&gt;So, we just multiply those derivatives we just calculated to get the derivative with respect to &lt;em&gt;x:&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;$\frac{dy}{dx}=e^u \times (-1)=-e^u=-e^{-x}$&lt;/p&gt;
-&lt;p&gt;All in all for step 2,&lt;/p&gt;
-&lt;p&gt;$\frac{dm}{dx}=-e^{-x}$&lt;/p&gt;
-
-&lt;h3 id=&quot;3-multiply-the-derivatives&quot;&gt;3. Multiply the derivatives&lt;/h3&gt;
-&lt;p&gt;Recall, that once we found the two intermediate derivatives, we had to multiply them. So, here is a quick summary:&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dx}=\frac{d\sigma}{dm}\frac{dm}{dx}$&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dm}=-(1+e^{-x})^{-2}$&lt;/p&gt;
-&lt;p&gt;$\frac{dm}{dx}=-e^{-x}$&lt;/p&gt;
-&lt;p&gt;Now, if you remember how to multiply :), we can finally finish this!&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dx}=-(1+e^{-x})^{-2} \times -e^{-x}=\frac{e^{-x}}{(1+e^{-x})^2}$&lt;/p&gt;
-&lt;p&gt;You can now take this value and use it as the derivation of the sigmoid function. An interesting thing occurs after you manipulate this result, though. It turns out that you can rewrite the derivative like this:&lt;/p&gt;
-&lt;p&gt;$\frac{d\sigma}{dx}=\sigma(x)(1-\sigma(x))$&lt;/p&gt;
-&lt;p&gt;The derivative of the sigmoid function is the sigmoid times 1 minus the sigmoid. Wow. I feel cheated. :)&lt;/p&gt;
-&lt;p&gt;If you even remotely enjoyed this article, keep learning about AI and deep learning! 👍
-
-&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
    <title>Linear algebra for machine learning</title>
    <link href="http://localhost:4000/linear-algebra"/>
    <updated>2018-12-30T00:00:00-06:00</updated>
@@ -1744,7 +1661,7 @@ git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&q
  </entry>
  
  <entry>
-   <title>Proof of the Squeeze Theorem (and why I like it)</title>
+   <title>A proof of the Squeeze Theorem (and why I like it)</title>
    <link href="http://localhost:4000/squeeze-theorem"/>
    <updated>2018-04-15T00:00:00-05:00</updated>
    <id>http://localhost:4000/squeeze</id>

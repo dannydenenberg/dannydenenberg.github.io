@@ -60,7 +60,7 @@ html {
 }
 
 body {
-  color: $body-color;
+  color: var(--body-color);
   background-color: var(--body-bg);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
