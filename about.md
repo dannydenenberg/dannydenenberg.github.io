@@ -9,6 +9,8 @@ He is way too passionate about music and spends more time than he should playing
 
 Although he doesn't wear a kippah all of the time, Danny is a practicing [Jew](https://en.wikipedia.org/wiki/Jews) (yes that's possible) and you can often find him looking up different arrangements of the [prayer for the state of israel](https://en.wikipedia.org/wiki/Prayer_for_the_Welfare_of_the_State_of_Israel) or some variant of a familiar synagogue tune.
 
+Just to clear up any would-be confusion, I am related to some other Denenbergs that have websites, namely [Larry](http://larry.denenberg.com/) and [Steve](http://www.facialsurgery.com/PPghome_page).
+
 **DANGER**: Mentioning lyrics from ANY musical in front of Danny may result in that song being sung......by him......with choreography.
 
 **Want to see a cool pic?** Perhaps, [my favorite image](/goods/dadwithgatesandbuffet.png) of my dad.
