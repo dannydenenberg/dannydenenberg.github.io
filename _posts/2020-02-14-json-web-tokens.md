@@ -94,7 +94,7 @@ dotenv.config();
 process.env.ACCESS_TOKEN_SECRET;
 ```
 
-The **piece of data** that you hash in your token can be something as simply as a user ID or username, all the way up to something much more complex. In either case, it should be an _identifier_ for a _specific user_.
+The **piece of data** that you hash in your token can be something as simple as a user ID or username, all the way up to something much more complex. In either case, it should be an _identifier_ for a _specific user_.
 
 The **token expire time** is a string, such as '1800s' that details how long until the token will be invalid.
 
