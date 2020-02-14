@@ -125,8 +125,11 @@ When the client receives the token, they should store it in a cookie like so:
 
 ```js
 ...
-const token = await res.json(); // get token from fetch request
-document.cookie = `token=${token}` // set token in cookie
+// get token from fetch request
+const token = await res.json(); 
+
+// set token in cookie
+document.cookie = `token=${token}` 
 ...
 ```
 
