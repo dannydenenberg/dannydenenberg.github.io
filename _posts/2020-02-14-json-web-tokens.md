@@ -133,7 +133,7 @@ document.cookie = `token=${token}`
 ...
 ```
 
-It that simple!
+It's that simple!
 
 I will also put below some utility functions for retrieving and setting tokens in cookies effectively and using cookie expires times.
 
