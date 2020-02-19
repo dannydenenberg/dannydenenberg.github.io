@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-Danny Denenberg is an award winning [actor, singer, musician](https://drive.google.com/file/d/1b29B0QrxZei-Fpmv96fJhEw-qyBjV3AQ/view?usp=sharing), and software dev @ [Gallup](https://www.gallup.com/home.aspx). He lives in [Omaha](https://en.wikipedia.org/wiki/Omaha,_Nebraska), the silicon valley of the midwest (yeah right 🧐), with his crazy family. In 2016, Danny [won](http://www.jewishomaha.org/jewish-press/2015/06/danny-goes-national/) the National Modern Woodmen of America speech contest out of 93,000 participants across the U.S. -- just an interesting tid bit.
+Danny Denenberg is an award winning [actor, singer, musician](https://drive.google.com/file/d/1b29B0QrxZei-Fpmv96fJhEw-qyBjV3AQ/view?usp=sharing), and software dev @ [Gallup](https://www.gallup.com/home.aspx). He lives in [Omaha](https://en.wikipedia.org/wiki/Omaha,_Nebraska), the silicon valley of the midwest (hell yeah 🧐), with his crazy family. In 2016, Danny [won](http://www.jewishomaha.org/jewish-press/2015/06/danny-goes-national/) the National Modern Woodmen of America speech contest out of 93,000 participants across the US -- just an interesting tid bit.
 
 He is way too passionate about music and spends more time than he should playing [Scott Joplin](https://en.wikipedia.org/wiki/Scott_Joplin) rags or [Bach](https://en.wikipedia.org/wiki/Johann_Sebastian_Bach) preludes and fugues. If you ever want to get him started talking non stop about something, please mention the latter (really, try it).
 
