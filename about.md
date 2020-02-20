@@ -26,8 +26,12 @@ In case you were wondering, this site is:
 - Built on [Jekyll](https://jekyllrb.com/), the open source static site generator
 - Hosted on [Netlify](https://www.netlify.com/) for 0 dollars
 
+I am a writer for [Alligator.io](https://alligator.io/author/danny-denenberg), and my posts have also been published in [BecomingHuman.ai](https://becominghuman.ai/@DannyDenenberg), [Better Programming, and The Startup](https://medium.com/@DannyDenenberg) (495k followers).
+
 You can find some other things I've done with my Mac on my [projects page](/projects) or on [GitHub](https://github.com/dannydenenberg).
 
-If you want to get a hold of me via email use danny at denenberg dot com
+---
 
-Interested in the **theme of this website**? See what happens when you click on the heart below...
+If you want to get a hold of me via email use `danny` AT `denenberg` DOT `com`
+
+Interested in the **_theme of this website_**? See what happens when you click on the heart below...

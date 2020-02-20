@@ -12,6 +12,20 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-142322478-2');
+
+
+
+(async () => {
+  // redirect from denenberg.us to dannydenenberg.com
+  if (window.location.href.includes('denenberg.us')) {
+    let url = window.location.href;
+    let firstPart=url.slice(0,8);
+    let lastPart=url.slice(20);
+    let newUrl = firstPart + 'dannydenenberg.com'+lastPart;
+    window.location.replace(newUrl);
+  }
+})();
+
 </script>
     
     

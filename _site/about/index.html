@@ -14,6 +14,20 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-142322478-2');
+
+
+
+(async () => {
+  // redirect from denenberg.us to dannydenenberg.com
+  if (window.location.href.includes('denenberg.us')) {
+    let url = window.location.href;
+    let firstPart=url.slice(0,8);
+    let lastPart=url.slice(20);
+    let newUrl = firstPart + 'dannydenenberg.com'+lastPart;
+    window.location.replace(newUrl);
+  }
+})();
+
 </script>
     
     
@@ -109,11 +123,15 @@
   <li>Hosted on <a href="https://www.netlify.com/">Netlify</a> for 0 dollars</li>
 </ul>
 
+<p>I am a writer for <a href="https://alligator.io/author/danny-denenberg">Alligator.io</a>, and my posts have also been published in <a href="https://becominghuman.ai/@DannyDenenberg">BecomingHuman.ai</a>, <a href="https://medium.com/@DannyDenenberg">Better Programming, and The Startup</a> (495k followers).</p>
+
 <p>You can find some other things I’ve done with my Mac on my <a href="/projects">projects page</a> or on <a href="https://github.com/dannydenenberg">GitHub</a>.</p>
 
-<p>If you want to get a hold of me via email use danny at denenberg dot com</p>
+<hr />
 
-<p>Interested in the <strong>theme of this website</strong>? See what happens when you click on the heart below…</p>
+<p>If you want to get a hold of me via email use <code class="highlighter-rouge">danny</code> AT <code class="highlighter-rouge">denenberg</code> DOT <code class="highlighter-rouge">com</code></p>
+
+<p>Interested in the <strong><em>theme of this website</em></strong>? See what happens when you click on the heart below…</p>
 
 </article>
 
