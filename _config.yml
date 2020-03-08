@@ -1,39 +1,57 @@
 # Dependencies
-markdown:         kramdown
+markdown: kramdown
 kramdown:
   extensions: ["tables"]
 
-highlighter:         true
+pgp_key: BAA0 2E14 BB58 1531 ED84 F3AD 3745 6162 1157 EF38
 
 # Permalinks
-permalink:        pretty
+permalink: pretty
 
 # Setup
-title:            Joshua Lande
-tagline:          'Data Science, Apache Pig, Hadoop, Blogging, Tweets, Astrophysics'
-url:              http://www.joshualande.com
-shorturl:         joshualande.com
+title: Danny
+tagline: Singer, open-source dev, native Omahan
+url: https://dannydenenberg.com
+shorturl: dannydenenberg.com
 
 author:
-  name:           'Joshua Lande'
-  url:            https://twitter.com/joshualande
+  name: Danny Denenberg
+  url: https://twitter.com/dannydenenberg_
 
-paginate:         1
+paginate: 1
 
 # Custom vars
-version:          1.0.0
+version: 1.0.0
 
 github:
-  repo:           github.com/joshualande/joshualande.github.io
+  repo: github.com/dannydenenberg/dannydenenberg.github.io
 
 # This is the list of pages to include in the header of the website.
-pages_list:       
-  About: '/about/'
-  Archive: '/archive/'
-  Feed: '/atom.xml'
+pages_list:
+  About: "/about/"
+  Archive: "/archive"
+  Projects: "/projects"
+  Contact: "/contact"
 
-# Allow URL Redirects: 
+# Allow URL Redirects:
 #  * https://help.github.com/articles/redirects-on-github-pages
 gems:
   - jekyll-redirect-from
   - jekyll-paginate
+
+contact_links:
+  - name: Twitter
+    url: https://twitter.com/dannydenenberg_
+    icon: twitter
+  - name: Facebook
+    url: https://www.facebook.com/daniel.denenberg.18
+    icon: facebook-f
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/dannydenenberg
+    icon: linkedin-in
+  - name: GitHub
+    url: https://github.com/dannydenenberg
+    icon: github
+  - name: Keybase
+    url: https://keybase.io/dannydenenberg
+    icon: keybase

@@ -1,0 +1,38 @@
+<br/>
+  <!-- Place your kit's code here -->
+
+<div class="text-center">
+  <div class="row w-50 mx-auto">
+    {% for link in site.contact_links %}
+      <div class="col small">
+        <a href="{{ link.url }}" rel="me" target="_blank" data-proofer-ignore="true" class="text-muted">
+          <i class="fab fa-{{ link.icon }} fa-2x">&nbsp;</i>
+          <p>{{ link.name }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if site.pgp_key %}
+  <p>
+    <a href="{{ "key.asc" | absolute_url }}">PGP: <code>{{ site.pgp_key }}</code></a>
+  </p>
+  {% endif %}
+</div>
+<style>
+.row {
+  display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+  position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+</style>

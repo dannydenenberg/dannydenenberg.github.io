@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/dannydenenberg
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://dannydenenberg.com
+  * I am dannydenenberg (https://keybase.io/dannydenenberg) on keybase.
+  * I have a public key with fingerprint BAA0 2E14 BB58 1531 ED84  F3AD 3745 6162 1157 EF38
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120dd8350494119037e9fb740382b8f3bfc2193c0c7bcbf96073dda784a6f1189e70a",
+      "fingerprint": "baa02e14bb581531ed84f3ad374561621157ef38",
+      "host": "keybase.io",
+      "key_id": "374561621157ef38",
+      "kid": "010134c9d340b5b7980951e299fa4e684a9931645b264cb7da321bfdbe65001b9e170a",
+      "uid": "bef63612836df4750988dc4659084a19",
+      "username": "dannydenenberg"
+    },
+    "service": {
+      "hostname": "dannydenenberg.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1583557631,
+  "expire_in": 157680000,
+  "prev": "b2eadebbdea2276517032c81cc2d68afefc901214ff85c61e79fd6da032a2889",
+  "seqno": 12,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMNxAnicbVJrTBxVGF2QgrxKq2KhFZWh9qGAc+c9WARbMAZR2opiEIW5M3eW4TFL
+dxd2oUvB0PpDxKQxCGy0FXkUG6CgKFFQZAWLIJWkUGyLSdMFFFtBCNJnijNo//X+
+ubnfd86559z7DQTeZ/DzYBMFuDFtgfMY6W8sNLwlPrV6EIMmqRiLOYjlorUN5UnI
+Ys3MVSQsBsMBgUsSR9I4xVMA8DjJIl6GLIWTHAE5mYSySACeFHGRhSKUeQZnSUkS
+WI4SGBkAjkcsLmCRmKyoRmQuMCuqVZOFgoATCFAQ0hygSYAkjpJJQSJZimYAQwBA
+s0gmOY2YbbLoDM0cFCwoWjFpNe2QuWbvHvi7vnFAUiIvkRQOacjyHM7TABE8LwsU
+YjR3PE8ChqIhwVAiZCWBJACUJYgYGscB5BH4z3fhmhxEMkMygOBIRpIplsZ5jpNE
+iqF5XJMCvA60ILMq5CMNLQmqWiwhFakQmY1YaSSm9YoUEenPq+e5Jy5aNOVrOgVm
+k9UkmvK0frbVWmCJ0fnW4gKdYEMw83+pTKiokvamGqMImS2KScVigIYUrYquDWjt
+z2iWIUEkhuwFihllKjpCK3G4tvR7UJGejECChCCUkEAQLENrsUlC5IAoEhLDCTKS
+RV4bAkDJMkeLDEAsL0uMJGgogeA4PbkFHVBNmjah+RSMmqZFMaqCtdCMsFJXf4aX
+wcPP4L3OUx82g5/vhrsjuPJD0Gqh8RWvyS9HV3502ctX+w5zUeWF3z8cBR/L/yy7
+wzHIf3WJV13OiXDF3nqj5hGc7Jz7c9UdtiE53oeWdm46tzfL/XrR6vzCoR6Df9Jh
+2N1UE3tk82ud0fU7363j3n/WuWxburbvjm0koPvWp0+UWc9c7G4efmbHgueVlxxY
+Q+0xW0KLJbgDlHy7OPnBQkntYkRblOd6n4bt+0M+SnogYcZt2RYoT4f0LR/v9T0V
+uuWLvrSwsUveVc8vT/xkf696zrve6+K2t/f3VMaZO4xXRy98HKcYOmefnht3jnm5
+Klsfym9brEsJnwnx79st3Rr++ZekOTAQuy++rLi97PTlEeyozflrf1xJfqqrIS8t
+xHtq5PRQSXUOuPao+1BAr9N1vudAlXuyZm5ZOfk3vuK4nWo70TIyOMV4TrNnSm9E
+5MS3/NWZkhIcuv1mrT3HYTp2fslnJmv0xOX58INtHbPneNPM3qNvXt1V5yj3KXnx
+691p6Y7m5g5zbmNX16vjVNPJwfXf5FQmn3KmXW8JiA/uuz94mkwfCG+/cjvgw6Hh
+LsPLgesePLv820rFG/bx/qElvDRjKaBq68TWpNnFf2JbZ2/O9JaHJryTWuG7+c7Z
+oDD/+RD/5E+eTFyhUzIiqheCSCU9a1PC4HeNxuyp63u2HN+R3YTqE90VL/y+8Y/H
+o1LH2udB8p6U5z732nXhX939y0Q=
+=fhgL
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dannydenenberg
+
+==================================================================
