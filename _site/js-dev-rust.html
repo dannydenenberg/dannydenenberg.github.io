@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     A js developer’s view of rust &middot; Danny 
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="post">
+  <h1 class="post-title">A js developer’s view of rust</h1>
+  <span class="post-date">13 Sep 2019</span>
+  <p>A while ago, I was trying to find something interesting to read about online when I bumped into Rust. Rust is …</p>
+
+<blockquote>
+  <p>“a language empowering everyone to build reliable and efficient software.”</p>
+</blockquote>
+
+<p>In short, it is a systems programming language. A freaky fast one, at that. It even outperformed C++ in many of the benchmarks tests run by The Computer Language Benchmarks Game (mostly having to do with complex algorithmic tasks like binary trees, etc).</p>
+
+<p>Before I started to delve more into the language itself, though, I searched about to see what people were thinking of it. Rust was created in 2011 and is backed by Mozilla (the not-for-profit). It has a sort of niche group following it consisting mostly of previous C/C++ developers who wanted a break from the null pointer exceptions, undefined behaviors, language complexity, crazy macros — shall I go on? Although Rust is still in its early stages of maturity, it has a website devoted to following its development of game programming, which is pretty sweet. There are even some games that are gathering a lot of buzz and have even been put into the App Store and the Google Play Store such as A Snake’s Tale. Rust even has an AMAZING package manager called crates.io which is comparable to npm and has had almost 1.5 billion downloads to date.</p>
+
+<p>After seeing all of this, I decided that I needed to feed my curiosity and learn Rust’s syntax. I started by reading through The Book — a (mostly) complete walkthrough of Rust’s syntax, idioms, and program structure.</p>
+
+<p>Because I know many c-like languages, the general form of the syntax was simple and easy to grasp. If you are one of those people who use const whenever possible and will punish those who don’t, you’ll love Rust. Its default form of assigning variables makes them immutable.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Below is an immutable variable</span>
+<span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="c">// Below is a mutable variable</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="c">// General form for variables:</span>
+<span class="k">let</span> <span class="n">var_name</span><span class="p">:</span> <span class="k">type</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Data types in Rust are straight forward. Integer types consist of 8 through 128 bit unsigned and signed numbers.</p>
+
+<p><img src="https://miro.medium.com/max/564/1*AesR6b5JntLgZzW7K2_nlA.png" alt="" /></p>
+
+<p>There are also immutable array types, characters, &amp;str (references to a list of characters in memory), tuples, enumerations, structs, collections, etc.</p>
+
+<p>Functions are declared using the fn keyword like so:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello, world"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can specify return values with the -&gt; symbol and if you are returning a value in the last line of the function, there is no need to include the return keyword.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// returns the 32-bit integer 5</span>
+<span class="k">fn</span> <span class="nf">my_function</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">u32</span> <span class="p">{</span>
+  <span class="mi">5</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I was breezing on through until I hit the concept of ownership. All programs have to manage the way they use a computer’s memory while running. Because Rust doesn’t garbage-collect and programmers don’t have to manually allocate and deallocate memory, memory is managed through a system of ownership.</p>
+
+<p>Here are the rules of ownership in Rust (right from The Book):</p>
+
+<ol>
+  <li>Each value in Rust has a variable that’s called its owner.</li>
+  <li>There can only be one owner at a time.</li>
+  <li>When the owner goes out of scope, the value will be dropped.</li>
+</ol>
+
+<p>Let’s have an example:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>                      <span class="c">// s is not valid here, it’s not yet declared</span>
+    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>   <span class="c">// s is valid from this point forward</span>
+
+    <span class="c">// do stuff with s</span>
+<span class="p">}</span> <span class="c">// this scope is now over, and s is no longer valid</span>
+</code></pre></div></div>
+
+<p>Here is the jam that I got into when I was first using Rust.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">);</span> <span class="c">// a is the owner</span>
+<span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ownership has changed to b. What is a?</span>
+
+<span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="c">// error[E0382]: borrow of moved value: `a`</span>
+</code></pre></div></div>
+
+<p>Because there can only be only one owner at a time, I can’t try to assign the value of a variable to another using the first variable’s name if it was allocated on the heap, like the String type is in Rust. Now, if the variable’s type is a primitive (int, double, bool, etc), doing the reassign will simply copy the value and NOT change ownership.</p>
+
+<p>When referencing a variable, you use the &amp; symbol as in C/C++. The references allow the programmer to take the value without taking ownership. There can be as many non-mutable references as one wants to a variable at one time, but only ONE mutable reference.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Dude, Rust is sick."</span><span class="p">);</span>
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
+  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
+<span class="p">}</span>
+
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// mutable reference. ok.</span>
+  <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Different!"</span><span class="p">);</span> <span class="c">// change value. ok</span>
+<span class="p">}</span>
+
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
+  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ERROR. Only one mut reference at a time!</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Even more difficult for me to understand was rust lifetimes which is how Rust can get around using garbage collection. It is also their solution to the all too well known C++ problem of dangling pointers when a variable is “used after free”. I won’t even attempt to explain that concept here. You should read this article to find more.</p>
+
+<p>Overall, I would say my experience with Rust was rewarding. I was able to understand its syntax and style guide easily, although some of the concepts were difficult to grasp at first. I don’t know if this is just me, but even the way the language looks when typed is elegant. It uses functional programming techniques commonly used in JavaScript (filtering, mapping, etc) and its syntax keywords are short and too the point (<code class="highlighter-rouge">fn</code>, <code class="highlighter-rouge">enum</code>, <code class="highlighter-rouge">let</code>, <code class="highlighter-rouge">mut</code>, <code class="highlighter-rouge">i32</code>, <code class="highlighter-rouge">&amp;str</code>, etc.)</p>
+
+<p>Some systems developers are lobbying heavily for Rust to be the next C/C++. I don’t know whether that will happen anytime soon, but one thing is for sure: it will continue to grow and mature. It is backed by Mozilla and has a ‘cult’ following that want to kill off C++.</p>
+
+<p>So there.</p>
+
+<p>Go look at Rust.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/jwt-express">
+            JSON web tokens with expressjs
+            <small>14 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/activation-functions-comparison">
+            Activation functions comparison
+            <small>12 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/complete-neural-nets">
+            Complete approach to neural networks
+            <small>02 Jan 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

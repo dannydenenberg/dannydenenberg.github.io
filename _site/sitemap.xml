@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:4000</loc>
+    <lastmod>2020-03-07T20:30:20-06:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+    <url>
+      <loc>http://localhost:4000/jwt-express</loc>
+      
+        <lastmod>2020-02-14T00:00:00-06:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/activation-functions-comparison</loc>
+      
+        <lastmod>2020-02-12T00:00:00-06:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/complete-neural-nets</loc>
+      
+        <lastmod>2020-01-02T00:00:00-06:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/gradient-descent-univar-lr</loc>
+      
+        <lastmod>2019-09-20T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/js-dev-rust</loc>
+      
+        <lastmod>2019-09-13T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/pass-hashing</loc>
+      
+        <lastmod>2019-09-10T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/securing-db</loc>
+      
+        <lastmod>2019-08-05T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/creating-mongodb-nodejs</loc>
+      
+        <lastmod>2019-07-29T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/ghost-blog-aws-docker</loc>
+      
+        <lastmod>2019-06-25T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/contributing</loc>
+      
+        <lastmod>2019-04-23T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/what-is-a-perceptron</loc>
+      
+        <lastmod>2019-04-21T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/installing-node\</loc>
+      
+        <lastmod>2019-03-14T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/linear-algebra</loc>
+      
+        <lastmod>2018-12-30T00:00:00-06:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/recursion</loc>
+      
+        <lastmod>2018-12-14T00:00:00-06:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/get-started-typescript</loc>
+      
+        <lastmod>2018-06-10T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/cron-github</loc>
+      
+        <lastmod>2018-05-24T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/squeeze-theorem</loc>
+      
+        <lastmod>2018-04-15T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/web-scraping</loc>
+      
+        <lastmod>2018-03-12T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/about-this-site</loc>
+      
+        <lastmod>2015-08-04T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/filters-joins-aggregations</loc>
+      
+        <lastmod>2014-08-14T00:00:00-05:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+    <url>
+      <loc>http://localhost:4000/jekyll-github-pages-poole</loc>
+      
+        <lastmod>2014-02-03T00:00:00-06:00</lastmod>
+      
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    </url>
+  
+  
+  <url>
+    <loc>http://localhost:4000/404/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/about/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/archive/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/contact/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/projects/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/2014/02/03/jekyll-github-pages-poole/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page2/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page3/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page4/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page5/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page6/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page7/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page8/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page9/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page10/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page11/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page12/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page13/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page14/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page15/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page16/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page17/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page18/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page19/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page20/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://localhost:4000/page21/</loc>
+    
+      <lastmod>2020-03-07</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+</urlset>

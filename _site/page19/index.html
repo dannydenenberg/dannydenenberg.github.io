@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     Danny &middot; Singer, open-source dev, native Omahan
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/about-this-site">
+        About this site.
+      </a>
+    </h1>
+
+    <span class="post-date">04 Aug 2015</span>
+
+    <p><strong>All math on dannydenenberg.com is rendered using <a href="https://www.mathjax.org/">MathJax</a></strong></p>
+
+<p>Here’s some inline $5x=33x^2-8\pi$ math.</p>
+
+<p>Here’s some display math:
+!!
+\int^{88}_\infty \frac{x^2}{\pi^4 x} \dot dx = 4
+!!</p>
+
+<ul>
+  <li>To write math inline, enclose the math in <code class="highlighter-rouge">$</code> to start and <code class="highlighter-rouge">$</code> to end. Ex: <code class="highlighter-rouge">$a=\frac{F}{m}$</code></li>
+  <li>To write display math, enclose the math in double exclamation marks like so: <code class="highlighter-rouge">!!a=\frac{F}{m}!!</code>
+    <ul>
+      <li>Why not 2 dollar signs you ask? It turns out that before MathJax can even get to the math, if you are using 2 dollar signs the <strong>markdown parser turns it into a script tag</strong>……SO not ideal 🙄.</li>
+    </ul>
+  </li>
+</ul>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+  <a class="pagination-item older" href="/page20/"
+    >Older</a
+  >
+    
+  <a class="pagination-item newer" href="/page18/"
+    >Newer</a
+  >
+   
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

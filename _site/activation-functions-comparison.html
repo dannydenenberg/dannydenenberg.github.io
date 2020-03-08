@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     Activation functions comparison &middot; Danny 
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="post">
+  <h1 class="post-title">Activation functions comparison</h1>
+  <span class="post-date">12 Feb 2020</span>
+  <style>
+  .post img, .post iframe {;
+    background-color: white;
+}
+</style>
+
+<p>Consider a neuron. All it does is calculate the sum of its “weighted” inputs and adds the bias on that:</p>
+
+<p>!!y=\sum (weight \times input) + bias!!</p>
+
+<p>Because Y can be any value from (-inf, +inf), activation functions are the deciding factor of whether a neuron should fire or not (be on or off, 0 or 1, etc.)</p>
+
+<p><strong>Why use an activation function?</strong> Well, there are a few good reasons, the most important being that activation functions introduce non-linearity into the network. A neural network without activation functions is basically just a linear regression model and is not able to do more complicated tasks such as language translations and image classifications. Also, linear functions are not able to make use of backpropagation which is the way neural networks “learn”.</p>
+
+<h2 id="step-function">Step Function</h2>
+
+<p>This is a function that says:</p>
+
+<blockquote>
+  <p>$Activated=true$ if Y &gt; some number (usually 0), otherwise 0</p>
+</blockquote>
+
+<p><img src="/goods/step-function.png" alt="Step Function" /></p>
+
+<p>What happens when there are many different neurons that are all 1 or all 0 or some are 1 and some are 0. How do you decide which is most right? This is what activation functions help with.</p>
+
+<p>What if I had some function that could tell me which is most right….20% right 99% right 87%, etc….</p>
+
+<p>The first thing that comes to mind is a Linear Function:</p>
+
+<p>!!A=cx!!</p>
+
+<p>This way it gives a range of activations and given many neurons we could choose a max or min or something else.</p>
+
+<p>The problem with this is that the derivative of this linear function is a constant which means that in the back-propagation of the network, the derivative will never go to zero and find that “minimum”. It will keep climbing slowly to either +inf or -inf.</p>
+
+<p>Let’s now look at a function that can give us a range of results but is non-linear.</p>
+
+<h2 id="sigmoid">Sigmoid</h2>
+
+<p>!!A=\frac{1}{1+e^{-x}}!!</p>
+
+<p><img src="/goods/sigmoid.png" alt="" /></p>
+
+<p><strong>Benefits of this ‘step’ function:</strong></p>
+
+<ul>
+  <li>Non-linear</li>
+  <li>Binary (ever output is either above, below, or equal to 0.5)</li>
+  <li>Smooth gradient</li>
+  <li>Always will be in the range (0,1) so values are kept close together</li>
+</ul>
+
+<p>A downside of the sigmoid function is that towards the ends of the curve, y values (outputs) tend to respond very little to changes in x ($\frac{dy}{dx}$ is close to zero). This means that the gradient is small or has vanished entirely which gives useless results for inputs that are higher than about 6 in value.</p>
+
+<h2 id="tanh">Tanh</h2>
+
+<p>!!tanh(x)=\frac{2}{1+e^{-2x}}-1!!</p>
+
+<p><img src="/goods/tanh.png" alt="" /></p>
+
+<p>As you may be able to see, it is a scaled sigmoid function:</p>
+
+<p>!!tanh(x)=2sigmoid(2x)-1!!</p>
+
+<p><strong>About the Tanh function:</strong></p>
+
+<ul>
+  <li>Non-linear</li>
+  <li>Is in range (-1,1)</li>
+  <li>The gradient is stronger for tanh that sigmoid (the derivatives are much steeper more of the time)</li>
+  <li>Like sigmoid, tanh also has the vanishing gradient problem towards the ends</li>
+  <li>Like sigmoid, it is very popular — libraries support it</li>
+</ul>
+
+<h2 id="relu-rectified-linear-unit">ReLu (rectified linear unit)</h2>
+
+<p>!!A(x)=max(0,x)!!</p>
+
+<p><img src="/goods/relu.png" alt="" /></p>
+
+<p><strong>About ReLu:</strong></p>
+
+<ul>
+  <li>Non-linear in nature.</li>
+  <li>Not bound (darn!)</li>
+  <li>Range is [0, inf) — can blow up the activation</li>
+  <li>Not as computationally costly as the other functions</li>
+  <li>Involves only simple mathematical operations</li>
+  <li>Because of the horizontal line for any negative x values, the gradient can go to 0 and nothing changes in the back-propagation step— this is known as the “dying ReLu problem”</li>
+</ul>
+
+<h2 id="which-one">Which one??</h2>
+
+<p>Sigmoid has proven to work well on <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification problems</a>, however, both sigmoid and tanh suffer from the “vanishing gradient” issue. They are generally not recommended nowadays because of loss in performance and accuracy in deep neural networks.</p>
+
+<p>The ReLu activation function is widely used and is the default choice for many as it yields better results although it should only be used in hidden layers because the model can suffer from dead neurons or infinite max out otherwise. If you have a <a href="https://en.wikipedia.org/wiki/Linear_regression">regression problem</a>, then the final layer of your network could possibly use a linear function (though not recommended a ton when using it in conjunction with an ANN).</p>
+
+<p>I hope this article helped clear out some misconceptions or confusion around the different activation functions!</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/jwt-express">
+            JSON web tokens with expressjs
+            <small>14 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/complete-neural-nets">
+            Complete approach to neural networks
+            <small>02 Jan 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gradient-descent-univar-lr">
+            Gradient descent for univariate linear regression
+            <small>20 Sep 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

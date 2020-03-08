@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     How to contribute on GitHub &middot; Danny 
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="post">
+  <h1 class="post-title">How to contribute on GitHub</h1>
+  <span class="post-date">23 Apr 2019</span>
+  <p>This guide assumes that you have a <a href="https://github.com/">Github</a> account and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git installed</a> on your machine.</p>
+
+<h2 id="step-1-fork">Step 1: Fork</h2>
+
+<p>After you find a repo that looks cool, the first step is to fork it. A fork will create a copy of the repo under your account that you can modify, while maintaining a link to original (that’s called the upstream repo).</p>
+
+<p><img src="/assets/forking.png" alt="Forking" /></p>
+
+<h2 id="step-2-clone">Step 2: Clone</h2>
+
+<p>Now let’s download the code to your local machine by cloning the fork.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;your-fork-url.git&gt;
+</code></pre></div></div>
+
+<p>You should now have a directory for your project that can be opened with your <a href="https://code.visualstudio.com/">preferred code editor</a>.</p>
+
+<h2 id="step-3-branch">Step 3: Branch</h2>
+
+<p>A git repo is just a big tree 🌳. You might have hundreds of people working on the same project and branches ensure that collaboration can happen without complete chaos. Changes on your branch are isolated from the work everybody else is doing.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b my-cool-thing
+</code></pre></div></div>
+
+<p>At this point you can start making changes to the code.</p>
+
+<h2 id="step-4-commit">Step 4: Commit</h2>
+
+<p>When you are happy with the changes, you can stage the changes and commit the code.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
+git commit -m "🚀 I made this software better!"
+</code></pre></div></div>
+
+<h2 id="step-5-pull-request">Step 5: Pull Request</h2>
+
+<p>A “pull request” is identical to a “git merge”, but it is requested from an external source - you. In fact, it is called a “merge request” on other platforms, which I think is a better name, but I digress.</p>
+
+<p>Let’s push your branch to your fork.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin my-cool-thing
+</code></pre></div></div>
+
+<p>When you go back to Github you should automatically see a button labeled <strong>Create New Pull Request for my-cool-thing</strong>. Go ahead and push that button. Add additional details as needed and it will show up in the list of PRs once submitted.</p>
+
+<p>Many larger projects have their own “Contributor Guidelines” and may require you to sign a <a href="https://en.wikipedia.org/wiki/Contributor_License_Agreement">CLA</a> before participating.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/jwt-express">
+            JSON web tokens with expressjs
+            <small>14 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/activation-functions-comparison">
+            Activation functions comparison
+            <small>12 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/complete-neural-nets">
+            Complete approach to neural networks
+            <small>02 Jan 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

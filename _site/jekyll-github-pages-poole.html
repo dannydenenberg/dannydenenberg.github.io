@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole &middot; Danny 
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="post">
+  <h1 class="post-title">How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole</h1>
+  <span class="post-date">03 Feb 2014</span>
+  <p>I recently migrated this website from <a href="http://wordpress.com">Wordpress</a> to <a href="http://pages.github.com/">Github pages</a>
+using <a href="http://jekyllrb.com">Jekyll</a> and <a href="https://github.com/poole/poole">poole</a>. So far I am really happy with the transition. Over time, I grew to really dislike how heavy-weight Wordpress is. I dislike how WYSIWYG editors make it really hard to see what HTML is being generated and tend to bloat the code that is produced. I found the Wordpress plugin system so confusing that I was afraid to try to customize the layout of anything.</p>
+
+<p>The process of backing up Wordpress is a huge pain. I was annoyed constantly installing security updates. I hated having to keep an opaque database in order to keep all of my content. And whenever I went in to edit my website, I was always afraid that I would fat-finger change something and have no idea what happened.</p>
+
+<p>So when I learned about <a href="http://jekyllrb.com/">Jekyll</a>, it seemed like a great alternative. I like the idea that my entire blog is a set of static files. Besides its simplicity, it makes backups so much easier and avoids most common security concerns caused by running dynamic websites. I could write my posts in <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> which I know from <a href="https://www.atlassian.com/software/confluence">Confluence</a> and <a href="http://github.com">GitHub</a>. Also, Jekyll allows for code examples to be very nicely embedded in the website. Finally, Jekyll is very lightweight and allows for very minimal websites without any bloat.</p>
+
+<p>The fact that GitHub provides <a href="http://pages.github.com">free hosting for Jekyll blogs</a> is just icing on the cake. It will save me ~$50 per year in hosting. GitHub provides automatic version control of my blog. I can use GitHub’s web editor to write blog posts online. And I can still connect it to my custom domain (<a href="http://joshualande.com">joshualande.com</a>).</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Instead of reading a lot of documentation, I found this really great git repo called <a href="https://github.com/poole/poole">poole</a>. poole provides:</p>
+
+<blockquote>
+  <p>“a clear and concise foundational setup for any Jekyll site. And it has a super minimal look… It does so by furnishing a full vanilla Jekyll install with example templates, pages, posts, and styles.”</p>
+</blockquote>
+
+<p><a href="http://demo.getpoole.com/">demo.getpoole.com</a> is a working demo of the poole website that looks like:</p>
+
+<p><img src="/assets/demo_poole_website.png" alt="The demo pool website" /></p>
+
+<p>To get started with my blog, all I had to do was create a new Git repo with the name <a href="http://joshualande.github.io">joshualande.github.io</a>, download the poole repository, and push it to my git repo. A few minutes later the website joshualande.github.io was ready! I only had a few posts on my previous website so I just copied them over manually. But there is <a href="http://jekyllrb.com/docs/migrations">a package</a> for migrating blogs to Jekyll.</p>
+
+<h2 id="blog-layout">Blog Layout</h2>
+
+<p>The initial state of the poole repository is:</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="se">\$</span> <span class="nb">ls</span> <span class="nt">-1</span>
+404.html
+CNAME
+LICENSE.md
+README.md
+<span class="se">\_</span>config.yml
+<span class="se">\_</span>includes
+<span class="se">\_</span>layouts
+<span class="se">\_</span>posts
+about.md
+atom.xml
+index.html
+public</code></pre></figure>
+
+<p>You can view the folder structure on <a href="https://github.com/poole/poole">GitHub</a>.
+When you run Jekyll, it creates a folder called _site with the
+static website inside of it. Every file or folder in the repo will get copied
+into the _site folder unless it begins with an underscore.
+Markdown files will get automatically converted to HTML
+and poole uses the <a href="http://liquidmarkup.org">Liquid</a> templating system to allow
+for somewhat dynamic content on the website.</p>
+
+<p>The folder <a href="https://github.com/poole/poole/tree/master/_posts">_posts</a> contains all of the blog posts in markdown format.
+The example posts that come with poole are:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\$</span> <span class="nb">ls</span> <span class="nt">-1</span> <span class="se">\_</span>posts/
+2013-12-31-whats-jekyll.md
+2014-01-01-example-content.md
+2014-01-02-introducing-poole.md</code></pre></figure>
+
+<p><a href="https://github.com/poole/poole/blob/master/index.html">index.html</a>
+contains the front page of the blog and
+<a href="https://github.com/poole/poole/blob/master/about.md">about.md</a> is a
+static post in markdown format.
+If you want to have more static files, you can just add them to the
+repo and poole will copy them to the _site folder when rendering the website.</p>
+
+<p><a href="https://github.com/poole/poole/blob/master/_config.yml">_config</a>
+contains general configuration stuff for the website:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1">## Setup</span>
+
+<span class="na">title</span><span class="pi">:</span> <span class="s">Poole</span>
+<span class="na">tagline</span><span class="pi">:</span> <span class="s1">'</span><span class="s">The</span><span class="nv"> </span><span class="s">Jekyll</span><span class="nv"> </span><span class="s">Butler'</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Base</span><span class="nv"> </span><span class="s">theme</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Jekyll</span><span class="nv"> </span><span class="s">themes</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">@mdo.'</span>
+<span class="na">url</span><span class="pi">:</span> <span class="s">http://getpoole.com</span>
+<span class="nn">...</span></code></pre></figure>
+
+<p>Finally, the folders <a href="https://github.com/poole/poole/blob/master/_layouts">_layouts</a>
+and <a href="https://github.com/poole/poole/tree/master/_includes">_includes</a>
+contain boiler-plate HTML for building the website.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">$ ls -1 _layouts/</span>
+<span class="s">default.html</span>
+<span class="s">page.html</span>
+<span class="s">post.html</span>
+<span class="s">$ ls -1 \_includes/</span>
+<span class="s">head.html</span></code></pre></figure>
+
+<p>I will describe next some tweaks I made to the base website.</p>
+
+<h2 id="customizations">Customizations</h2>
+
+<p>To get my blog to its current form, I made a few modifications to the base poole layout.</p>
+
+<p>First, I wanted to create an <a href="/archive/">Archive</a> page which listed all of my blog posts.
+To do this, I created the file <a href="https://github.com/joshualande/joshualande.github.io/blob/5e5ca6389fbc66be06488b9b7803e0278ee1b89f/archive.md">archive.md</a> which shows a dynamic list of all of
+my blog posts:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">---
+
+layout: page
+title: Archive
+
+---
+
+## Blog Posts
+
+{% for post in site.posts %}
+
+- {{ post.date | date_to_string }} <span class="ni">&amp;raquo;</span> [ {{ post.title }} ]({{ post.url }})
+  {% endfor %}
+  
+  </code></pre></figure>
+
+<p>Note that the syntax <code class="highlighter-rouge">{% for post in site.posts %}</code> is from the Liquid templating system.</p>
+
+<p>Next, I wanted to add a navigation bar at the top of the website with links to the <a href="/about/">About</a> page, <a href="/archive">Archive</a> page, and the feed. To do this, I modified the file <a href="https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_config.yml">_config.yml</a> to define a dictionary of pages to show in my header:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">pages_list</span><span class="pi">:</span>  
+ <span class="na">About</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/about'</span>
+<span class="na">Archive</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/archive'</span>
+<span class="na">Feed</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/atom.xml'</span></code></pre></figure>
+
+<p>I then modify the file <a href="https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_layouts/default.html">_layouts/default.html</a> to loop over this list, creating links to each of the pages:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"masthead-title"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/"</span> <span class="na">title=</span><span class="s">"Home"</span><span class="nt">&gt;</span>{{ site.title }}<span class="nt">&lt;/a&gt;</span>
+
+{% for page in site.pages_list %}
+<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+<span class="nt">&lt;small&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ page[1]  }}"</span><span class="nt">&gt;</span>{{ page[0] }}<span class="nt">&lt;/a&gt;&lt;/small&gt;</span>
+{% endfor %}
+
+<span class="nt">&lt;/h3&gt;</span></code></pre></figure>
+
+<h2 id="disqus-comments">Disqus Comments</h2>
+
+<p>I wanted to enable <a href="http://disqus.com/">Disqus</a> comments on the
+blog. To do that, I modified the file <a href="https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_layouts/default.html">_layouts/default.html</a> to include the line:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">{</span><span class="o">%</span> <span class="n">include</span> <span class="n">comments</span><span class="o">.</span><span class="n">html</span> <span class="o">%</span><span class="p">}</span></code></pre></figure>
+
+<p>I then created a file <a href="https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_includes/comments.html">_includes/comments.html</a> which includes the code given to me by Disqus:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% if page.comments %}
+
+<span class="c">&lt;!-- Add Disqus comments. --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"disqus_thread"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+  <span class="cm">/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */</span>
+  <span class="kd">var</span> <span class="nx">disqus_shortname</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">&lt;USERNAME&gt;</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// required: replace example with your forum shortname</span>
+  <span class="kd">var</span> <span class="nx">disqus_identifier</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">{{ site.disqusid }}{{ page.url | replace:'index.html','' }}</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="sr">/</span><span class="se">\*</span><span class="sr"> </span><span class="se">\*</span><span class="sr"> _ DON'T EDIT BELOW THIS LINE _ </span><span class="se">\*</span><span class="sr"> </span><span class="se">\*</span><span class="sr">/</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">dsq</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">);</span> <span class="nx">dsq</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">text/javascript</span><span class="dl">'</span><span class="p">;</span> <span class="nx">dsq</span><span class="p">.</span><span class="k">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">dsq</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">//</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">disqus_shortname</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">.disqus.com/embed.js</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">head</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">body</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">dsq</span><span class="p">);</span>
+<span class="p">})();</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://disqus.com/?ref_noscript"</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://disqus.com"</span> <span class="na">class=</span><span class="s">"dsq-brlink"</span><span class="nt">&gt;</span>comments powered by <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"logo-disqus"</span><span class="nt">&gt;</span>Disqus<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+{% endif %}</code></pre></figure>
+
+<p>By setting up the code this way, I can enable commenting on a page-by-page basis. All I have to do is set “comments: True” in the YAML header of the post.</p>
+
+<h2 id="google-analytics">Google Analytics</h2>
+
+<p>Finally, I enabled <a href="http://www.google.com/analytics">Google Analytics</a> on the website. First, I had to register my website through
+Google Analytics. Google gave me this javascript tracking code to embed on every website:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span><span class="nx">i</span><span class="p">[</span><span class="dl">'</span><span class="s1">GoogleAnalyticsObject</span><span class="dl">'</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span><span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span>
+  <span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">a</span><span class="p">.</span><span class="k">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">//www.google-analytics.com/analytics.js</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">ga</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="nx">ga</span><span class="p">(</span><span class="dl">'</span><span class="s1">create</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UA-47674613-1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">joshualande.com</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="dl">'</span><span class="s1">send</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pageview</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+<p>I put this code in the file
+<a href="https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_includes/google_analytics.html">_includes/google_analytics.html</a>
+Finally, I included this tracking code on all of the pages of my website by modifying the file
+<a href="https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_layouts/default.html">_layouts/default.html</a>
+to include the line:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% include google_analytics.html %}</code></pre></figure>
+
+<h2 id="getting-a-custom-url">Getting a Custom URL</h2>
+
+<p>Once I got my blog up to speed on GitHub with the URL <a href="http://joshualande.github.io">joshualande.github.io</a>, it was easy to link my personal domain <a href="http://joshualande.com">joshualande.com</a> to it. I use Namecheap to host my domain, so I followed the instructions <a href="http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap">here</a>.</p>
+
+<p>I hope this blog will help you get up to speed quickly with GitHub Pages, Jekyll, and poole.
+If you have any questions about my implementation, you can view my entire website on <a href="https://github.com/joshualande/joshualande.github.io">GitHub</a> or leave a question below.</p>
+
+<h2 id="adding-a-custom-twitter-plug-to-the-bottom-of-each-post">Adding a Custom Twitter Plug To the Bottom of Each Post</h2>
+
+<p>I was not thrilled by the idea of putting
+big Social Media buttons on my website.
+I felt that they would disrupt the minimal design and layout of my website.
+And after reading
+<a href="https://news.ycombinator.com/item?id=7232738">this discussion</a>
+on <a href="news.ycombinator.com">Hacker News</a>, I decided
+to leave them off.
+But I wanted some lightweight way to
+allow people to share my posts on Twitter if they though
+their followers would appreciate it.
+As a compromise, I decide to add a
+sentence at the end of each blog post saying:</p>
+
+<blockquote>
+  <p>“If you have any questions or comments, please post them below. If
+you liked this post, you can
+<a href="https://twitter.com/intent/tweet?url=http://localhost:4000/jekyll-github-pages-poole&amp;text=How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole&amp;via=joshualande" target="_blank">
+  share it with your followers</a> 
+or 
+<a href="https://twitter.com/joshualande">
+  follow me on Twitter</a>!
+“</p>
+</blockquote>
+
+<p>I felt this was a reasonable compromise between
+utility and obnoxiousness.</p>
+
+<p>To dynamically generate this sentence on each post
+and automatically create a nice looking Tweet,
+I created a file called
+<a href="https://github.com/joshualande/joshualande.github.io/blob/8405f035bd7da5306b1a35a4a4632bf698ea4f0a/_includes/twitter_plug.html">_includes/twitter_plug.html</a>
+which contains:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> If you liked this post, you can
+<span class="nt">&lt;a</span>
+  <span class="na">href=</span><span class="s">"https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&amp;text={{ page.title }}&amp;via=joshualande"</span>
+  <span class="na">target=</span><span class="s">"_blank"</span>
+<span class="nt">&gt;</span>
+  share it with your followers<span class="nt">&lt;/a</span>
+<span class="nt">&gt;</span>
+or
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://twitter.com/joshualande"</span><span class="nt">&gt;</span> follow me on Twitter<span class="nt">&lt;/a&gt;</span>! 
+</code></pre></div></div>
+
+<p>When you click on “share it with your followers”, it will automatically compose a tweet like:</p>
+
+<blockquote>
+  <p>How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole http://www.joshualande.com/2014/02/03/jekyll-github-pages-poole/ via @joshualande</p>
+</blockquote>
+
+<p>Whenever I want to include the Twitter plug on a post, I just add the liquid tag:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{% include twitter_plug.html %}
+
+</code></pre></div></div>
+
+<h2 id="more-links">More Links</h2>
+
+<p>Here are some links which helped me along the way:</p>
+
+<ul>
+  <li>The official <a href="http://jekyllrb.com">Jekyll</a> website, along with detailed <a href="http://jekyllrb.com/docs/home">documentation</a>.</li>
+  <li>Documentation by GitHub about hosting static webpages with <a href="http://pages.github.com">GitHub pages</a>.</li>
+  <li>The <a href="https://github.com/poole/poole">poole</a> GitHub repository.</li>
+  <li>The GitHub repository for my <a href="http://github.com/joshualande/joshualande.github.io">personal website</a>.</li>
+</ul>
+
+<p>If you have any questions or comments, please post them below. If
+you liked this post, you can
+<a href="https://twitter.com/intent/tweet?url=http://localhost:4000/jekyll-github-pages-poole&amp;text=How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole&amp;via=joshualande" target="_blank">
+  share it with your followers</a> 
+or 
+<a href="https://twitter.com/joshualande">
+  follow me on Twitter</a>!</p>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/jwt-express">
+            JSON web tokens with expressjs
+            <small>14 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/activation-functions-comparison">
+            Activation functions comparison
+            <small>12 Feb 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/complete-neural-nets">
+            Complete approach to neural networks
+            <small>02 Jan 2020</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
