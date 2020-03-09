@@ -30,7 +30,7 @@ And a refresher on the **cost function**:
 
 Here is the actual algorithm:
 
-!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \\{!! !!\hspace{10mm} \\theta \_j := \\theta \_j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\\theta \_ 0, \\theta \_ 1)}{\partial \\theta \_j }!! !!} \hspace{67mm}!!
+!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \\{!! !!\hspace{10mm} \\theta \_j := \\theta \_j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\\theta \_ 0, \\theta \_ 1)}{\partial \\theta \_j }!! !!\\}!!
 
 This is repeated simultaneously for $\\theta \_0$and $\\theta \_1$. A.K.A this is repeated simultaneously for the $j$values of $0,1$.
 
@@ -40,7 +40,7 @@ Programmatically, you will have to create temporary variables to be able to simu
 
 !!
 temp0 := \\theta \_0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\\theta \_0, \\theta \_1)}{\partial \\theta \_0 } !! !!temp1 := \\theta \_1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\\theta \_0, \\theta \_1)}{\partial \\theta \_1 } !! !!\\theta \_0 := temp0!! !!\\theta \_1 := temp1!!
-!!
+
 
 **INcorrect Simultaneous Update:**
 
