@@ -58,7 +58,7 @@
   />
 
   <title>
-     Gradient descent for univariate linear regression &middot; Danny 
+     Gradient descent for univariate linear regression &middot; Danny Denenberg 
   </title>
 
   <!-- CSS -->
@@ -87,7 +87,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -136,7 +136,7 @@
 
 <p>Here is the actual algorithm:</p>
 
-<p>!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{ \\ \hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }\\ \} \hspace{67mm}!!</p>
+<p>!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{!! !!\hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }!! !!\}!!</p>
 
 <p>This is repeated simultaneously for $\theta _0$and $\theta _1$. A.K.A this is repeated simultaneously for the $j$values of $0,1$.</p>
 
@@ -145,13 +145,12 @@
 <p><strong>Correct Simultaneous Update:</strong></p>
 
 <p>!!
-temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } \\ temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } \\ \\ \\ \\ \theta _0 := temp0 \\ \theta _1 := temp1
-!!</p>
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } !! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } !! !!\theta _0 := temp0!! !!\theta _1 := temp1!!</p>
 
 <p><strong>INcorrect Simultaneous Update:</strong></p>
 
 <p>!!
-temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } \\ \theta _0 := temp0 \\ temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } \\ \theta _1 := temp1
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 }!! !!\theta _0 := temp0!! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 }!! !!\theta _1 := temp1
 !!</p>
 
 <blockquote>
@@ -166,7 +165,7 @@ temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, 
 
 <p>What we want to find is the value of $\theta$ that makes the $y$component of this graph to be as low as possible – in this case, 0. Just looking at the graph, we can see that that number is 4. But, in more complex cost functions that deal with hundreds of parameters/dimensions, simply graphing the cost function will not yield an easy-to-see answer.</p>
 
-<p>In terms of gradient descent, we start by choosing a random value for $\theta _1$(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from $\theta _1!!’s current value. To find the slope we find the derivative of the cost function with respect to $\theta _1$.</p>
+<p>In terms of gradient descent, we start by choosing a random value for $\theta _1$(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from $\theta _1$’s current value. To find the slope we find the derivative of the cost function with respect to $\theta _1$.</p>
 
 <p><strong>Note:</strong> If you don’t know calc already, THAT’S TOTALLY OKAY! I didn’t either when I started learning about this subject. I taught all I needed to know to myself. I would highly highly recommend 3Blue1Brown’s <a href="https://www.youtube.com/watch?v=WUvTyaaNkzM&amp;list=PL0-GT3co4r2wlh6UHTUeQsrf3mlS2lk6x">“The Essence of Calculus”</a> as a starting point. It has amazing animations and fantastic descriptions of everything you would need to know. If you want to just keep trudging along, though, just note that the derivative of a function allows you to find the slope of any point along that original function.</p>
 
@@ -196,35 +195,44 @@ temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, 
   <h2>Related Posts</h2>
   <ul class="related-posts">
     
-      <li>
-        <h3>
-          <a href="/jwt-express">
-            JSON web tokens with expressjs
-            <small>14 Feb 2020</small>
-          </a>
-        </h3>
-      </li>
+    <li>
+      <h3>
+        <a href="/golang-present-tool">
+          Golang presentation tool usage
+          <small>11 Mar 2020</small>
+        </a>
+      </h3>
+    </li>
     
-      <li>
-        <h3>
-          <a href="/activation-functions-comparison">
-            Activation functions comparison
-            <small>12 Feb 2020</small>
-          </a>
-        </h3>
-      </li>
+    <li>
+      <h3>
+        <a href="/how-hash-functions-work">
+          How hash functions work
+          <small>04 Mar 2020</small>
+        </a>
+      </h3>
+    </li>
     
-      <li>
-        <h3>
-          <a href="/complete-neural-nets">
-            Complete approach to neural networks
-            <small>02 Jan 2020</small>
-          </a>
-        </h3>
-      </li>
+    <li>
+      <h3>
+        <a href="/jwt-express">
+          JSON web tokens with expressjs
+          <small>14 Feb 2020</small>
+        </a>
+      </h3>
+    </li>
     
   </ul>
 </div>
+
+<script src="https://utteranc.es/client.js"
+        repo="dannydenenberg/dannydenenberg.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 
       <div class="footer">

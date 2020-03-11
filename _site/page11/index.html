@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,76 +110,16 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/what-is-a-perceptron">
-        What the heck is a perceptron
+      <a href="/ghost-blog-aws-docker">
+        How to create a Ghost blog with docker 🐳+ AWS ❤️
       </a>
     </h1>
 
-    <span class="post-date">21 Apr 2019</span>
+    <span class="post-date">25 Jun 2019</span>
 
-    <p>A quick article about what a perceptron is, how it works, and why it is important.</p>
-
-<p>In short, the perceptron is an algorithm. A very simple one at that. The algorithm it performs, in machine learning lingo, is known as <em>binary classification</em>.</p>
-
-<p><strong>Binary classification</strong> is the task of classifying elements into two groups. Hence the word binary — meaning 2.<!--more--></p>
-
-<p>All the algorithm does, it <strong>take an input and produce an output</strong>. The method by which the perceptron produces an output is called the weighted sum. It takes some input X, multiplies it by some weight W, adds in a bias B and then runs that value through some step function which classifies the weighted sum as a 0 or 1 (most of the time).</p>
-
-<blockquote>
-  <p>If there are multiple inputs, then there is a single weight assigned to each input and all of the inputs are multiplied by their corresponding weight and then summed together and added to the bias before being passed through the step function.</p>
-</blockquote>
-
-<p>Here is visual of what a simple perceptron with n inputs may look like:</p>
-
-<p><img src="https://i.snap.as/w49eSsS.png" alt="" /></p>
-
-<p>This image depicts the inputs (represented as subscripts of X) each being multiplied by their corresponding weights, summed together, and passed through some step function that takes the weighted sum and produces either a 0 or a 1. Notice that there is a constant that is fed into the perceptron as well as the other inputs. This constant will always be 1 and when multiplied with the first weight, represents the bias. So, essentially, that weight is the bias — it is added to the sum of the weights without being multiplied first with an input.</p>
-
-<p>A simple step function is depicted below:</p>
-
-<p><img src="https://i.snap.as/8nEMVgJ.png" alt="" /></p>
-
-<p>This step function takes some value. If the value is greater than or equal to 0, then it outputs 1, otherwise, it outputs 0.</p>
-
-<h2 id="how-is-it-useful-at-classifying-things">How is it useful at classifying things?</h2>
-
-<p>The perceptron is a subset of machine learning algorithms known as supervised learning. This means that when you teach a perceptron to learn to classify inputs into 2 categories, you give it the inputs and the labels that you want the perceptron to produce in the end (0 or 1 for binary classification, usually).</p>
-
-<p>The perceptron initializes its weights randomly and get’s fed the inputs. It takes its final output from the step function and compares it to the label that you gave it for the specified set of inputs.</p>
-
-<p>The perceptron can then see whether it was wrong at all and how wrong. It can quantify how wrong it is by producing a loss function which takes the perceptron’s output and the target label provided by you and produces a number. In essence, the loss function is saying, “this perceptron is 2.76 wrong” or “this perceptron is 8.92 wrong”, etc. Here is a common loss function for binary classification known as Squared Error:</p>
-
-<p>!!Loss=(predicted-target)^2!!</p>
-<p>So, in a simple example, if the perceptron was fed inputs and produced a 1, but the label assigned to the inputs was 0, then the loss of the perceptron would be:</p>
-<p>!!Loss=(1-0)^2=1!!</p>
-<p>The perceptron in this case was “1 wrong”.</p>
-
-<blockquote>It can then use this value to adjust the weights is various ways, one of which is known as <strong>Gradient Descent</strong>. In GD, you adjust the weights by subtracting the partial derivative of the loss function with respect to each weight. To actually figure out the derivatives, you would use the chain rule because the loss function is in actuality a composition of the weighted sum plus the bias, piped through the step function:</blockquote>
-
-<p>!!\frac{\partial Loss}{\partial w_i}=\frac{\partial Loss}{\partial y}\frac{\partial y}{\partial w_i}!!</p>
-
-<blockquote>If you are familiar with Calculus and derivatives, this concept shouldn’t be too difficult to understand and I am planning on writing an article on this soon. But it is beyond the scope of this high-level paper.</blockquote>
-
-<h2 id="what-is-a-binary-classifier">What is a Binary Classifier?</h2>
-
-<p>This means that the input entered is mapped to 2 different categories.</p>
-<p>Another way to describe this is by saying that the information entered into a perceptron is linearly separable:</p>
-
-<p><img src="https://i.snap.as/cQcPrYs.png" alt="" /></p>
-
-<p>This means that the input entered can be separated by a<strong> single line.</strong></p>
-
-<h2 id="a-perceptron-is-just-like-a-linear-function">A perceptron is just like a linear function</h2>
-
-<p>One thing to note about a perceptron is that it is functions kind of line a linear function. For example, here is a function in slope-intercept form:</p>
-<p>!!y=mx+b!!</p>
-<p>When comparing this to a perceptron you can see they are much alike. The X is the input, the m is the weight, and the b is the bias. Here is what the perceptron value before it is run through the step function would look like:</p>
-<p>!!y=\sum_{i=0}^{n} X_{i} W_{i}+B!!</p>
-<p>Looks pretty similar, huh?</p>
-<p>This high level overview of a perceptron is a good prep for learning about <strong>Neural Networks</strong> which are just perceptrons stacked on top of each other and gathered into layers.</p>
-<p>Just keep learning!
-
-</p>
+    <ol><li>Login to the AWS website</li><li>Click on Services  (top bar)</li><li>Click on EC2</li><li>Click on Launch Instance</li><li>Search and choose Ubuntu Server (18 or up)</li><li>Leave selected the free tear (unless you have upwards of $10000000000)</li><li>Edit security groups (by clicking on <code>edit security groups</code>)</li><li>Click Add rule - <code>http</code> - leave other defaults</li><li>Click Add rule - <code>https</code> -leave other defaults</li><li>Click Launch Instance</li><li>Choose Create new pair key from the drop down selector (name it and download it)</li><li>Open terminal</li><li>CD into the directory where the pair key was downloaded to and do this</li><li>Change the .pem file permissions with: <code>sudo chmod 600 &lt;&lt;MYPAIRKEYFILENAME&gt;&gt;.pem</code></li><li>Go to your AWS instances tab in the EC2 page and find the Public DNS (IPv4) of your instance </li><li><code>ssh <a href="/cdn-cgi/l/email-protection#7c091e091208093c191f4e514948514e4e48514d4f4e51454f521f13110c090819514d521d111d0613121d0b0f521f1311"><span class="__cf_email__" data-cfemail="790c1b0c170d0c39">[email&#160;protected]</span>&lt;</a>&lt;INSERT.Public.Dns.IPv4&gt;&gt; -i PairKeyName.pem</code></li><li>Type <code>yes</code> to get into the ubuntu computer</li><li>Install docker: <code>sudo snap install docker</code></li><li>Make a start file: <code>vim startserver</code></li><li>Put this in the script👇: </li><li><code>#!/bin/bash; docker run -d --name website -e url=https://&lt;&lt;websitename&gt;&gt; -p 80:2386 -v /home/ubuntu/website:/var/lib/ghost/content ghost</code></li><li>Create a /website directory: <code>mkdir website</code></li><li>Go to <code>cloudflare.com</code> and link your website to it by creating an account (or signing in) and going through the steps to link it to your URL that you used in step <strong>21</strong></li><li>Make a <code>CNAME</code> record with the name being <code>@</code> and the address being the public IPv4 of the aws instance that you found in step <strong>15</strong> (example: <code>ec2-54-224-132-93.compute-1.amazonaws.com</code>)</li><li>Go to your domain service (mine is google domains) and set the nameservers to be cloudflare’s (you should have already done this step while setting up cloudflare in step <strong>23</strong>)</li><li>Change the permissions of the <code>startserver</code> script to be able to execute: <code>chmod +x startscript</code></li><li>Now run it: <code>./startscript</code></li><li>It will take a bit to complete because docker needs to pull the image off of their website, but when it does everything should be up and running</li></ol>
+<h2 id="please-note">Please Note</h2>
+<p>It may take a bit for cloudflare to enable https. It will also take some time for your domain provider to change its nameservers and for that change to propagate back to cloudflare.<br /></p>
 
   </div>
   

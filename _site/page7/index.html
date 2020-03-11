@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,215 +110,111 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/securing-db">
-        Securing your database
+      <a href="/js-dev-rust">
+        A js developer’s view of rust
       </a>
     </h1>
 
-    <span class="post-date">05 Aug 2019</span>
+    <span class="post-date">13 Sep 2019</span>
 
-    <p><a href="https://github.com/dannydenenberg/mongodb-users">Here</a> is a link to all of the source code WITH authentication and hashing.</p>
+    <p>A while ago, I was trying to find something interesting to read about online when I bumped into Rust. Rust is …</p>
 
-<p>This article assumes knowledge of NodeJS, Express.js, MongoDB, and how all of those technologies interact programmatically. I wrote a <a href="https://denenberg.us/creating-and-connecting-a-mongodb-database-and-node-js-server-to-a-front-end">great article</a> on that topic as well.</p>
+<blockquote>
+  <p>“a language empowering everyone to build reliable and efficient software.”</p>
+</blockquote>
 
-<p>Let’s start by taking a look at some code for a MongoDB database connection through Node.js and ExpressJS.<!--more--></p>
+<p>In short, it is a systems programming language. A freaky fast one, at that. It even outperformed C++ in many of the benchmarks tests run by The Computer Language Benchmarks Game (mostly having to do with complex algorithmic tasks like binary trees, etc).</p>
 
-<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/1/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+<p>Before I started to delve more into the language itself, though, I searched about to see what people were thinking of it. Rust was created in 2011 and is backed by Mozilla (the not-for-profit). It has a sort of niche group following it consisting mostly of previous C/C++ developers who wanted a break from the null pointer exceptions, undefined behaviors, language complexity, crazy macros — shall I go on? Although Rust is still in its early stages of maturity, it has a website devoted to following its development of game programming, which is pretty sweet. There are even some games that are gathering a lot of buzz and have even been put into the App Store and the Google Play Store such as A Snake’s Tale. Rust even has an AMAZING package manager called crates.io which is comparable to npm and has had almost 1.5 billion downloads to date.</p>
 
-<p>It achieves the central goal for that article which was to be able to connect a front end to a Mongo database. It does this by allowing requests to be sent to a server which has the functionality to read, write, and update the database.</p>
+<p>After seeing all of this, I decided that I needed to feed my curiosity and learn Rust’s syntax. I started by reading through The Book — a (mostly) complete walkthrough of Rust’s syntax, idioms, and program structure.</p>
 
-<p>Well, now there is a new issue – we have users that each have their own unique information, but ANYONE who sends a get request to the server with a username of some user can acquire their information! That is SUPER unsafe. To combat this, most websites have a password field for each user (as I’m sure you know) which is kept private. This combination of public and private “keys” is a nice way for users to be able to connect with each other using their public usernames, but keep their info secure with a strong password.</p>
+<p>Because I know many c-like languages, the general form of the syntax was simple and easy to grasp. If you are one of those people who use const whenever possible and will punish those who don’t, you’ll love Rust. Its default form of assigning variables makes them immutable.</p>
 
-<p>Let’s implement this in our NodeJS program by first adding a <code class="highlighter-rouge">pass</code> field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called <code class="highlighter-rouge">deb</code> with the password <code class="highlighter-rouge">1234</code> (I am using JavaScript to send the request to our server – make sure the server is running on port <code class="highlighter-rouge">4567</code>):</p>
-
-<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/12/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
-
-<p>Okay, to make sure the <code class="highlighter-rouge">fetch()</code> request worked, look at the data inside of your MongoDB cluster collections in Atlas.</p>
-
-<p>Great. The user has a password, but we can still send a get request and get the information without using a password. To password-protect the user info, every time a get request is sent, a password should be sent along with it. The server will then compare the password sent in the get request with the password stored in the database associated with the user the get request was sent for. If they are equivalent, the server will send back the user information. Otherwise, it will send back some sort of an error code for the wrong password.</p>
-
-<p>In short, in the express server’s response to get requests, it should check that the sent password is correct before allowing the request to access the user’s information.</p>
-
-<p>To send a password along with the get request, we will use simple HTTP url request parameters. The GET request will look like this:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:4567/username?pass=mypassword1
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Below is an immutable variable</span>
+<span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="c">// Below is a mutable variable</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="c">// General form for variables:</span>
+<span class="k">let</span> <span class="n">var_name</span><span class="p">:</span> <span class="k">type</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p><strong>One thing to note</strong> is how to get the query parameters in Express.js (Node.js): <code class="highlighter-rouge">req.query.myparam</code>. Or, in our specific case, <code class="highlighter-rouge">req.query.pass</code> gives the password sent.</p>
+<p>Data types in Rust are straight forward. Integer types consist of 8 through 128 bit unsigned and signed numbers.</p>
 
-<p>Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the <code class="highlighter-rouge">/user</code> and <code class="highlighter-rouge">?pass=__ fields</code>.</p>
+<p><img src="https://miro.medium.com/max/564/1*AesR6b5JntLgZzW7K2_nlA.png" alt="" /></p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/:user</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Password: </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">pass</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div></div>
+<p>There are also immutable array types, characters, &amp;str (references to a list of characters in memory), tuples, enumerations, structs, collections, etc.</p>
 
-<p>To test this, run the Node server. In the browser go to <code class="highlighter-rouge">localhost:4567/dan?pass=abc</code>. Switch back to the console and you should see the password printed there.</p>
+<p>Functions are declared using the fn keyword like so:</p>
 
-<p>Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the <code class="highlighter-rouge">/user</code>. If that is the same as the URL <code class="highlighter-rouge">pass</code> parameter, we send back the info on the user.</p>
-
-<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/10/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
-
-<p>To test this out, restart your server with updated code. Go to <code class="highlighter-rouge">localhost:4567/deb?pass=1234</code> in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.</p>
-
-<p>Okay, nice! You have now password protected all get requests to recieve data. There are, however, a couple of issues with this method, one of which is the fact that if your database is compromised, you will have leaked a piece of very sensitive information that users have trusted you with: their password (which is likely being reused on different sites). This is why, instead of being stored as they are, passwords are typically <strong>hashed</strong> using a <em>one way</em> function.</p>
-
-<p>The following section will go more in depth into hashing, why it is important, and how to use it to <strong>securely</strong> store data.</p>
-
-<hr />
-
-<p>Hashing algorithms are one way functions. They take any string and turn it into a fixed-length “fingerprint” that is unable to be reversed. This means that if the data is compromised, the onlooker cannot get the user’s passwords if they were hashed. At no point were they ever stored on the drive without being in their hashed form.</p>
-
-<p>Websites using hashing typically have this workflow:</p>
-
-<ol>
-  <li>User creates an account</li>
-  <li>Their password is hashed and stored on the base</li>
-  <li>When the user attempts to log in, the hash of their entered password is compared to the has stored in the database</li>
-  <li>If the hashes match, the user can access the account. If not, a <strong>generic</strong> error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.</li>
-</ol>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
-hash("hellu") = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
-hash("danny") = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
-</code></pre></div></div>
-
-<p><strong>NOTE:</strong> Only secure, or <strong>cryptographic hash functions</strong>, can be used for password hashing (SHA256, SHA512, RipeMD, WHIRLPOOL, etc.)</p>
-
-<p>Sadly, just cryptographically hashing passwords does not ensure safety.</p>
-
-<h2 id="cracking-hashes">Cracking Hashes</h2>
-
-<h3 id="brute-force-and-dictionary-attacks">Brute Force and Dictionary Attacks</h3>
-
-<p>The easiest way to decrypt a hash is just to guess the password. The way to do this is to guess the user password, hash the guess, and compare it to the hash of the actual password you are trying to solve. If the two hashes match, the unhashed version of the guess is the right password.</p>
-
-<p>A <strong>brute force</strong> attack goes through every possible combination of characters given a certain length. Even though they will 100% <em>eventually</em> crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying aaa : failed
-Trying aab : failed
-Trying aac : failed
-...
-Trying acb : failed
-Trying acc : success!
-</code></pre></div></div>
-
-<p><strong>Dictionary attacks</strong> use a file containing commonly used words, phrases, or passwords that are likely to be a used password. There are <a href="https://en.wikipedia.org/wiki/Wikipedia:10,000_most_common_passwords">databases you can find</a> that hold the top 100,000 (or however many) most commonly used passwords. The attack hashes these passwords and compares the hash to the password to crack. For cracking the average Joe Shmo, this is sometimes a good method to use and is certainly faster than using a brute force attack.</p>
-
-<p><strong>Lookup tables</strong> can improve cracking performance by pre-computing the hashes so when it comes time to guess the password, the program needs not spend compute time actually hashing the guesses.</p>
-
-<p>In the next section, we will take a look at “salting” which makes these cracking methods impossible to use reliably.</p>
-
-<h2 id="salting">Salting</h2>
-
-<p>The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a <em>salt</em> to the passwords BEFORE hashing.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
-hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
-</code></pre></div></div>
-
-<p>The salt doesn’t have to be secret because an attacker doesn’t know what the salt will be and thus cannot make pre computed tables for it.</p>
-
-<h2 id="the-dos-and-donts-of-salting">The Dos and Don’ts of Salting</h2>
-
-<p>Don’t:</p>
-
-<ul>
-  <li>Reuse the same salt for each password hashed</li>
-  <li>Use short salts</li>
-  <li>Use wierd double hashes (ex: hash(hash(hash(‘mypass’)))) in lou of a salt</li>
-</ul>
-
-<p>Do:</p>
-
-<ul>
-  <li>Generate random salts using a <strong>Cryptographically Secure Pseudo-Random Number Generator</strong> (CSPRNG)</li>
-  <li>Generate a new random unique salt for <em>EACH</em> password hashed</li>
-  <li>Generate LONG salts</li>
-</ul>
-
-<h2 id="salting-workflow">Salting Workflow</h2>
-
-<p>Storing a Password:</p>
-
-<ol>
-  <li>Generate super long salt with a CSPRNG</li>
-  <li>Prepend the salt to the user password and hash it</li>
-  <li>Save the salt and the hash in the database</li>
-</ol>
-
-<p>Checking a Password:</p>
-
-<ol>
-  <li>Get the salt and hash from the database</li>
-  <li>Prepend the salt to the submitted password and hash it</li>
-  <li>Compare the hashes. If they are equal, the password is correct</li>
-</ol>
-
-<p><strong>NOTE:</strong> Always always always hash on the server. Sometimes JavaScript isn’t enabled. Also, no one else can access the server so it is ensured to be hashed (You can <em>also</em> hash on the client side if you so choose)</p>
-
-<p>And with that, you have learned the basics of securely hashing data. Now let’s continue on with the (not-as-hashy parts of the) article.</p>
-
-<h2 id="our-hash-function">Our Hash Function</h2>
-
-<p>We will be using the SHA256 hashing function. How, exactly, hashing functions work is beyond the scope of this article, but if you are interested, see <a href="https://en.wikipedia.org/wiki/Hash_function">this</a> and <a href="https://gfredericks.com/blog/98">this</a>.</p>
-
-<p>First of all, install the dependency for our function: <code class="highlighter-rouge">npm i -s crypto</code>. Also, add the import to the top of the NodeJS file: <code class="highlighter-rouge">const crypto = require("crypto");</code></p>
-
-<p>Now add this code to the bottom of the NodeJS file. We will call the function <code class="highlighter-rouge">hash</code>.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hashes strings with sha256 for storing passwords</span>
-<span class="kd">function</span> <span class="nx">hash</span><span class="p">(</span><span class="nx">pwd</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">crypto</span>
-    <span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="dl">"</span><span class="s2">sha256</span><span class="dl">"</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">pwd</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="dl">"</span><span class="s2">base64</span><span class="dl">"</span><span class="p">);</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello, world"</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="the-plan">The Plan</h2>
+<p>You can specify return values with the -&gt; symbol and if you are returning a value in the last line of the function, there is no need to include the return keyword.</p>
 
-<p>There are 3 more feature we need to implement before I can call the database “secure”.</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// returns the 32-bit integer 5</span>
+<span class="k">fn</span> <span class="nf">my_function</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">u32</span> <span class="p">{</span>
+  <span class="mi">5</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I was breezing on through until I hit the concept of ownership. All programs have to manage the way they use a computer’s memory while running. Because Rust doesn’t garbage-collect and programmers don’t have to manually allocate and deallocate memory, memory is managed through a system of ownership.</p>
+
+<p>Here are the rules of ownership in Rust (right from The Book):</p>
 
 <ol>
-  <li>Hash &amp; salt passcodes for new users being stored in response to <code class="highlighter-rouge">post</code> requests</li>
-  <li>Use the salt to hash and check the passwords when a <code class="highlighter-rouge">get</code> request needs info</li>
-  <li>Use the salt to check passwords for updating info on the database in response to <code class="highlighter-rouge">put</code> requests.</li>
+  <li>Each value in Rust has a variable that’s called its owner.</li>
+  <li>There can only be one owner at a time.</li>
+  <li>When the owner goes out of scope, the value will be dropped.</li>
 </ol>
 
-<p>Alrighty, let’s get started!</p>
+<p>Let’s have an example:</p>
 
-<h2 id="post-request-security">POST Request Security</h2>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>                      <span class="c">// s is not valid here, it’s not yet declared</span>
+    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>   <span class="c">// s is valid from this point forward</span>
 
-<p>Passwords need to be hashed and salted before being stored in the database.</p>
+    <span class="c">// do stuff with s</span>
+<span class="p">}</span> <span class="c">// this scope is now over, and s is no longer valid</span>
+</code></pre></div></div>
 
-<p>Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: <code class="highlighter-rouge">npm i -s csprng</code>. Also, add the import in the top of the NodeJS file: <code class="highlighter-rouge">const csprng = require('csprng');</code></p>
+<p>Here is the jam that I got into when I was first using Rust.</p>
 
-<p>Here is the <em>well commented</em> code for the server’s response to POST requests. It uses the <code class="highlighter-rouge">hash()</code> function defined earlier.</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">);</span> <span class="c">// a is the owner</span>
+<span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ownership has changed to b. What is a?</span>
 
-<p><strong>NOTE:</strong> The user password is sent as the <code class="highlighter-rouge">pass</code> field in the body of the request (contrary to how it was sent before).</p>
+<span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="c">// error[E0382]: borrow of moved value: `a`</span>
+</code></pre></div></div>
 
-<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/8/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+<p>Because there can only be only one owner at a time, I can’t try to assign the value of a variable to another using the first variable’s name if it was allocated on the heap, like the String type is in Rust. Now, if the variable’s type is a primitive (int, double, bool, etc), doing the reassign will simply copy the value and NOT change ownership.</p>
 
-<h2 id="get-request-security">GET Request Security</h2>
+<p>When referencing a variable, you use the &amp; symbol as in C/C++. The references allow the programmer to take the value without taking ownership. There can be as many non-mutable references as one wants to a variable at one time, but only ONE mutable reference.</p>
 
-<p>Now to check if an entered passcode is correct, we have to get the stored salt and use that to hash the entered passcode to check against the stored one.</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Dude, Rust is sick."</span><span class="p">);</span>
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
+  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
+<span class="p">}</span>
 
-<p>Here is the code for the GET request response.</p>
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// mutable reference. ok.</span>
+  <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Different!"</span><span class="p">);</span> <span class="c">// change value. ok</span>
+<span class="p">}</span>
 
-<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/5/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
+  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ERROR. Only one mut reference at a time!</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-<h2 id="put-request-security">PUT Request Security</h2>
+<p>Even more difficult for me to understand was rust lifetimes which is how Rust can get around using garbage collection. It is also their solution to the all too well known C++ problem of dangling pointers when a variable is “used after free”. I won’t even attempt to explain that concept here. You should read this article to find more.</p>
 
-<p>When updating info in the database, like the GET request, a password must be submitted to make sure the user is the right person to update his data. Also like the GET request, we need to use the stored salt associated with the user to hash the entered password for hashing.</p>
+<p>Overall, I would say my experience with Rust was rewarding. I was able to understand its syntax and style guide easily, although some of the concepts were difficult to grasp at first. I don’t know if this is just me, but even the way the language looks when typed is elegant. It uses functional programming techniques commonly used in JavaScript (filtering, mapping, etc) and its syntax keywords are short and too the point (<code class="highlighter-rouge">fn</code>, <code class="highlighter-rouge">enum</code>, <code class="highlighter-rouge">let</code>, <code class="highlighter-rouge">mut</code>, <code class="highlighter-rouge">i32</code>, <code class="highlighter-rouge">&amp;str</code>, etc.)</p>
 
-<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/6/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
+<p>Some systems developers are lobbying heavily for Rust to be the next C/C++. I don’t know whether that will happen anytime soon, but one thing is for sure: it will continue to grow and mature. It is backed by Mozilla and has a ‘cult’ following that want to kill off C++.</p>
 
-<p><strong>Congrats for getting through this article!! 🎉🥳</strong></p>
+<p>So there.</p>
 
-<p>Although I used a MongoDB database for storage and NodeJS for the server, the concepts covered here are applicable in ANY technology you may choose.</p>
-
-<p>Have fun with your database!</p>
+<p>Go look at Rust.</p>
 
   </div>
   

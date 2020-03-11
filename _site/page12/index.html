@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,36 +110,59 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/installing-node\">
-        How to install Node.js
+      <a href="/contributing">
+        How to contribute on GitHub
       </a>
     </h1>
 
-    <span class="post-date">14 Mar 2019</span>
+    <span class="post-date">23 Apr 2019</span>
 
-    <p>It is likely that you already have <a href="https://nodejs.org/en/">NodeJS</a> installed on your machine. Try running <code class="highlighter-rouge">node -v</code> from the command line. If that does not work or the version is older than <code class="highlighter-rouge">8.15</code>, follow the install instructions below.</p>
+    <p>This guide assumes that you have a <a href="https://github.com/">Github</a> account and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git installed</a> on your machine.</p>
 
-<h2 id="node-version-manager-nvm">Node Version Manager NVM</h2>
+<h2 id="step-1-fork">Step 1: Fork</h2>
 
-<p><a href="https://github.com/creationix/nvm">Node Version Manager</a> NVM makes it easy to switch between Node versions in your local environment. I highly recommend using it over the native install on your system.</p>
+<p>After you find a repo that looks cool, the first step is to fork it. A fork will create a copy of the repo under your account that you can modify, while maintaining a link to original (that’s called the upstream repo).</p>
 
-<h3 id="mac-and-linux">Mac and Linux</h3>
+<p><img src="/assets/forking.png" alt="Forking" /></p>
 
-<p>Simply run the install script from the command line.</p>
+<h2 id="step-2-clone">Step 2: Clone</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-o-</span> https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+<p>Now let’s download the code to your local machine by cloning the fork.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;your-fork-url.git&gt;
 </code></pre></div></div>
 
-<p>Restart your terminal. You should now be able to easily install and manage Node versions.</p>
+<p>You should now have a directory for your project that can be opened with your <a href="https://code.visualstudio.com/">preferred code editor</a>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install </span>10
+<h2 id="step-3-branch">Step 3: Branch</h2>
 
-nvm use 10
+<p>A git repo is just a big tree 🌳. You might have hundreds of people working on the same project and branches ensure that collaboration can happen without complete chaos. Changes on your branch are isolated from the work everybody else is doing.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b my-cool-thing
 </code></pre></div></div>
 
-<h3 id="windows">Windows</h3>
+<p>At this point you can start making changes to the code.</p>
 
-<p>NVM is not available on Windows, but there is a solid alternative with <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a>. It provides an installer than you can download from the repo. Once installed you will have access commands similar to those above.</p>
+<h2 id="step-4-commit">Step 4: Commit</h2>
+
+<p>When you are happy with the changes, you can stage the changes and commit the code.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
+git commit -m "🚀 I made this software better!"
+</code></pre></div></div>
+
+<h2 id="step-5-pull-request">Step 5: Pull Request</h2>
+
+<p>A “pull request” is identical to a “git merge”, but it is requested from an external source - you. In fact, it is called a “merge request” on other platforms, which I think is a better name, but I digress.</p>
+
+<p>Let’s push your branch to your fork.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin my-cool-thing
+</code></pre></div></div>
+
+<p>When you go back to Github you should automatically see a button labeled <strong>Create New Pull Request for my-cool-thing</strong>. Go ahead and push that button. Add additional details as needed and it will show up in the list of PRs once submitted.</p>
+
+<p>Many larger projects have their own “Contributor Guidelines” and may require you to sign a <a href="https://en.wikipedia.org/wiki/Contributor_License_Agreement">CLA</a> before participating.</p>
 
   </div>
   

@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,149 +110,74 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/web-scraping">
-        Web scraping in node.js 101
+      <a href="/cron-github">
+        Automating Backups with Cron & GitHub
       </a>
     </h1>
 
-    <span class="post-date">12 Mar 2018</span>
+    <span class="post-date">24 May 2018</span>
 
-    <p>Web scraping is a great way to create dynamic websites or to just be able to get data from sites without having access to their databases. In short, it is an easy method to get info from a site by going through the <strong>front end</strong> (what the user sees) HTML code.</p>
+    <p>Back when I was using <a href="https://ghost.org/">Ghost</a> as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.</p>
 
-<p>To get started with web scraping you must know how a website is structured. If you right click on a page, and click inspect (on chrome), you can see the developer tools.<!--more--></p>
+<p>Being me, I found a <em>hacky</em> way around paying.</p>
 
-<p><img src="https://i.snap.as/V8yrpGZ.png" alt="" /></p>
+<p>I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. <!--more--></p>
 
-<p>This shows you the structure of the HTML/CSS/JavaScript code as well as network performace, errors, security, and much much more.</p>
+<p>To do this, make sure git is installed on your Linux/Unix system.</p>
 
-<p>Now, let’s say I want to grab the first image that you see on twitter programatically in the JavaScript console.</p>
+<p>Then set your username and email in the git preferences through the terminal.</p>
 
-<p>Well, I could right click on the image, click inspect, right click on the element in the dev tools, and copy the css selector.</p>
-
-<p><img src="https://i.snap.as/XNXJhXa.png" alt="" /></p>
-
-<p>Then I could do a <code class="highlighter-rouge">document.querySelector(&lt;&lt;SELECTOR&gt;&gt;).src</code> and that would give me the URL of the image I want, and I could use that on a web page, for example:</p>
-
-<p><img src="https://i.snap.as/QnJblUJ.png" alt="" /></p>
-
-<p>This IS web scraping! I was able to gather data (an image) from a website without having access to the database. But this is super tedious and long, so to actually webscrape more efficiently, I use Node.js + Puppeteer.</p>
-
-<p>If you don’t already know, <a href="https://nodejs.org/">Node.js</a> is a runtime enviornment that allows JavaScript to be run on the server side. And <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).</p>
-
-<p>Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running <code class="highlighter-rouge">tsc -v</code> works in the terminal, you’re good to go!</p>
-
-<p>Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a <code class="highlighter-rouge">command not found</code> or something related by running one of the following, I suggest that you look at this article on how to install Node.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm -v # should be 6.0.0 or higher
-$ node -v # should be 9.0.0 or higher
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email "MY_NAME@example.com"
 </code></pre></div></div>
 
-<p>Great! Let’s start a new project and install the dependencies:</p>
+<p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir Web-Scraping-101 &amp;&amp; cd Web-Scraping-101
-$ npm init # go through all defaults
-$ npm i puppeteer # the google npm scraping package
-$ tsc --init # initialize typescript
-$ npm i @types/puppeteer # type declarations
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
 </code></pre></div></div>
 
-<p>Now open the folder in the text editor of your choice. Edit the <code class="highlighter-rouge">outDir</code> option in the <code class="highlighter-rouge">tsconfig.json</code> file to be <code class="highlighter-rouge">./build</code> and uncomment the line, so it looks like this:</p>
+<p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
 
-<p><img src="https://i.snap.as/y1kZn10.png" alt="" /></p>
+<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
 
-<p>Create a new file in the root of the folder:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch app.ts
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
+<span class="nb">cd</span> /home/mybackupsrepo <span class="c"># go to the backups repo</span>
+git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <span class="nt">-m</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> git push origin master <span class="c"># commit, push</span>
+<span class="nb">sudo rm</span> <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
 </code></pre></div></div>
 
-<p>In <code class="highlighter-rouge">app.ts</code> add:</p>
+<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log("Twitter, here we come");
+<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
+
+<p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># crontab -e</span>
+<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
+<span class="nv">MAILTO</span><span class="o">=</span>root@example.com
+<span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+<span class="c"># For details see man 4 crontabs</span>
+
+<span class="c"># Example of job definition:</span>
+<span class="c"># .---------------- minute (0 - 59)</span>
+<span class="c"># |  .------------- hour (0 - 23)</span>
+<span class="c"># |  |  .---------- day of month (1 - 31)</span>
+<span class="c"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
+<span class="c"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
+<span class="c"># |  |  |  |  |</span>
+<span class="c"># *  *  *  *  * user-name  command to be executed</span>
+
+<span class="c"># backup using the rsbu program to the internal 4TB HDD and then 4TB external</span>
+01 01 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/rsbu <span class="nt">-vbd1</span> <span class="p">;</span> /usr/local/bin/rsbu <span class="nt">-vbd2</span>
+
+<span class="c"># Set the hardware clock to keep it in sync with the more accurate system clock</span>
+03 05 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /sbin/hwclock <span class="nt">--systohc</span>
+
+<span class="c"># Perform monthly updates on the first of the month</span>
+<span class="c"># 25 04 1 * * /usr/bin/dnf -y update</span>
 </code></pre></div></div>
-
-<p>Now, to <strong>run this</strong>, in terminal, write: <code class="highlighter-rouge">tsc &amp;&amp; node build/app.js</code></p>
-
-<p><strong>NOTE:</strong> <code class="highlighter-rouge">tsc</code> builds all TypeScript files into the outDir directory defined in the config file and <code class="highlighter-rouge">node</code> runs a single JavaScript file.</p>
-
-<p>If you see <em>“Twitter, here we come”</em> appear in the terminal, you’ve got it working!</p>
-
-<p>Now, we will start to actually scrape using puppeteer.
-Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.ts</code> file:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">puppeteer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">puppeteer</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// import the npm package that we installed</span>
-
-<span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// the rest of the code must be enclosed in an `async` function to be able to `await` for results</span>
-  <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span> <span class="c1">// launches an "invisible" chromium browser</span>
-  <span class="kd">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span> <span class="c1">// takes the browser to a new tab (page)</span>
-  <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">goto</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://example.com</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// takes the page to a specific url</span>
-
-  <span class="c1">// Get the "viewport" of the page,</span>
-  <span class="c1">// as reported by the page.</span>
-  <span class="c1">// NOTE: Anything inside of the `evaluate` function is DOM manipulation.</span>
-  <span class="c1">// No variables outside of the evaluate function can go in, and none can come out without being returned inside of the return object.</span>
-  <span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="c1">// use DOM manipulation to access the width and height of the page</span>
-      <span class="c1">// if you want to get elements out of the DOM and into the node js code, return theme here</span>
-      <span class="na">width</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span>
-      <span class="na">height</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span>
-      <span class="na">deviceScaleFactor</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span>
-    <span class="p">};</span>
-  <span class="p">});</span>
-
-  <span class="c1">// print out the DOM data</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Dimensions:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
-
-  <span class="c1">// remember to close the broser (invisible chromium)</span>
-  <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-<span class="p">})();</span>
-</code></pre></div></div>
-
-<p>Please read through the commented code above to get a feel for what is going on ⬆.</p>
-
-<p>Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.</p>
-
-<p>First, edit the <code class="highlighter-rouge">await page.goto("https://example.com")</code> to be <code class="highlighter-rouge">await page.goto("https://twitter.com")</code></p>
-
-<p>Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span>
-  <span class="dl">"</span><span class="s2">#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div</span><span class="dl">"</span>
-<span class="p">);</span>
-<span class="c1">// the above returns the div for the middle column twitter feed</span>
-</code></pre></div></div>
-
-<p>Here is an image of what that represents:</p>
-
-<p><img src="https://i.snap.as/Taoa3a3.png" alt="" /></p>
-
-<p>To get all of the images from the middle column, I ended up doing this for the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">sources</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// an array of the links to each image</span>
-  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
-    <span class="dl">"</span><span class="s2">#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div img</span><span class="dl">"</span>
-  <span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">img</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">sources</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="nx">sources</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dimensions</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>There you go! You’ve just scraped image data from a twitter feed. A challenge would be to take this data and integrate it into an express server so that when a user goes to the root site, they are presented with all of these images.</p>
-
-<p>Thanks for reading!</p>
 
   </div>
   

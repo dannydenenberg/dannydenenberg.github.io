@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,103 +110,93 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/pass-hashing">
-        A complete guide to password hashing
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
       </a>
     </h1>
 
-    <span class="post-date">10 Sep 2019</span>
+    <span class="post-date">20 Sep 2019</span>
 
-    <p>Hashing algorithms are one-way functions. They take any string and turn it into a fixed-length “fingerprint” that is unable to be reversed. This means that if the data is compromised, the hacker<!--more--> cannot get the user’s passwords if they were hashed because at no point were they ever stored on the drive without being in their hashed form.</p>
+    <p>Gradient descent is used for many aspects of machine learning. One area in which it is used a ton is in optimizing artificial neural networks. I will explain the concept of how this works once you understand the basic gradient descent operations.</p>
 
-<p>Websites using hashing typically have this workflow:</p>
+<p>Gradient descent can also be used to minimize arbitrary functions such as more general ones like cost functions with $n$ number of parameters: $J(\theta _0, \theta _1, \theta _2, \theta _3, … , \theta _n)$.</p>
+
+<p>Please keep in mind that gradient descent is NOT HARD. Especially understanding how it minimizes functions is super easy to get. So, if you don’t understand a concept right away, keep on trying to see it from different angles and I’m sure it’ll click.</p>
+
+<p>So, without further ado let me give you the general outline for minimizing a function using G.D.:</p>
 
 <ol>
-  <li>A user creates an account</li>
-  <li>Their password is hashed and stored on the base</li>
-  <li>When the user attempts to log in, the hash of their entered password is compared to the has stored in the database</li>
-  <li>If the hashes match, the user can access the account. If not, a generic error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.</li>
+  <li>Start with some value for $\theta _0$and $\theta _1$</li>
+  <li>Keep changing $\theta _0$and $\theta _1$to reduce $(\theta _0, \theta _1) $until we hopefully find a minimum</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
-hash("hellu") = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
-hash("danny") = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
-</code></pre></div></div>
+<p><strong>Note:</strong> The <em>assignment operator</em> in maths looks like this: “$:=$”. It can also be used to reassign variable values. The normal “$=$” is a truth assertion.</p>
 
-<p><strong>NOTE:</strong> Only secure, or cryptographic hash functions, can be used for password hashing (SHA256, SHA512, RipeMD, WHIRLPOOL, etc.)</p>
+<p>Here are some variable to know before I get into the algorithm:</p>
 
-<p>Sadly, just cryptographically hashing passwords does not ensure safety.</p>
+<p>$\alpha=$”alpha” is the <em>learning rate</em>. It is how much we change the parameter values by each update step. It usually is a constant. Ex: If $\alpha=10$whatever value the algorithm gives to update the parameter value by, it is multiplied by a factor of ten.</p>
+
+<p>$j=$it is a subscript to $\theta$to represent a which parameter we are dealing with. It is a generic form of saying something like $theta _0!!.</p>
+
+<p>And a refresher on the <strong>cost function</strong>:
+!!J(\theta _0,\theta _1)=\frac{1}{2m} \sum _{i=1} ^m (h _\theta (x^i) - y^i)^2!!</p>
 
 <hr />
 
-<h1 id="cracking-hashes">Cracking Hashes</h1>
+<p>Here is the actual algorithm:</p>
 
-<h2 id="brute-force-and-dictionary-attacks">Brute Force and Dictionary Attacks</h2>
+<p>!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{!! !!\hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }!! !!\}!!</p>
 
-<p>The easiest way to decrypt a hash is just to guess the password. The way to do this is to guess the user password, hash the guess, and compare it to the hash of the actual password you are trying to solve. If the two hashes match, the unhashed version of the guess is the right password.</p>
+<p>This is repeated simultaneously for $\theta _0$and $\theta _1$. A.K.A this is repeated simultaneously for the $j$values of $0,1$.</p>
 
-<p>A <strong>brute force attack</strong> goes through every possible combination of characters given a certain length. Even though they will 100% eventually crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.</p>
+<p>Programmatically, you will have to create temporary variables to be able to simulate a simultaneous update.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying aaa : failed
-Trying aab : failed
-Trying aac : failed
-...
-Trying acb : failed
-Trying acc : success!
-</code></pre></div></div>
+<p><strong>Correct Simultaneous Update:</strong></p>
 
-<p><strong>Dictionary attacks</strong> use a file containing commonly used words, phrases, or passwords that are likely to be a used password. There are databases you can find that hold the top 100,000 (or however many) most commonly used passwords. The attack hashes these passwords and compares the hash to the password to crack. For cracking the average Joe Shmo, this is sometimes a good method to use and is certainly faster than using a brute force attack.</p>
+<p>!!
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } !! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } !! !!\theta _0 := temp0!! !!\theta _1 := temp1!!</p>
 
-<p><strong>Lookup tables</strong> can improve cracking performance by pre-computing the hashes so when it comes time to guess the password, the program needs not to spend compute time actually hashing the guesses.</p>
+<p><strong>INcorrect Simultaneous Update:</strong></p>
 
-<p>In the next section, we will take a look at “salting” which makes these cracking methods impossible to use reliably.</p>
+<p>!!
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 }!! !!\theta _0 := temp0!! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 }!! !!\theta _1 := temp1
+!!</p>
 
-<h1 id="salting">Salting</h1>
+<blockquote>
+  <p>The error here occurs because $\theta _0$is updated before $\theta _1$. That means that $\theta _1$is using the newly updated value of $\theta _0$to calculate the partial derivative with respects to $\theta _1$which is NOT what we want to happen.</p>
+</blockquote>
 
-<p>The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a salt to the passwords BEFORE hashing.</p>
+<h2 id="example-using-an-easier-function">Example Using an Easier Function</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
-hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
-</code></pre></div></div>
+<p>Let’s say that our task was to minimize some arbitrary cost function with one parameter $(\theta _1)$where $theta _1 \in ℝ$. The graph of the function $(\theta _1)$(if it is a squared error cost function) might look something like this:</p>
 
-<p>The salt doesn’t have to be secret because an attacker doesn’t know what the salt will be and thus cannot make pre-computed tables for it.
-The Dos and Don’ts of Salting</p>
+<p><img src="https://i.snap.as/UdTq5I8.png" alt="" /></p>
 
-<p>Don’t:</p>
+<p>What we want to find is the value of $\theta$ that makes the $y$component of this graph to be as low as possible – in this case, 0. Just looking at the graph, we can see that that number is 4. But, in more complex cost functions that deal with hundreds of parameters/dimensions, simply graphing the cost function will not yield an easy-to-see answer.</p>
 
-<ul>
-  <li>Reuse the same salt for each password hashed</li>
-  <li>Use short salts</li>
-  <li>Use weird double hashes (ex: hash(hash(hash(‘mypass’)))) in lou of a salt</li>
+<p>In terms of gradient descent, we start by choosing a random value for $\theta _1$(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from $\theta _1$’s current value. To find the slope we find the derivative of the cost function with respect to $\theta _1$.</p>
+
+<p><strong>Note:</strong> If you don’t know calc already, THAT’S TOTALLY OKAY! I didn’t either when I started learning about this subject. I taught all I needed to know to myself. I would highly highly recommend 3Blue1Brown’s <a href="https://www.youtube.com/watch?v=WUvTyaaNkzM&amp;list=PL0-GT3co4r2wlh6UHTUeQsrf3mlS2lk6x">“The Essence of Calculus”</a> as a starting point. It has amazing animations and fantastic descriptions of everything you would need to know. If you want to just keep trudging along, though, just note that the derivative of a function allows you to find the slope of any point along that original function.</p>
+
+<p>Okay, back to it.</p>
+
+<p>Here is the expression for updating our parameter:</p>
+
+<p>!!
+\theta _1 := \theta _1 - \alpha \frac{d J(\theta _1)}{d\theta _1}
+!!</p>
+
+<p>Next:</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Example using easier function, J(theta 1)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Talk about alpha</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Linear regression model review</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />What is the derivative</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />New algorithm with the derivatives</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Cost function will always be a “bowl” function like the image</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Discuss Batch gradient descent using ALL training examples</li>
 </ul>
-
-<p>Do:</p>
-
-<ul>
-  <li>Generate random salts using a <em>Cryptographically Secure Pseudo-Random Number Generator</em> (<strong>CSPRNG</strong>)</li>
-  <li>Generate a new random unique salt for EACH password hashed</li>
-  <li>Generate LONG salts</li>
-</ul>
-
-<h1 id="salting-workflow">Salting Workflow</h1>
-
-<p><strong>Storing a Password:</strong></p>
-
-<ol>
-  <li>Generate super long salt with a CSPRNG</li>
-  <li>Prepend the salt to the user password and hash it</li>
-  <li>Save the salt and the hash in the database</li>
-</ol>
-
-<p><strong>Checking a Password:</strong></p>
-
-<ol>
-  <li>Get the salt and hash from the database</li>
-  <li>Prepend the salt to the submitted password and hash it</li>
-  <li>Compare the hashes. If they are equal, the password is correct</li>
-</ol>
-
-<p><strong>NOTE:</strong> Always always always (shall I add more always’??) hash on the server. Sometimes JavaScript isn’t enabled and a hash won’t work on the client-side. Also, no one else can access the server so it is ensured to be hashed (You can also hash on the client-side if you so choose)</p>
 
   </div>
   

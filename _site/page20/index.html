@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,998 +110,149 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/filters-joins-aggregations">
-        Filters, Joins, Aggregations, and All That: A Guide to Querying in SQL
+      <a href="/web-scraping">
+        Web scraping in node.js 101
       </a>
     </h1>
 
-    <span class="post-date">14 Aug 2014</span>
+    <span class="post-date">12 Mar 2018</span>
 
-    <p>We can use the <code class="highlighter-rouge">SELECT</code> statement in SQL to query data from a
-database. For example, we might be interested in finding
-all of the ingredients in the “Tomato Soup” recipe
-(from the
-recipes database described in the
-first post
-in this series).</p>
+    <p>Web scraping is a great way to create dynamic websites or to just be able to get data from sites without having access to their databases. In short, it is an easy method to get info from a site by going through the <strong>front end</strong> (what the user sees) HTML code.</p>
 
-<p>This query is non-trivial because this
-information is spread across three tables.
-As a first, step we could query for the recipe ID of this
-recipe with:</p>
+<p>To get started with web scraping you must know how a website is structured. If you right click on a page, and click inspect (on chrome), you can see the developer tools.<!--more--></p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">recipe_id</span>
-  <span class="k">FROM</span> <span class="n">recipes</span>
- <span class="k">WHERE</span> <span class="n">recipe_name</span><span class="o">=</span><span class="nv">"Tomato Soup"</span>
+<p><img src="https://i.snap.as/V8yrpGZ.png" alt="" /></p>
+
+<p>This shows you the structure of the HTML/CSS/JavaScript code as well as network performace, errors, security, and much much more.</p>
+
+<p>Now, let’s say I want to grab the first image that you see on twitter programatically in the JavaScript console.</p>
+
+<p>Well, I could right click on the image, click inspect, right click on the element in the dev tools, and copy the css selector.</p>
+
+<p><img src="https://i.snap.as/XNXJhXa.png" alt="" /></p>
+
+<p>Then I could do a <code class="highlighter-rouge">document.querySelector(&lt;&lt;SELECTOR&gt;&gt;).src</code> and that would give me the URL of the image I want, and I could use that on a web page, for example:</p>
+
+<p><img src="https://i.snap.as/QnJblUJ.png" alt="" /></p>
+
+<p>This IS web scraping! I was able to gather data (an image) from a website without having access to the database. But this is super tedious and long, so to actually webscrape more efficiently, I use Node.js + Puppeteer.</p>
+
+<p>If you don’t already know, <a href="https://nodejs.org/">Node.js</a> is a runtime enviornment that allows JavaScript to be run on the server side. And <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).</p>
+
+<p>Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running <code class="highlighter-rouge">tsc -v</code> works in the terminal, you’re good to go!</p>
+
+<p>Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a <code class="highlighter-rouge">command not found</code> or something related by running one of the following, I suggest that you look at this article on how to install Node.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm -v # should be 6.0.0 or higher
+$ node -v # should be 9.0.0 or higher
 </code></pre></div></div>
 
-<p>This says to take the <code class="highlighter-rouge">recipes</code> table and take the <code class="highlighter-rouge">recipe_id</code>
-column for all rows where the <code class="highlighter-rouge">recipe_name</code> column has a
-particular value. This query returns the table</p>
+<p>Great! Let’s start a new project and install the dependencies:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Given this recipe ID, we can get the ingredient IDs for the recipe
-using a similar query on the recipe-ingredients-mapping table:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ingredient_id</span>
-  <span class="k">FROM</span> <span class="n">recipe_ingredients</span>
- <span class="k">WHERE</span> <span class="n">recipe_id</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir Web-Scraping-101 &amp;&amp; cd Web-Scraping-101
+$ npm init # go through all defaults
+$ npm i puppeteer # the google npm scraping package
+$ tsc --init # initialize typescript
+$ npm i @types/puppeteer # type declarations
 </code></pre></div></div>
 
-<p>This returns</p>
+<p>Now open the folder in the text editor of your choice. Edit the <code class="highlighter-rouge">outDir</code> option in the <code class="highlighter-rouge">tsconfig.json</code> file to be <code class="highlighter-rouge">./build</code> and uncomment the line, so it looks like this:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>6</td>
-    </tr>
-  </tbody>
-</table>
+<p><img src="https://i.snap.as/y1kZn10.png" alt="" /></p>
 
-<p>Finally, we can find the ingredient names knowing their IDs:</p>
+<p>Create a new file in the root of the folder:</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ingredient_name</span>
-  <span class="k">FROM</span> <span class="n">ingredients</span>
- <span class="k">WHERE</span> <span class="n">ingredient_id</span><span class="o">=</span><span class="mi">3</span>
-    <span class="k">OR</span> <span class="n">ingredient_id</span><span class="o">=</span><span class="mi">6</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch app.ts
 </code></pre></div></div>
 
-<p>This returns:</p>
+<p>In <code class="highlighter-rouge">app.ts</code> add:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tomatoes</td>
-    </tr>
-    <tr>
-      <td>Milk</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="the-join-operator-in-sql">The JOIN Operator in SQL</h2>
-
-<p>Because our data is spread across three tables, it is cumbersome
-and error-prone to have to run multiple queries to find the information
-we want. We can avoid this by joining the tables together.</p>
-
-<p>When we join two tables on a column in SQL, it will create every
-possible combination of rows in the output table where the condition
-holds For example, if we joined <code class="highlighter-rouge">recipes</code> with <code class="highlighter-rouge">recipe_ingredients</code>
-on the recipe ID:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
-  <span class="k">FROM</span> <span class="n">recipes</span>
-  <span class="k">JOIN</span> <span class="n">recipe_ingredients</span>
-    <span class="k">ON</span> <span class="n">recipes</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">recipe_ingredients</span><span class="p">.</span><span class="n">recipe_id</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log("Twitter, here we come");
 </code></pre></div></div>
 
-<p>We get the table:</p>
+<p>Now, to <strong>run this</strong>, in terminal, write: <code class="highlighter-rouge">tsc &amp;&amp; node build/app.js</code></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-      <th>recipe_name</th>
-      <th>recipe_id</th>
-      <th>ingredient_id</th>
-      <th>amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>3</td>
-      <td>Grilled Cheese</td>
-      <td>3</td>
-      <td>5</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Grilled Cheese</td>
-      <td>3</td>
-      <td>7</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Tacos</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Tacos</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Tacos</td>
-      <td>1</td>
-      <td>3</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Tacos</td>
-      <td>1</td>
-      <td>4</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Tacos</td>
-      <td>1</td>
-      <td>5</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Tomato Soup</td>
-      <td>2</td>
-      <td>3</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Tomato Soup</td>
-      <td>2</td>
-      <td>6</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
+<p><strong>NOTE:</strong> <code class="highlighter-rouge">tsc</code> builds all TypeScript files into the outDir directory defined in the config file and <code class="highlighter-rouge">node</code> runs a single JavaScript file.</p>
 
-<p>This joined table includes the recipe names along with the recipe
-IDs for each recipe-ingredient pair.</p>
+<p>If you see <em>“Twitter, here we come”</em> appear in the terminal, you’ve got it working!</p>
 
-<p>Getting back to our example from above, we can compute the ingredient
-IDs for ‘Tomato Soup’ by joining <code class="highlighter-rouge">recipes</code> with <code class="highlighter-rouge">recipe_ingredients</code>
-on the recipe ID.</p>
+<p>Now, we will start to actually scrape using puppeteer.
+Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.ts</code> file:</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">recipe_ingredients</span><span class="p">.</span><span class="n">ingredient_id</span>
-  <span class="k">FROM</span> <span class="n">recipes</span>
-  <span class="k">JOIN</span> <span class="n">recipe_ingredients</span>
-    <span class="k">ON</span> <span class="n">recipes</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">recipe_ingredients</span><span class="p">.</span><span class="n">recipe_id</span>
- <span class="k">WHERE</span> <span class="n">recipes</span><span class="p">.</span><span class="n">recipe_name</span> <span class="o">=</span> <span class="s1">'Tomato Soup'</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">puppeteer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">puppeteer</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// import the npm package that we installed</span>
+
+<span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// the rest of the code must be enclosed in an `async` function to be able to `await` for results</span>
+  <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span> <span class="c1">// launches an "invisible" chromium browser</span>
+  <span class="kd">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span> <span class="c1">// takes the browser to a new tab (page)</span>
+  <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">goto</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://example.com</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// takes the page to a specific url</span>
+
+  <span class="c1">// Get the "viewport" of the page,</span>
+  <span class="c1">// as reported by the page.</span>
+  <span class="c1">// NOTE: Anything inside of the `evaluate` function is DOM manipulation.</span>
+  <span class="c1">// No variables outside of the evaluate function can go in, and none can come out without being returned inside of the return object.</span>
+  <span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="c1">// use DOM manipulation to access the width and height of the page</span>
+      <span class="c1">// if you want to get elements out of the DOM and into the node js code, return theme here</span>
+      <span class="na">width</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span>
+      <span class="na">height</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span>
+      <span class="na">deviceScaleFactor</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span>
+    <span class="p">};</span>
+  <span class="p">});</span>
+
+  <span class="c1">// print out the DOM data</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Dimensions:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
+
+  <span class="c1">// remember to close the broser (invisible chromium)</span>
+  <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="p">})();</span>
 </code></pre></div></div>
 
-<p>This returns:</p>
+<p>Please read through the commented code above to get a feel for what is going on ⬆.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>6</td>
-    </tr>
-  </tbody>
-</table>
+<p>Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.</p>
 
-<p>In the next section, we will show how we can also join with the
-<code class="highlighter-rouge">ingredients</code> table to directly get the ingredient names.</p>
+<p>First, edit the <code class="highlighter-rouge">await page.goto("https://example.com")</code> to be <code class="highlighter-rouge">await page.goto("https://twitter.com")</code></p>
 
-<p>Having to use the full table names repeatedly in a SQL query is
-cumbersome. SQL provides a convenient shorthand where
-we can give each table a nickname:</p>
+<p>Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-  <span class="k">FROM</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="n">a</span>
-  <span class="k">JOIN</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
- <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_name</span> <span class="o">=</span> <span class="s1">'Tomato Soup'</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span>
+  <span class="dl">"</span><span class="s2">#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div</span><span class="dl">"</span>
+<span class="p">);</span>
+<span class="c1">// the above returns the div for the middle column twitter feed</span>
 </code></pre></div></div>
 
-<p>This is the same query as before, but slightly less verbose.</p>
+<p>Here is an image of what that represents:</p>
 
-<h2 id="joining-multiple-tables-in-sql">JOINing Multiple Tables in SQL</h2>
+<p><img src="https://i.snap.as/Taoa3a3.png" alt="" /></p>
 
-<p>SQL allows us to join multiple tables for even more powerful queries.
-Getting back to our original example, we can directly find the ingredient
-names for the ingredients in ‘Tomato Soup’ by joining all three
-tables together:</p>
+<p>To get all of the images from the middle column, I ended up doing this for the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">ingredient_name</span>
-  <span class="k">FROM</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="n">a</span>
-  <span class="k">JOIN</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-  <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="k">c</span>
-    <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">ingredient_id</span>
- <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_name</span> <span class="o">=</span> <span class="nv">"Tomato Soup"</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">sources</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// an array of the links to each image</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div img</span><span class="dl">"</span>
+  <span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">img</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">sources</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">sources</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>As expected, this returns the table:</p>
+<p>Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tomatoes</td>
-    </tr>
-    <tr>
-      <td>Milk</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>What is great about SQL is that by joining tables together,
-we can ask very diverse questions about our data.
-For example, finding all the recipes that include ‘tomatoes’
-is just as straightforward:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_name</span>
-  <span class="k">FROM</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="n">a</span>
-  <span class="k">JOIN</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-  <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="k">c</span>
-    <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">ingredient_id</span>
- <span class="k">WHERE</span> <span class="k">c</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="nv">"tomatoes"</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dimensions</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>This returns:</p>
+<p>There you go! You’ve just scraped image data from a twitter feed. A challenge would be to take this data and integrate it into an express server so that when a user goes to the root site, they are presented with all of these images.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>recipe_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tacos</td>
-    </tr>
-    <tr>
-      <td>Tomato Soup</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="the-group-by-operator-in-sql">The GROUP BY Operator In SQL</h2>
-
-<p>The next important concept in SQL is aggregating rows.
-This is done with the <code class="highlighter-rouge">GROUP BY</code> command.</p>
-
-<p>Supposed for example that we wanted to find the number
-of ingredients in each recipe. We could do this by
-grouping the rows in the <code class="highlighter-rouge">recipe_ingredients</code> table by the
-recipe ID and counting the number or grouped rows:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">recipe_id</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="n">ingredient_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_ingredients</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">recipe_id</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">num_ingredients</span> <span class="k">DESC</span>
-</code></pre></div></div>
-
-<p>The code returns:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-      <th>num_ingredients</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>We can combine the <code class="highlighter-rouge">GROUP BY</code> and <code class="highlighter-rouge">JOIN</code> operators in a single query.
-To compute in addition the price of each recipe, we would need to figure
-out the price of each ingredient by joining with the ingredients table.
-This query would look like:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">recipe_id</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_ingredients</span><span class="p">,</span>
-         <span class="k">SUM</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">amount</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_price</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">as</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">as</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span>
-</code></pre></div></div>
-
-<p>This returns</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-      <th>num_ingredients</th>
-      <th>total_price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>5</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>2</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>2</td>
-      <td>7</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Similarly, if we want to make the table display recipe names,
-we could also JOIN with the recipes tables:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_name</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_ingredients</span><span class="p">,</span>
-         <span class="k">SUM</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">amount</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_price</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-    <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="k">c</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span>
-</code></pre></div></div>
-
-<p>This returns a nicer formated table:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_name</th>
-      <th>num_ingredients</th>
-      <th>total_price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tacos</td>
-      <td>5</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <td>Tomato Soup</td>
-      <td>2</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>Grilled Cheese</td>
-      <td>2</td>
-      <td>7</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Finally, as a shorthand, SQL allows you to
-refer to the columns in the <code class="highlighter-rouge">SELECT</code>
-clause by numbering</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_name</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_ingredients</span><span class="p">,</span>
-         <span class="k">SUM</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">amount</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_price</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-    <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="k">c</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span>
-</code></pre></div></div>
-
-<p>Some people consider this to be more elegant
-and less error prone.</p>
-
-<h2 id="aggregation-functions-in-sql">Aggregation Functions in SQL</h2>
-
-<p>As you saw above, SQL can apply different
-aggregation functions. This query demonstrates
-more of them:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="k">count</span><span class="p">,</span>
-       <span class="k">AVG</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="k">avg</span><span class="p">,</span>
-       <span class="k">SUM</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="k">sum</span><span class="p">,</span>
-       <span class="k">MIN</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="k">min</span><span class="p">,</span>
-       <span class="k">MAX</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="k">max</span><span class="p">,</span>
-       <span class="n">STDDEV</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="n">stddev</span><span class="p">,</span>
-       <span class="k">SUM</span><span class="p">(</span><span class="n">ingredient_price</span><span class="p">)</span> <span class="k">as</span> <span class="k">sum</span>
-  <span class="k">FROM</span> <span class="n">ingredients</span>
-</code></pre></div></div>
-
-<p>This returns</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>count</th>
-      <th>avg</th>
-      <th>sum</th>
-      <th>min</th>
-      <th>max</th>
-      <th>stddev</th>
-      <th>sum</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>7</td>
-      <td>2.2857</td>
-      <td>16</td>
-      <td>1</td>
-      <td>5</td>
-      <td>1.2777531299998797</td>
-      <td>16</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Note here that when you leave out the <code class="highlighter-rouge">GROUP BY</code> class, but include
-an aggregation function, SQL assumes that you want to group all
-rows together.</p>
-
-<p>You can find the full list of aggregation functions in MySQL
-<a href="http://dev.mysql.com/doc/refman/5.0/en/group-by-functions.html">here</a>.</p>
-
-<h2 id="the-having-operator-in-sql">The HAVING Operator in SQL</h2>
-
-<p>The <code class="highlighter-rouge">HAVING</code> clause in SQL is almost exactly like the <code class="highlighter-rouge">WHERE</code>
-clause, but filters the table after the aggregation has been
-performed.</p>
-
-<p>Suppose we wanted to find only recipes with 2 ingredients in it.
-We could use the <code class="highlighter-rouge">HAVING</code> clause:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">recipe_id</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="n">ingredient_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_ingredients</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">recipe_id</span>
-  <span class="k">HAVING</span> <span class="n">num_ingredients</span> <span class="o">=</span> <span class="mi">2</span>
-</code></pre></div></div>
-
-<p>This creates the table</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-      <th>num_ingredients</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>2</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>As you will see below, <code class="highlighter-rouge">HAVING</code> is just a convenient shorthand to
-avoid using a subquery.</p>
-
-<h2 id="subqueries-in-sql">Subqueries in SQL</h2>
-
-<p>A more challenging query would be to make a list of the number of
-ingredients, but only for recipes that include tomatoes.</p>
-
-<p>To do this, we first would need to find all the recipes which include
-tomatoes and then count the number of ingredients for each of those
-recipes.</p>
-
-<p>We could imagine doing this in two steps. First, we find the recipes
-that have tomatoes in it:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span>
-  <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-  <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
- <span class="k">WHERE</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="s1">'Tomatoes'</span>
-</code></pre></div></div>
-
-<p>This creates the table:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Next, we could joining this table with the ingredient count table
-from the query above to filter out the recipes that aren’t in this table.</p>
-
-<p>This leads us to the idea of subqueries. Because every SQL
-query returns a table, another SQL query can be used instead of a table
-inside of another SQL query.</p>
-
-<p>The final query is:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_name</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_ingredients</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-    <span class="k">JOIN</span> <span class="p">(</span>
-             <span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_id</span>
-             <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="k">c</span>
-             <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="n">d</span>
-             <span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">ingredient_id</span>
-             <span class="k">WHERE</span> <span class="n">d</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="s1">'Tomatoes'</span>
-         <span class="p">)</span> <span class="k">AS</span> <span class="n">e</span>
-      <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">recipe_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span>
-</code></pre></div></div>
-
-<p>As expected, this returns</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_name</th>
-      <th>num_ingredients</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tacos</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>Tomato Soup</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>What’s cool about SQL is that it is very flexible and can allow
-multiple subqueries to be nested together.</p>
-
-<h2 id="the-distinct-operator">The DISTINCT Operator</h2>
-
-<p>In SQL, <code class="highlighter-rouge">DISTINCT</code> operator can be used to find all of the unique
-rows.</p>
-
-<p>For example, to find all the recipes that include
-either beef or cheese, we could use the SQL query:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">recipe_name</span>
-  <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-  <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-  <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="k">c</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_id</span>
- <span class="k">WHERE</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="s1">'Cheese'</span>
-    <span class="k">OR</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="s1">'Beef'</span>
-</code></pre></div></div>
-
-<p>This creates</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Grilled Cheese</td>
-    </tr>
-    <tr>
-      <td>Tacos</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Note that here the <code class="highlighter-rouge">DISTINCT</code>
-keyword is required because otherwise two rows would
-be returned for tacos since they contain both
-cheese and beef.</p>
-
-<p>We can count the number of distinct recipes by
-putting the <code class="highlighter-rouge">COUNT</code> keyword outside the <code class="highlighter-rouge">DISTINCT</code>
-keyword:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">recipe_name</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_recipes</span>
-  <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-  <span class="k">JOIN</span> <span class="n">ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-  <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="k">c</span>
-    <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_id</span>
- <span class="k">WHERE</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="s1">'Cheese'</span>
-    <span class="k">OR</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_name</span> <span class="o">=</span> <span class="s1">'Beef'</span>
-</code></pre></div></div>
-
-<p>This returns:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>num_recipes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="the-order-by-operator-in-sql">The ORDER BY operator in SQL</h2>
-
-<p><code class="highlighter-rouge">ORDER BY</code> can be used to sort the output rows based on a particular
-column. For example, if we wanted to sort the ingredients by how
-expensive they are in descending order of price, we could run the
-query:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="o">*</span>
-    <span class="k">FROM</span> <span class="n">ingredients</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ingredient_price</span> <span class="k">DESC</span>
-</code></pre></div></div>
-
-<p>This returns</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_id</th>
-      <th>ingredient_name</th>
-      <th>ingredient_price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Beef</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Cheese</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Tomatoes</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Taco Shell</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Bread</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Lettuce</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Milk</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>If we wanted to sort columns of the same price alphabetically by name, we could
-use a similar query but perform a second sort based on the price:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="o">*</span>
-    <span class="k">FROM</span> <span class="n">ingredients</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ingredient_price</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">ingredient_name</span>
-</code></pre></div></div>
-
-<p>This creates the table:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_id</th>
-      <th>ingredient_name</th>
-      <th>ingredient_price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Beef</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Cheese</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Bread</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Taco Shell</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Tomatoes</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Lettuce</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Milk</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="the-limit-operator-in-sql">The LIMIT operator in SQL</h2>
-
-<p>We can use the <code class="highlighter-rouge">LIMIT</code> operator to limit the number of results returned
-by the query. For example, to get only the most expensive ingredient, we could use
-the query:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="o">*</span>
-    <span class="k">FROM</span> <span class="n">ingredients</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ingredient_price</span> <span class="k">DESC</span>
-   <span class="k">LIMIT</span> <span class="mi">1</span>
-</code></pre></div></div>
-
-<p>This returns just one result:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>ingredient_id</th>
-      <th>ingredient_name</th>
-      <th>ingredient_price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Beef</td>
-      <td>5</td>
-    </tr>
-  </tbody>
-</table>
-
-<h1 id="self-and-inequality-joins">Self AND Inequality Joins</h1>
-
-<p>The final concepts we will learn about is self and equality joins. As
-a concrete example, supposed that we wanted to compute the number
-of shared ingredients for all pairs of recipes.</p>
-
-<p>To compute this, we can join the ingredient-recipe mapping table
-with itself and select for rows that have the same ingredient.
-This will create a row for ever matching ingredient in every pair
-of recipes:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-     <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-</code></pre></div></div>
-
-<p>Note that we have to filter for <code class="highlighter-rouge">a.recipe_id != b.recipe_id</code> to avoid
-matching recipe with themselves. Joins with an inequality
-condition are unsurprisingly called inequality joins.</p>
-
-<p>This returns</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-      <th>recipe_id</th>
-      <th>ingredient_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>3</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>1</td>
-      <td>5</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>This table shows the recipe 1 (“Tacos”) and recipe 2 (“Tomato Soup”)
-share ingredient 3 (“Tomatoes”). Similarly, recipe 1 (“Tacos”) and
-recipe 3 (“Grilled Cheese”) share ingredient 5 (“Cheese”).</p>
-
-<p>One issue with this query is that it matches every pair of ingredients
-twice. To avoid this, we can modify the query to
-return only rows when the first recipe ID is less than
-the second.</p>
-
-<p>Finally, we can can aggregate over the recipe IDs
-to compute the count of shared ingredients:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span>
-         <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">num_shared</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-     <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-</code></pre></div></div>
-
-<p>As expected, this returns</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_id</th>
-      <th>recipe_id</th>
-      <th>num_shared</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>We can include the recipe names by also joining with the recipes
-table:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_name</span> <span class="k">AS</span> <span class="n">recipe_1</span><span class="p">,</span>
-         <span class="n">d</span><span class="p">.</span><span class="n">recipe_name</span> <span class="k">AS</span> <span class="n">recipe_2</span><span class="p">,</span>
-         <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">num_shared</span>
-    <span class="k">FROM</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">a</span>
-    <span class="k">JOIN</span> <span class="n">recipe_ingredients</span> <span class="k">AS</span> <span class="n">b</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-     <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">ingredient_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">ingredient_id</span>
-    <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="k">c</span>
-      <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">recipe_id</span>
-    <span class="k">JOIN</span> <span class="n">recipes</span> <span class="k">AS</span> <span class="n">d</span>
-      <span class="k">ON</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">recipe_id</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">recipe_id</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">recipe_id</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">recipe_1</span><span class="p">,</span> <span class="n">recipe_2</span>
-</code></pre></div></div>
-
-<p>This returns:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>recipe_1</th>
-      <th>recipe_2</th>
-      <th>num_shared</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Tacos</td>
-      <td>Grilled Cheese</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>Tacos</td>
-      <td>Tomato Soup</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>From these examples, I hope you see that the simple SQL operators
-can be combined to perform very powerful queries.</p>
+<p>Thanks for reading!</p>
 
   </div>
   

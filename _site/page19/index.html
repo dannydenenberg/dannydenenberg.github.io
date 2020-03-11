@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,30 +110,59 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/about-this-site">
-        About this site.
+      <a href="/squeeze-theorem">
+        A proof of the Squeeze Theorem (and why I like it)
       </a>
     </h1>
 
-    <span class="post-date">04 Aug 2015</span>
+    <span class="post-date">15 Apr 2018</span>
 
-    <p><strong>All math on dannydenenberg.com is rendered using <a href="https://www.mathjax.org/">MathJax</a></strong></p>
+    <p><em>An intuitive explanation of an awesome theorem.</em></p>
+<p>While I was studying calculus, I came across this statement:</p>
+<p>!!\lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta}=1!!</p>
+<p>This amazed my because of the fact that sin of 0 is 0, so with substitution of theta in the fraction next to the limit, it would end up as 0/0 or undefined. Now, I had already studied limits a bit and knew about <a href="https://dannydenenberg.com/lhopitals-rule/">l’hopital’s rule</a>. So, I proceeded to take the derivative of the top and bottom of the fraction with respect to theta and checked out what I got. This got me to the expected answer of 1/1 = 1 because the derivative of sin(x) is cos(x) and cos(0) is 1. <!--more-->Now this was all fine and dandy, but as I did more research into the limit listed above, I found a theorem called The Squeeze Theorem which I thought was a much more fun way to solve this same problem. </p>
 
-<p>Here’s some inline $5x=33x^2-8\pi$ math.</p>
+<p>This article is my shot at fully explaining the proof that accompanies the limit shown above using the Squeeze Theorem.</p>
 
-<p>Here’s some display math:
-!!
-\int^{88}_\infty \frac{x^2}{\pi^4 x} \dot dx = 4
-!!</p>
+<h2 id="the-proof">The Proof</h2>
 
-<ul>
-  <li>To write math inline, enclose the math in <code class="highlighter-rouge">$</code> to start and <code class="highlighter-rouge">$</code> to end. Ex: <code class="highlighter-rouge">$a=\frac{F}{m}$</code></li>
-  <li>To write display math, enclose the math in double exclamation marks like so: <code class="highlighter-rouge">!!a=\frac{F}{m}!!</code>
-    <ul>
-      <li>Why not 2 dollar signs you ask? It turns out that before MathJax can even get to the math, if you are using 2 dollar signs the <strong>markdown parser turns it into a script tag</strong>……SO not ideal 🙄.</li>
-    </ul>
-  </li>
-</ul>
+<p>To begin, take a look at this picture of a few triangles drawn using different points around a unit circle. If you don’t already know, a unit circle is one with a radius of 1. The point A is at (0,0), point C is at some point on the edge of the circle, point D is at (1,0), and point E is at some point (1, x).</p>
+
+<p><img src="https://i.snap.as/ceBMvID.png" alt="" /></p>
+
+<p>Using this visual, let us compare the <strong>areas</strong> of two triangles and a sector.</p>
+
+<p>!!△ACD \le ⌔ACD \le △AED!!</p>
+
+<p>We can see that this is true by just looking at the graph. Next, I will define the values of the <strong>areas</strong>. Note that theta will refer to the angle made on the unit circle with each of the shapes (the bottom left angle of the triangle or sector).</p>
+
+<p>!!\begin{array}{c}{\triangle ACD=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \sin \theta=\frac{\sin \theta}{2}} \\ {⌔ACD=\frac{1}{2} r^{2} \theta=\frac{1}{2} \cdot 1^{2} \cdot \theta=\frac{\theta}{2}} \\ {\triangle AED=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \tan \theta=\frac{\tan \theta}{2}}\end{array}!!</p>
+
+<p>Just FYI, the hight of triangle △AED is tan(x) because tan(x) is opposite over adjacent and adjacent is 1, so it is really just <strong>the side opposite the angle</strong>, which is the hight. (That confused me at first too 😂)</p>
+
+<p>Now that we have this, we can re-compare (is that a word?) the areas using actual values.</p>
+
+<p>!!\frac{\sin \theta}{2} \leq \frac{\theta}{2} \leq \frac{\tan \theta}{2}!!</p>
+<p>Next, I am going to perform a set of operation to all of the elements in the inequality. This is legal as it preserves the <em>truthfulness</em> of the inequality like applying the same operation to each side of an equals sign preserves the equality.</p>
+
+<p>First, I will multiply each element by 2.</p>
+
+<p>!!\sin \theta \leq \theta \leq \tan \theta!!</p>
+
+<p>Second, I will divide by sin(𝜃).</p>
+<p>!!1 \leq \frac{\theta}{\sin \theta} \leq \frac{1}{\cos \theta}!!</p>
+
+<p>Finally, I will take the reciprocal of each.</p>
+<p>!!1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta!!</p>
+
+<p>These reciprocals will get us to the final result that we want. All we have to do now is take the limit as listed at the top and analyze the results.</p>
+<p>!!\begin{array}{c}{\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta\right]} \\ {\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq 1\right]} \\ {1 \geq \lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta} \geq 1}\end{array}!!</p>
+
+<p>As you can most likely see (I highlighted it), by substitution of the limit value into each element of the inequality, we get 1 is greater than or equal to the limit of sin theta over theta as theta approaches 0 which is greater than or equal to 1.</p>
+<p>Because we know this:</p>
+<p>!!\begin{array}{c}{\text {if}} \\ {1 \geq x \geq 1} \\ {\text {then,}} \\{x=1}\end{array}!!</p>
+
+<p>Now we can say that the limit of sin of theta over theta as theta approaches 0 <strong>has to be 1</strong> because of what I just stated above. Kinda cool, right?</p>
 
   </div>
   

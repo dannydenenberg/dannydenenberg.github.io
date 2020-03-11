@@ -58,7 +58,7 @@
   />
 
   <title>
-     Danny &middot; Singer, open-source dev, native Omahan
+     Danny Denenberg &middot; Singer, open-source dev, native Omahan
     
   </title>
 
@@ -88,7 +88,7 @@
     <div class="container content">
       <div class="masthead">
         <h3 class="masthead-title">
-          <a href="/" title="Home">Danny</a>
+          <a href="/" title="Home">Danny Denenberg</a>
 
            &nbsp;&nbsp;&nbsp;<small
             ><a href="/about/">About</a></small
@@ -110,74 +110,338 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/cron-github">
-        Automating Backups with Cron & GitHub
+      <a href="/recursion">
+        Recursive programming
       </a>
     </h1>
 
-    <span class="post-date">24 May 2018</span>
+    <span class="post-date">14 Dec 2018</span>
 
-    <p>Back when I was using <a href="https://ghost.org/">Ghost</a> as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.</p>
+    <p>Let’s begin with the definition of recursion: “A function is recursive if it is defined in terms of itself”.</p>
 
-<p>Being me, I found a <em>hacky</em> way around paying.</p>
+<p>Or, in other words, a function is recursive if it calls itself.</p>
 
-<p>I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. <!--more--></p>
+<p>The classic math example is the factorial function. The factorial of a number is the product of all whole numbers below it down to 1. This can also be restated as: the factorial of a number is itself multiplied with the factorial of itself minus one. The factorial of 0 is 1. The factorial function is denoted by an exclamation mark.</p>
 
-<p>To do this, make sure git is installed on your Linux/Unix system.</p>
+<p>!!0!=1!! !!n!=n\times (n-1)! !!</p>
 
-<p>Then set your username and email in the git preferences through the terminal.</p>
+<p>Here is the factorial function for the first 5 numbers (0, 1, 2, 3, 4):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
-git config --global user.email "MY_NAME@example.com"
+<p>!!
+3!=3\times (3-1)!=3\times 2!!
+!!2!=2\times (2-1)!=2\times 1 !!
+!!1!=1\times (1-1)!=1\times 1!!
+!!0!=1
+!!</p>
+
+<p>So, because \( 0!=1\):</p>
+
+<p>Recursive function have a <strong>base case</strong> and a <strong>general case</strong>. The base case typically returns a value but <em>always</em> doesn’t call the enclosed function. The general case calls the enclosed function (itself). Here is the previously discussed factorial function written in Typescript (so you can see the parameter and return types):</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
+  <span class="c1">// base case: 0! = 1</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="c1">// general case, uses a call to itself</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
+<p>And here is the factorial function programmed iteratively (with loops), not recursively:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">solution</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">solution</span> <span class="o">*=</span> <span class="nx">i</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">solution</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
+<p>Take a minute to go through both programs, find how they differ, and try to figure out how the recursive implementation works (that’s how I first got my “Oh! I understand”).</p>
 
-<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
+<p>For now, we are going to backtrack (no pun intended) and take a look at a super simple function called <code class="highlighter-rouge">countDownFrom</code>. This function takes a positive integer as the parameter and counts down to 0 (exluding 0). So if you enter <code class="highlighter-rouge">countDownFrom(5)</code>, it will print:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
-<span class="nb">cd</span> /home/mybackupsrepo <span class="c"># go to the backups repo</span>
-git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <span class="nt">-m</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> git push origin master <span class="c"># commit, push</span>
-<span class="nb">sudo rm</span> <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+4
+3
+2
+1
 </code></pre></div></div>
 
-<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
+<p>Here is the iterative implementation (Javascript):</p>
 
-<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
-
-<p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># crontab -e</span>
-<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
-<span class="nv">MAILTO</span><span class="o">=</span>root@example.com
-<span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-
-<span class="c"># For details see man 4 crontabs</span>
-
-<span class="c"># Example of job definition:</span>
-<span class="c"># .---------------- minute (0 - 59)</span>
-<span class="c"># |  .------------- hour (0 - 23)</span>
-<span class="c"># |  |  .---------- day of month (1 - 31)</span>
-<span class="c"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
-<span class="c"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
-<span class="c"># |  |  |  |  |</span>
-<span class="c"># *  *  *  *  * user-name  command to be executed</span>
-
-<span class="c"># backup using the rsbu program to the internal 4TB HDD and then 4TB external</span>
-01 01 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/rsbu <span class="nt">-vbd1</span> <span class="p">;</span> /usr/local/bin/rsbu <span class="nt">-vbd2</span>
-
-<span class="c"># Set the hardware clock to keep it in sync with the more accurate system clock</span>
-03 05 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /sbin/hwclock <span class="nt">--systohc</span>
-
-<span class="c"># Perform monthly updates on the first of the month</span>
-<span class="c"># 25 04 1 * * /usr/bin/dnf -y update</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">countDownFrom</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
+
+<p>Pretty simple and straightforeward, right?!
+Now let’s take a look at the recursive solution:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">countDownFrom</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// base case, if n is 0, end the function call</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="c1">// general case.</span>
+  <span class="c1">// print the number and make a call for n-1</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">countDownFrom</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To figure out exactly how this function works, we will trace each call using a table. Here is a trace table for the call <code class="highlighter-rouge">countDownFrom(3)</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Call Number</th>
+      <th>Function Call</th>
+      <th>Console Output</th>
+      <th>n = 0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>countDownFrom(3)</td>
+      <td>3</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>countDownFrom(2)</td>
+      <td>2</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>countDownFrom(1)</td>
+      <td>1</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>countDownFrom(0)</td>
+      <td> </td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This tracing method also shows us the call stack after the function was executed. The call stack is a <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">Stack</a> (data structure) that function calls get pushed (added) on to after they are called. Stacks are a list of things that can be <em>pushed</em> to or <em>popped</em> from. A push adds something to the end of the list and a pop takes that last thing off. Picture a stack like a stack of plates. You can put one on top of the other, but you can’t just take off the bottom one. You first have to take off the top ones or else the stack will collapse. So, because stacks have LIFO (Last In First Out) priority, the most recent function called will ALWAYS be the first to return a value (returning void/nothing counts as a return). When the functions in a recursive call begin to return values and get popped off of the call stack, it is called unwinding. So, the actual FULL (including unwinding) function trace for <code class="highlighter-rouge">countDownFrom(3)</code> would be:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Call Number</th>
+      <th>Function Call</th>
+      <th>Console Output</th>
+      <th>n = 0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>countDownFrom(3)</td>
+      <td>3</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>countDownFrom(2)</td>
+      <td>2</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>countDownFrom(1)</td>
+      <td>1</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>countDownFrom(0)</td>
+      <td> </td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>(3)</td>
+      <td>countDownFrom(1)</td>
+      <td> </td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>(2)</td>
+      <td>countDownFrom(2)</td>
+      <td> </td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>(1)</td>
+      <td>countDownFrom(3)</td>
+      <td> </td>
+      <td>FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you are interested, here is the trace table for the call <code class="highlighter-rouge">factorial(4)</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Call Number</th>
+      <th>Function Call</th>
+      <th>n = 0</th>
+      <th>Result</th>
+      <th>Return Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>factorial(4)</td>
+      <td>FALSE</td>
+      <td>4 * factorial(3)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>factorial(3)</td>
+      <td>FALSE</td>
+      <td>3 * factorial(2)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>factorial(2)</td>
+      <td>FALSE</td>
+      <td>2 * factorial(1)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>factorial(1)</td>
+      <td>FALSE</td>
+      <td>1 * factorial(0)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>factorial(0)</td>
+      <td>TRUE</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>(4)</td>
+      <td>factorial(1)</td>
+      <td>FALSE</td>
+      <td>1 * 1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>(3)</td>
+      <td>factorial(2)</td>
+      <td>FALSE</td>
+      <td>2 * 1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>(2)</td>
+      <td>factorial(3)</td>
+      <td>FALSE</td>
+      <td>3 * 2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>(3)</td>
+      <td>factorial(4)</td>
+      <td>FALSE</td>
+      <td>4 * 6</td>
+      <td>24</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The last 5 rows represent the unwinding (call numbers in parenthesis). Row 5 is when the base case was reached (it returned 1 because the input was 0 and the factorial of 0 is 1).</p>
+
+<h2 id="an-interesting-example">An Interesting Example</h2>
+
+<p>My uncle gave me an interesting problem one time: “create a function to tell if a number is even or odd without using the modulus operator”. I came up with a set of functions that uses recursion to bounce a number back and forth until it reaches zero, then the function it lands on when it is at zero returns true or false (even or odd).</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">odd</span><span class="p">(</span><span class="nx">n</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">even</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">even</span><span class="p">(</span><span class="nx">n</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">odd</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you call <code class="highlighter-rouge">odd(3)</code> it will return true. <code class="highlighter-rouge">odd(4)</code> returns false. <code class="highlighter-rouge">even(3)</code> returns false. <code class="highlighter-rouge">even(4)</code> returns true!</p>
+
+<p>It’s probably my favorite set of recursive functions because of its simplicity and sheer elegance. Implement it in whatever language you want. It works!</p>
+
+<h2 id="benefits-and-drawbacks">Benefits and Drawbacks</h2>
+
+<p>When figuring out a solution to a math problem that is inherently recursive, the recursive solution is typically the simplest to implement. Recursive solutions are often more elegant and use less code than iterative solutions.</p>
+
+<p><strong>Note:</strong> ANY, yes ANY recursive program/function can be rewritten iteratively (although it is, at times, more difficult to find than the iterative algorithm).</p>
+
+<p>The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment’s largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a <code class="highlighter-rouge">StackOverflow</code> error will be thrown.</p>
+
+<p>Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.</p>
+
+<hr />
+
+<p>Here is one of <strong>my favorite coding problems</strong> with a nice recursive solution. Please note that it is a more advanced problem that requires several recursive helper functions to solve. <strong>If I were you, I would go through some <a href="https://codingbat.com/java">Javabat</a> recursive problems before I take a whack at this doozy</strong>. I will include the code after the problem statement.</p>
+
+<h2 id="island-on-an-island">Island on an Island</h2>
+
+<p>A satellite photograph displays a section of the South Pacific Ocean and various islands. Some islands contain lakes within the island, and some of these lakes have an island in that lake. Write a program to count the number of islands which have an island within that island’s lake. No island will touch the border of the photograph. No island will have more than one lake. No lake will have more than one island.</p>
+
+<p><strong>Input:</strong> This first line of the file contains two integers indicating the height and width of the map. The next height number of lines contain one row of data for the map represented as characters ‘~’ for water and ‘*’ for land. No map is larger than 80 x 80.</p>
+
+<p>Your goal is to output the number of islands which are surrounded by water within a bigger island. A square of land is connected to another square if they are adjacent in directions, north, east, south or west. (left, right, up, down)</p>
+
+<p><strong>Output:</strong> The number of islands contained within an island.</p>
+
+<p>Sample Input:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20 30
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~********~~~~~~~********~~~~
+~~~~****~~~~~~~~~~**~~*~**~~~~
+~~~~*~~~*~~~~~~~~~**~~~~**~~~~
+~~~~*~~~*~~~~~~~~~********~~~~
+~~~~~~~*~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~***~~~~~~**********~~~~~~~~~~
+~*~*~~~~~~*~~~~~~~~*~~~~~~~~~~
+~***~~~~~~*~~****~~*~~~~*****~
+~~~~~~~~~~*~~*~~*~~*~~~~*~~~*~
+~~******~~*~~~~~~~~*~~~~**~~*~
+~~*~~~**~~**********~~~***~~*~
+~~*~*~~*~~~~~~~~~~~~~~**~~~~*~
+~~*~~~~*~~~~~~*********~~~*~*~
+~~*~~***~~~~~~*~~~~~~~~~***~*~
+~~*~~*~~~~~~~~***~~~~~~~~~~~*~
+~~****~~~~~~~~~~*************~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</code></pre></div></div>
+
+<p>Sample Output: <code class="highlighter-rouge">3</code>.</p>
+
+<p>And…..here is the code I used to solve the problem (JavaScript):</p>
+
+<iframe width="100%" height="300" src="//jsfiddle.net/denenberg/5nr6w4mg/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
 
   </div>
   
