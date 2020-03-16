@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-03-11T16:53:05-05:00</updated>
+ <updated>2020-03-15T20:02:28-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
@@ -13,129 +13,9 @@
 
  
  <entry>
-   <title>Golang presentation tool usage</title>
-   <link href="http://localhost:4000/golang-present-tool"/>
-   <updated>2020-03-11T00:00:00-05:00</updated>
-   <id>http://localhost:4000/present-go</id>
-   <content type="html">&lt;p&gt;So, you want to create awesome presentations that look like this?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/goods/gopresentpic.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;First make sure that you have the &lt;a href=&quot;https://go.dev/&quot;&gt;Go programming language&lt;/a&gt; installed on your system.&lt;/p&gt;
-
-&lt;p&gt;On a Mac, it’s as easy as &lt;code class=&quot;highlighter-rouge&quot;&gt;brew install go&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Next, set your GOPATH and make public the folder where your installed Go binaries will go:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ GOPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Users/danny/go&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# public go path&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GOPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# binaries&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally, install (by way of &lt;code class=&quot;highlighter-rouge&quot;&gt;go get ...&lt;/code&gt;) the present binary to be able to locally run your presentations.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;go get &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; golang.org/x/tools/cmd/present
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This command will install in your &lt;code class=&quot;highlighter-rouge&quot;&gt;$GOPATH/bin&lt;/code&gt; folder, the executable binary that runs the presentations.&lt;/p&gt;
-
-&lt;p&gt;To check that the binary is working properly, type &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; as a command into your terminal and it should output something close to &lt;code class=&quot;highlighter-rouge&quot;&gt;2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;And, if you open your web browser to that specified port (in this case &lt;code class=&quot;highlighter-rouge&quot;&gt;http://127.0.0.1:3999&lt;/code&gt;), you should see a landing page like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/goods/presenthomepage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is a page displaying the brother folders from the one you ran the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; command in.&lt;/p&gt;
-
-&lt;p&gt;Now, create a file in your current folder with the extension &lt;code class=&quot;highlighter-rouge&quot;&gt;.slide&lt;/code&gt; and put at the top of the file, this information (of course, with your corresponding unique info):&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Title of document
-Subtitle of document
-15:04 2 Jan 2006
-Tags: foo, bar, baz
-&amp;lt;blank line&amp;gt;
-Author Name
-Job title, Company
-joe@example.com
-http://url/
-@twitter_name
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the date may be written without a time prepended. Also, multiple presenters may be specified, simply separate them by blank lines and then put their corresponding info.&lt;/p&gt;
-
-&lt;p&gt;Now, whenever you want to run your presentation, simply run the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; command in the folder containing your &lt;code class=&quot;highlighter-rouge&quot;&gt;*.slide&lt;/code&gt; file and select it on the webpage the present command sends you to.&lt;/p&gt;
-
-&lt;p&gt;After the specified presenters, each of the slides/sections are put separated by blank lines. Following is an example slide:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide or section (must have asterisk)
-
-Some Text
-
-** Subsection
-
-- bullets
-- more bullets
-- a bullet with
-
-*** Sub-subsection
-
-Some More text
-
-  Preformatted text
-  is indented (however you like)
-
-Further Text, including invocations like:
-
-.code x.go /^func main/,/^}/
-.play y.go
-.image image.jpg
-.background image.jpg
-.iframe http://foo
-.link http://foo label
-.html file.html
-.caption _Gopher_ by [[https://www.instagram.com/reneefrench/][Renée French]]
-
-Again, more text
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.code&lt;/code&gt; function injects source code from a file by injecting them as HTML-escaped &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks.
-Any line in the program ending with the four characters &lt;code class=&quot;highlighter-rouge&quot;&gt;OMIT&lt;/code&gt; is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.code test.go /START OMIT/,/END OMIT/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With some example contents of &lt;code class=&quot;highlighter-rouge&quot;&gt;test.go&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;coolFunction&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;// START OMIT&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;see_mee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;great&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;// END OMIT&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And the slide only gets this:&lt;/p&gt;
-
-&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;see_mee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;great&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The information following a &lt;code class=&quot;highlighter-rouge&quot;&gt;.image&lt;/code&gt; function can be a file path OR a url.&lt;/p&gt;
-
-&lt;p&gt;Parts of the file that begin with a &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; (colon) are presenter notes.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide
-
-Some Text
-
-: Presenter notes (first paragraph)
-: Presenter notes (subsequent paragraph(s))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For other cool features and functionality, visit the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; &lt;a href=&quot;https://pkg.go.dev/golang.org/x/tools/present?tab=doc&quot;&gt;package homepage&lt;/a&gt;.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
    <title>How hash functions work</title>
    <link href="http://localhost:4000/how-hash-functions-work"/>
-   <updated>2020-03-04T00:00:00-06:00</updated>
+   <updated>2020-03-12T00:00:00-05:00</updated>
    <id>http://localhost:4000/hash-function</id>
    <content type="html">&lt;p&gt;A hash function is a way to &lt;strong&gt;tell something where to go&lt;/strong&gt;.&lt;/p&gt;
 
@@ -400,6 +280,128 @@ Some Text
 &lt;p&gt;$j$ runs through the integers $0,1,2…,m-1$ and all possible locations are traced.&lt;/p&gt;
 
 &lt;p&gt;The most reasonable distribution of $g(k)$ values occurs when both $m$ and $m-1$ are prime (twin primes).&lt;/p&gt;
+
+&lt;p&gt;In addition to the recommended restrictions on the values of $m$ and $m-1$, m should not be a power of base $b$, where $k$ is represented as $k_b$ ($k$ is a number in base $b$), because $(\textrm{mod}\ m)$ would always return the last couple digits of the number and will cluster as $m$ continues to increase in size.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Golang presentation tool usage</title>
+   <link href="http://localhost:4000/golang-present-tool"/>
+   <updated>2020-03-11T00:00:00-05:00</updated>
+   <id>http://localhost:4000/present-go</id>
+   <content type="html">&lt;p&gt;So, you want to create awesome presentations that look like this?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/goods/gopresentpic.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;First make sure that you have the &lt;a href=&quot;https://go.dev/&quot;&gt;Go programming language&lt;/a&gt; installed on your system.&lt;/p&gt;
+
+&lt;p&gt;On a Mac, it’s as easy as &lt;code class=&quot;highlighter-rouge&quot;&gt;brew install go&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next, set your GOPATH and make public the folder where your installed Go binaries will go:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ GOPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Users/danny/go&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# public go path&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GOPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# binaries&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, install (by way of &lt;code class=&quot;highlighter-rouge&quot;&gt;go get ...&lt;/code&gt;) the present binary to be able to locally run your presentations.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;go get &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; golang.org/x/tools/cmd/present
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This command will install in your &lt;code class=&quot;highlighter-rouge&quot;&gt;$GOPATH/bin&lt;/code&gt; folder, the executable binary that runs the presentations.&lt;/p&gt;
+
+&lt;p&gt;To check that the binary is working properly, type &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; as a command into your terminal and it should output something close to &lt;code class=&quot;highlighter-rouge&quot;&gt;2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;And, if you open your web browser to that specified port (in this case &lt;code class=&quot;highlighter-rouge&quot;&gt;http://127.0.0.1:3999&lt;/code&gt;), you should see a landing page like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/goods/presenthomepage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is a page displaying the brother folders from the one you ran the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; command in.&lt;/p&gt;
+
+&lt;p&gt;Now, create a file in your current folder with the extension &lt;code class=&quot;highlighter-rouge&quot;&gt;.slide&lt;/code&gt; and put at the top of the file, this information (of course, with your corresponding unique info):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Title of document
+Subtitle of document
+15:04 2 Jan 2006
+Tags: foo, bar, baz
+&amp;lt;blank line&amp;gt;
+Author Name
+Job title, Company
+joe@example.com
+http://url/
+@twitter_name
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the date may be written without a time prepended. Also, multiple presenters may be specified, simply separate them by blank lines and then put their corresponding info.&lt;/p&gt;
+
+&lt;p&gt;Now, whenever you want to run your presentation, simply run the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; command in the folder containing your &lt;code class=&quot;highlighter-rouge&quot;&gt;*.slide&lt;/code&gt; file and select it on the webpage the present command sends you to.&lt;/p&gt;
+
+&lt;p&gt;After the specified presenters, each of the slides/sections are put separated by blank lines. Following is an example slide:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide or section (must have asterisk)
+
+Some Text
+
+** Subsection
+
+- bullets
+- more bullets
+- a bullet with
+
+*** Sub-subsection
+
+Some More text
+
+  Preformatted text
+  is indented (however you like)
+
+Further Text, including invocations like:
+
+.code x.go /^func main/,/^}/
+.play y.go
+.image image.jpg
+.background image.jpg
+.iframe http://foo
+.link http://foo label
+.html file.html
+.caption _Gopher_ by [[https://www.instagram.com/reneefrench/][Renée French]]
+
+Again, more text
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.code&lt;/code&gt; function injects source code from a file by injecting them as HTML-escaped &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks.
+Any line in the program ending with the four characters &lt;code class=&quot;highlighter-rouge&quot;&gt;OMIT&lt;/code&gt; is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.code test.go /START OMIT/,/END OMIT/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With some example contents of &lt;code class=&quot;highlighter-rouge&quot;&gt;test.go&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;coolFunction&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// START OMIT&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;see_mee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;great&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// END OMIT&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And the slide only gets this:&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;see_mee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;great&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The information following a &lt;code class=&quot;highlighter-rouge&quot;&gt;.image&lt;/code&gt; function can be a file path OR a url.&lt;/p&gt;
+
+&lt;p&gt;Parts of the file that begin with a &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; (colon) are presenter notes.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide
+
+Some Text
+
+: Presenter notes (first paragraph)
+: Presenter notes (subsequent paragraph(s))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For other cool features and functionality, visit the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; &lt;a href=&quot;https://pkg.go.dev/golang.org/x/tools/present?tab=doc&quot;&gt;package homepage&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  

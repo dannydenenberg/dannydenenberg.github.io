@@ -116,3 +116,5 @@ In the above function, $(g(k),m)=1$. Our new probing sequence is thus
 $j$ runs through the integers $0,1,2...,m-1$ and all possible locations are traced.
 
 The most reasonable distribution of $g(k)$ values occurs when both $m$ and $m-1$ are prime (twin primes).
+
+In addition to the recommended restrictions on the values of $m$ and $m-1$, m should not be a power of base $b$, where $k$ is represented as $k_b$ ($k$ is a number in base $b$), because $(\textrm{mod}\ m)$ would always return the last couple digits of the number and will cluster as $m$ continues to increase in size.

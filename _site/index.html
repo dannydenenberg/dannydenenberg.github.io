@@ -110,125 +110,278 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/golang-present-tool">
-        Golang presentation tool usage
+      <a href="/how-hash-functions-work">
+        How hash functions work
       </a>
     </h1>
 
-    <span class="post-date">11 Mar 2020</span>
+    <span class="post-date">12 Mar 2020</span>
 
-    <p>So, you want to create awesome presentations that look like this?</p>
+    <p>A hash function is a way to <strong>tell something where to go</strong>.</p>
 
-<p><img src="/goods/gopresentpic.png" alt="" /></p>
+<p>Here is the function for reference:</p>
 
-<p>First make sure that you have the <a href="https://go.dev/">Go programming language</a> installed on your system.</p>
+<p>!!h(k) \equiv k\ (\textrm{mod}\ m)!!</p>
 
-<p>On a Mac, it’s as easy as <code class="highlighter-rouge">brew install go</code>.</p>
+<p>If you are confused about the $(\textrm{mod}\ m)$ part, I would recommend brushing up on <a href="https://en.wikipedia.org/wiki/Modular_arithmetic">modular arithmetic</a>. It’s not bad at all!</p>
 
-<p>Next, set your GOPATH and make public the folder where your installed Go binaries will go:</p>
+<p>Now, back to the function.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ GOPATH</span><span class="o">=</span><span class="s2">"/Users/danny/go"</span> <span class="c"># public go path</span>
-<span class="nv">$ PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$GOPATH</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span> <span class="c"># binaries</span>
-</code></pre></div></div>
+<p>Let me define all of the variables for you. $h$ is the return value (think y=x). $k$ is the object, or ‘thing’ which the function is telling where to go (hence it is the input to the function). And $m$ is the modulus we are working in such that $0 \le h(k) \lt m$, making $h(k)$ the least positive residue of $k$ modulo $m$</p>
 
-<p>Finally, install (by way of <code class="highlighter-rouge">go get ...</code>) the present binary to be able to locally run your presentations.</p>
+<p>Lets say we had some parking lot with 10 spaces.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>go get <span class="nt">-u</span> golang.org/x/tools/cmd/present
-</code></pre></div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Space</th>
+      <th>Car</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-<p>This command will install in your <code class="highlighter-rouge">$GOPATH/bin</code> folder, the executable binary that runs the presentations.</p>
+<p>Currently there are no cars in the lot, but if I were to put one into spot 4 and 8, for example, it would look like this:</p>
 
-<p>To check that the binary is working properly, type <code class="highlighter-rouge">present</code> as a command into your terminal and it should output something close to <code class="highlighter-rouge">2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999</code></p>
+<table>
+  <thead>
+    <tr>
+      <th>Space</th>
+      <th>Car</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>🚙</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>🚖</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-<p>And, if you open your web browser to that specified port (in this case <code class="highlighter-rouge">http://127.0.0.1:3999</code>), you should see a landing page like so:</p>
+<p>Okay, in this situation, the parking lot owner, Sol, (somehow) knows that he won’t ever have more than ten cars in his lot at the same time. Sol also wants to make it easy for people to know where to park and to know where their car is when they need to retrieve it.</p>
 
-<p><img src="/goods/presenthomepage.png" alt="" /></p>
+<p>Naturally 🙄, Sol uses a hash function to automate this process.</p>
 
-<p>This is a page displaying the brother folders from the one you ran the <code class="highlighter-rouge">present</code> command in.</p>
+<p>In his hash function, the output $h$ is the space to park in (0-9), $k$ is the license plate number of the car (in this world license plates are strictly numeric), and $m$ is the number of spaces (10)–thus, $h(k)$ will <strong>always</strong> output a number that corresponds to an actual space.</p>
 
-<p>Now, create a file in your current folder with the extension <code class="highlighter-rouge">.slide</code> and put at the top of the file, this information (of course, with your corresponding unique info):</p>
+<p><strong>Let’s take Sol’s lot out for a spin</strong>. A car 🚍 pulls up with the license plate 20. Using our hash function, $h(k) \equiv k\ (\textrm{mod}\ m)$, we find $h(20)$ to be 0. So, Sol sends the car to space 0.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Title of document
-Subtitle of document
-15:04 2 Jan 2006
-Tags: foo, bar, baz
-&lt;blank line&gt;
-Author Name
-Job title, Company
-joe@example.com
-http://url/
-@twitter_name
-</code></pre></div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Space</th>
+      <th>Car</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>🚍</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-<p><strong>Note</strong> that the date may be written without a time prepended. Also, multiple presenters may be specified, simply separate them by blank lines and then put their corresponding info.</p>
+<p>Another car 🚙 with the license plate 478 pulls up. Sol tells him to go to spot 8. And another 🚔 with the plate 87263 goes to spot 3.</p>
 
-<p>Now, whenever you want to run your presentation, simply run the <code class="highlighter-rouge">present</code> command in the folder containing your <code class="highlighter-rouge">*.slide</code> file and select it on the webpage the present command sends you to.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Space</th>
+      <th>Car</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>🚍</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>🚔</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>🚙</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
-<p>After the specified presenters, each of the slides/sections are put separated by blank lines. Following is an example slide:</p>
+<p>Now, a car 🚕 pulls up with the license plate #9878. The hash function tells the car to go to space 8, but there is already a car there. This is called a <strong>collision</strong> (when a hash function assigns two different things to the same location).</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide or section (must have asterisk)
+<h2 id="collision-resolution">Collision resolution</h2>
 
-Some Text
+<p>How can Sol find a free spot available to the new car?</p>
 
-** Subsection
+<p>Well, if we were working with memory and not parking lots, one way to resolve the issue would be to create a <strong>linked list</strong> in the spot in memory where both cars go and simply search through that list every time a retrieval was needed or add to that list every time an input was needed.</p>
 
-- bullets
-- more bullets
-- a bullet with
+<p>However, we need to find a <strong>free spot</strong> for the car to go to.</p>
 
-*** Sub-subsection
+<p>Starting with the original hashing function $h_0(k)=h(k)$, we can define a sequence of spaces $h_1(k),h_2(k),….$. We attempt to place the car (or thing) $k$ at location $h_0(k)$. If this location is taken, we move one location up, $h_1(k)$. If this is taken, we move one more up $h_2(k)$, and so on.</p>
 
-Some More text
+<p>The simplest way to represent this ‘probing sequence’ is like so:</p>
 
-  Preformatted text
-  is indented (however you like)
+<p>!!h_j(k) \equiv h(k) +j\ (\textrm{mod}\ m), \quad \quad 0 \le h_j(k) \lt m!!</p>
 
-Further Text, including invocations like:
+<p>This places the thing $k$ as near as possible to the past location $h(k)$.</p>
 
-.code x.go /^func main/,/^}/
-.play y.go
-.image image.jpg
-.background image.jpg
-.iframe http://foo
-.link http://foo label
-.html file.html
-.caption _Gopher_ by [[https://www.instagram.com/reneefrench/][Renée French]]
+<p>This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called <em>clustering</em>, where many different items are placed right next to each other.</p>
 
-Again, more text
-</code></pre></div></div>
+<p>To avoid clustering, you can use a collision resolution policy called <em>double hashing</em>.</p>
 
-<p>The <code class="highlighter-rouge">.code</code> function injects source code from a file by injecting them as HTML-escaped <code class="highlighter-rouge">&lt;pre&gt;</code> blocks.
-Any line in the program ending with the four characters <code class="highlighter-rouge">OMIT</code> is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:</p>
+<p>Using $0 \le h(k) \lt m$, where $m$ is prime, a second hashing function is derived:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.code test.go /START OMIT/,/END OMIT/
-</code></pre></div></div>
+<p>!!g(k) \equiv k +1\ (\textrm{mod}\ m-2), \quad \quad 0 \lt g(k) \le m-2!!</p>
 
-<p>With some example contents of <code class="highlighter-rouge">test.go</code>:</p>
+<p>In the above function, $(g(k),m)=1$. Our new probing sequence is thus</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coolFunction</span> <span class="o">:=</span> <span class="n">boop</span><span class="p">()</span>
-<span class="c">// START OMIT</span>
-<span class="n">see_mee</span> <span class="o">:=</span> <span class="n">great</span><span class="p">()</span>
-<span class="c">// END OMIT</span>
-</code></pre></div></div>
+<p>!!h_j(k) \equiv h(k) +j \cdot g(k)(\textrm{mod}\ m)!!</p>
 
-<p>And the slide only gets this:</p>
+<p>$j$ runs through the integers $0,1,2…,m-1$ and all possible locations are traced.</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">see_mee</span> <span class="o">:=</span> <span class="n">great</span><span class="p">()</span>
-</code></pre></div></div>
+<p>The most reasonable distribution of $g(k)$ values occurs when both $m$ and $m-1$ are prime (twin primes).</p>
 
-<p>The information following a <code class="highlighter-rouge">.image</code> function can be a file path OR a url.</p>
-
-<p>Parts of the file that begin with a <code class="highlighter-rouge">:</code> (colon) are presenter notes.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide
-
-Some Text
-
-: Presenter notes (first paragraph)
-: Presenter notes (subsequent paragraph(s))
-</code></pre></div></div>
-
-<p>For other cool features and functionality, visit the <code class="highlighter-rouge">present</code> <a href="https://pkg.go.dev/golang.org/x/tools/present?tab=doc">package homepage</a>.</p>
+<p>In addition to the recommended restrictions on the values of $m$ and $m-1$, m should not be a power of base $b$, where $k$ is represented as $k_b$ ($k$ is a number in base $b$), because $(\textrm{mod}\ m)$ would always return the last couple digits of the number and will cluster as $m$ continues to increase in size.</p>
 
   </div>
   

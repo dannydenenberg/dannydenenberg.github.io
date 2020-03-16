@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     Emacs Commands &middot; Danny Denenberg 
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="page">
+  <h1 class="page-title">Emacs Commands</h1>
+  <p>COMMANDS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. C- = Ctrl Key
+
+2. M- = Meta Key / Alt Key (ESC Don't hold and then the Letter)
+
+3. Start Emacs without Opening Screen : emacs -Q
+	
+4. Open Help : C-h i (HELP INFO)
+
+	A. Show All Key Bindings : C-h b (BINDINGS)
+	
+	B. Get Info on Key Binding : C-h k "binding"
+	
+		i. C-h k C-x b -&gt; Find Out About Switching Buffers
+		
+5. See All Functions for an Action : C-h a (ALL)
+
+	A. All Buffer Functions : C-h a buffer
+	
+	B. Execute Command with : ESC x "functionName"
+	
+6. Turn on Auto New Line (Hard Wrap) : ESC x auto-fill-mode 
+
+7. Turn on Visual Line Mode (Soft Wrap) ESC x visual-line-mode
+
+8. Increase Text Size : C-x C-+
+
+9. Decrease Text Size : C-x C--
+
+10. Change the Font : ESC x menu-set-font
+
+11. Change Themes : ESC x customize-themes
+
+12. Open Tetris : ESC x tetris
+	
+	
+BUFFERS
+
+1. Show Buffers : C-x C-b (COMMAND BUFFERS)
+
+2. C-x k : Kills the Buffer (KILL)
+
+3. Switch Buffers : C-x b (BUFFER)
+
+	A. Type just the 1st letter of the buffer and click &lt;Tab&gt; &lt;Enter&gt;
+	
+	B. ? : Shows all possible options
+	
+	C. M-x beginning-of-command? : Shows all matching commands
+	
+4. Select Whole Buffer : C-x h
+
+	
+EDITING
+
+1. Quit Emacs : C-x -&gt; C-c (Press y to save and n to not)
+
+2. C-x and M-x : Issues commands (EXECUTE)
+
+3. C-g : Cancels the command or Running Program (GO BACK)
+
+4. Open or Create a File : C-x C-f -&gt; "enter file name" (EXECUTE FILE)
+
+5. Save File : C-x C-s (SAVE)
+
+6. Write Buffer to File : C-x C-w (WRITE FILE)
+
+7. Insert Buffer in File : C-x i "buffer name" (INSERT BUFFER)
+
+8. Undo : C-x u (UNDO)
+
+9. Delete Selection : C-w 
+
+10. Delete # Back : ESC #CharToDel BS
+
+11. Kill / Cut Word Forward : ESC d
+
+12. Kill Word Backward : ESC BS
+
+13. Kill to End of Sentence : ESC k
+
+14. Kill up through Character : ESC z "char"
+
+15. Kill the Next 2 Words : ESC 2 ESC d
+
+16. Yank or Paste Last Killed Text : C-y (YANK)
+
+17. Copy Selection : ESC w (take WITH)
+
+18. Show Text in Kill Ring : C-h v kill-ring
+
+19. Paste Next Kill Ring Item after C-y : ESC Y
+</code></pre></div></div>
+
+<p>MOVING AROUND</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Move Down 1 Screen : C-v (VERTICAL)
+
+2. Move Up 1 Screen : M-v
+
+3. Previous Line : C-p (PREVIOUS)
+
+4. Next Line : C-n (NEXT)
+
+5. Forward Word : M-f (FORWARD)
+
+6. Backward Word : M-b (BACKWARD)
+
+7. Forward Sentence : M-e (sENTENCE)
+
+8. Backward Sentence : M-a (AWAY)
+
+9. Forward Paragraph : M-} (BIG FORWARD)
+
+10. Backward Paragraph : M-{ (BIG BACKWARD)
+
+11. Beginning of Buffer : M-&lt; (BIGGEST BACK)
+
+12. End of Buffer : M-&gt; (BIGGEST FORWARD)
+
+13. Display Line Numbers : M-x linum-mode
+
+14. Go to Line Number : M-g g "Line#"
+</code></pre></div></div>
+
+<p>REGIONS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Define a Region 
+	
+	A. Define the Mark : C-SPC
+	B. Move Cursor to a Position which is the Point
+	C. Delete the Region : C-w 
+	
+2. Select Whole Paragraph : M-h (wHOLE)
+
+3. Select Whole Buffer : C-x h (wHOLE BUFFER)
+
+4. Select # of Words : ESC #ofWords M-@
+
+5. Erase Selection : C-w
+
+6. Run Shell using Selection as Input : M-|
+
+7. Format Selection
+
+	A. Select Paragraph : M-h
+	B. Format Selection : M-x fill-region
+</code></pre></div></div>
+
+<p>THE MODE LINE</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. C-x C-q : Turn on/off Read Only Mode
+2. **- : Modified and not saved
+3. --- : Not Modified
+4. %% : Read Only Mode not Modified
+5. %* : Read Only Mode has been Modified
+6. Buffer name or *scratch* if no name
+7. Location in the buffer (% or All)
+8. Line Number
+9. Current Mode
+	
+	A. Fundamental Mode : Default mode
+	B. Text Mode : Use when using paragraphs
+	C. Paragraph Indent Text Mode : When paragraphs should be indented
+	D. Indented Text Mode : Used for outlines
+	E. Switch : ESC x fundamental-mode
+		
+10. Show all Modes : ESC x *-mode &lt;Tab&gt;
+11. Describe Modes : C-h a mode
+</code></pre></div></div>
+
+<p>WINDOWS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Working with Windows : 
+
+	A. Close Current Window : C-x 0 (ZERO IN ON 1 WINDOW)
+	B. Close All but Current Window : C-x 1 (1 WINDOW)
+	C. Move to Other Window : C-x o (OTHER WINDOW)
+	D. Split Window Vertically : C-x 2 (2 WINDOWS)
+	E. Split Window Horizontally : C-x 3 
+	F. Make Window Wider : C-x }
+	G. Make Window Narrow : C-x {
+	H. C-x 3 -&gt; C-x b -&gt; a &lt;tab&gt; &lt;enter&gt;
+
+2. Tutorial : Ctrl-h -&gt; t (TUTORIAL)
+
+3. Delete to End of Line : C-k
+
+4. Delete Previous Sentence : C-x BS
+
+5. Emacs auto saves your work in a file with #s at the beginning and end
+
+	A. To use the backup file type M-x recover-file
+</code></pre></div></div>
+
+<p>REPEATING COMMANDS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. ESC #ofTimes "Command"
+
+	A. Move Up 2 Lines : ESC 2 C-p
+</code></pre></div></div>
+
+<p>SEARCHING AND REPLACING</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Search Forward : C-s "searchWord" (SEARCH)
+
+	A. Keep pressing C-s for next 
+	
+	B. RET to End Search
+
+2. Search Backward : C-r "searchWord" (REVERSE SEARCH)
+
+	A. Keep pressing C-r for next 
+	
+	B. RET to End Search
+
+3. Search for Regex : M-C-s Type Expression (SUPER SEARCH) [MP]att*
+
+4. Find and Replace : ESC % "findWord" "replaceWord" 
+
+	A. Responses 
+	
+		i. y : Replace 1
+		ii. n : Don't Replace
+		iii. ! : Replace All
+		iv. . : Replace and quit
+</code></pre></div></div>
+
+<p>EXECUTING SHELL COMMANDS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Open Shell in a Buffer : ESC x shell
+
+2. Run Shell Command : ESC ! "command"
+
+3. Use Region as Input for Shell Command : Select ESC | "command"
+
+	A. Select b d a c ESC | sort -&gt; Sorts letters
+	
+4. Replace Selected Text with Shell Output : Select ESC 1 ESC | sort
+</code></pre></div></div>
+
+<p>EDITING .EMACS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Don't Show Startup Message : (setq inhibit-startup-message t)
+
+2. Set Starting Mode to Text Mode : (setq major-mode 'text-mode)
+
+3. Set Default Mode to Text Mode : (setq-default major-mode 'text-mode)
+
+4. Set Default Theme : (load-theme 'misterioso)
+</code></pre></div></div>
+
+<p>EXTRAS</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Count the Words and Characters : M-= 
+
+2. Convert to Uppercase : C-x C-u
+
+3. Convert to Lowercase : C-x C-l
+</code></pre></div></div>
+
+<p>Creating Macros</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Macros record actions and then replay them
+
+2. How to Record
+
+	A. C-x (
+	B. Perform actions you want recorded
+	C. C-x ) Closes the Macro
+	D. C-x e Plays the Macro
+	
+3. Remove list number from item
+
+	A. C-x (
+	B. ESC z [SPC]
+	C. C-x )
+	D. C-x e
+	
+4. Show your Macro : C-x C-k SPC
+
+	A. C-g Closes this
+	
+5. Play Macro with e
+
+	A. C-x (
+	B. ESC z [SPC] -&gt; Go to next line
+	C. C-x e
+	D. Repeat e
+	
+6. Save Macro : C-x C-k n -&gt; Give it a name "delete-line-number"
+
+7. Use Macro M-x delete-line-number
+
+	A. C-x z to run command again -&gt; z to execute again
+	
+8. Save your Macro
+
+	A. Open .emacs -&gt; C-x C-f ~/.emacs
+	
+	B. M-x insert-kbd-macro
+	
+	C. Enter delete-line-number
+</code></pre></div></div>
+
+
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

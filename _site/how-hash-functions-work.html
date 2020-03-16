@@ -107,7 +107,7 @@
 
       <div class="post">
   <h1 class="post-title">How hash functions work</h1>
-  <span class="post-date">04 Mar 2020</span>
+  <span class="post-date">12 Mar 2020</span>
   <p>A hash function is a way to <strong>tell something where to go</strong>.</p>
 
 <p>Here is the function for reference:</p>
@@ -371,6 +371,8 @@
 <p>$j$ runs through the integers $0,1,2…,m-1$ and all possible locations are traced.</p>
 
 <p>The most reasonable distribution of $g(k)$ values occurs when both $m$ and $m-1$ are prime (twin primes).</p>
+
+<p>In addition to the recommended restrictions on the values of $m$ and $m-1$, m should not be a power of base $b$, where $k$ is represented as $k_b$ ($k$ is a number in base $b$), because $(\textrm{mod}\ m)$ would always return the last couple digits of the number and will cluster as $m$ continues to increase in size.</p>
 
 </div>
 
