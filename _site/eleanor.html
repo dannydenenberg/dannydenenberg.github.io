@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta
+    name="description"
+    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
+  />
+  <script
+    src="https://kit.fontawesome.com/b0b051f3df.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (async () => {
+      // redirect from denenberg.us to dannydenenberg.com
+      if (window.location.href.includes("denenberg.us")) {
+        let url = window.location.href;
+        let firstPart = url.slice(0, 8);
+        let lastPart = url.slice(20);
+        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
+        window.location.replace(newUrl);
+      }
+    })();
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+  ></script>
+  <script>
+    window.MathJax = {
+      commonHTML: {
+        linebreaks: { automatic: true }
+      },
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ["&&&", "&&&"],
+          ["!!", "!!"]
+        ]
+      },
+      svg: {
+        fontCache: "global"
+      }
+    };
+  </script>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1"
+  />
+
+  <title>
+     Love that question... &middot; Danny Denenberg 
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css" />
+  <link rel="stylesheet" href="/public/css/syntax.css" />
+
+  <!-- Icons -->
+  <link
+    rel="apple-touch-icon-precomposed"
+    sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png"
+  />
+  <link rel="shortcut icon" href="/public/favicon.ico" />
+
+  <!-- RSS -->
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/atom.xml"
+  />
+</head>
+
+
+  <body>
+    <div class="container content">
+      <div class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">Danny Denenberg</a>
+
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/about/">About</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/archive">Archive</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/projects">Projects</a></small
+          >
+           &nbsp;&nbsp;&nbsp;<small
+            ><a href="/contact">Contact</a></small
+          >
+          
+        </h3>
+      </div>
+
+      <div class="page">
+  <h1 class="page-title">Love that question...</h1>
+  <blockquote>
+  <p>Read if ya want, Eleanor :) I’ll leave this up here if you ever want to reference it.
+Oh, and, don’t worry, only you can see this page, it’s unlisted.</p>
+</blockquote>
+
+<p>Okay, okay, where to start…</p>
+
+<h3 id="useless-info-about-me">Useless info about me</h3>
+
+<p>I first got into coding when I, 11 year-old Danny, peeked over at my uncle’s computer screen as he was writing out a piece of software for his company <a href="https://www.tripadvisor.com/">Tripadvisor</a>. To be honest, I just thought all of that messy code looked super dope.</p>
+
+<p>My uncle taught me the basics of HTML, how to build web pages, and I made a simple website which is still online! You can see the first thing I ever programmed <a href="http://denenberg.com/danny/">here</a> (please don’t be alarmed at its horribleness ;)).</p>
+
+<p>He told me to keep going by learning the basics of web programming from a website called <a href="https://www.w3schools.com/">W3Schools</a>. I started on going through their HTML course and it wasn’t easy at first. It’s a bit of a jump (not too bad), but you always get it eventually and when you do you feel like a freaking g0d of hacking 😂.</p>
+
+<p>I kept poking around w3schools and learned some JavaScript, CSS, some other useful tools. After that I really got into learning <strong>programming languages</strong>: their syntax, their differences, how they work, why they are designed in a specific way. I would buy these dense, books on Java, C++, Python, Golang, etc. and read them word by word so I would understand them (I sometimes (mostly) didn’t though 😩). BUT, the point is I tried–and when doing this tech crap, trying is LITERALLY 80% of the way to mastering a skill (even if you completely fail at it).</p>
+
+<p>There’s a lot more to my coding story, but I’ll move on for the sake of maintaining audience interest (that’s you eleanor) :)).</p>
+
+<h3 id="what-the-hell-happened-at-gallup">What the hell happened at Gallup?</h3>
+
+<p>So, I went to “work” at Gallup the Saturdays of my Sophomore year. It was such a great experience, I met crazy smart-asses who help me fix errors, there was great management, it was fun. During that time, I and another Central dude built a voice command system that we called “A hackable alexa”.</p>
+
+<p>It was an alexa type deal that could be run on a desktop computer that the programmer or user could customize in every aspect: they could add their own commands and what the thing should do when the command is given. We called it <strong>Starlight</strong>. The link to the code if you want it is <a href="https://github.com/dannydenenberg/Starlight">here</a></p>
+
+<hr />
+
+<p>I got the job for the paid <strong>internship</strong> as a software developer at Gallup that summer and worked on a super cool tool that was to be used (never actually got used 😓) internally. It was a search engine for all of Gallup’s sites because they have way way too many.</p>
+
+<p>My main job was to collect all of the data. Part of that was writing a program that would take all of the YouTube videos Gallup had (more than 1500 each an hour long) and store them on a database with their transcripts and timestamps for when every word was said. Ahhhh! It was crazy–my computer crashed multiple times. I would totally totally give you the link but it’s proprietary software. Boo!</p>
+
+<h3 id="some-mediocre-personal-projects-">Some (mediocre) personal projects 🤮</h3>
+
+<p>I’m always working on a personal project. I have so many. Currently I have two. One isn’t online yet. The other is an online calculator for figuring out medicinal dosages for dogs and cats given their weights. My mom, who is an emergency room vet, needed something better than what they had at the clinic, so I made <a href="https://vet.dannydenenberg.com">this</a> (<strong>note</strong>: it doesn’t have most of the actual medicines uploaded but the infrastructure is all there).</p>
+
+<p>You can see some others <a href="/projects">here</a>.</p>
+
+<p>But <strong>enough of my story</strong>, here’s what I’ll say about programming/tech in general.</p>
+
+<h3 id="my-totally-finished-awesome-rules-for-code">My totally finished awesome rules for code</h3>
+
+<ol>
+  <li>Programming is NOT hard.</li>
+  <li><em>cricket sounds</em></li>
+</ol>
+
+<p>That’s my one rule. It’s not hard. Anyone can be a programmer. Yes, anyone.</p>
+
+<p><strong>Here’s what I love about programming:</strong></p>
+
+<ol>
+  <li>There is so much out there to learn</li>
+  <li>It’s super easy to get into (if you have a friend to bug)</li>
+  <li>The answer is ALWAYS on google</li>
+  <li>I can make so much with almost no experience</li>
+</ol>
+
+<p><strong>Here’s what I hate about programming:</strong></p>
+
+<ol>
+  <li>There is so much out there to learn</li>
+  <li>Sometimes, when you haven’t grasped a concept, finding solutions to errors is so annoying because you can’t see the big picture</li>
+  <li>Debugging code (but everyone hates that)</li>
+</ol>
+
+<h2 id="okay-now-you-want-links-and-tips-">Okay, now you want links and tips 🔗</h2>
+
+<p>Full disclosure, I’m not exactly sure what the best first steps would be, but here’s what I would do:</p>
+
+<ul>
+  <li>Learn the bare minimum HTML and CSS (web design languages) on <a href="https://www.w3schools.com/">w3schools</a></li>
+  <li>Get into JavaScript on either <a href="https://www.w3schools.com/js/default.asp">w3schools</a> (amazing) or my looking into my absolute favorite book on the subject: <a href="https://www.amazon.com/JavaScript-JQuery-Interactive-Front-End-Development/dp/1118531647">Jon Duckett’s Intro</a> (has amazing pictures, color, wow it’s so good)</li>
+</ul>
+
+<p>Even just from there you have an immensely large tool bucket. There are so many places to go from there. If you want, text me after that! I can help you build your own website and put it up online! (or text me to say “danny you idiot, I hate all of these sources give me better ones”)</p>
+
+<p>And, it goes without saying, YouTube is an amazeballs resource for everything too.</p>
+
+<hr />
+
+<p><strong>Just know this</strong> (it took me so freaking long to get it): you can make anything you want with code. It’s not the coding languages you choose but what you do with them.</p>
+
+<p>Coding is at its bare minimum a beautiful <strong>tool</strong> to do what a human could, but just way way way faster.</p>
+
+<p>And know this too: you won’t learn everything on the first day. Enjoy the process, because it’s fun!</p>
+
+<p>❤️👨‍💻</p>
+
+</div>
+
+
+      <div class="footer">
+        <p>
+          &copy; 2020. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
