@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+links: true
 ---
 
 ![](/goods/aboutpicture.jpg)

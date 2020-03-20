@@ -3,6 +3,11 @@ markdown: kramdown
 kramdown:
   extensions: ["tables"]
 
+# markdown: CommonMark
+# commonmark:
+#   options: ["SMART", "FOOTNOTES", "UNSAFE"]
+#   extensions: ["strikethrough", "autolink", "table"]
+
 pgp_key: BAA0 2E14 BB58 1531 ED84 F3AD 3745 6162 1157 EF38
 
 # Permalinks
@@ -39,13 +44,17 @@ gems:
   - jekyll-redirect-from
   - jekyll-paginate
 
+plugins:
+  - jekyll-commonmark
+  - jekyll-include-cache
+
+exclude:
+  - .jekyll-cache
+
 contact_links:
   - name: Twitter
     url: https://twitter.com/dannydenenberg_
     icon: twitter
-  - name: Facebook
-    url: https://www.facebook.com/daniel.denenberg.18
-    icon: facebook-f
   - name: LinkedIn
     url: https://www.linkedin.com/in/dannydenenberg
     icon: linkedin-in
