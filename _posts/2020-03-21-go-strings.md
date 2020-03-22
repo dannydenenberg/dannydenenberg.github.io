@@ -59,7 +59,7 @@ Coming from another more dynamic language such as python, ruby, or javascript, t
 
 So, as I said before, utf-8 is a variable-length encoding of characters--it takes 1 to 4 bytes to represent each character instead of each being 4. But, this variability **prevents** direct access to the n-th character of a string through indexing. However, go still uses them normally to encode strings because of their sweet advantages such as their compatibility with ASCII, ability to decode left to right, and easy searching for specific runes by just using their bytes.
 
-Recall, the `len` function returns the number of bytes in a string, so it might by confusing in this case:
+Recall, the `len` function returns the number of bytes in a string, so it could get a bit confusing in this case:
 
 ```go
 a := "浴"
