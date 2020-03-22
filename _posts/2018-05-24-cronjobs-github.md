@@ -1,5 +1,5 @@
 ---
-title: Automating Backups with Cron & GitHub
+title: Automating Backups with Cron &amp; GitHub
 permalink: cron-github
 layout: post
 ---

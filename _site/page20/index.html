@@ -96,10 +96,7 @@
             ><a href="/archive">Archive</a></small
           >
            &nbsp;&nbsp;&nbsp;<small
-            ><a href="/projects">Projects</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/contact">Contact</a></small
+            ><a href="/atom.xml">Feed</a></small
           >
           
         </h3>
@@ -109,149 +106,59 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/web-scraping">
-        Web scraping in node.js 101
+      <a href="/squeeze-theorem">
+        A proof of the Squeeze Theorem (and why I like it)
       </a>
     </h1>
 
-    <span class="post-date">12 Mar 2018</span>
+    <span class="post-date">15 Apr 2018</span>
 
-    <p>Web scraping is a great way to create dynamic websites or to just be able to get data from sites without having access to their databases. In short, it is an easy method to get info from a site by going through the <strong>front end</strong> (what the user sees) HTML code.</p>
+    <p><em>An intuitive explanation of an awesome theorem.</em></p>
+<p>While I was studying calculus, I came across this statement:</p>
+<p>!!\lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta}=1!!</p>
+<p>This amazed my because of the fact that sin of 0 is 0, so with substitution of theta in the fraction next to the limit, it would end up as 0/0 or undefined. Now, I had already studied limits a bit and knew about <a href="https://dannydenenberg.com/lhopitals-rule/">l’hopital’s rule</a>. So, I proceeded to take the derivative of the top and bottom of the fraction with respect to theta and checked out what I got. This got me to the expected answer of 1/1 = 1 because the derivative of sin(x) is cos(x) and cos(0) is 1. <!--more-->Now this was all fine and dandy, but as I did more research into the limit listed above, I found a theorem called The Squeeze Theorem which I thought was a much more fun way to solve this same problem. </p>
 
-<p>To get started with web scraping you must know how a website is structured. If you right click on a page, and click inspect (on chrome), you can see the developer tools.<!--more--></p>
+<p>This article is my shot at fully explaining the proof that accompanies the limit shown above using the Squeeze Theorem.</p>
 
-<p><img src="https://i.snap.as/V8yrpGZ.png" alt="" /></p>
+<h2 id="the-proof">The Proof</h2>
 
-<p>This shows you the structure of the HTML/CSS/JavaScript code as well as network performace, errors, security, and much much more.</p>
+<p>To begin, take a look at this picture of a few triangles drawn using different points around a unit circle. If you don’t already know, a unit circle is one with a radius of 1. The point A is at (0,0), point C is at some point on the edge of the circle, point D is at (1,0), and point E is at some point (1, x).</p>
 
-<p>Now, let’s say I want to grab the first image that you see on twitter programatically in the JavaScript console.</p>
+<p><img src="https://i.snap.as/ceBMvID.png" alt="" /></p>
 
-<p>Well, I could right click on the image, click inspect, right click on the element in the dev tools, and copy the css selector.</p>
+<p>Using this visual, let us compare the <strong>areas</strong> of two triangles and a sector.</p>
 
-<p><img src="https://i.snap.as/XNXJhXa.png" alt="" /></p>
+<p>!!△ACD \le ⌔ACD \le △AED!!</p>
 
-<p>Then I could do a <code class="highlighter-rouge">document.querySelector(&lt;&lt;SELECTOR&gt;&gt;).src</code> and that would give me the URL of the image I want, and I could use that on a web page, for example:</p>
+<p>We can see that this is true by just looking at the graph. Next, I will define the values of the <strong>areas</strong>. Note that theta will refer to the angle made on the unit circle with each of the shapes (the bottom left angle of the triangle or sector).</p>
 
-<p><img src="https://i.snap.as/QnJblUJ.png" alt="" /></p>
+<p>!!\begin{array}{c}{\triangle ACD=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \sin \theta=\frac{\sin \theta}{2}} \\ {⌔ACD=\frac{1}{2} r^{2} \theta=\frac{1}{2} \cdot 1^{2} \cdot \theta=\frac{\theta}{2}} \\ {\triangle AED=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \tan \theta=\frac{\tan \theta}{2}}\end{array}!!</p>
 
-<p>This IS web scraping! I was able to gather data (an image) from a website without having access to the database. But this is super tedious and long, so to actually webscrape more efficiently, I use Node.js + Puppeteer.</p>
+<p>Just FYI, the hight of triangle △AED is tan(x) because tan(x) is opposite over adjacent and adjacent is 1, so it is really just <strong>the side opposite the angle</strong>, which is the hight. (That confused me at first too 😂)</p>
 
-<p>If you don’t already know, <a href="https://nodejs.org/">Node.js</a> is a runtime enviornment that allows JavaScript to be run on the server side. And <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).</p>
+<p>Now that we have this, we can re-compare (is that a word?) the areas using actual values.</p>
 
-<p>Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running <code class="highlighter-rouge">tsc -v</code> works in the terminal, you’re good to go!</p>
+<p>!!\frac{\sin \theta}{2} \leq \frac{\theta}{2} \leq \frac{\tan \theta}{2}!!</p>
+<p>Next, I am going to perform a set of operation to all of the elements in the inequality. This is legal as it preserves the <em>truthfulness</em> of the inequality like applying the same operation to each side of an equals sign preserves the equality.</p>
 
-<p>Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a <code class="highlighter-rouge">command not found</code> or something related by running one of the following, I suggest that you look at this article on how to install Node.</p>
+<p>First, I will multiply each element by 2.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm -v # should be 6.0.0 or higher
-$ node -v # should be 9.0.0 or higher
-</code></pre></div></div>
+<p>!!\sin \theta \leq \theta \leq \tan \theta!!</p>
 
-<p>Great! Let’s start a new project and install the dependencies:</p>
+<p>Second, I will divide by sin(𝜃).</p>
+<p>!!1 \leq \frac{\theta}{\sin \theta} \leq \frac{1}{\cos \theta}!!</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir Web-Scraping-101 &amp;&amp; cd Web-Scraping-101
-$ npm init # go through all defaults
-$ npm i puppeteer # the google npm scraping package
-$ tsc --init # initialize typescript
-$ npm i @types/puppeteer # type declarations
-</code></pre></div></div>
+<p>Finally, I will take the reciprocal of each.</p>
+<p>!!1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta!!</p>
 
-<p>Now open the folder in the text editor of your choice. Edit the <code class="highlighter-rouge">outDir</code> option in the <code class="highlighter-rouge">tsconfig.json</code> file to be <code class="highlighter-rouge">./build</code> and uncomment the line, so it looks like this:</p>
+<p>These reciprocals will get us to the final result that we want. All we have to do now is take the limit as listed at the top and analyze the results.</p>
+<p>!!\begin{array}{c}{\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta\right]} \\ {\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq 1\right]} \\ {1 \geq \lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta} \geq 1}\end{array}!!</p>
 
-<p><img src="https://i.snap.as/y1kZn10.png" alt="" /></p>
+<p>As you can most likely see (I highlighted it), by substitution of the limit value into each element of the inequality, we get 1 is greater than or equal to the limit of sin theta over theta as theta approaches 0 which is greater than or equal to 1.</p>
+<p>Because we know this:</p>
+<p>!!\begin{array}{c}{\text {if}} \\ {1 \geq x \geq 1} \\ {\text {then,}} \\{x=1}\end{array}!!</p>
 
-<p>Create a new file in the root of the folder:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch app.ts
-</code></pre></div></div>
-
-<p>In <code class="highlighter-rouge">app.ts</code> add:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log("Twitter, here we come");
-</code></pre></div></div>
-
-<p>Now, to <strong>run this</strong>, in terminal, write: <code class="highlighter-rouge">tsc &amp;&amp; node build/app.js</code></p>
-
-<p><strong>NOTE:</strong> <code class="highlighter-rouge">tsc</code> builds all TypeScript files into the outDir directory defined in the config file and <code class="highlighter-rouge">node</code> runs a single JavaScript file.</p>
-
-<p>If you see <em>“Twitter, here we come”</em> appear in the terminal, you’ve got it working!</p>
-
-<p>Now, we will start to actually scrape using puppeteer.
-Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.ts</code> file:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">puppeteer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">puppeteer</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// import the npm package that we installed</span>
-
-<span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="c1">// the rest of the code must be enclosed in an `async` function to be able to `await` for results</span>
-  <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">();</span> <span class="c1">// launches an "invisible" chromium browser</span>
-  <span class="kd">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">();</span> <span class="c1">// takes the browser to a new tab (page)</span>
-  <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">goto</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://example.com</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// takes the page to a specific url</span>
-
-  <span class="c1">// Get the "viewport" of the page,</span>
-  <span class="c1">// as reported by the page.</span>
-  <span class="c1">// NOTE: Anything inside of the `evaluate` function is DOM manipulation.</span>
-  <span class="c1">// No variables outside of the evaluate function can go in, and none can come out without being returned inside of the return object.</span>
-  <span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="c1">// use DOM manipulation to access the width and height of the page</span>
-      <span class="c1">// if you want to get elements out of the DOM and into the node js code, return theme here</span>
-      <span class="na">width</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span>
-      <span class="na">height</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">,</span>
-      <span class="na">deviceScaleFactor</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">devicePixelRatio</span>
-    <span class="p">};</span>
-  <span class="p">});</span>
-
-  <span class="c1">// print out the DOM data</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Dimensions:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">dimensions</span><span class="p">);</span>
-
-  <span class="c1">// remember to close the broser (invisible chromium)</span>
-  <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-<span class="p">})();</span>
-</code></pre></div></div>
-
-<p>Please read through the commented code above to get a feel for what is going on ⬆.</p>
-
-<p>Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.</p>
-
-<p>First, edit the <code class="highlighter-rouge">await page.goto("https://example.com")</code> to be <code class="highlighter-rouge">await page.goto("https://twitter.com")</code></p>
-
-<p>Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span>
-  <span class="dl">"</span><span class="s2">#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div</span><span class="dl">"</span>
-<span class="p">);</span>
-<span class="c1">// the above returns the div for the middle column twitter feed</span>
-</code></pre></div></div>
-
-<p>Here is an image of what that represents:</p>
-
-<p><img src="https://i.snap.as/Taoa3a3.png" alt="" /></p>
-
-<p>To get all of the images from the middle column, I ended up doing this for the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">sources</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// an array of the links to each image</span>
-  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span>
-    <span class="dl">"</span><span class="s2">#react-root &gt; div &gt; div &gt; div &gt; main &gt; div &gt; div.css-1dbjc4n.r-aqfbo4.r-1niwhzg.r-16y2uox &gt; div &gt; div.css-1dbjc4n.r-14lw9ot.r-1tlfku8.r-1ljd8xs.r-13l2t4g.r-1phboty.r-1jgb5lz.r-1ye8kvj.r-13qz1uu.r-184en5c &gt; div &gt; div &gt; div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-6337vo.r-13qz1uu &gt; div &gt; section &gt; div &gt; div &gt; div img</span><span class="dl">"</span>
-  <span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">img</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">sources</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="nx">sources</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dimensions</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>There you go! You’ve just scraped image data from a twitter feed. A challenge would be to take this data and integrate it into an express server so that when a user goes to the root site, they are presented with all of these images.</p>
-
-<p>Thanks for reading!</p>
+<p>Now we can say that the limit of sin of theta over theta as theta approaches 0 <strong>has to be 1</strong> because of what I just stated above. Kinda cool, right?</p>
 
   </div>
   
@@ -272,7 +179,7 @@ Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.t
 
       <div class="footer">
         <p>
-          &copy; 2020. All rights reserved.
+          &copy; 2020. 🦥 All rights reserved.
         </p>
       </div>
     </div>

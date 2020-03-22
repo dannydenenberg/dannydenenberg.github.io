@@ -96,10 +96,7 @@
             ><a href="/archive">Archive</a></small
           >
            &nbsp;&nbsp;&nbsp;<small
-            ><a href="/projects">Projects</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/contact">Contact</a></small
+            ><a href="/atom.xml">Feed</a></small
           >
           
         </h3>
@@ -109,74 +106,63 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/cron-github">
-        Automating Backups with Cron & GitHub
+      <a href="/get-started-typescript">
+        Typescript quickstart
       </a>
     </h1>
 
-    <span class="post-date">24 May 2018</span>
+    <span class="post-date">10 Jun 2018</span>
 
-    <p>Back when I was using <a href="https://ghost.org/">Ghost</a> as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.</p>
+    <p>Typescript is a programming language that compiles into JavaScript. This means that any valid JS (JavaScript) code is valid TS (Typescript). TS is a language for the developer. If you have every written a bunch of Javascript code and started to wonder, “hey, what was the type of that function parameter, again?”, you understand.</p>
 
-<p>Being me, I found a <em>hacky</em> way around paying.</p>
+<p>Typescript is “JavaScript that scales” meaning it enforces types on all variables/return values, allows for interface use, and much much more. Typescript also implements some feature that are supposed to come to Javascript in the future.<!--more--></p>
 
-<p>I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. <!--more--></p>
+<h2 id="getting-started">Getting Started</h2>
 
-<p>To do this, make sure git is installed on your Linux/Unix system.</p>
+<p>Typescript is a compiled language which means it needs a compiler. You will first need NodeJS installed (TS is almost always used with Node). Then type <code class="highlighter-rouge">npm i -g typescript</code> to install TS globally on your computer.
+If typing <code class="highlighter-rouge">tsc -v</code> works and yields the version number of your TS installation, you’re good to go!</p>
 
-<p>Then set your username and email in the git preferences through the terminal.</p>
+<h2 id="the-basics">The Basics</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
-git config --global user.email "MY_NAME@example.com"
+<p>All you really need to use Typescript is the compiler. So, create a new file called hello.ts and put this code in it:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">mes</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello, TS 🌏😍</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">mes</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
+<p>As you can see, there is one difference here from vanilla JS – the :string type annotation after the message variable name. The general form for type annotations go like this: <code class="highlighter-rouge">let variableName: type</code>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
-</code></pre></div></div>
+<p><strong>Note:</strong> The string type would have been inferred as the type without the annotation, just like in this case, let a = 9, the inerred type would be number.</p>
 
-<p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
+<p>Now to compile the TS file into JavaScript, run <code class="highlighter-rouge">tsc hello.ts</code>. This generates a new file called <code class="highlighter-rouge">hello.js</code> with the compiled JS code.</p>
 
-<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
+<p>Let’s run that: <code class="highlighter-rouge">node hello.js</code>. You should see in the console “Hello, TS ♥️”.
+To learn more about Typescript syntax and cool features, check out the handbook.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
-<span class="nb">cd</span> /home/mybackupsrepo <span class="c"># go to the backups repo</span>
-git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <span class="nt">-m</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> git push origin master <span class="c"># commit, push</span>
-<span class="nb">sudo rm</span> <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
-</code></pre></div></div>
+<h2 id="workflow-with-node">Workflow with Node</h2>
 
-<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
+<p>Because TS is primarily used in NodeJS environments, it is important to know how they work together.</p>
 
-<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
+<p>Create a new project with <code class="highlighter-rouge">npm init</code>.</p>
 
-<p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
+<p>Next, add the TS configure file with <code class="highlighter-rouge">tsc -init</code>. This creates a new file in the root of your project called <code class="highlighter-rouge">tsconfig.json</code>. In it are all sorts of configure variables that you can play with. All we are interested in for the time being is one called outDir. This is the folder that the compiled TS is put into. Find the line where it is defined, uncomment it, and assign it the value of <code class="highlighter-rouge">"./build"</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># crontab -e</span>
-<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
-<span class="nv">MAILTO</span><span class="o">=</span>root@example.com
-<span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+<p>Now, you can put your TS files anywhere and they will all be compiled into the <code class="highlighter-rouge">./build</code> directory with the command <code class="highlighter-rouge">tsc</code>.</p>
 
-<span class="c"># For details see man 4 crontabs</span>
+<p>Copy your <code class="highlighter-rouge">hello.ts</code> file into the root of your project and run tsc (just those 3 letters). Now in the build folder, there should be a hello.js file. You can run it with <code class="highlighter-rouge">node build/hello.js</code>.</p>
 
-<span class="c"># Example of job definition:</span>
-<span class="c"># .---------------- minute (0 - 59)</span>
-<span class="c"># |  .------------- hour (0 - 23)</span>
-<span class="c"># |  |  .---------- day of month (1 - 31)</span>
-<span class="c"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
-<span class="c"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
-<span class="c"># |  |  |  |  |</span>
-<span class="c"># *  *  *  *  * user-name  command to be executed</span>
+<p>This is the general workflow for creating TS files, compiling, and running them. Remember, you can name the <code class="highlighter-rouge">outDir</code> directory anything you want!</p>
 
-<span class="c"># backup using the rsbu program to the internal 4TB HDD and then 4TB external</span>
-01 01 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/rsbu <span class="nt">-vbd1</span> <span class="p">;</span> /usr/local/bin/rsbu <span class="nt">-vbd2</span>
+<h2 id="editors-and-types">Editors and @types</h2>
 
-<span class="c"># Set the hardware clock to keep it in sync with the more accurate system clock</span>
-03 05 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /sbin/hwclock <span class="nt">--systohc</span>
+<p>For editing Typescript, I would highly, highly recommend <a href="https://code.visualstudio.com/">Visual Studio Code</a>. It is the editor I use for almost everything. I used to use <a href="https://atom.io/">Atom</a>, but when I made the switch, I realized just how much better VSC is. It is SUPER fast ⚡️. Has thousands of amazing plugins. Runs on almost every platform.
+For intellisense, VSC’s default Typescript package works extremely well. But, when is comes to working with npm packages in Typescript, you will have to install the type definitions for the package (if they are available). Let’s take express.js for example. The type definition package for express is <code class="highlighter-rouge">@types/express</code>. So, to get autocomplete, intellisense, etc. just install the package with <code class="highlighter-rouge">npm i @types/express</code>.</p>
 
-<span class="c"># Perform monthly updates on the first of the month</span>
-<span class="c"># 25 04 1 * * /usr/bin/dnf -y update</span>
-</code></pre></div></div>
+<p>Without the type definitions installed, the packages have the type any by default.</p>
+
+<p>A great website for finding type definitions for your favorite npm packages is <a href="https://definitelytyped.org">definitelytyped.org</a>. Click on the search and it will take you to TypeSearch where you can find your package’s types and how to install them (it usually is @types/package).
+As an alternative, you could search on <a href="https://yarnpkg.com/lang/en/">Yarn’s</a> website for packages that start with “<code class="highlighter-rouge">@types</code>”.
+Have fun with TS ❤️.</p>
 
   </div>
   
@@ -197,7 +183,7 @@ git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <
 
       <div class="footer">
         <p>
-          &copy; 2020. All rights reserved.
+          &copy; 2020. 🦥 All rights reserved.
         </p>
       </div>
     </div>

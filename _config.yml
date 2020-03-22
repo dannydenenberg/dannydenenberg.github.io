@@ -35,8 +35,7 @@ github:
 pages_list:
   About: "/about/"
   Archive: "/archive"
-  Projects: "/projects"
-  Contact: "/contact"
+  Feed: "/atom.xml"
 
 # Allow URL Redirects:
 #  * https://help.github.com/articles/redirects-on-github-pages
@@ -47,14 +46,20 @@ gems:
 plugins:
   - jekyll-commonmark
   - jekyll-include-cache
+  - jekyll-compress-images
+
+# where to compress images
+compress_images:
+  images_path: "/goods/**/*.{gif,png,jpg,jpeg,svg}"
+
+imageoptim:
+  svgo: false
 
 exclude:
   - .jekyll-cache
+  - _compress_images_cache.yml
 
 contact_links:
-  - name: Twitter
-    url: https://twitter.com/dannydenenberg_
-    icon: twitter
   - name: LinkedIn
     url: https://www.linkedin.com/in/dannydenenberg
     icon: linkedin-in
@@ -64,3 +69,6 @@ contact_links:
   - name: Keybase
     url: https://keybase.io/dannydenenberg
     icon: keybase
+  - name: Twitter
+    url: https://twitter.com/dannydenenberg_
+    icon: twitter
