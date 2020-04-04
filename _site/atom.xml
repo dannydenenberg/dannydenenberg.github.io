@@ -4,13 +4,81 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-03-21T21:22:23-05:00</updated>
+ <updated>2020-04-03T19:40:55-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Speed up your jekyll web site</title>
+   <link href="http://localhost:4000/2020/03/27/fast-jekyll-sites/"/>
+   <updated>2020-03-27T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2020/03/27/fast-jekyll-sites</id>
+   <content type="html">&lt;p&gt;Tips on speeding up your jekyll website.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-use-a-cdn&quot;&gt;#1. Use a CDN&lt;/h3&gt;
+
+&lt;p&gt;Just do it. It will help &lt;strong&gt;cache your content&lt;/strong&gt;, minify your assets, and make your website more accessible from all parts of the world (if you use a good cdn).&lt;/p&gt;
+
+&lt;p&gt;I use &lt;a href=&quot;https://www.cloudflare.com/&quot;&gt;cloudflare&lt;/a&gt;. Many other sites do (digital ocean, etc.). It’s free to use and you can put many different domains on it. There is literally a tab named “speed” where you can optimize your caching settings, minimization of files, and image compression.&lt;/p&gt;
+
+&lt;p&gt;An additional benefit is that DNS configuration is so so easy and updates almost immediately.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-jekyll-include-cache&quot;&gt;#2. jekyll-include-cache&lt;/h3&gt;
+
+&lt;p&gt;This gem will automatically cache specified parts of the page that don’t need to be reloaded such as sidebars, navigation features, etc.&lt;/p&gt;
+
+&lt;p&gt;To use, include it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:jekyll_plugins&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'jekyll-include-cache'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# - jekyll-commonmark&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jekyll-include-cache&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; to install everything before using it in your site.&lt;/p&gt;
+
+&lt;p&gt;To use the caching feature on an included file, instead of saying &lt;code class=&quot;highlighter-rouge&quot;&gt;{\% include foo.html \%}&lt;/code&gt;, simply say &lt;code class=&quot;highlighter-rouge&quot;&gt;{\% include_cached foo.html \%}&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-jekyll-compress-images&quot;&gt;#3. jekyll-compress-images&lt;/h3&gt;
+
+&lt;p&gt;Yes, compressing your images will make an effect on the load time of your website. For me it was one of the factors that took my time to first byte down by around 300 ms.&lt;/p&gt;
+
+&lt;p&gt;I believe that the feature on cloudflare that allows image compression is a pay-to-play feature, thus this jekyll gem can do it for free every time a build is made.&lt;/p&gt;
+
+&lt;p&gt;Include it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:jekyll_plugins&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'jekyll-compress-images'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/valerijaspasojevic/jekyll-compress-images.git'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Include it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jekyll-compress-images&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s it for Jekyll image compression!&lt;/p&gt;
+
+&lt;h3 id=&quot;4-use-github-pages&quot;&gt;#4. Use github pages&lt;/h3&gt;
+
+&lt;p&gt;I have to say that prior to using github pages, I was very skeptical to the idea. I was using &lt;a href=&quot;https://netlify.com&quot;&gt;Netlify&lt;/a&gt; and it made builds and minimization and custom domains and many many more features easy as clicking a button.&lt;/p&gt;
+
+&lt;p&gt;However, I was trying to get my site to be as fast as possible without switching to Gatsbyjs or some other way to make my JAMStack site. So, I tried switching it to github pages. Wow. That did the trick. It brought my TTFB down around 400 ms.&lt;/p&gt;
+
+&lt;p&gt;If you are having trouble even after steps #1 through #3 with site speed, try switching to &lt;a href=&quot;https://pages.github.com/&quot;&gt;github pages&lt;/a&gt;. &lt;strong&gt;It will make a change to the speed of your site&lt;/strong&gt;.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Strings in go</title>
@@ -71,7 +139,7 @@
 
 &lt;p&gt;So, as I said before, utf-8 is a variable-length encoding of characters–it takes 1 to 4 bytes to represent each character instead of each being 4. But, this variability &lt;strong&gt;prevents&lt;/strong&gt; direct access to the n-th character of a string through indexing. However, go still uses them normally to encode strings because of their sweet advantages such as their compatibility with ASCII, ability to decode left to right, and easy searching for specific runes by just using their bytes.&lt;/p&gt;
 
-&lt;p&gt;Recall, the &lt;code class=&quot;highlighter-rouge&quot;&gt;len&lt;/code&gt; function returns the number of bytes in a string, so it might by confusing in this case:&lt;/p&gt;
+&lt;p&gt;Recall, the &lt;code class=&quot;highlighter-rouge&quot;&gt;len&lt;/code&gt; function returns the number of bytes in a string, so it could get a bit confusing in this case:&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;浴&quot;&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 3&lt;/span&gt;

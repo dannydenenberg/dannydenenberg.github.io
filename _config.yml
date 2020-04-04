@@ -44,7 +44,7 @@ gems:
   - jekyll-paginate
 
 plugins:
-  - jekyll-commonmark
+  # - jekyll-commonmark
   - jekyll-include-cache
   - jekyll-compress-images
 

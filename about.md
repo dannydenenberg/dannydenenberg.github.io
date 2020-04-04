@@ -8,7 +8,7 @@ links: true
 
 ---
 
-Danny Denenberg is an award winning [actor, singer, musician](https://drive.google.com/file/d/1b29B0QrxZei-Fpmv96fJhEw-qyBjV3AQ/view?usp=sharing), and software dev @ [Gallup](https://www.gallup.com/home.aspx). He lives in [Omaha](https://en.wikipedia.org/wiki/Omaha,_Nebraska), the silicon valley of the midwest (hell yeah 🧐), with his crazy family.
+Danny is an award winning [actor, singer, musician](https://drive.google.com/file/d/1b29B0QrxZei-Fpmv96fJhEw-qyBjV3AQ/view?usp=sharing), and works as a software dev (previously @ [Gallup](https://www.gallup.com/home.aspx) and the university of Nebraska at Omaha). He lives in [Omaha](https://en.wikipedia.org/wiki/Omaha,_Nebraska), the silicon valley of the midwest (hell yeah 🧐), with his crazy family.
 
 He is way too passionate about music and spends more time than he should playing [Scott Joplin](https://en.wikipedia.org/wiki/Scott_Joplin) rags or [Bach](https://en.wikipedia.org/wiki/Johann_Sebastian_Bach) preludes and fugues. If you ever want to get him started talking non stop about something, please mention the latter (really, try it).
 
