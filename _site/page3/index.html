@@ -117,278 +117,147 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/how-hash-functions-work">
-        How hash functions work
+      <a href="/2020/03/21/go-strings/">
+        Strings in go
       </a>
     </h1>
 
-    <span class="post-date">12 Mar 2020</span>
+    <span class="post-date">21 Mar 2020</span>
 
-    <p>A hash function is a way to <strong>tell something where to go</strong>.</p>
+    <blockquote>
+  <p>What’s the f*&amp;@$%∂ heck is up with strings in go??</p>
+</blockquote>
 
-<p>Here is the function for reference:</p>
+<p>Here’s the clarification you need.</p>
 
-<p>!!h(k) \equiv k\ (\textrm{mod}\ m)!!</p>
+<h3 id="unicode-and-utf-8">Unicode and utf-8</h3>
 
-<p>If you are confused about the $(\textrm{mod}\ m)$ part, I would recommend brushing up on <a href="https://en.wikipedia.org/wiki/Modular_arithmetic">modular arithmetic</a>. It’s not bad at all!</p>
+<p>Around 1960, <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>, the American Standard Code for Information Interchange was released. It uses 7 bits to represent 2^7 or 128 characters. Among these were all english lower and upper case characters, punctuation, the ampersand, numbers, etc. Although this manner of storing textual data seemed to work fine, as computing and the internet began to grow, it was a challenge for other countries, in particular those who didn’t use English regularly, to store their native language in files.</p>
 
-<p>Now, back to the function.</p>
+<p>The solution to this issue was <a href="http://unicode.org/">Unicode</a>, which collected all of the characters in all of the languages of the world with accented letters, control codes, etc. and assigned each character a number or <em>Unicode code point</em>. In go, this number is called a <code class="highlighter-rouge">rune</code>.</p>
 
-<p>Let me define all of the variables for you. $h$ is the return value (think y=x). $k$ is the object, or ‘thing’ which the function is telling where to go (hence it is the input to the function). And $m$ is the modulus we are working in such that $0 \le h(k) \lt m$, making $h(k)$ the least positive residue of $k$ modulo $m$</p>
+<p>As of March 2020, Unicode version 13 holds over 143,000 characters spanning 154 languages and scripts and symbol sets. In go, each <code class="highlighter-rouge">rune</code> is essentially an <code class="highlighter-rouge">int32</code> which is the standard data type for Unicode characters (you can literally write go code like this <code class="highlighter-rouge">var r rune = 1424</code>).</p>
 
-<p>Lets say we had some parking lot with 10 spaces.</p>
+<p>In memory, it is possible that you could represent a bunch of runes simply as a bunch of int32 values (known as utf-32 or ucs-4). But, often you won’t need to have space for the entire 32-bit integer. You certainly won’t if all you are dealing with are English characters.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p><strong>This is where utf-8 steps in.</strong></p>
 
-<p>Currently there are no cars in the lot, but if I were to put one into spot 4 and 8, for example, it would look like this:</p>
+<p>UTF-8 is a “variable-length encoding of Unicode code points as bytes”<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. Basically, it uses between 1 and 4 bytes to represent a rune. The most significant bits (also known as high-order bits, having the highest values, positioned on the left side of the number) dictate how many bytes follow. For example a high-order <code class="highlighter-rouge">0</code> means 7-bit (exactly like ASCII). A high-order <code class="highlighter-rouge">110</code> means 2 bytes (the second byte will begin with <code class="highlighter-rouge">10</code>). A high-order <code class="highlighter-rouge">1110</code> means 3 bytes, <code class="highlighter-rouge">11110</code> means 4.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>🚙</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>🚖</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xxxxxxx                                | 0-127
+110xxxxx 10xxxxxx                       | 128-2047
+1110xxxx 10xxxxxx 10xxxxxx              | 2048-65535
+11110xxx 10xxxxxx 10xxxxxx 10xxxxxx     | 65536-
+</code></pre></div></div>
 
-<p>Okay, in this situation, the parking lot owner, Sol, (somehow) knows that he won’t ever have more than ten cars in his lot at the same time. Sol also wants to make it easy for people to know where to park and to know where their car is when they need to retrieve it.</p>
+<h3 id="working-in-go">Working in go</h3>
 
-<p>Naturally 🙄, Sol uses a hash function to automate this process.</p>
+<p>In go, a string is an “immutable sequence of bytes”. Strings in Go are almost always encoded in utf-8 encoding and the <code class="highlighter-rouge">len(s)</code> function returns the number of <strong>bytes</strong> in a string (not the number of characters). The indexing operator <code class="highlighter-rouge">s[i]</code> returns the ith <em>byte</em> of <code class="highlighter-rouge">s</code>.</p>
 
-<p>In his hash function, the output $h$ is the space to park in (0-9), $k$ is the license plate number of the car (in this world license plates are strictly numeric), and $m$ is the number of spaces (10)–thus, $h(k)$ will <strong>always</strong> output a number that corresponds to an actual space.</p>
+<p>There is also a substring operator which returns a completely new string starting at the beginning index and ending one less than the end index:</p>
 
-<p><strong>Let’s take Sol’s lot out for a spin</strong>. A car 🚍 pulls up with the license plate 20. Using our hash function, $h(k) \equiv k\ (\textrm{mod}\ m)$, we find $h(20)$ to be 0. So, Sol sends the car to space 0.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">:=</span> <span class="s">"Bathroom"</span>
+<span class="n">s</span><span class="p">[</span><span class="m">4</span><span class="o">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span> <span class="c">// "room"</span>
+<span class="n">s</span><span class="p">[</span><span class="m">4</span><span class="o">:</span><span class="p">]</span> <span class="c">// "room"</span>
+<span class="n">s</span><span class="p">[</span><span class="o">:</span><span class="m">4</span><span class="p">]</span> <span class="c">// "Bath"</span>
+</code></pre></div></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>🚍</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>String concatenation can be performed with the <code class="highlighter-rouge">+</code> operator or with buffers as you will see in a bit.</p>
 
-<p>Another car 🚙 with the license plate 478 pulls up. Sol tells him to go to spot 8. And another 🚔 with the plate 87263 goes to spot 3.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">:=</span> <span class="s">"Airport "</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s">"'s aren't very fun."</span>
+</code></pre></div></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>🚍</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>🚔</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>🚙</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>Strings are immutable and thus attempting to reassign a specific byte or character doesn’t work.</p>
 
-<p>Now, a car 🚕 pulls up with the license plate #9878. The hash function tells the car to go to space 8, but there is already a car there. This is called a <strong>collision</strong> (when a hash function assigns two different things to the same location).</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"b"</span> <span class="c">// error on compile: cannot assign to s[0]</span>
+</code></pre></div></div>
 
-<h2 id="collision-resolution">Collision resolution</h2>
+<p>Coming from another more dynamic language such as python, ruby, or javascript, the immutability of strings might seem like an annoying nuisance, but it makes it super easy for the computer to copy strings. For example, the string <code class="highlighter-rouge">s</code> and the substring <code class="highlighter-rouge">s[4:]</code> can share the same underlying memory without worrying about it somehow changing. <strong>No new memory must be allocated</strong>.</p>
 
-<p>How can Sol find a free spot available to the new car?</p>
+<h3 id="runes-and-utf-8">Runes and utf-8</h3>
 
-<p>Well, if we were working with memory and not parking lots, one way to resolve the issue would be to create a <strong>linked list</strong> in the spot in memory where both cars go and simply search through that list every time a retrieval was needed or add to that list every time an input was needed.</p>
+<p>So, as I said before, utf-8 is a variable-length encoding of characters–it takes 1 to 4 bytes to represent each character instead of each being 4. But, this variability <strong>prevents</strong> direct access to the n-th character of a string through indexing. However, go still uses them normally to encode strings because of their sweet advantages such as their compatibility with ASCII, ability to decode left to right, and easy searching for specific runes by just using their bytes.</p>
 
-<p>However, we need to find a <strong>free spot</strong> for the car to go to.</p>
+<p>Recall, the <code class="highlighter-rouge">len</code> function returns the number of bytes in a string, so it could get a bit confusing in this case:</p>
 
-<p>Starting with the original hashing function $h_0(k)=h(k)$, we can define a sequence of spaces $h_1(k),h_2(k),….$. We attempt to place the car (or thing) $k$ at location $h_0(k)$. If this location is taken, we move one location up, $h_1(k)$. If this is taken, we move one more up $h_2(k)$, and so on.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="s">"浴"</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// 3</span>
+</code></pre></div></div>
 
-<p>The simplest way to represent this ‘probing sequence’ is like so:</p>
+<p>To find the actual rune count in a string, rather than the number of bytes in the string, there are a couple ways of doing this.</p>
 
-<p>!!h_j(k) \equiv h(k) +j\ (\textrm{mod}\ m), \quad \quad 0 \le h_j(k) \lt m!!</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">:=</span> <span class="m">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="p">{</span>
+  <span class="n">_</span><span class="p">,</span> <span class="n">size</span> <span class="o">:=</span> <span class="n">utf8</span><span class="o">.</span><span class="n">DecodeLastRuneInString</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="p">])</span> <span class="c">// jump forward</span>
+  <span class="n">i</span> <span class="o">+=</span> <span class="n">size</span>
+  <span class="n">n</span><span class="o">++</span>
+<span class="p">}</span>
+<span class="n">n</span> <span class="c">// 1 ✅</span>
 
-<p>This places the thing $k$ as near as possible to the past location $h(k)$.</p>
+<span class="n">n</span> <span class="o">=</span> <span class="m">0</span>
+<span class="k">for</span> <span class="k">range</span> <span class="n">a</span> <span class="p">{</span> <span class="c">// range iterates over runes in string</span>
+  <span class="n">n</span><span class="o">++</span>
+<span class="p">}</span>
+<span class="n">n</span> <span class="c">// 1 ✅</span>
 
-<p>This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called <em>clustering</em>, where many different items are placed right next to each other.</p>
+<span class="n">utf8</span><span class="o">.</span><span class="n">RuneCountInString</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// 1 ✅</span>
+</code></pre></div></div>
 
-<p>To avoid clustering, you can use a collision resolution policy called <em>double hashing</em>.</p>
+<p>Converting a <code class="highlighter-rouge">[]rune</code> to a utf-8 encoded string returns the unicode code points of the string.</p>
 
-<p>Using $0 \le h(k) \lt m$, where $m$ is prime, a second hashing function is derived:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="s">"浴室"</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"% x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="c">// e6 b5 b4 e5 ae a4</span>
+<span class="n">r</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">rune</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="c">// [6d74 5ba4]</span>
+</code></pre></div></div>
 
-<p>!!g(k) \equiv k +1\ (\textrm{mod}\ m-2), \quad \quad 0 \lt g(k) \le m-2!!</p>
+<p>Convert from <code class="highlighter-rouge">[]rune</code> to <code class="highlighter-rouge">string</code> using <code class="highlighter-rouge">string(r)</code>.</p>
 
-<p>In the above function, $(g(k),m)=1$. Our new probing sequence is thus</p>
+<h3 id="manipulating-strings">Manipulating strings</h3>
 
-<p>!!h_j(k) \equiv h(k) +j \cdot g(k)(\textrm{mod}\ m)!!</p>
+<p>The main packages to manipulate strings are <code class="highlighter-rouge">bytes</code>, <code class="highlighter-rouge">strings</code>, <code class="highlighter-rouge">strconv</code>, and <code class="highlighter-rouge">unicode</code> (some of which you have already seen).</p>
 
-<p>$j$ runs through the integers $0,1,2…,m-1$ and all possible locations are traced.</p>
+<p>Because of the immutability of strings, it can sometimes be useful to use <code class="highlighter-rouge">bytes.Buffer</code> which allows you to use a string buffer (a string that can grow as more is added).</p>
 
-<p>The most reasonable distribution of $g(k)$ values occurs when both $m$ and $m-1$ are prime (twin primes).</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">buf</span> <span class="n">bytes</span><span class="o">.</span><span class="n">Buffer</span>
+<span class="n">buf</span><span class="o">.</span><span class="n">WriteByte</span><span class="p">(</span><span class="sc">'a'</span><span class="p">)</span>
+<span class="n">buf</span><span class="o">.</span><span class="n">WriteString</span><span class="p">(</span><span class="s">"123abc"</span><span class="p">)</span>
 
-<p>In addition to the recommended restrictions on the values of $m$ and $m-1$, m should not be a power of base $b$, where $k$ is represented as $k_b$ ($k$ is a number in base $b$), because $(\textrm{mod}\ m)$ would always return the last couple digits of the number and will cluster as $m$ continues to increase in size.</p>
+<span class="k">var</span> <span class="n">s</span> <span class="kt">string</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">strings</code> package has many useful utility functions. A few I have written below.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">Contains</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">substr</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>
+<span class="k">func</span> <span class="n">Count</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">int</span>
+<span class="k">func</span> <span class="n">Fields</span><span class="p">(</span><span class="n">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">string</span>
+<span class="k">func</span> <span class="n">HasPrefix</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">prefix</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>
+<span class="k">func</span> <span class="n">Index</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">int</span>
+<span class="k">func</span> <span class="n">Join</span><span class="p">(</span><span class="n">a</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">strconv</code> has functions for converting integer, floating-point, and boolean values into and out of string representations.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="m">432</span>
+<span class="n">strconv</span><span class="o">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// "432"</span>
+<span class="n">strconv</span><span class="o">.</span><span class="n">FormatInt</span><span class="p">(</span><span class="kt">int64</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span> <span class="c">// "110110000"</span>
+<span class="n">strconv</span><span class="o">.</span><span class="n">Atoi</span><span class="p">(</span><span class="s">"432"</span><span class="p">)</span> <span class="c">// 432</span>
+<span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s">"432"</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">64</span><span class="p">)</span> <span class="c">// base 10, up to 64 bits</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">unicode</code> package has functions like <code class="highlighter-rouge">IsDigit</code>, <code class="highlighter-rouge">IsUpper</code>, <code class="highlighter-rouge">IsLetter</code>, <code class="highlighter-rouge">ToUpper</code>, <code class="highlighter-rouge">ToLower</code>, <code class="highlighter-rouge">IsLower</code>, and many more run manipulation functions.</p>
+
+<p>Phew! That was a lot.</p>
+
+<hr />
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The Go Programming Language, by Donovan and Kernighan <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </div>
   

@@ -117,111 +117,93 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/js-dev-rust">
-        A js developer’s view of rust
+      <a href="/gradient-descent-univar-lr">
+        Gradient descent for univariate linear regression
       </a>
     </h1>
 
-    <span class="post-date">13 Sep 2019</span>
+    <span class="post-date">20 Sep 2019</span>
 
-    <p>A while ago, I was trying to find something interesting to read about online when I bumped into Rust. Rust is …</p>
+    <p>Gradient descent is used for many aspects of machine learning. One area in which it is used a ton is in optimizing artificial neural networks. I will explain the concept of how this works once you understand the basic gradient descent operations.</p>
 
-<blockquote>
-  <p>“a language empowering everyone to build reliable and efficient software.”</p>
-</blockquote>
+<p>Gradient descent can also be used to minimize arbitrary functions such as more general ones like cost functions with $n$ number of parameters: $J(\theta _0, \theta _1, \theta _2, \theta _3, … , \theta _n)$.</p>
 
-<p>In short, it is a systems programming language. A freaky fast one, at that. It even outperformed C++ in many of the benchmarks tests run by The Computer Language Benchmarks Game (mostly having to do with complex algorithmic tasks like binary trees, etc).</p>
+<p>Please keep in mind that gradient descent is NOT HARD. Especially understanding how it minimizes functions is super easy to get. So, if you don’t understand a concept right away, keep on trying to see it from different angles and I’m sure it’ll click.</p>
 
-<p>Before I started to delve more into the language itself, though, I searched about to see what people were thinking of it. Rust was created in 2011 and is backed by Mozilla (the not-for-profit). It has a sort of niche group following it consisting mostly of previous C/C++ developers who wanted a break from the null pointer exceptions, undefined behaviors, language complexity, crazy macros — shall I go on? Although Rust is still in its early stages of maturity, it has a website devoted to following its development of game programming, which is pretty sweet. There are even some games that are gathering a lot of buzz and have even been put into the App Store and the Google Play Store such as A Snake’s Tale. Rust even has an AMAZING package manager called crates.io which is comparable to npm and has had almost 1.5 billion downloads to date.</p>
-
-<p>After seeing all of this, I decided that I needed to feed my curiosity and learn Rust’s syntax. I started by reading through The Book — a (mostly) complete walkthrough of Rust’s syntax, idioms, and program structure.</p>
-
-<p>Because I know many c-like languages, the general form of the syntax was simple and easy to grasp. If you are one of those people who use const whenever possible and will punish those who don’t, you’ll love Rust. Its default form of assigning variables makes them immutable.</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Below is an immutable variable</span>
-<span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="c">// Below is a mutable variable</span>
-<span class="k">let</span> <span class="k">mut</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="c">// General form for variables:</span>
-<span class="k">let</span> <span class="n">var_name</span><span class="p">:</span> <span class="k">type</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>Data types in Rust are straight forward. Integer types consist of 8 through 128 bit unsigned and signed numbers.</p>
-
-<p><img src="https://miro.medium.com/max/564/1*AesR6b5JntLgZzW7K2_nlA.png" alt="" /></p>
-
-<p>There are also immutable array types, characters, &amp;str (references to a list of characters in memory), tuples, enumerations, structs, collections, etc.</p>
-
-<p>Functions are declared using the fn keyword like so:</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello, world"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>You can specify return values with the -&gt; symbol and if you are returning a value in the last line of the function, there is no need to include the return keyword.</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// returns the 32-bit integer 5</span>
-<span class="k">fn</span> <span class="nf">my_function</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="nb">u32</span> <span class="p">{</span>
-  <span class="mi">5</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>I was breezing on through until I hit the concept of ownership. All programs have to manage the way they use a computer’s memory while running. Because Rust doesn’t garbage-collect and programmers don’t have to manually allocate and deallocate memory, memory is managed through a system of ownership.</p>
-
-<p>Here are the rules of ownership in Rust (right from The Book):</p>
+<p>So, without further ado let me give you the general outline for minimizing a function using G.D.:</p>
 
 <ol>
-  <li>Each value in Rust has a variable that’s called its owner.</li>
-  <li>There can only be one owner at a time.</li>
-  <li>When the owner goes out of scope, the value will be dropped.</li>
+  <li>Start with some value for $\theta _0$and $\theta _1$</li>
+  <li>Keep changing $\theta _0$and $\theta _1$to reduce $(\theta _0, \theta _1) $until we hopefully find a minimum</li>
 </ol>
 
-<p>Let’s have an example:</p>
+<p><strong>Note:</strong> The <em>assignment operator</em> in maths looks like this: “$:=$”. It can also be used to reassign variable values. The normal “$=$” is a truth assertion.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>                      <span class="c">// s is not valid here, it’s not yet declared</span>
-    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>   <span class="c">// s is valid from this point forward</span>
+<p>Here are some variable to know before I get into the algorithm:</p>
 
-    <span class="c">// do stuff with s</span>
-<span class="p">}</span> <span class="c">// this scope is now over, and s is no longer valid</span>
-</code></pre></div></div>
+<p>$\alpha=$”alpha” is the <em>learning rate</em>. It is how much we change the parameter values by each update step. It usually is a constant. Ex: If $\alpha=10$whatever value the algorithm gives to update the parameter value by, it is multiplied by a factor of ten.</p>
 
-<p>Here is the jam that I got into when I was first using Rust.</p>
+<p>$j=$it is a subscript to $\theta$to represent a which parameter we are dealing with. It is a generic form of saying something like $theta _0!!.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">);</span> <span class="c">// a is the owner</span>
-<span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ownership has changed to b. What is a?</span>
+<p>And a refresher on the <strong>cost function</strong>:
+!!J(\theta _0,\theta _1)=\frac{1}{2m} \sum _{i=1} ^m (h _\theta (x^i) - y^i)^2!!</p>
 
-<span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="c">// error[E0382]: borrow of moved value: `a`</span>
-</code></pre></div></div>
+<hr />
 
-<p>Because there can only be only one owner at a time, I can’t try to assign the value of a variable to another using the first variable’s name if it was allocated on the heap, like the String type is in Rust. Now, if the variable’s type is a primitive (int, double, bool, etc), doing the reassign will simply copy the value and NOT change ownership.</p>
+<p>Here is the actual algorithm:</p>
 
-<p>When referencing a variable, you use the &amp; symbol as in C/C++. The references allow the programmer to take the value without taking ownership. There can be as many non-mutable references as one wants to a variable at one time, but only ONE mutable reference.</p>
+<p>!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{!! !!\hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }!! !!\}!!</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Dude, Rust is sick."</span><span class="p">);</span>
-<span class="p">{</span>
-  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
-  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
-<span class="p">}</span>
+<p>This is repeated simultaneously for $\theta _0$and $\theta _1$. A.K.A this is repeated simultaneously for the $j$values of $0,1$.</p>
 
-<span class="p">{</span>
-  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// mutable reference. ok.</span>
-  <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Different!"</span><span class="p">);</span> <span class="c">// change value. ok</span>
-<span class="p">}</span>
+<p>Programmatically, you will have to create temporary variables to be able to simulate a simultaneous update.</p>
 
-<span class="p">{</span>
-  <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ok</span>
-  <span class="k">let</span> <span class="n">c</span> <span class="o">=</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">a</span><span class="p">;</span> <span class="c">// ERROR. Only one mut reference at a time!</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<p><strong>Correct Simultaneous Update:</strong></p>
 
-<p>Even more difficult for me to understand was rust lifetimes which is how Rust can get around using garbage collection. It is also their solution to the all too well known C++ problem of dangling pointers when a variable is “used after free”. I won’t even attempt to explain that concept here. You should read this article to find more.</p>
+<p>!!
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } !! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } !! !!\theta _0 := temp0!! !!\theta _1 := temp1!!</p>
 
-<p>Overall, I would say my experience with Rust was rewarding. I was able to understand its syntax and style guide easily, although some of the concepts were difficult to grasp at first. I don’t know if this is just me, but even the way the language looks when typed is elegant. It uses functional programming techniques commonly used in JavaScript (filtering, mapping, etc) and its syntax keywords are short and too the point (<code class="highlighter-rouge">fn</code>, <code class="highlighter-rouge">enum</code>, <code class="highlighter-rouge">let</code>, <code class="highlighter-rouge">mut</code>, <code class="highlighter-rouge">i32</code>, <code class="highlighter-rouge">&amp;str</code>, etc.)</p>
+<p><strong>INcorrect Simultaneous Update:</strong></p>
 
-<p>Some systems developers are lobbying heavily for Rust to be the next C/C++. I don’t know whether that will happen anytime soon, but one thing is for sure: it will continue to grow and mature. It is backed by Mozilla and has a ‘cult’ following that want to kill off C++.</p>
+<p>!!
+temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 }!! !!\theta _0 := temp0!! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 }!! !!\theta _1 := temp1
+!!</p>
 
-<p>So there.</p>
+<blockquote>
+  <p>The error here occurs because $\theta _0$is updated before $\theta _1$. That means that $\theta _1$is using the newly updated value of $\theta _0$to calculate the partial derivative with respects to $\theta _1$which is NOT what we want to happen.</p>
+</blockquote>
 
-<p>Go look at Rust.</p>
+<h2 id="example-using-an-easier-function">Example Using an Easier Function</h2>
+
+<p>Let’s say that our task was to minimize some arbitrary cost function with one parameter $(\theta _1)$where $theta _1 \in ℝ$. The graph of the function $(\theta _1)$(if it is a squared error cost function) might look something like this:</p>
+
+<p><img src="https://i.snap.as/UdTq5I8.png" alt="" /></p>
+
+<p>What we want to find is the value of $\theta$ that makes the $y$component of this graph to be as low as possible – in this case, 0. Just looking at the graph, we can see that that number is 4. But, in more complex cost functions that deal with hundreds of parameters/dimensions, simply graphing the cost function will not yield an easy-to-see answer.</p>
+
+<p>In terms of gradient descent, we start by choosing a random value for $\theta _1$(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from $\theta _1$’s current value. To find the slope we find the derivative of the cost function with respect to $\theta _1$.</p>
+
+<p><strong>Note:</strong> If you don’t know calc already, THAT’S TOTALLY OKAY! I didn’t either when I started learning about this subject. I taught all I needed to know to myself. I would highly highly recommend 3Blue1Brown’s <a href="https://www.youtube.com/watch?v=WUvTyaaNkzM&amp;list=PL0-GT3co4r2wlh6UHTUeQsrf3mlS2lk6x">“The Essence of Calculus”</a> as a starting point. It has amazing animations and fantastic descriptions of everything you would need to know. If you want to just keep trudging along, though, just note that the derivative of a function allows you to find the slope of any point along that original function.</p>
+
+<p>Okay, back to it.</p>
+
+<p>Here is the expression for updating our parameter:</p>
+
+<p>!!
+\theta _1 := \theta _1 - \alpha \frac{d J(\theta _1)}{d\theta _1}
+!!</p>
+
+<p>Next:</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Example using easier function, J(theta 1)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Talk about alpha</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Linear regression model review</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />What is the derivative</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />New algorithm with the derivatives</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Cost function will always be a “bowl” function like the image</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Discuss Batch gradient descent using ALL training examples</li>
+</ul>
 
   </div>
   
