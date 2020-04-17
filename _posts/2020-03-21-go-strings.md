@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Strings in go
+title: Strings in go (and what the heck utf-8 is)
 ---
 
 > What's the f\*&@\$%∂ heck is up with strings in go??

@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-04-10T22:12:03-05:00</updated>
+ <updated>2020-04-16T21:50:17-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
@@ -144,7 +144,7 @@
  </entry>
  
  <entry>
-   <title>Strings in go</title>
+   <title>Strings in go (and what the heck utf-8 is)</title>
    <link href="http://localhost:4000/2020/03/21/go-strings/"/>
    <updated>2020-03-21T00:00:00-05:00</updated>
    <id>http://localhost:4000/2020/03/21/go-strings</id>
@@ -803,7 +803,7 @@ window.location.replace(&quot;https://alligator.io/nodejs/jwt-expressjs/&quot;);
  </entry>
  
  <entry>
-   <title>Complete approach to neural networks</title>
+   <title>Complete approach to neural networks (mathy)</title>
    <link href="http://localhost:4000/complete-neural-nets"/>
    <updated>2020-01-02T00:00:00-06:00</updated>
    <id>http://localhost:4000/complete-guide-to-nn</id>

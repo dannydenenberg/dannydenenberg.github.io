@@ -1,5 +1,5 @@
 ---
-title: Complete approach to neural networks
+title: Complete approach to neural networks (mathy)
 permalink: complete-neural-nets
 layout: post
 ---
