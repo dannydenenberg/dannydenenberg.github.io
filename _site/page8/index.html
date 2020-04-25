@@ -184,7 +184,7 @@
 
     <blockquote>
   <p><span class="message" style="padding: 0">
-<strong>Arrgg!</strong> There are MathJax rendering errors in this article 😥. You can totally read it–just keep in mind that the math is not gorgeous.
+<strong>Arrgg!</strong> I’m almost done with this puppy. Almost!
 </span></p>
 </blockquote>
 
@@ -245,7 +245,7 @@ value.</p>
 
 <p>Let’s take a look at this simple perceptron:</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*CiTHY-agGfLLH9BwdxsogQ@2x.jpeg" alt="" /></p>
+<p><img style="max-width: 70%" src="/goods/simpleperceptron.jpeg" /></p>
 
 <p>In this case, <em>y</em> is equal to:</p>
 
@@ -284,15 +284,16 @@ in this article.</p>
 <p>Because of this connectedness, a node’s value, as in a perceptron, is the <em>weighted sum</em> of all of the nodes in the previous layer. However, unlike a perceptron, the weighted sum is not passed through a step function to determine the final value of an output node. It is passed through some <strong>activation function</strong> that presents some complex mappings between the weighted sum and the node’s actual value. They introduce <em>non-linearity</em> into the network. This non-linearity is extremely important to the network’s ability to learn. It is
 crucial that the activation function be non-linear or else the entire network can only conform to linear patterns such as a line of best fit.</p>
 
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*f3B3KpTAyyS0mL77_rqOnw@2x.png" alt="" />
-<span class="figcaption_hack">Boring, linear function</span></p>
+<p><img src="/goods/boringlinearfunction.png" style="max-width:70%" /></p>
+
+<p><span class="figcaption_hack">Boring, linear function</span></p>
 
 <p>With a non-linear activation function, the ANN can conform to complex $x,y$
 mappings like this one:</p>
 
 <p><br /></p>
 
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*PLRDsg8D6MY_KyTcN68vQw@2x.png" alt="" />
+<p><img src="/goods/superdopefunction.png" style="max-width:70%" />
 <span class="figcaption_hack">Super dope, non-linear function</span></p>
 
 <p>I hope you can now understand some of the key differences between a neural
@@ -344,7 +345,7 @@ Wᵢₕ<br /> The weights connecting the hidden and output layers, I will denote
 follows: Wₕₒ</p>
 </blockquote>
 
-<p>!!X=\begin{bmatrix}x<em>1 &amp; x_2\end{bmatrix} \\ \\ W</em>{ih} = \begin{bmatrix} w<em>{11} &amp; w</em>{12} &amp; w<em>{13} \\ w</em>{21} &amp; w<em>{22} &amp; w</em>{23}\end{bmatrix}!!</p>
+<p>!!X=\begin{bmatrix}x_1 &amp; x_2\end{bmatrix}!! !!W_{ih} = \begin{bmatrix} w_{11} &amp; w_{12} &amp; w_{13} \\ w_{21} &amp; w_{22} &amp; w_{23}\end{bmatrix}!!</p>
 
 <p>Just for a quick reference, here is how you multiply matrices:</p>
 
@@ -356,7 +357,7 @@ follows: Wₕₒ</p>
 product of) the input matrix and the weight matrix. The hidden layer nodes are
 represented by $H$.</p>
 
-<p>!!H<em>{weighted-sum}=X \cdot W</em>{ih}=\begin{bmatrix} (x<em>1w</em>{11}+x<em>2w</em>{21}) \\ (x<em>1w</em>{12}+x<em>2w</em>{22}) \\ (x<em>1w</em>{13}+x<em>2w</em>{23})\end{bmatrix}!!</p>
+<p>!!H_{weighted-sum}=X \cdot W_{ih}=\begin{bmatrix} (x_1w_{11}+x_2w_{21}) \\ (x_1w_{12}+x_2w_{22}) \\ (x_1w_{13}+x_2w_{23})\end{bmatrix}!!</p>
 
 <h4 id="step-2">STEP #2</h4>
 
@@ -375,7 +376,7 @@ unique uses in ANNs).</p>
 
 <p>Now we can pass our weighted sum matrix through this <strong>non-linear</strong> activation function and the outputs of this are our values for our hidden layer nodes.</p>
 
-<p>!!H=\sigma(X\times W<em>{ih})=\begin{bmatrix} \sigma (x_1w</em>{11}+x<em>2w</em>{21}) \\ \sigma(x<em>1w</em>{12}+x<em>2w</em>{22}) \\ \sigma (x<em>1w</em>{13}+x<em>2w</em>{23})\end{bmatrix}=\begin{bmatrix} h_1 \\ h_2 \\ h_3 \end{bmatrix}!!</p>
+<p>!!H=\sigma(X\times W_{ih})=\begin{bmatrix} \sigma (x_1w_{11}+x_2w_{21}) \\ \sigma(x_1w_{12}+x_2w_{22}) \\ \sigma (x_1w_{13}+x_2w_{23})\end{bmatrix}=\begin{bmatrix} h_1 \\ h_2 \\ h_3 \end{bmatrix}!!</p>
 
 <h4 id="step-3">STEP #3</h4>
 
@@ -394,7 +395,7 @@ matrices.</p>
 
 <p>And then multiply them to find the weighted sum for the output layer.</p>
 
-<p>!!Y<em>{weighted-sum}=H\cdot W</em>{ho} \\ = \begin{bmatrix} h<em>1 &amp; h_2 &amp; h_3 \end{bmatrix} \begin{bmatrix} w</em>{11} &amp; w<em>{12} \\ w</em>{21} &amp; w<em>{22} \\ w</em>{31} &amp; w<em>{32}\end{bmatrix} \\ = \begin{bmatrix} h_1w</em>{11} + h<em>2w</em>{21}+h<em>3w</em>{31} \\ h<em>1w</em>{12}+h<em>2w</em>{22}+h<em>3w</em>{32}\end{bmatrix}!!</p>
+<p>!!Y_{weighted-sum}=H\cdot W_{ho}!! !!= \begin{bmatrix} h_1 &amp; h_2 &amp; h_3 \end{bmatrix} \begin{bmatrix} w_{11} &amp; w_{12} \\ w_{21} &amp; w_{22} \\ w_{31} &amp; w_{32}\end{bmatrix}!! !!= \begin{bmatrix} h_1w_{11} + h_2w_{21}+h_3w_{31} \\ h_1w_{12}+h_2w_{22}+h_3w_{32}\end{bmatrix}!!</p>
 
 <h4 id="step-4-final">STEP #4 (FINAL)</h4>
 
@@ -406,7 +407,7 @@ function.</p>
 <p>To get the outputs for the entire network, we just have to pass the weighted sum
 for the output layer through our activation function (sigmoid once more).</p>
 
-<p>!!Y=\sigma (H \cdot W<em>{ho})=\begin{bmatrix} \sigma (h_1w</em>{11} + h<em>2w</em>{21}+h<em>3w</em>{31}) \\ \sigma ( h<em>1w</em>{12}+h<em>2w</em>{22}+h<em>3w</em>{32}) \end{bmatrix}!!</p>
+<p>!!Y=\sigma (H \cdot W_{ho})=\begin{bmatrix} \sigma (h_1w_{11} + h_2w_{21}+h_3w_{31}) \\ \sigma ( h_1w_{12}+h_2w_{22}+h_3w_{32}) \end{bmatrix}!!</p>
 
 <p>And that produces the final ‘outputs’ for our ANN.</p>
 
