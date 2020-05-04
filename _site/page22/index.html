@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-  <head>
+<head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
 <script>
@@ -94,30 +94,30 @@
 </head>
 
 
-  <body>
-    <div class="container content">
-      <div class="masthead">
-        <h3 class="masthead-title">
-          <a href="/" title="Home">Danny Denenberg</a>
+<body>
+  <div class="container content">
+    <div class="masthead">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Danny Denenberg</a>
 
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/about/">About</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/archive">Archive</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/atom.xml">Feed</a></small
-          >
-          
-        </h3>
-      </div>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+        
+      </h3>
+    </div>
 
-      <h2>What's New?</h2>
+    <p>See a full list of posts in <a href="/archive">the archive</a>.</p>
+<h2>What's New?</h2>
 <ul>
   
   <li>
-    <a href="/2020/04/10/reading-files-in-go/">File reading in go</a
+    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a
+    ><span class="post-date">25 Apr 2020</span>
+  </li>
+  
+  <li>
+    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a
     ><span class="post-date">10 Apr 2020</span>
   </li>
   
@@ -129,11 +129,6 @@
   <li>
     <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a
     ><span class="post-date">21 Mar 2020</span>
-  </li>
-  
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a
-    ><span class="post-date">12 Mar 2020</span>
   </li>
   
 </ul>
@@ -175,59 +170,74 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/squeeze-theorem">
-        A proof of the Squeeze Theorem (and why I like it)
+      <a href="/cron-github">
+        Automating Backups with Cron &amp; GitHub
       </a>
     </h1>
 
-    <span class="post-date">15 Apr 2018</span>
+    <span class="post-date">24 May 2018</span>
 
-    <p><em>An intuitive explanation of an awesome theorem.</em></p>
-<p>While I was studying calculus, I came across this statement:</p>
-<p>!!\lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta}=1!!</p>
-<p>This amazed my because of the fact that sin of 0 is 0, so with substitution of theta in the fraction next to the limit, it would end up as 0/0 or undefined. Now, I had already studied limits a bit and knew about <a href="https://dannydenenberg.com/lhopitals-rule/">l’hopital’s rule</a>. So, I proceeded to take the derivative of the top and bottom of the fraction with respect to theta and checked out what I got. This got me to the expected answer of 1/1 = 1 because the derivative of sin(x) is cos(x) and cos(0) is 1. <!--more-->Now this was all fine and dandy, but as I did more research into the limit listed above, I found a theorem called The Squeeze Theorem which I thought was a much more fun way to solve this same problem. </p>
+    <p>Back when I was using <a href="https://ghost.org/">Ghost</a> as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.</p>
 
-<p>This article is my shot at fully explaining the proof that accompanies the limit shown above using the Squeeze Theorem.</p>
+<p>Being me, I found a <em>hacky</em> way around paying.</p>
 
-<h2 id="the-proof">The Proof</h2>
+<p>I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. <!--more--></p>
 
-<p>To begin, take a look at this picture of a few triangles drawn using different points around a unit circle. If you don’t already know, a unit circle is one with a radius of 1. The point A is at (0,0), point C is at some point on the edge of the circle, point D is at (1,0), and point E is at some point (1, x).</p>
+<p>To do this, make sure git is installed on your Linux/Unix system.</p>
 
-<p><img src="https://i.snap.as/ceBMvID.png" alt="" /></p>
+<p>Then set your username and email in the git preferences through the terminal.</p>
 
-<p>Using this visual, let us compare the <strong>areas</strong> of two triangles and a sector.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email "MY_NAME@example.com"
+</code></pre></div></div>
 
-<p>!!△ACD \le ⌔ACD \le △AED!!</p>
+<p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
 
-<p>We can see that this is true by just looking at the graph. Next, I will define the values of the <strong>areas</strong>. Note that theta will refer to the angle made on the unit circle with each of the shapes (the bottom left angle of the triangle or sector).</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
+</code></pre></div></div>
 
-<p>!!\begin{array}{c}{\triangle ACD=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \sin \theta=\frac{\sin \theta}{2}} \\ {⌔ACD=\frac{1}{2} r^{2} \theta=\frac{1}{2} \cdot 1^{2} \cdot \theta=\frac{\theta}{2}} \\ {\triangle AED=\frac{1}{2} b h=\frac{1}{2} \cdot 1 \cdot \tan \theta=\frac{\tan \theta}{2}}\end{array}!!</p>
+<p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
 
-<p>Just FYI, the hight of triangle △AED is tan(x) because tan(x) is opposite over adjacent and adjacent is 1, so it is really just <strong>the side opposite the angle</strong>, which is the hight. (That confused me at first too 😂)</p>
+<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
 
-<p>Now that we have this, we can re-compare (is that a word?) the areas using actual values.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
+<span class="nb">cd</span> /home/mybackupsrepo <span class="c"># go to the backups repo</span>
+git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <span class="nt">-m</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> git push origin master <span class="c"># commit, push</span>
+<span class="nb">sudo rm</span> <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
+</code></pre></div></div>
 
-<p>!!\frac{\sin \theta}{2} \leq \frac{\theta}{2} \leq \frac{\tan \theta}{2}!!</p>
-<p>Next, I am going to perform a set of operation to all of the elements in the inequality. This is legal as it preserves the <em>truthfulness</em> of the inequality like applying the same operation to each side of an equals sign preserves the equality.</p>
+<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
 
-<p>First, I will multiply each element by 2.</p>
+<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
 
-<p>!!\sin \theta \leq \theta \leq \tan \theta!!</p>
+<p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
 
-<p>Second, I will divide by sin(𝜃).</p>
-<p>!!1 \leq \frac{\theta}{\sin \theta} \leq \frac{1}{\cos \theta}!!</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># crontab -e</span>
+<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
+<span class="nv">MAILTO</span><span class="o">=</span>root@example.com
+<span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
-<p>Finally, I will take the reciprocal of each.</p>
-<p>!!1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta!!</p>
+<span class="c"># For details see man 4 crontabs</span>
 
-<p>These reciprocals will get us to the final result that we want. All we have to do now is take the limit as listed at the top and analyze the results.</p>
-<p>!!\begin{array}{c}{\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq \cos \theta\right]} \\ {\lim _{\theta \rightarrow 0}\left[1 \geq \frac{\sin \theta}{\theta} \geq 1\right]} \\ {1 \geq \lim _{\theta \rightarrow 0} \frac{\sin \theta}{\theta} \geq 1}\end{array}!!</p>
+<span class="c"># Example of job definition:</span>
+<span class="c"># .---------------- minute (0 - 59)</span>
+<span class="c"># |  .------------- hour (0 - 23)</span>
+<span class="c"># |  |  .---------- day of month (1 - 31)</span>
+<span class="c"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
+<span class="c"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
+<span class="c"># |  |  |  |  |</span>
+<span class="c"># *  *  *  *  * user-name  command to be executed</span>
 
-<p>As you can most likely see (I highlighted it), by substitution of the limit value into each element of the inequality, we get 1 is greater than or equal to the limit of sin theta over theta as theta approaches 0 which is greater than or equal to 1.</p>
-<p>Because we know this:</p>
-<p>!!\begin{array}{c}{\text {if}} \\ {1 \geq x \geq 1} \\ {\text {then,}} \\{x=1}\end{array}!!</p>
+<span class="c"># backup using the rsbu program to the internal 4TB HDD and then 4TB external</span>
+01 01 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/rsbu <span class="nt">-vbd1</span> <span class="p">;</span> /usr/local/bin/rsbu <span class="nt">-vbd2</span>
 
-<p>Now we can say that the limit of sin of theta over theta as theta approaches 0 <strong>has to be 1</strong> because of what I just stated above. Kinda cool, right?</p>
+<span class="c"># Set the hardware clock to keep it in sync with the more accurate system clock</span>
+03 05 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /sbin/hwclock <span class="nt">--systohc</span>
+
+<span class="c"># Perform monthly updates on the first of the month</span>
+<span class="c"># 25 04 1 * * /usr/bin/dnf -y update</span>
+</code></pre></div></div>
 
   </div>
   
@@ -246,11 +256,12 @@
 </div> -->
 
 
-      <div class="footer">
-        <p>
-          &copy; 2020. 🦥 All rights reserved.
-        </p>
-      </div>
+    <div class="footer">
+      <p>
+        &copy; 2020. 🐫 All rights reserved.
+      </p>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

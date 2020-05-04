@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-  <head>
+<head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
 <script>
@@ -94,30 +94,30 @@
 </head>
 
 
-  <body>
-    <div class="container content">
-      <div class="masthead">
-        <h3 class="masthead-title">
-          <a href="/" title="Home">Danny Denenberg</a>
+<body>
+  <div class="container content">
+    <div class="masthead">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Danny Denenberg</a>
 
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/about/">About</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/archive">Archive</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/atom.xml">Feed</a></small
-          >
-          
-        </h3>
-      </div>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+        
+      </h3>
+    </div>
 
-      <h2>What's New?</h2>
+    <p>See a full list of posts in <a href="/archive">the archive</a>.</p>
+<h2>What's New?</h2>
 <ul>
   
   <li>
-    <a href="/2020/04/10/reading-files-in-go/">File reading in go</a
+    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a
+    ><span class="post-date">25 Apr 2020</span>
+  </li>
+  
+  <li>
+    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a
     ><span class="post-date">10 Apr 2020</span>
   </li>
   
@@ -129,11 +129,6 @@
   <li>
     <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a
     ><span class="post-date">21 Mar 2020</span>
-  </li>
-  
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a
-    ><span class="post-date">12 Mar 2020</span>
   </li>
   
 </ul>
@@ -175,59 +170,16 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/contributing">
-        How to contribute on GitHub
+      <a href="/ghost-blog-aws-docker">
+        How to create a Ghost blog with docker 🐳+ AWS ❤️
       </a>
     </h1>
 
-    <span class="post-date">23 Apr 2019</span>
+    <span class="post-date">25 Jun 2019</span>
 
-    <p>This guide assumes that you have a <a href="https://github.com/">Github</a> account and <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git installed</a> on your machine.</p>
-
-<h2 id="step-1-fork">Step 1: Fork</h2>
-
-<p>After you find a repo that looks cool, the first step is to fork it. A fork will create a copy of the repo under your account that you can modify, while maintaining a link to original (that’s called the upstream repo).</p>
-
-<p><img src="/assets/forking.png" alt="Forking" /></p>
-
-<h2 id="step-2-clone">Step 2: Clone</h2>
-
-<p>Now let’s download the code to your local machine by cloning the fork.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;your-fork-url.git&gt;
-</code></pre></div></div>
-
-<p>You should now have a directory for your project that can be opened with your <a href="https://code.visualstudio.com/">preferred code editor</a>.</p>
-
-<h2 id="step-3-branch">Step 3: Branch</h2>
-
-<p>A git repo is just a big tree 🌳. You might have hundreds of people working on the same project and branches ensure that collaboration can happen without complete chaos. Changes on your branch are isolated from the work everybody else is doing.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b my-cool-thing
-</code></pre></div></div>
-
-<p>At this point you can start making changes to the code.</p>
-
-<h2 id="step-4-commit">Step 4: Commit</h2>
-
-<p>When you are happy with the changes, you can stage the changes and commit the code.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
-git commit -m "🚀 I made this software better!"
-</code></pre></div></div>
-
-<h2 id="step-5-pull-request">Step 5: Pull Request</h2>
-
-<p>A “pull request” is identical to a “git merge”, but it is requested from an external source - you. In fact, it is called a “merge request” on other platforms, which I think is a better name, but I digress.</p>
-
-<p>Let’s push your branch to your fork.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin my-cool-thing
-</code></pre></div></div>
-
-<p>When you go back to Github you should automatically see a button labeled <strong>Create New Pull Request for my-cool-thing</strong>. Go ahead and push that button. Add additional details as needed and it will show up in the list of PRs once submitted.</p>
-
-<p>Many larger projects have their own “Contributor Guidelines” and may require you to sign a <a href="https://en.wikipedia.org/wiki/Contributor_License_Agreement">CLA</a> before participating.</p>
+    <ol><li>Login to the AWS website</li><li>Click on Services  (top bar)</li><li>Click on EC2</li><li>Click on Launch Instance</li><li>Search and choose Ubuntu Server (18 or up)</li><li>Leave selected the free tear (unless you have upwards of $10000000000)</li><li>Edit security groups (by clicking on <code>edit security groups</code>)</li><li>Click Add rule - <code>http</code> - leave other defaults</li><li>Click Add rule - <code>https</code> -leave other defaults</li><li>Click Launch Instance</li><li>Choose Create new pair key from the drop down selector (name it and download it)</li><li>Open terminal</li><li>CD into the directory where the pair key was downloaded to and do this</li><li>Change the .pem file permissions with: <code>sudo chmod 600 &lt;&lt;MYPAIRKEYFILENAME&gt;&gt;.pem</code></li><li>Go to your AWS instances tab in the EC2 page and find the Public DNS (IPv4) of your instance </li><li><code>ssh <a href="/cdn-cgi/l/email-protection#7c091e091208093c191f4e514948514e4e48514d4f4e51454f521f13110c090819514d521d111d0613121d0b0f521f1311"><span class="__cf_email__" data-cfemail="790c1b0c170d0c39">[email&#160;protected]</span>&lt;</a>&lt;INSERT.Public.Dns.IPv4&gt;&gt; -i PairKeyName.pem</code></li><li>Type <code>yes</code> to get into the ubuntu computer</li><li>Install docker: <code>sudo snap install docker</code></li><li>Make a start file: <code>vim startserver</code></li><li>Put this in the script👇: </li><li><code>#!/bin/bash; docker run -d --name website -e url=https://&lt;&lt;websitename&gt;&gt; -p 80:2386 -v /home/ubuntu/website:/var/lib/ghost/content ghost</code></li><li>Create a /website directory: <code>mkdir website</code></li><li>Go to <code>cloudflare.com</code> and link your website to it by creating an account (or signing in) and going through the steps to link it to your URL that you used in step <strong>21</strong></li><li>Make a <code>CNAME</code> record with the name being <code>@</code> and the address being the public IPv4 of the aws instance that you found in step <strong>15</strong> (example: <code>ec2-54-224-132-93.compute-1.amazonaws.com</code>)</li><li>Go to your domain service (mine is google domains) and set the nameservers to be cloudflare’s (you should have already done this step while setting up cloudflare in step <strong>23</strong>)</li><li>Change the permissions of the <code>startserver</code> script to be able to execute: <code>chmod +x startscript</code></li><li>Now run it: <code>./startscript</code></li><li>It will take a bit to complete because docker needs to pull the image off of their website, but when it does everything should be up and running</li></ol>
+<h2 id="please-note">Please Note</h2>
+<p>It may take a bit for cloudflare to enable https. It will also take some time for your domain provider to change its nameservers and for that change to propagate back to cloudflare.<br /></p>
 
   </div>
   
@@ -246,11 +198,12 @@ git commit -m "🚀 I made this software better!"
 </div> -->
 
 
-      <div class="footer">
-        <p>
-          &copy; 2020. 🦥 All rights reserved.
-        </p>
-      </div>
+    <div class="footer">
+      <p>
+        &copy; 2020. 🐫 All rights reserved.
+      </p>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

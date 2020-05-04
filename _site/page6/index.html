@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-  <head>
+<head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
 <script>
@@ -94,30 +94,30 @@
 </head>
 
 
-  <body>
-    <div class="container content">
-      <div class="masthead">
-        <h3 class="masthead-title">
-          <a href="/" title="Home">Danny Denenberg</a>
+<body>
+  <div class="container content">
+    <div class="masthead">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Danny Denenberg</a>
 
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/about/">About</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/archive">Archive</a></small
-          >
-           &nbsp;&nbsp;&nbsp;<small
-            ><a href="/atom.xml">Feed</a></small
-          >
-          
-        </h3>
-      </div>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+        
+      </h3>
+    </div>
 
-      <h2>What's New?</h2>
+    <p>See a full list of posts in <a href="/archive">the archive</a>.</p>
+<h2>What's New?</h2>
 <ul>
   
   <li>
-    <a href="/2020/04/10/reading-files-in-go/">File reading in go</a
+    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a
+    ><span class="post-date">25 Apr 2020</span>
+  </li>
+  
+  <li>
+    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a
     ><span class="post-date">10 Apr 2020</span>
   </li>
   
@@ -129,11 +129,6 @@
   <li>
     <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a
     ><span class="post-date">21 Mar 2020</span>
-  </li>
-  
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a
-    ><span class="post-date">12 Mar 2020</span>
   </li>
   
 </ul>
@@ -175,22 +170,125 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/jwt-express">
-        JSON web tokens with expressjs
+      <a href="/golang-present-tool">
+        Golang presentation tool usage
       </a>
     </h1>
 
-    <span class="post-date">14 Feb 2020</span>
+    <span class="post-date">11 Mar 2020</span>
 
-    <blockquote>
-  <p>This page links to my article in <strong>Alligator.io</strong>.</p>
-</blockquote>
+    <p>So, you want to create awesome presentations that look like this?</p>
 
-<script>
-  if (window.location.href.substr(window.location.href.length - 'jwt-express'.length) == 'jwt-express') {
-window.location.replace("https://alligator.io/nodejs/jwt-expressjs/");}
-</script>
+<p><img src="/goods/gopresentpic.png" alt="" /></p>
 
+<p>First make sure that you have the <a href="https://go.dev/">Go programming language</a> installed on your system.</p>
+
+<p>On a Mac, it’s as easy as <code class="highlighter-rouge">brew install go</code>.</p>
+
+<p>Next, set your GOPATH and make public the folder where your installed Go binaries will go:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ GOPATH</span><span class="o">=</span><span class="s2">"/Users/danny/go"</span> <span class="c"># public go path</span>
+<span class="nv">$ PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$GOPATH</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span> <span class="c"># binaries</span>
+</code></pre></div></div>
+
+<p>Finally, install (by way of <code class="highlighter-rouge">go get ...</code>) the present binary to be able to locally run your presentations.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>go get <span class="nt">-u</span> golang.org/x/tools/cmd/present
+</code></pre></div></div>
+
+<p>This command will install in your <code class="highlighter-rouge">$GOPATH/bin</code> folder, the executable binary that runs the presentations.</p>
+
+<p>To check that the binary is working properly, type <code class="highlighter-rouge">present</code> as a command into your terminal and it should output something close to <code class="highlighter-rouge">2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999</code></p>
+
+<p>And, if you open your web browser to that specified port (in this case <code class="highlighter-rouge">http://127.0.0.1:3999</code>), you should see a landing page like so:</p>
+
+<p><img src="/goods/presenthomepage.png" alt="" /></p>
+
+<p>This is a page displaying the brother folders from the one you ran the <code class="highlighter-rouge">present</code> command in.</p>
+
+<p>Now, create a file in your current folder with the extension <code class="highlighter-rouge">.slide</code> and put at the top of the file, this information (of course, with your corresponding unique info):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Title of document
+Subtitle of document
+15:04 2 Jan 2006
+Tags: foo, bar, baz
+&lt;blank line&gt;
+Author Name
+Job title, Company
+joe@example.com
+http://url/
+@twitter_name
+</code></pre></div></div>
+
+<p><strong>Note</strong> that the date may be written without a time prepended. Also, multiple presenters may be specified, simply separate them by blank lines and then put their corresponding info.</p>
+
+<p>Now, whenever you want to run your presentation, simply run the <code class="highlighter-rouge">present</code> command in the folder containing your <code class="highlighter-rouge">*.slide</code> file and select it on the webpage the present command sends you to.</p>
+
+<p>After the specified presenters, each of the slides/sections are put separated by blank lines. Following is an example slide:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide or section (must have asterisk)
+
+Some Text
+
+** Subsection
+
+- bullets
+- more bullets
+- a bullet with
+
+*** Sub-subsection
+
+Some More text
+
+  Preformatted text
+  is indented (however you like)
+
+Further Text, including invocations like:
+
+.code x.go /^func main/,/^}/
+.play y.go
+.image image.jpg
+.background image.jpg
+.iframe http://foo
+.link http://foo label
+.html file.html
+.caption _Gopher_ by [[https://www.instagram.com/reneefrench/][Renée French]]
+
+Again, more text
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">.code</code> function injects source code from a file by injecting them as HTML-escaped <code class="highlighter-rouge">&lt;pre&gt;</code> blocks.
+Any line in the program ending with the four characters <code class="highlighter-rouge">OMIT</code> is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.code test.go /START OMIT/,/END OMIT/
+</code></pre></div></div>
+
+<p>With some example contents of <code class="highlighter-rouge">test.go</code>:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coolFunction</span> <span class="o">:=</span> <span class="n">boop</span><span class="p">()</span>
+<span class="c">// START OMIT</span>
+<span class="n">see_mee</span> <span class="o">:=</span> <span class="n">great</span><span class="p">()</span>
+<span class="c">// END OMIT</span>
+</code></pre></div></div>
+
+<p>And the slide only gets this:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">see_mee</span> <span class="o">:=</span> <span class="n">great</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The information following a <code class="highlighter-rouge">.image</code> function can be a file path OR a url.</p>
+
+<p>Parts of the file that begin with a <code class="highlighter-rouge">:</code> (colon) are presenter notes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide
+
+Some Text
+
+: Presenter notes (first paragraph)
+: Presenter notes (subsequent paragraph(s))
+</code></pre></div></div>
+
+<p>For other cool features and functionality, visit the <code class="highlighter-rouge">present</code> <a href="https://pkg.go.dev/golang.org/x/tools/present?tab=doc">package homepage</a>.</p>
 
   </div>
   
@@ -209,11 +307,12 @@ window.location.replace("https://alligator.io/nodejs/jwt-expressjs/");}
 </div> -->
 
 
-      <div class="footer">
-        <p>
-          &copy; 2020. 🦥 All rights reserved.
-        </p>
-      </div>
+    <div class="footer">
+      <p>
+        &copy; 2020. 🐫 All rights reserved.
+      </p>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

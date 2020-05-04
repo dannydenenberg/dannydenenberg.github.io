@@ -1,6 +1,6 @@
 ---
 layout: post
-title: File reading in go
+title: 3 ways to read files in Go
 ---
 
 > A quick reference for reading files in Go.

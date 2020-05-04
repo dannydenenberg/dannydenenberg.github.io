@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-04-25T12:50:58-05:00</updated>
+ <updated>2020-05-03T19:47:08-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
@@ -13,7 +13,151 @@
 
  
  <entry>
-   <title>File reading in go</title>
+   <title>Hey, end-to-end encryption really isn't that hard</title>
+   <link href="http://localhost:4000/end-to-end-nodejs"/>
+   <updated>2020-04-25T00:00:00-05:00</updated>
+   <id>http://localhost:4000/nodejs-end-to-end-encryption</id>
+   <content type="html">&lt;p&gt;End-to-end encryption (&lt;strong&gt;E2EE&lt;/strong&gt;) is “system of communication”&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; in which anyone, save the client, cannot read plaintext&lt;sup id=&quot;fnref:d&quot;&gt;&lt;a href=&quot;#fn:d&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; versions of pieces of data. This is usually a measure taken by some chat or email service to prevent internet service providers or other unauthorized people from reading the plaintext versions of texts sent by users. Not even the server of the application has access to the key to decrypt messages and thus, all messages are stored on the database in encrypted form.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Basically, &lt;strong&gt;E2EE&lt;/strong&gt; is a way to make sure the the only person reading messages is &lt;strong&gt;the user&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;first-off-theoretical-implementation&quot;&gt;First off, theoretical implementation&lt;/h3&gt;
+
+&lt;p&gt;How would the structure of our E2EE chat&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; app look?&lt;/p&gt;
+
+&lt;p&gt;Well, an app like this will have three basic components to it: a front end, a server (back end), and a database.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;front end&lt;/strong&gt; displays to the user the login screen, the chat application features, and any other things in our app the user interacts with.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;server&lt;/strong&gt; will receive all incoming messages, update the pages of all users in the chat with the new message (typically by emitting a new &lt;a href=&quot;https://socket.io/&quot;&gt;socket&lt;/a&gt; event), and store texts on the database.&lt;/p&gt;
+
+&lt;p&gt;In our case, let’s say that each separate chat will have a unique password associated with it. To enter the specific “chat room”&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;, all a user must do is supply the correct password to that room.&lt;/p&gt;
+
+&lt;p&gt;Now, for what our app must have to ensure &lt;strong&gt;E2EE&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How are texts ENcrypted?&lt;/strong&gt; BEFORE being sent to the server, a text will be encrypted using the plaintext password for the unique chat room.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;How are texts DEcrypted?&lt;/strong&gt; Once the server sends the encrypted chat to a user, that user decrypts the message using the same key, the plaintext password.&lt;/p&gt;
+
+&lt;p&gt;The idea is that the password will be sent to the server in a hashed form and the messages will be sent in an encrypted form to prevent the server from even being able to decrypt the message using the password. This is because the password that the server has isn’t the one that was used to encrypt the message, it is the hashed version. The message was encrypted using the &lt;strong&gt;NON&lt;/strong&gt;-hashed version of the password (plaintext).&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;database&lt;/strong&gt; will store the hashed password and encrypted versions of texts ONLY. To tell if a password is correct, the client sends the hashed version of the password the user entered and compares it to the hashed version of the password stored in the database. If they match, the password entered by the user is correct&lt;sup id=&quot;fnref:a&quot;&gt;&lt;a href=&quot;#fn:a&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;practical-example-in-nodejs&quot;&gt;Practical example in node.js&lt;/h3&gt;
+&lt;p&gt;Now for the fun part 🎉.&lt;/p&gt;
+
+&lt;p&gt;The library for encrypting messages that I would recommend is &lt;a href=&quot;https://github.com/brix/crypto-js&quot;&gt;CryptoJS&lt;/a&gt;. For quick use on the client side of things, I would simply use it’s CDN (import the javascript of the library from another URL) and place the &lt;code class=&quot;highlighter-rouge&quot;&gt;script&lt;/code&gt; tag in the head of my HTML page:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, I create two functions. One to encrypt data and one to decrypt data. It’s simply a nice way to contain all of the library code into a separate helper function as to not mess up the rest of my code files with too much repetition (although I am weary to not over-engineer 🙄).&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;encrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CryptoJS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CryptoJS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;CryptoJS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;enc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Utf8&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you’re interested in learning more about the &lt;a href=&quot;https://en.wikipedia.org/wiki/Advanced_Encryption_Standard&quot;&gt;Advanced Encryption Standard&lt;/a&gt; (AES) that I’m using to encrypt messages, please click on &lt;a href=&quot;https://en.wikipedia.org/wiki/Advanced_Encryption_Standard&quot;&gt;the link&lt;/a&gt;. Otherwise, if you’re like me, just continue knowing that it’s safe to use.&lt;/p&gt;
+
+&lt;p&gt;Take a second to make sure the functions work:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;encrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hey&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;U2FsdGVkX1/8cqiEoDGEdqilkazwgE98NucTZzFlDIo=&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;U2FsdGVkX1/8cqiEoDGEdqilkazwgE98NucTZzFlDIo=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;hey&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s run through a quick example.&lt;/p&gt;
+
+&lt;p&gt;If you want to check that your helper functions work, simply use the property that &lt;code class=&quot;highlighter-rouge&quot;&gt;decrypt(encrypt(x)) = x&lt;/code&gt;. In this example, the &lt;strong&gt;message&lt;/strong&gt; will be &lt;code class=&quot;highlighter-rouge&quot;&gt;hey&lt;/code&gt; and the &lt;strong&gt;key&lt;/strong&gt; will be &lt;code class=&quot;highlighter-rouge&quot;&gt;secret&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hey&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;secret&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;secret&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;hey&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In other words, you are decrypting a message with the &lt;em&gt;same&lt;/em&gt; key used to encrypt it. It works behind the same principles that $arccos(cos(x))=x$ is based on.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Okay, back to what’s going on systematically.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Any passwords going to the server will be hashed BEFORE being sent, so I also usually develop yet another helper function for the purpose of clean, contained code:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;CryptoJS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SHA512&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CryptoJS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;enc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Base64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Take another second to check that this works too:&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// &quot;sQnzu7wkTrgkQZF+0G1hi5AI3Qmzvv0bXgc5THBqi7mAsdd4Xll27ASbRt9fEyavWi6m0QP9B8lThf+rDKy8hg==&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If a new chat room, account, or what-have-you is created, the password MUST be hashed &lt;strong&gt;BEFORE&lt;/strong&gt; being sent to the server to ensure a secure E2EE standard.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;So, what’s the sequence of a user sending a new message like?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;User signs in and is authenticated as an authorized user.&lt;/li&gt;
+  &lt;li&gt;User clicks “send” on their message.&lt;/li&gt;
+  &lt;li&gt;The message text is encrypted with the key being the &lt;strong&gt;plaintext&lt;/strong&gt; password to the chat room.&lt;/li&gt;
+  &lt;li&gt;The message is sent to the server.&lt;/li&gt;
+  &lt;li&gt;The server updates all users connected to the chat by sending them the ENCRYPTED message.&lt;/li&gt;
+  &lt;li&gt;The users connect to the chat receive this new message and, because they are authenticated, use the key (being the plaintext password stored on their computers) to decrypt and show the message in &lt;em&gt;its&lt;/em&gt; plaintext form.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;All in all, E2EE isn’t brain surgery. It’s a relatively simple concept to grasp but has some very interesting consequences such as nearly unbreakable security.&lt;/p&gt;
+
+&lt;p&gt;However, if you’re thinking about implementing this in your own application, I would consider these &lt;strong&gt;few drawbacks&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Because the text stored on the database is encrypted, any server-side searching through text, text analysis, machine learning on text is impossible.&lt;/li&gt;
+  &lt;li&gt;If you are worried about content on your site, you cannot repress illegal or unacceptable content&lt;/li&gt;
+  &lt;li&gt;Targeted ads are harder to implement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Anyway, take it as you will, it’s a super cool topic with many many helpful applications that can lead to increased consumer privacy.&lt;/p&gt;
+
+&lt;p&gt;Have fun with E2EE!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Direct from &lt;a href=&quot;https://en.wikipedia.org/wiki/End-to-end_encryption&quot;&gt;Wikipedia&lt;/a&gt; (for lack of better terminology) &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:d&quot;&gt;
+      &lt;p&gt;Whenever I use the word &lt;strong&gt;plaintext&lt;/strong&gt;, I am referring to the human readable form of the text. Like, the actual thing. &lt;a href=&quot;#fnref:d&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;Just using a chat app as an example. By the end of the post, it’ll be clear how E2EE can be applied to your other fun projects 🎉! &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;This will be our name for a group chat that anyone can enter with the password. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:a&quot;&gt;
+      &lt;p&gt;Why? Because the hash of a string is always the same as another hash of the same string. Thus, the only time the hashes would differ would be if the plaintext passwords differed. &lt;a href=&quot;#fnref:a&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>3 ways to read files in Go</title>
    <link href="http://localhost:4000/2020/04/10/reading-files-in-go/"/>
    <updated>2020-04-10T00:00:00-05:00</updated>
    <id>http://localhost:4000/2020/04/10/reading-files-in-go</id>
