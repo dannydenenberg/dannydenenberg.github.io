@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://localhost:4000</loc>
-    <lastmod>2020-05-03T19:51:51-05:00</lastmod>
+    <lastmod>2020-05-15T18:03:11-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -245,7 +245,7 @@
   <url>
     <loc>http://localhost:4000/404/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -258,7 +258,7 @@
   <url>
     <loc>http://localhost:4000/about/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -271,7 +271,7 @@
   <url>
     <loc>http://localhost:4000/archive/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -284,7 +284,7 @@
   <url>
     <loc>http://localhost:4000/contact/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -297,7 +297,7 @@
   <url>
     <loc>http://localhost:4000/eleanor</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -310,7 +310,7 @@
   <url>
     <loc>http://localhost:4000/emacs/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -323,7 +323,7 @@
   <url>
     <loc>http://localhost:4000/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -336,7 +336,7 @@
   <url>
     <loc>http://localhost:4000/projects/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -349,7 +349,7 @@
   <url>
     <loc>http://localhost:4000/2014/02/03/jekyll-github-pages-poole/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -362,7 +362,7 @@
   <url>
     <loc>http://localhost:4000/page2/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -375,7 +375,7 @@
   <url>
     <loc>http://localhost:4000/page3/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -388,7 +388,7 @@
   <url>
     <loc>http://localhost:4000/page4/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -401,7 +401,7 @@
   <url>
     <loc>http://localhost:4000/page5/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -414,7 +414,7 @@
   <url>
     <loc>http://localhost:4000/page6/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -427,7 +427,7 @@
   <url>
     <loc>http://localhost:4000/page7/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -440,7 +440,7 @@
   <url>
     <loc>http://localhost:4000/page8/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -453,7 +453,7 @@
   <url>
     <loc>http://localhost:4000/page9/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -466,7 +466,7 @@
   <url>
     <loc>http://localhost:4000/page10/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -479,7 +479,7 @@
   <url>
     <loc>http://localhost:4000/page11/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -492,7 +492,7 @@
   <url>
     <loc>http://localhost:4000/page12/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -505,7 +505,7 @@
   <url>
     <loc>http://localhost:4000/page13/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -518,7 +518,7 @@
   <url>
     <loc>http://localhost:4000/page14/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -531,7 +531,7 @@
   <url>
     <loc>http://localhost:4000/page15/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -544,7 +544,7 @@
   <url>
     <loc>http://localhost:4000/page16/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -557,7 +557,7 @@
   <url>
     <loc>http://localhost:4000/page17/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -570,7 +570,7 @@
   <url>
     <loc>http://localhost:4000/page18/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -583,7 +583,7 @@
   <url>
     <loc>http://localhost:4000/page19/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -596,7 +596,7 @@
   <url>
     <loc>http://localhost:4000/page20/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -609,7 +609,7 @@
   <url>
     <loc>http://localhost:4000/page21/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -622,7 +622,7 @@
   <url>
     <loc>http://localhost:4000/page22/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -635,7 +635,7 @@
   <url>
     <loc>http://localhost:4000/page23/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -648,7 +648,7 @@
   <url>
     <loc>http://localhost:4000/page24/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -661,7 +661,7 @@
   <url>
     <loc>http://localhost:4000/page25/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -674,7 +674,7 @@
   <url>
     <loc>http://localhost:4000/page26/</loc>
     
-      <lastmod>2020-05-03</lastmod>
+      <lastmod>2020-05-15</lastmod>
     
     
       <changefreq>monthly</changefreq>

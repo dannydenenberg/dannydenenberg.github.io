@@ -403,6 +403,32 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
       </p>
     </div>
   </div>
+  <script>
+    function makeHeaderHashes() {
+      let things = document.querySelectorAll(
+        '.post > h2,.post > h3,.post > h4,.post > h5,.post > h6,.page > h2,.page > h3,.page > h4,.page > h5,.page > h6'
+      );
+      things.forEach(thing => {
+        let tagName = thing.tagName;
+        let num = parseInt(tagName[1]);
+
+        let hashes = (() => {
+          let t = "";
+          for (let i = 0; i < num; i++) {
+            t += "#";
+          }
+          return t;
+        })();
+
+        var hash = document.createElement(tagName);
+        hash.innerHTML = hashes;
+        hash.id = "header-hash";
+
+        thing.insertAdjacentElement("beforebegin", hash)
+      });
+    }
+    makeHeaderHashes();
+  </script>
 </body>
 
 </html>
