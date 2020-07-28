@@ -107,28 +107,26 @@
       </h3>
     </div>
 
-    <p>See a full list of posts in <a href="/archive">the archive</a>.</p>
+    <blockquote>
+  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+</blockquote>
 <h2>What's New?</h2>
 <ul>
   
   <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a
-    ><span class="post-date">03 May 2020</span>
+    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
   </li>
   
   <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a
-    ><span class="post-date">10 Apr 2020</span>
+    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
   </li>
   
   <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a
-    ><span class="post-date">27 Mar 2020</span>
+    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
   </li>
   
   <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a
-    ><span class="post-date">21 Mar 2020</span>
+    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
   </li>
   
 </ul>
@@ -137,32 +135,27 @@
 <ul>
   <!-- A bit brute forceeee, but it works....*sigh* -->
   <li>
-    <a href="/2020/03/21/go-strings/"
-      >Strings in go (and what the heck utf-8 is)</a
-    ><span class="post-date">21 Mar 2020</span>
+    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+      class="post-date">21 Mar 2020</span>
   </li>
   <li>
-    <a href="/how-hash-functions-work">How hash functions work</a
-    ><span class="post-date">12 Mar 2020</span>
+    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+      2020</span>
   </li>
   <li>
-    <a href="/jwt-express"
-      >JSON web tokens with Node and Express.js</a
-    ><span class="post-date">14 Feb 2020</span>
+    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+      class="post-date">14 Feb 2020</span>
   </li>
 
   <li>
-    <a href="/complete-neural-nets"
-      >Complete approach to neural networks (mathy)</a
-    ><span class="post-date">2 Jan 2020</span>
+    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
+      class="post-date">2 Jan 2020</span>
   </li>
   <li>
-    <a href="/securing-db">Securing your database</a
-    ><span class="post-date">5 Aug 2019</span>
+    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
   </li>
   <li>
-    <a href="/recursion">Recursive programming</a
-    ><span class="post-date">14 Dec 2018</span>
+    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
   </li>
 </ul>
 
@@ -170,73 +163,68 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2020/03/27/fast-jekyll-sites/">
-        Speed up your jekyll web site
+      <a href="/2020/04/10/reading-files-in-go/">
+        3 ways to read files in Go
       </a>
     </h1>
 
-    <span class="post-date">27 Mar 2020</span>
+    <span class="post-date">10 Apr 2020</span>
 
-    <p>Tips on speeding up your jekyll website.</p>
+    <blockquote>
+  <p>A quick reference for reading files in Go.</p>
+</blockquote>
 
-<h3 id="1-use-a-cdn">#1. Use a CDN</h3>
+<h3 id="1-simple-file-reading">1. Simple file reading</h3>
 
-<p>Just do it. It will help <strong>cache your content</strong>, minify your assets, and make your website more accessible from all parts of the world (if you use a good cdn).</p>
+<p>For a simple file reading, let’s say when you just want to read it into a variable, you can use the <code class="highlighter-rouge">ioutil</code> library. The code blow demonstrates this.</p>
 
-<p>I use <a href="https://www.cloudflare.com/">cloudflare</a>. Many other sites do (digital ocean, etc.). It’s free to use and you can put many different domains on it. There is literally a tab named “speed” where you can optimize your caching settings, minimization of files, and image compression.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s">"io/ioutil"</span>
 
-<p>An additional benefit is that DNS configuration is so so easy and updates almost immediately.</p>
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">data</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">);</span>
 
-<h3 id="2-jekyll-include-cache">#2. jekyll-include-cache</h3>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="c">// error</span>
+  <span class="p">}</span>
 
-<p>This gem will automatically cache specified parts of the page that don’t need to be reloaded such as sidebars, navigation features, etc.</p>
-
-<p>To use, include it in your <code class="highlighter-rouge">Gemfile</code> like so:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
-  <span class="n">gem</span> <span class="s1">'jekyll-include-cache'</span>
-<span class="k">end</span>
+  <span class="c">// store data in a string</span>
+  <span class="k">var</span> <span class="n">text</span> <span class="kt">string</span> <span class="o">=</span> <span class="kt">string</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>And in your <code class="highlighter-rouge">_config.yml</code> like so:</p>
+<h3 id="2-byte-sized-pieces">2. Byte sized pieces</h3>
 
-<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
-  <span class="c1"># - jekyll-commonmark</span>
-  <span class="pi">-</span> <span class="s">jekyll-include-cache</span>
+<p>Another common way to read files in are in bite sized pieces. You would use this technique if your file is so large that reading it all in at once would be very very slow or crash your program. This is often known as streaming in data.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">(</span>
+  <span class="s">"os"</span>
+  <span class="s">"bufio"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">f</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+    <span class="c">// err</span>
+  <span class="p">}</span>
+
+  <span class="k">defer</span> <span class="n">f</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+  <span class="n">r</span> <span class="o">:=</span> <span class="n">bufio</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">b</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span> <span class="c">// size of chunk</span>
+
+  <span class="n">finalString</span> <span class="o">=</span> <span class="s">""</span>
+
+  <span class="k">for</span> <span class="p">{</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">r</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+      <span class="k">break</span>
+    <span class="p">}</span>
+
+    <span class="n">finalString</span> <span class="o">+=</span> <span class="kt">string</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="m">0</span><span class="o">:</span><span class="n">n</span><span class="p">])</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>Run <code class="highlighter-rouge">bundle install</code> to install everything before using it in your site.</p>
-
-<p>To use the caching feature on an included file, instead of saying <code class="highlighter-rouge">{\% include foo.html \%}</code>, simply say <code class="highlighter-rouge">{\% include_cached foo.html \%}</code>.</p>
-
-<h3 id="3-jekyll-compress-images">#3. jekyll-compress-images</h3>
-
-<p>Yes, compressing your images will make an effect on the load time of your website. For me it was one of the factors that took my time to first byte down by around 300 ms.</p>
-
-<p>I believe that the feature on cloudflare that allows image compression is a pay-to-play feature, thus this jekyll gem can do it for free every time a build is made.</p>
-
-<p>Include it in your <code class="highlighter-rouge">Gemfile</code> like so:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
-  <span class="n">gem</span> <span class="s1">'jekyll-compress-images'</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">'https://github.com/valerijaspasojevic/jekyll-compress-images.git'</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<p>Include it in your <code class="highlighter-rouge">_config.yml</code> like so:</p>
-
-<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">jekyll-compress-images</span>
-</code></pre></div></div>
-
-<p>That’s it for Jekyll image compression!</p>
-
-<h3 id="4-use-github-pages">#4. Use github pages</h3>
-
-<p>I have to say that prior to using github pages, I was very skeptical to the idea. I was using <a href="https://netlify.com">Netlify</a> and it made builds and minimization and custom domains and many many more features easy as clicking a button.</p>
-
-<p>However, I was trying to get my site to be as fast as possible without switching to Gatsbyjs or some other way to make my JAMStack site. So, I tried switching it to github pages. Wow. That did the trick. It brought my TTFB down around 400 ms.</p>
-
-<p>If you are having trouble even after steps #1 through #3 with site speed, try switching to <a href="https://pages.github.com/">github pages</a>. <strong>It will make a change to the speed of your site</strong>.</p>
 
   </div>
   
@@ -253,7 +241,6 @@
   >
    
 </div> -->
-
 
     <div class="footer">
       <p>

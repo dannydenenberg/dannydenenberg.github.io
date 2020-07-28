@@ -4,13 +4,175 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-06-22T22:22:55-05:00</updated>
+ <updated>2020-07-28T11:23:34-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>How to use ES6 (and beyond) with node.js in 2020</title>
+   <link href="http://localhost:4000/2020/07/28/babel-nodejs/"/>
+   <updated>2020-07-28T00:00:00-05:00</updated>
+   <id>http://localhost:4000/2020/07/28/babel-nodejs</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;🏄‍♂️ &lt;strong&gt;Updated for Babel 7 in July 2020!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;make-an-empty-node-project&quot;&gt;Make an empty node project&lt;/h3&gt;
+
+&lt;p&gt;Create an empty folder and go into it:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ mkdir TestTestingTest &amp;amp;&amp;amp; cd TestTestingTest&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then make sure you have &lt;a href=&quot;https://yarnpkg.com/&quot;&gt;Yarn&lt;/a&gt; or &lt;a href=&quot;https://www.npmjs.com/&quot;&gt;NPM&lt;/a&gt; as your package manager installed on your computer.&lt;/p&gt;
+
+&lt;p&gt;In the folder, run &lt;code class=&quot;highlighter-rouge&quot;&gt;$ yarn init&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm init&lt;/code&gt; and answer the questions when prompted.&lt;/p&gt;
+
+&lt;h3 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h3&gt;
+
+&lt;p&gt;For the purposes of this tutorial, I will be making an express.js app using ES6 (and beyond) syntax.&lt;/p&gt;
+
+&lt;p&gt;Install the necessary modules:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;with &lt;strong&gt;Yarn&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ yarn add @babel/cli @babel/core @babel/preset-env express rimraf&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;with &lt;strong&gt;NPM&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm install --save @babel/cli @babel/core @babel/preset-env express rimraf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;/h3&gt;
+
+&lt;p&gt;Create a file in the root directory (of your node project) called &lt;code class=&quot;highlighter-rouge&quot;&gt;.babelrc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Put the following JSON into it:&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;presets&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;@babel/preset-env&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;^^ This simply specifies the version of JavaScript for babel to compile your code down to.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In the &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file, add the following to the JSON object:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;echo &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Error: no test specified&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &amp;amp;&amp;amp; exit 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rimraf COMPILED_CODE_HERE/ &amp;amp;&amp;amp; babel ./MY_CODE_DIRECTORY --out-dir COMPILED_CODE_HERE/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;npm run build &amp;amp;&amp;amp; node COMPILED_CODE_HERE/app.js&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;^^ This specifies build and start commands for the node project. On &lt;strong&gt;build&lt;/strong&gt;, Babel, will compile all of your code in the &lt;code class=&quot;highlighter-rouge&quot;&gt;./MY_CODE_DIRECTORY&lt;/code&gt; and place it in the &lt;code class=&quot;highlighter-rouge&quot;&gt;COMPILED_CODE_HERE&lt;/code&gt; folder.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;On &lt;strong&gt;start&lt;/strong&gt;, the build command is run and then the entry point of your app is called. In this case, the entry point is &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What the &lt;strong&gt;rimraf&lt;/strong&gt; dependency does is empty out the compiled code directory every time a new build is run.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;lets-test-this-puppy&quot;&gt;Let’s test this puppy&lt;/h3&gt;
+
+&lt;p&gt;To actually see if this works, let’s write a quick server.&lt;/p&gt;
+
+&lt;p&gt;First, create and enter your code folder by running&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ mkdir MY_CODE_DIRECTORY &amp;amp;&amp;amp; cd MY_CODE_DIRECTORY&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Create the server file with &lt;code class=&quot;highlighter-rouge&quot;&gt;$ touch app.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Put the following in that file:&lt;/p&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;here we are!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4040&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;listening at http://localhost:4040&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you may know, &lt;strong&gt;line 1&lt;/strong&gt; of the code uses importing syntax from ES6 that is not currently supported in Node.js. We are counting on babel to compile this down to something node can understand!&lt;/p&gt;
+
+&lt;p&gt;Save the file and run &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you see &lt;code class=&quot;highlighter-rouge&quot;&gt;listening at http://localhost:4040&lt;/code&gt; in your terminal, you’re good to go.&lt;/p&gt;
+
+&lt;p&gt;If you look in your project you’ll notice that the new &lt;code class=&quot;highlighter-rouge&quot;&gt;COMPILED_CODE_HERE&lt;/code&gt; folder was created and in it is &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Open that file and you should see that your ES6 import statement has been changed to something like this:&lt;/p&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_express&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_interopRequireDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;_express&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s how you can use cool new JavaScript syntax in node apps!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you made it this far, you can stop reading now. The rest of the article shows how to use a specific cool plugin to enable &lt;strong&gt;Typescript types in Babel&lt;/strong&gt; and how to hook up your project to &lt;strong&gt;nodemon&lt;/strong&gt; for easy development.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-babel-plugin&quot;&gt;Example babel plugin&lt;/h3&gt;
+
+&lt;p&gt;Babel has some great plugins such as being able to write types in your javascript code!&lt;/p&gt;
+
+&lt;p&gt;Behind the scenes, babel simply strips them away at compile-time, but they can be very useful to javascript code readability.&lt;/p&gt;
+
+&lt;p&gt;To use this feature, install the plugin with:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ yarn add @babel/plugin-transform-flow-strip-types&lt;/code&gt;&lt;br /&gt;
+or&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm install --save @babel/plugin-transform-flow-strip-types&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, add this to your babel config file &lt;code class=&quot;highlighter-rouge&quot;&gt;.babelrc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;@babel/plugin-transform-flow-strip-types&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s it!&lt;/p&gt;
+
+&lt;p&gt;Now you can use types like &lt;code class=&quot;highlighter-rouge&quot;&gt;let a: string = 'hey'&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;faster-reloading-with-nodemon&quot;&gt;Faster reloading with nodemon&lt;/h3&gt;
+
+&lt;p&gt;When you’re developing the project, it becomes cumbersome to manually restart the server every time a change is made. &lt;strong&gt;Nodemon&lt;/strong&gt; is a package that watches for changes and restarts your server for you!&lt;/p&gt;
+
+&lt;p&gt;To being, first install nodemon on your system and in your project:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yarn add nodemon
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; nodemon
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, add the following &lt;strong&gt;configuration&lt;/strong&gt; to your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; object:&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;nodemonConfig&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;exec&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;npm start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;watch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MY_CODE_DIRECTORY/*&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;ignore&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;**/__tests__/**&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;*.test.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;*.spec.js&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;^^As the code states, this will &lt;strong&gt;‘watch’&lt;/strong&gt; for changes in the &lt;code class=&quot;highlighter-rouge&quot;&gt;MY_CODE_DIRECTORY&lt;/code&gt; folder and &lt;strong&gt;‘execute’&lt;/strong&gt; the command &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; (as we have previously defined) when it sees that a change has been made.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, in your development, start by running &lt;code class=&quot;highlighter-rouge&quot;&gt;$ nodemon&lt;/code&gt; in the root of your node project and edit/save any file in &lt;code class=&quot;highlighter-rouge&quot;&gt;MY_CODE_DIRECTORY&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You will see that the server is automatically restarted and your babel code is recompiled.&lt;/p&gt;
+
+&lt;p&gt;🎉&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Hey, end-to-end encryption really isn't that hard</title>
@@ -682,7 +844,7 @@
 
 &lt;p&gt;This places the thing $k$ as near as possible to the past location $h(k)$.&lt;/p&gt;
 
-&lt;p&gt;This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called &lt;em&gt;clustering&lt;/em&gt;, where many different items are placed right next to each other.&lt;/p&gt;
+&lt;p&gt;This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called &lt;em&gt;clustering&lt;/em&gt;, where many different items are placed right next to each other, it also can be computationally intensive for Sol or his computer to retrace through the same number of spaces each time simply because similar license plates are clustered together.&lt;/p&gt;
 
 &lt;p&gt;To avoid clustering, you can use a collision resolution policy called &lt;em&gt;double hashing&lt;/em&gt;.&lt;/p&gt;
 

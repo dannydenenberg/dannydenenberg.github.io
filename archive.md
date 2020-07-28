@@ -1,18 +1,18 @@
 ---
 layout: page
-title: Blog Posts
+title: Archive
 ---
-
-<!-- {% for post in site.posts %}
+## Blog Posts
+{% for post in site.posts %}
 
 - {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
-{% endfor %} -->
+{% endfor %}
 
-<ul>
+<!-- <ul>
   {% for post in site.posts %}
   <li>
     <a href="{{post.url}}">{{post.title}}</a
     ><span class="post-date">{{ post.date | date_to_string }}</span>
   </li>
   {% endfor %}
-</ul>
+</ul> -->

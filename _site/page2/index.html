@@ -107,28 +107,26 @@
       </h3>
     </div>
 
-    <p>See a full list of posts in <a href="/archive">the archive</a>.</p>
+    <blockquote>
+  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+</blockquote>
 <h2>What's New?</h2>
 <ul>
   
   <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a
-    ><span class="post-date">03 May 2020</span>
+    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
   </li>
   
   <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a
-    ><span class="post-date">10 Apr 2020</span>
+    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
   </li>
   
   <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a
-    ><span class="post-date">27 Mar 2020</span>
+    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
   </li>
   
   <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a
-    ><span class="post-date">21 Mar 2020</span>
+    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
   </li>
   
 </ul>
@@ -137,32 +135,27 @@
 <ul>
   <!-- A bit brute forceeee, but it works....*sigh* -->
   <li>
-    <a href="/2020/03/21/go-strings/"
-      >Strings in go (and what the heck utf-8 is)</a
-    ><span class="post-date">21 Mar 2020</span>
+    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+      class="post-date">21 Mar 2020</span>
   </li>
   <li>
-    <a href="/how-hash-functions-work">How hash functions work</a
-    ><span class="post-date">12 Mar 2020</span>
+    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+      2020</span>
   </li>
   <li>
-    <a href="/jwt-express"
-      >JSON web tokens with Node and Express.js</a
-    ><span class="post-date">14 Feb 2020</span>
+    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+      class="post-date">14 Feb 2020</span>
   </li>
 
   <li>
-    <a href="/complete-neural-nets"
-      >Complete approach to neural networks (mathy)</a
-    ><span class="post-date">2 Jan 2020</span>
+    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
+      class="post-date">2 Jan 2020</span>
   </li>
   <li>
-    <a href="/securing-db">Securing your database</a
-    ><span class="post-date">5 Aug 2019</span>
+    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
   </li>
   <li>
-    <a href="/recursion">Recursive programming</a
-    ><span class="post-date">14 Dec 2018</span>
+    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
   </li>
 </ul>
 
@@ -170,68 +163,149 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2020/04/10/reading-files-in-go/">
-        3 ways to read files in Go
+      <a href="/end-to-end-nodejs">
+        Hey, end-to-end encryption really isn't that hard
       </a>
     </h1>
 
-    <span class="post-date">10 Apr 2020</span>
+    <span class="post-date">03 May 2020</span>
 
-    <blockquote>
-  <p>A quick reference for reading files in Go.</p>
+    <p>End-to-end encryption (<strong>E2EE</strong>) is “system of communication”<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> in which anyone, save the client, cannot read plaintext<sup id="fnref:d"><a href="#fn:d" class="footnote">2</a></sup> versions of pieces of data. This is usually a measure taken by some chat or email service to prevent internet service providers or other unauthorized people from reading the plaintext versions of texts sent by users. Not even the server of the application has access to the key to decrypt messages and thus, all messages are stored on the database in encrypted form.</p>
+
+<blockquote>
+  <p>Basically, <strong>E2EE</strong> is a way to make sure the the only person reading messages is <strong>the user</strong>.</p>
 </blockquote>
 
-<h3 id="1-simple-file-reading">1. Simple file reading</h3>
+<h3 id="first-off-theoretical-implementation">First off, theoretical implementation</h3>
 
-<p>For a simple file reading, let’s say when you just want to read it into a variable, you can use the <code class="highlighter-rouge">ioutil</code> library. The code blow demonstrates this.</p>
+<p>How would the structure of our E2EE chat<sup id="fnref:2"><a href="#fn:2" class="footnote">3</a></sup> app look?</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s">"io/ioutil"</span>
+<p>Well, an app like this will have three basic components to it: a front end, a server (back end), and a database.</p>
 
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">data</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">);</span>
+<p>The <strong>front end</strong> displays to the user the login screen, the chat application features, and any other things in our app the user interacts with.</p>
 
-  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="c">// error</span>
-  <span class="p">}</span>
+<p>The <strong>server</strong> will receive all incoming messages, update the pages of all users in the chat with the new message (typically by emitting a new <a href="https://socket.io/">socket</a> event), and store texts on the database.</p>
 
-  <span class="c">// store data in a string</span>
-  <span class="k">var</span> <span class="n">text</span> <span class="kt">string</span> <span class="o">=</span> <span class="kt">string</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<p>In our case, let’s say that each separate chat will have a unique password associated with it. To enter the specific “chat room”<sup id="fnref:3"><a href="#fn:3" class="footnote">4</a></sup>, all a user must do is supply the correct password to that room.</p>
+
+<p>Now, for what our app must have to ensure <strong>E2EE</strong>.</p>
+
+<p><strong>How are texts ENcrypted?</strong> BEFORE being sent to the server, a text will be encrypted using the plaintext password for the unique chat room.</p>
+
+<p><strong>How are texts DEcrypted?</strong> Once the server sends the encrypted chat to a user, that user decrypts the message using the same key, the plaintext password.</p>
+
+<p>The idea is that the password will be sent to the server in a hashed form and the messages will be sent in an encrypted form to prevent the server from even being able to decrypt the message using the password. This is because the password that the server has isn’t the one that was used to encrypt the message, it is the hashed version. The message was encrypted using the <strong>NON</strong>-hashed version of the password (plaintext).</p>
+
+<p>The <strong>database</strong> will store the hashed password and encrypted versions of texts ONLY. To tell if a password is correct, the client sends the hashed version of the password the user entered and compares it to the hashed version of the password stored in the database. If they match, the password entered by the user is correct<sup id="fnref:a"><a href="#fn:a" class="footnote">5</a></sup>.</p>
+
+<hr />
+
+<h3 id="practical-example-in-nodejs">Practical example in node.js</h3>
+<p>Now for the fun part 🎉.</p>
+
+<p>The library for encrypting messages that I would recommend is <a href="https://github.com/brix/crypto-js">CryptoJS</a>. For quick use on the client side of things, I would simply use it’s CDN (import the javascript of the library from another URL) and place the <code class="highlighter-rouge">script</code> tag in the head of my HTML page:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Then, I create two functions. One to encrypt data and one to decrypt data. It’s simply a nice way to contain all of the library code into a separate helper function as to not mess up the rest of my code files with too much repetition (although I am weary to not over-engineer 🙄).</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">encrypt</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">encrypt</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">key</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">decrypt</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">AES</span><span class="p">.</span><span class="nx">decrypt</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">key</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span>
+    <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Utf8</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>If you’re interested in learning more about the <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">Advanced Encryption Standard</a> (AES) that I’m using to encrypt messages, please click on <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">the link</a>. Otherwise, if you’re like me, just continue knowing that it’s safe to use.</p>
+
+<p>Take a second to make sure the functions work:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">encrypt</span><span class="p">(</span><span class="dl">"</span><span class="s2">hey</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">k</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// "U2FsdGVkX1/8cqiEoDGEdqilkazwgE98NucTZzFlDIo="</span>
+<span class="nx">decrypt</span><span class="p">(</span><span class="dl">"</span><span class="s2">U2FsdGVkX1/8cqiEoDGEdqilkazwgE98NucTZzFlDIo=</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">k</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// "hey"</span>
+</code></pre></div></div>
+
+<p>Let’s run through a quick example.</p>
+
+<p>If you want to check that your helper functions work, simply use the property that <code class="highlighter-rouge">decrypt(encrypt(x)) = x</code>. In this example, the <strong>message</strong> will be <code class="highlighter-rouge">hey</code> and the <strong>key</strong> will be <code class="highlighter-rouge">secret</code>:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">decrypt</span><span class="p">(</span><span class="nx">encrypt</span><span class="p">(</span><span class="dl">"</span><span class="s2">hey</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">secret</span><span class="dl">"</span><span class="p">),</span><span class="dl">"</span><span class="s2">secret</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// "hey"</span>
+</code></pre></div></div>
+
+<p>In other words, you are decrypting a message with the <em>same</em> key used to encrypt it. It works behind the same principles that $arccos(cos(x))=x$ is based on.</p>
+
+<p><strong>Okay, back to what’s going on systematically.</strong></p>
+
+<p>Any passwords going to the server will be hashed BEFORE being sent, so I also usually develop yet another helper function for the purpose of clean, contained code:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">hash</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">SHA512</span><span class="p">(</span><span class="nx">p</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="nx">CryptoJS</span><span class="p">.</span><span class="nx">enc</span><span class="p">.</span><span class="nx">Base64</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<h3 id="2-byte-sized-pieces">2. Byte sized pieces</h3>
+<p>Take another second to check that this works too:</p>
 
-<p>Another common way to read files in are in bite sized pieces. You would use this technique if your file is so large that reading it all in at once would be very very slow or crash your program. This is often known as streaming in data.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">(</span>
-  <span class="s">"os"</span>
-  <span class="s">"bufio"</span>
-<span class="p">)</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">f</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-    <span class="c">// err</span>
-  <span class="p">}</span>
-
-  <span class="k">defer</span> <span class="n">f</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
-
-  <span class="n">r</span> <span class="o">:=</span> <span class="n">bufio</span><span class="o">.</span><span class="n">NewReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-  <span class="n">b</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span> <span class="c">// size of chunk</span>
-
-  <span class="n">finalString</span> <span class="o">=</span> <span class="s">""</span>
-
-  <span class="k">for</span> <span class="p">{</span>
-    <span class="n">n</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">r</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-      <span class="k">break</span>
-    <span class="p">}</span>
-
-    <span class="n">finalString</span> <span class="o">+=</span> <span class="kt">string</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="m">0</span><span class="o">:</span><span class="n">n</span><span class="p">])</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hash</span><span class="p">(</span><span class="dl">"</span><span class="s2">password</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">// "sQnzu7wkTrgkQZF+0G1hi5AI3Qmzvv0bXgc5THBqi7mAsdd4Xll27ASbRt9fEyavWi6m0QP9B8lThf+rDKy8hg=="</span>
 </code></pre></div></div>
 
+<blockquote>
+  <p>If a new chat room, account, or what-have-you is created, the password MUST be hashed <strong>BEFORE</strong> being sent to the server to ensure a secure E2EE standard.</p>
+</blockquote>
+
+<p><strong>So, what’s the sequence of a user sending a new message like?</strong></p>
+
+<ol>
+  <li>User signs in and is authenticated as an authorized user.</li>
+  <li>User clicks “send” on their message.</li>
+  <li>The message text is encrypted with the key being the <strong>plaintext</strong> password to the chat room.</li>
+  <li>The message is sent to the server.</li>
+  <li>The server updates all users connected to the chat by sending them the ENCRYPTED message.</li>
+  <li>The users connect to the chat receive this new message and, because they are authenticated, use the key (being the plaintext password stored on their computers) to decrypt and show the message in <em>its</em> plaintext form.</li>
+</ol>
+
+<p>All in all, E2EE isn’t brain surgery. It’s a relatively simple concept to grasp but has some very interesting consequences such as nearly unbreakable security.</p>
+
+<p>However, if you’re thinking about implementing this in your own application, I would consider these <strong>few drawbacks</strong>:</p>
+
+<ul>
+  <li>Because the text stored on the database is encrypted, any server-side searching through text, text analysis, machine learning on text is impossible.</li>
+  <li>If you are worried about content on your site, you cannot repress illegal or unacceptable content</li>
+  <li>Targeted ads are harder to implement</li>
+</ul>
+
+<p>Anyway, take it as you will, it’s a super cool topic with many many helpful applications that can lead to increased consumer privacy.</p>
+
+<p>Have fun with E2EE!</p>
+
+<hr />
+
+<h3 id="footnotes">Footnotes</h3>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Direct from <a href="https://en.wikipedia.org/wiki/End-to-end_encryption">Wikipedia</a> (for lack of better terminology) <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:d">
+      <p>Whenever I use the word <strong>plaintext</strong>, I am referring to the human readable form of the text. Like, the actual thing. <a href="#fnref:d" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Just using a chat app as an example. By the end of the post, it’ll be clear how E2EE can be applied to your other fun projects 🎉! <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>This will be our name for a group chat that anyone can enter with the password. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:a">
+      <p>Why? Because the hash of a string is always the same as another hash of the same string. Thus, the only time the hashes would differ would be if the plaintext passwords differed. <a href="#fnref:a" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </div>
   
@@ -246,7 +320,6 @@
   <a class="pagination-item newer" href="/">Newer</a>
    
 </div> -->
-
 
     <div class="footer">
       <p>

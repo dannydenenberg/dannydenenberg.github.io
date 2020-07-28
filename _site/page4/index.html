@@ -107,28 +107,26 @@
       </h3>
     </div>
 
-    <p>See a full list of posts in <a href="/archive">the archive</a>.</p>
+    <blockquote>
+  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+</blockquote>
 <h2>What's New?</h2>
 <ul>
   
   <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a
-    ><span class="post-date">03 May 2020</span>
+    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
   </li>
   
   <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a
-    ><span class="post-date">10 Apr 2020</span>
+    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
   </li>
   
   <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a
-    ><span class="post-date">27 Mar 2020</span>
+    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
   </li>
   
   <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a
-    ><span class="post-date">21 Mar 2020</span>
+    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
   </li>
   
 </ul>
@@ -137,32 +135,27 @@
 <ul>
   <!-- A bit brute forceeee, but it works....*sigh* -->
   <li>
-    <a href="/2020/03/21/go-strings/"
-      >Strings in go (and what the heck utf-8 is)</a
-    ><span class="post-date">21 Mar 2020</span>
+    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+      class="post-date">21 Mar 2020</span>
   </li>
   <li>
-    <a href="/how-hash-functions-work">How hash functions work</a
-    ><span class="post-date">12 Mar 2020</span>
+    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+      2020</span>
   </li>
   <li>
-    <a href="/jwt-express"
-      >JSON web tokens with Node and Express.js</a
-    ><span class="post-date">14 Feb 2020</span>
+    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+      class="post-date">14 Feb 2020</span>
   </li>
 
   <li>
-    <a href="/complete-neural-nets"
-      >Complete approach to neural networks (mathy)</a
-    ><span class="post-date">2 Jan 2020</span>
+    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
+      class="post-date">2 Jan 2020</span>
   </li>
   <li>
-    <a href="/securing-db">Securing your database</a
-    ><span class="post-date">5 Aug 2019</span>
+    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
   </li>
   <li>
-    <a href="/recursion">Recursive programming</a
-    ><span class="post-date">14 Dec 2018</span>
+    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
   </li>
 </ul>
 
@@ -170,147 +163,73 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2020/03/21/go-strings/">
-        Strings in go (and what the heck utf-8 is)
+      <a href="/2020/03/27/fast-jekyll-sites/">
+        Speed up your jekyll web site
       </a>
     </h1>
 
-    <span class="post-date">21 Mar 2020</span>
+    <span class="post-date">27 Mar 2020</span>
 
-    <blockquote>
-  <p>What’s the f*&amp;@$%∂ heck is up with strings in go??</p>
-</blockquote>
+    <p>Tips on speeding up your jekyll website.</p>
 
-<p>Here’s the clarification you need.</p>
+<h3 id="1-use-a-cdn">#1. Use a CDN</h3>
 
-<h3 id="unicode-and-utf-8">Unicode and utf-8</h3>
+<p>Just do it. It will help <strong>cache your content</strong>, minify your assets, and make your website more accessible from all parts of the world (if you use a good cdn).</p>
 
-<p>Around 1960, <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>, the American Standard Code for Information Interchange was released. It uses 7 bits to represent 2^7 or 128 characters. Among these were all english lower and upper case characters, punctuation, the ampersand, numbers, etc. Although this manner of storing textual data seemed to work fine, as computing and the internet began to grow, it was a challenge for other countries, in particular those who didn’t use English regularly, to store their native language in files.</p>
+<p>I use <a href="https://www.cloudflare.com/">cloudflare</a>. Many other sites do (digital ocean, etc.). It’s free to use and you can put many different domains on it. There is literally a tab named “speed” where you can optimize your caching settings, minimization of files, and image compression.</p>
 
-<p>The solution to this issue was <a href="http://unicode.org/">Unicode</a>, which collected all of the characters in all of the languages of the world with accented letters, control codes, etc. and assigned each character a number or <em>Unicode code point</em>. In go, this number is called a <code class="highlighter-rouge">rune</code>.</p>
+<p>An additional benefit is that DNS configuration is so so easy and updates almost immediately.</p>
 
-<p>As of March 2020, Unicode version 13 holds over 143,000 characters spanning 154 languages and scripts and symbol sets. In go, each <code class="highlighter-rouge">rune</code> is essentially an <code class="highlighter-rouge">int32</code> which is the standard data type for Unicode characters (you can literally write go code like this <code class="highlighter-rouge">var r rune = 1424</code>).</p>
+<h3 id="2-jekyll-include-cache">#2. jekyll-include-cache</h3>
 
-<p>In memory, it is possible that you could represent a bunch of runes simply as a bunch of int32 values (known as utf-32 or ucs-4). But, often you won’t need to have space for the entire 32-bit integer. You certainly won’t if all you are dealing with are English characters.</p>
+<p>This gem will automatically cache specified parts of the page that don’t need to be reloaded such as sidebars, navigation features, etc.</p>
 
-<p><strong>This is where utf-8 steps in.</strong></p>
+<p>To use, include it in your <code class="highlighter-rouge">Gemfile</code> like so:</p>
 
-<p>UTF-8 is a “variable-length encoding of Unicode code points as bytes”<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. Basically, it uses between 1 and 4 bytes to represent a rune. The most significant bits (also known as high-order bits, having the highest values, positioned on the left side of the number) dictate how many bytes follow. For example a high-order <code class="highlighter-rouge">0</code> means 7-bit (exactly like ASCII). A high-order <code class="highlighter-rouge">110</code> means 2 bytes (the second byte will begin with <code class="highlighter-rouge">10</code>). A high-order <code class="highlighter-rouge">1110</code> means 3 bytes, <code class="highlighter-rouge">11110</code> means 4.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xxxxxxx                                | 0-127
-110xxxxx 10xxxxxx                       | 128-2047
-1110xxxx 10xxxxxx 10xxxxxx              | 2048-65535
-11110xxx 10xxxxxx 10xxxxxx 10xxxxxx     | 65536-
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">'jekyll-include-cache'</span>
+<span class="k">end</span>
 </code></pre></div></div>
 
-<h3 id="working-in-go">Working in go</h3>
+<p>And in your <code class="highlighter-rouge">_config.yml</code> like so:</p>
 
-<p>In go, a string is an “immutable sequence of bytes”. Strings in Go are almost always encoded in utf-8 encoding and the <code class="highlighter-rouge">len(s)</code> function returns the number of <strong>bytes</strong> in a string (not the number of characters). The indexing operator <code class="highlighter-rouge">s[i]</code> returns the ith <em>byte</em> of <code class="highlighter-rouge">s</code>.</p>
-
-<p>There is also a substring operator which returns a completely new string starting at the beginning index and ending one less than the end index:</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">:=</span> <span class="s">"Bathroom"</span>
-<span class="n">s</span><span class="p">[</span><span class="m">4</span><span class="o">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span> <span class="c">// "room"</span>
-<span class="n">s</span><span class="p">[</span><span class="m">4</span><span class="o">:</span><span class="p">]</span> <span class="c">// "room"</span>
-<span class="n">s</span><span class="p">[</span><span class="o">:</span><span class="m">4</span><span class="p">]</span> <span class="c">// "Bath"</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
+  <span class="c1"># - jekyll-commonmark</span>
+  <span class="pi">-</span> <span class="s">jekyll-include-cache</span>
 </code></pre></div></div>
 
-<p>String concatenation can be performed with the <code class="highlighter-rouge">+</code> operator or with buffers as you will see in a bit.</p>
+<p>Run <code class="highlighter-rouge">bundle install</code> to install everything before using it in your site.</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">:=</span> <span class="s">"Airport "</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s">"'s aren't very fun."</span>
+<p>To use the caching feature on an included file, instead of saying <code class="highlighter-rouge">{\% include foo.html \%}</code>, simply say <code class="highlighter-rouge">{\% include_cached foo.html \%}</code>.</p>
+
+<h3 id="3-jekyll-compress-images">#3. jekyll-compress-images</h3>
+
+<p>Yes, compressing your images will make an effect on the load time of your website. For me it was one of the factors that took my time to first byte down by around 300 ms.</p>
+
+<p>I believe that the feature on cloudflare that allows image compression is a pay-to-play feature, thus this jekyll gem can do it for free every time a build is made.</p>
+
+<p>Include it in your <code class="highlighter-rouge">Gemfile</code> like so:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">'jekyll-compress-images'</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">'https://github.com/valerijaspasojevic/jekyll-compress-images.git'</span>
+<span class="k">end</span>
 </code></pre></div></div>
 
-<p>Strings are immutable and thus attempting to reassign a specific byte or character doesn’t work.</p>
+<p>Include it in your <code class="highlighter-rouge">_config.yml</code> like so:</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"b"</span> <span class="c">// error on compile: cannot assign to s[0]</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-compress-images</span>
 </code></pre></div></div>
 
-<p>Coming from another more dynamic language such as python, ruby, or javascript, the immutability of strings might seem like an annoying nuisance, but it makes it super easy for the computer to copy strings. For example, the string <code class="highlighter-rouge">s</code> and the substring <code class="highlighter-rouge">s[4:]</code> can share the same underlying memory without worrying about it somehow changing. <strong>No new memory must be allocated</strong>.</p>
+<p>That’s it for Jekyll image compression!</p>
 
-<h3 id="runes-and-utf-8">Runes and utf-8</h3>
+<h3 id="4-use-github-pages">#4. Use github pages</h3>
 
-<p>So, as I said before, utf-8 is a variable-length encoding of characters–it takes 1 to 4 bytes to represent each character instead of each being 4. But, this variability <strong>prevents</strong> direct access to the n-th character of a string through indexing. However, go still uses them normally to encode strings because of their sweet advantages such as their compatibility with ASCII, ability to decode left to right, and easy searching for specific runes by just using their bytes.</p>
+<p>I have to say that prior to using github pages, I was very skeptical to the idea. I was using <a href="https://netlify.com">Netlify</a> and it made builds and minimization and custom domains and many many more features easy as clicking a button.</p>
 
-<p>Recall, the <code class="highlighter-rouge">len</code> function returns the number of bytes in a string, so it could get a bit confusing in this case:</p>
+<p>However, I was trying to get my site to be as fast as possible without switching to Gatsbyjs or some other way to make my JAMStack site. So, I tried switching it to github pages. Wow. That did the trick. It brought my TTFB down around 400 ms.</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="s">"浴"</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// 3</span>
-</code></pre></div></div>
-
-<p>To find the actual rune count in a string, rather than the number of bytes in the string, there are a couple ways of doing this.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">:=</span> <span class="m">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="p">{</span>
-  <span class="n">_</span><span class="p">,</span> <span class="n">size</span> <span class="o">:=</span> <span class="n">utf8</span><span class="o">.</span><span class="n">DecodeLastRuneInString</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="p">])</span> <span class="c">// jump forward</span>
-  <span class="n">i</span> <span class="o">+=</span> <span class="n">size</span>
-  <span class="n">n</span><span class="o">++</span>
-<span class="p">}</span>
-<span class="n">n</span> <span class="c">// 1 ✅</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="m">0</span>
-<span class="k">for</span> <span class="k">range</span> <span class="n">a</span> <span class="p">{</span> <span class="c">// range iterates over runes in string</span>
-  <span class="n">n</span><span class="o">++</span>
-<span class="p">}</span>
-<span class="n">n</span> <span class="c">// 1 ✅</span>
-
-<span class="n">utf8</span><span class="o">.</span><span class="n">RuneCountInString</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// 1 ✅</span>
-</code></pre></div></div>
-
-<p>Converting a <code class="highlighter-rouge">[]rune</code> to a utf-8 encoded string returns the unicode code points of the string.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="s">"浴室"</span>
-<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"% x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="c">// e6 b5 b4 e5 ae a4</span>
-<span class="n">r</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">rune</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="c">// [6d74 5ba4]</span>
-</code></pre></div></div>
-
-<p>Convert from <code class="highlighter-rouge">[]rune</code> to <code class="highlighter-rouge">string</code> using <code class="highlighter-rouge">string(r)</code>.</p>
-
-<h3 id="manipulating-strings">Manipulating strings</h3>
-
-<p>The main packages to manipulate strings are <code class="highlighter-rouge">bytes</code>, <code class="highlighter-rouge">strings</code>, <code class="highlighter-rouge">strconv</code>, and <code class="highlighter-rouge">unicode</code> (some of which you have already seen).</p>
-
-<p>Because of the immutability of strings, it can sometimes be useful to use <code class="highlighter-rouge">bytes.Buffer</code> which allows you to use a string buffer (a string that can grow as more is added).</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">buf</span> <span class="n">bytes</span><span class="o">.</span><span class="n">Buffer</span>
-<span class="n">buf</span><span class="o">.</span><span class="n">WriteByte</span><span class="p">(</span><span class="sc">'a'</span><span class="p">)</span>
-<span class="n">buf</span><span class="o">.</span><span class="n">WriteString</span><span class="p">(</span><span class="s">"123abc"</span><span class="p">)</span>
-
-<span class="k">var</span> <span class="n">s</span> <span class="kt">string</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>The <code class="highlighter-rouge">strings</code> package has many useful utility functions. A few I have written below.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">Contains</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">substr</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>
-<span class="k">func</span> <span class="n">Count</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">int</span>
-<span class="k">func</span> <span class="n">Fields</span><span class="p">(</span><span class="n">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">string</span>
-<span class="k">func</span> <span class="n">HasPrefix</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">prefix</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>
-<span class="k">func</span> <span class="n">Index</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">int</span>
-<span class="k">func</span> <span class="n">Join</span><span class="p">(</span><span class="n">a</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
-</code></pre></div></div>
-
-<p>The <code class="highlighter-rouge">strconv</code> has functions for converting integer, floating-point, and boolean values into and out of string representations.</p>
-
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="m">432</span>
-<span class="n">strconv</span><span class="o">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// "432"</span>
-<span class="n">strconv</span><span class="o">.</span><span class="n">FormatInt</span><span class="p">(</span><span class="kt">int64</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span> <span class="c">// "110110000"</span>
-<span class="n">strconv</span><span class="o">.</span><span class="n">Atoi</span><span class="p">(</span><span class="s">"432"</span><span class="p">)</span> <span class="c">// 432</span>
-<span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s">"432"</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">64</span><span class="p">)</span> <span class="c">// base 10, up to 64 bits</span>
-</code></pre></div></div>
-
-<p>The <code class="highlighter-rouge">unicode</code> package has functions like <code class="highlighter-rouge">IsDigit</code>, <code class="highlighter-rouge">IsUpper</code>, <code class="highlighter-rouge">IsLetter</code>, <code class="highlighter-rouge">ToUpper</code>, <code class="highlighter-rouge">ToLower</code>, <code class="highlighter-rouge">IsLower</code>, and many more run manipulation functions.</p>
-
-<p>Phew! That was a lot.</p>
-
-<hr />
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p>The Go Programming Language, by Donovan and Kernighan <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
+<p>If you are having trouble even after steps #1 through #3 with site speed, try switching to <a href="https://pages.github.com/">github pages</a>. <strong>It will make a change to the speed of your site</strong>.</p>
 
   </div>
   
@@ -327,7 +246,6 @@
   >
    
 </div> -->
-
 
     <div class="footer">
       <p>

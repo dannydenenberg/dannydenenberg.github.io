@@ -101,7 +101,7 @@ The simplest way to represent this 'probing sequence' is like so:
 
 This places the thing $k$ as near as possible to the past location $h(k)$.
 
-This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called _clustering_, where many different items are placed right next to each other.
+This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called _clustering_, where many different items are placed right next to each other, it also can be computationally intensive for Sol or his computer to retrace through the same number of spaces each time simply because similar license plates are clustered together.
 
 To avoid clustering, you can use a collision resolution policy called _double hashing_.
 
