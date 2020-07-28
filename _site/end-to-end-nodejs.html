@@ -293,9 +293,35 @@
 
     <div class="footer">
       <p>
-        &copy; 2020. 🐫 All rights reserved.
+        &copy; 2020. <span id='emoji'></span> All rights reserved.
       </p>
     </div>
+    <script>
+      let emojiStringToArray = function (str) {
+        split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
+        arr = [];
+        for (var i = 0; i < split.length; i++) {
+          char = split[i]
+          if (char !== "") {
+            arr.push(char);
+          }
+        }
+        return arr;
+      };
+
+      function getEmoji() {
+        let emojis = emojiStringToArray('🌎🦕🦖🐔🐧🐳🐬🐃🦒🌴🌲🌺☔️🍇')
+        let index = parseInt(Math.random() * emojis.length - 1);
+        return emojis[index];
+      }
+
+      function putEmojiInSpan(emoji) {
+        let span = document.getElementById('emoji');
+        span.innerHTML = emoji;
+      }
+
+      putEmojiInSpan(getEmoji());
+    </script>
   </div>
 </body>
 
