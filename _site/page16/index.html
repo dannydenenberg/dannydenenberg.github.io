@@ -100,99 +100,183 @@
       <h3 class="masthead-title">
         <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
         
       </h3>
     </div>
 
-    <blockquote>
-  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
-</blockquote>
-<h2>What's New?</h2>
-<ul>
-  
-  <li>
-    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
-  </li>
-  
-  <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
-  </li>
-  
-</ul>
+    <div>
+  <!-- <img id="home-img" src="/goods/danny-canada.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
+  <img id="home-img" src="/goods/home-pic.jpg" width=350 alt="Danny's Bike in Canada" srcset="" />
+  <!-- <img id="home-img" src="/goods/home2.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
 
-<h2>My Favorites</h2>
-<ul>
-  <!-- A bit brute forceeee, but it works....*sigh* -->
-  <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
-      class="post-date">21 Mar 2020</span>
-  </li>
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
-      2020</span>
-  </li>
-  <li>
-    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
-      class="post-date">14 Feb 2020</span>
-  </li>
-
-  <li>
-    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
-      class="post-date">2 Jan 2020</span>
-  </li>
-  <li>
-    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
-  </li>
-  <li>
-    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
-  </li>
-</ul>
-
-<!-- <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/ghost-blog-aws-docker">
-        How to create a Ghost blog with docker 🐳+ AWS ❤️
-      </a>
-    </h1>
-
-    <span class="post-date">25 Jun 2019</span>
-
-    <ol><li>Login to the AWS website</li><li>Click on Services  (top bar)</li><li>Click on EC2</li><li>Click on Launch Instance</li><li>Search and choose Ubuntu Server (18 or up)</li><li>Leave selected the free tear (unless you have upwards of $10000000000)</li><li>Edit security groups (by clicking on <code>edit security groups</code>)</li><li>Click Add rule - <code>http</code> - leave other defaults</li><li>Click Add rule - <code>https</code> -leave other defaults</li><li>Click Launch Instance</li><li>Choose Create new pair key from the drop down selector (name it and download it)</li><li>Open terminal</li><li>CD into the directory where the pair key was downloaded to and do this</li><li>Change the .pem file permissions with: <code>sudo chmod 600 &lt;&lt;MYPAIRKEYFILENAME&gt;&gt;.pem</code></li><li>Go to your AWS instances tab in the EC2 page and find the Public DNS (IPv4) of your instance </li><li><code>ssh <a href="/cdn-cgi/l/email-protection#7c091e091208093c191f4e514948514e4e48514d4f4e51454f521f13110c090819514d521d111d0613121d0b0f521f1311"><span class="__cf_email__" data-cfemail="790c1b0c170d0c39">[email&#160;protected]</span>&lt;</a>&lt;INSERT.Public.Dns.IPv4&gt;&gt; -i PairKeyName.pem</code></li><li>Type <code>yes</code> to get into the ubuntu computer</li><li>Install docker: <code>sudo snap install docker</code></li><li>Make a start file: <code>vim startserver</code></li><li>Put this in the script👇: </li><li><code>#!/bin/bash; docker run -d --name website -e url=https://&lt;&lt;websitename&gt;&gt; -p 80:2386 -v /home/ubuntu/website:/var/lib/ghost/content ghost</code></li><li>Create a /website directory: <code>mkdir website</code></li><li>Go to <code>cloudflare.com</code> and link your website to it by creating an account (or signing in) and going through the steps to link it to your URL that you used in step <strong>21</strong></li><li>Make a <code>CNAME</code> record with the name being <code>@</code> and the address being the public IPv4 of the aws instance that you found in step <strong>15</strong> (example: <code>ec2-54-224-132-93.compute-1.amazonaws.com</code>)</li><li>Go to your domain service (mine is google domains) and set the nameservers to be cloudflare’s (you should have already done this step while setting up cloudflare in step <strong>23</strong>)</li><li>Change the permissions of the <code>startserver</code> script to be able to execute: <code>chmod +x startscript</code></li><li>Now run it: <code>./startscript</code></li><li>It will take a bit to complete because docker needs to pull the image off of their website, but when it does everything should be up and running</li></ol>
-<h2 id="please-note">Please Note</h2>
-<p>It may take a bit for cloudflare to enable https. It will also take some time for your domain provider to change its nameservers and for that change to propagate back to cloudflare.<br /></p>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-  <a class="pagination-item older" href="/page17/"
-    >Older</a
-  >
-    
-  <a class="pagination-item newer" href="/page15/"
-    >Newer</a
-  >
-   
-</div> -->
+<div id="about-me">
+  <h4>A little about me. I'm a...</h4>
+  <ul>
+    <li>Nationally recognized singer</li>
+    <li>Software developer</li>
+    <li>Award-winning actor</li>
+    <li>Classically-trained pianist</li>
+    <li>Avid biker</li>
+  </ul>
+  <!-- <br> -->
+  <h4>Welcome to my site.</h4>
+  <!-- <blockquote style="padding-left: 10px"> -->
+  <p>I present a <i>collection</i> of my essays, each of which explores in depth <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p>
+  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p> -->
+  <p>All articles are <i>well-researched</i> and <i>candid</i>. Over <code>100,000</code> people have read my writings.
+  </p>
+  <!-- <p></p> -->
+  <!-- </blockquote> -->
 
-    <div class="footer">
+  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
+
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">A few of my favorites</h2>
+  <ul style='text-align: initial' id="favorites">
+    <!-- A bit brute forceeee, but it works....*sigh* -->
+    <li>
+      <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+        class="post-date">21 Mar 2020</span>
+    </li>
+    <li>
+      <a href="/complete-neural-nets">A complete approach to neural networks</a><span
+        class="post-date">2 Jan 2020</span>
+    </li>
+    <li>
+      <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+        2020</span>
+    </li>
+    <li>
+      <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+        class="post-date">14 Feb 2020</span>
+    </li>
+
+
+    <li>
+      <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug
+        2019</span>
+    </li>
+    <li>
+      <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
+    </li>
+  </ul>
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    
+    <li>
+      <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
+    </li>
+    
+    <li>
+      <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
+    </li>
+    
+  </ul>
+</div>
+
+<br />
+<div>
+  <blockquote>
+    <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+  </blockquote>
+</div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<style>
+  #down-arrow {
+    text-align: center;
+    font-size: 4em;
+    padding: .4em;
+  }
+
+  #favorites li {
+    padding: 2px;
+  }
+
+  #home-img {
+    float: left;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  #about-me {
+    margin-left: 18em;
+  }
+
+  #section-title {
+    text-align: center;
+  }
+
+  .post-date {
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+</style>
+
+    <br />
+
+    <div class="footer" style="font-size: smaller;">
       <p>
-        &copy; 2020. <span id='emoji'></span> All rights reserved.
+        &copy; 2020
+
+        <!-- <span id='emoji'></span>  -->
+
+        Daniel Oscar Denenberg.
       </p>
     </div>
     <script>

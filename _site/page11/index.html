@@ -100,176 +100,183 @@
       <h3 class="masthead-title">
         <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
         
       </h3>
     </div>
 
-    <blockquote>
-  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
-</blockquote>
-<h2>What's New?</h2>
-<ul>
-  
-  <li>
-    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
-  </li>
-  
-  <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
-  </li>
-  
-</ul>
+    <div>
+  <!-- <img id="home-img" src="/goods/danny-canada.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
+  <img id="home-img" src="/goods/home-pic.jpg" width=350 alt="Danny's Bike in Canada" srcset="" />
+  <!-- <img id="home-img" src="/goods/home2.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
 
-<h2>My Favorites</h2>
-<ul>
-  <!-- A bit brute forceeee, but it works....*sigh* -->
-  <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
-      class="post-date">21 Mar 2020</span>
-  </li>
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
-      2020</span>
-  </li>
-  <li>
-    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
-      class="post-date">14 Feb 2020</span>
-  </li>
-
-  <li>
-    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
-      class="post-date">2 Jan 2020</span>
-  </li>
-  <li>
-    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
-  </li>
-  <li>
-    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
-  </li>
-</ul>
-
-<!-- <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/gradient-descent-univar-lr">
-        Gradient descent for univariate linear regression
-      </a>
-    </h1>
-
-    <span class="post-date">20 Sep 2019</span>
-
-    <p>Gradient descent is used for many aspects of machine learning. One area in which it is used a ton is in optimizing artificial neural networks. I will explain the concept of how this works once you understand the basic gradient descent operations.</p>
-
-<p>Gradient descent can also be used to minimize arbitrary functions such as more general ones like cost functions with $n$ number of parameters: $J(\theta _0, \theta _1, \theta _2, \theta _3, … , \theta _n)$.</p>
-
-<p>Please keep in mind that gradient descent is NOT HARD. Especially understanding how it minimizes functions is super easy to get. So, if you don’t understand a concept right away, keep on trying to see it from different angles and I’m sure it’ll click.</p>
-
-<p>So, without further ado let me give you the general outline for minimizing a function using G.D.:</p>
-
-<ol>
-  <li>Start with some value for $\theta _0$and $\theta _1$</li>
-  <li>Keep changing $\theta _0$and $\theta _1$to reduce $(\theta _0, \theta _1) $until we hopefully find a minimum</li>
-</ol>
-
-<p><strong>Note:</strong> The <em>assignment operator</em> in maths looks like this: “$:=$”. It can also be used to reassign variable values. The normal “$=$” is a truth assertion.</p>
-
-<p>Here are some variable to know before I get into the algorithm:</p>
-
-<p>$\alpha=$”alpha” is the <em>learning rate</em>. It is how much we change the parameter values by each update step. It usually is a constant. Ex: If $\alpha=10$whatever value the algorithm gives to update the parameter value by, it is multiplied by a factor of ten.</p>
-
-<p>$j=$it is a subscript to $\theta$to represent a which parameter we are dealing with. It is a generic form of saying something like $theta _0!!.</p>
-
-<p>And a refresher on the <strong>cost function</strong>:
-!!J(\theta _0,\theta _1)=\frac{1}{2m} \sum _{i=1} ^m (h _\theta (x^i) - y^i)^2!!</p>
-
-<hr />
-
-<p>Here is the actual algorithm:</p>
-
-<p>!!repeat \hspace{2mm} until \hspace{2mm}convergence \hspace{4mm} \{!! !!\hspace{10mm} \theta _j := \theta _j \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _ 0, \theta _ 1)}{\partial \theta _j }!! !!\}!!</p>
-
-<p>This is repeated simultaneously for $\theta _0$and $\theta _1$. A.K.A this is repeated simultaneously for the $j$values of $0,1$.</p>
-
-<p>Programmatically, you will have to create temporary variables to be able to simulate a simultaneous update.</p>
-
-<p><strong>Correct Simultaneous Update:</strong></p>
-
-<p>!!
-temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 } !! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 } !! !!\theta _0 := temp0!! !!\theta _1 := temp1!!</p>
-
-<p><strong>INcorrect Simultaneous Update:</strong></p>
-
-<p>!!
-temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _0 }!! !!\theta _0 := temp0!! !!temp1 := \theta _1 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, \theta _1)}{\partial \theta _1 }!! !!\theta _1 := temp1
-!!</p>
-
-<blockquote>
-  <p>The error here occurs because $\theta _0$is updated before $\theta _1$. That means that $\theta _1$is using the newly updated value of $\theta _0$to calculate the partial derivative with respects to $\theta _1$which is NOT what we want to happen.</p>
-</blockquote>
-
-<h2 id="example-using-an-easier-function">Example Using an Easier Function</h2>
-
-<p>Let’s say that our task was to minimize some arbitrary cost function with one parameter $(\theta _1)$where $theta _1 \in ℝ$. The graph of the function $(\theta _1)$(if it is a squared error cost function) might look something like this:</p>
-
-<p><img src="https://i.snap.as/UdTq5I8.png" alt="" /></p>
-
-<p>What we want to find is the value of $\theta$ that makes the $y$component of this graph to be as low as possible – in this case, 0. Just looking at the graph, we can see that that number is 4. But, in more complex cost functions that deal with hundreds of parameters/dimensions, simply graphing the cost function will not yield an easy-to-see answer.</p>
-
-<p>In terms of gradient descent, we start by choosing a random value for $\theta _1$(in more advanced implementations, there are more clever ways to choose a starting value, but whatever). We then find the slope of the chosen point on the graph and subtract it from $\theta _1$’s current value. To find the slope we find the derivative of the cost function with respect to $\theta _1$.</p>
-
-<p><strong>Note:</strong> If you don’t know calc already, THAT’S TOTALLY OKAY! I didn’t either when I started learning about this subject. I taught all I needed to know to myself. I would highly highly recommend 3Blue1Brown’s <a href="https://www.youtube.com/watch?v=WUvTyaaNkzM&amp;list=PL0-GT3co4r2wlh6UHTUeQsrf3mlS2lk6x">“The Essence of Calculus”</a> as a starting point. It has amazing animations and fantastic descriptions of everything you would need to know. If you want to just keep trudging along, though, just note that the derivative of a function allows you to find the slope of any point along that original function.</p>
-
-<p>Okay, back to it.</p>
-
-<p>Here is the expression for updating our parameter:</p>
-
-<p>!!
-\theta _1 := \theta _1 - \alpha \frac{d J(\theta _1)}{d\theta _1}
-!!</p>
-
-<p>Next:</p>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Example using easier function, J(theta 1)</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Talk about alpha</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Linear regression model review</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />What is the derivative</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />New algorithm with the derivatives</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Cost function will always be a “bowl” function like the image</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Discuss Batch gradient descent using ALL training examples</li>
-</ul>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-  <a class="pagination-item older" href="/page12/"
-    >Older</a
-  >
-    
-  <a class="pagination-item newer" href="/page10/"
-    >Newer</a
-  >
-   
-</div> -->
+<div id="about-me">
+  <h4>A little about me. I'm a...</h4>
+  <ul>
+    <li>Nationally recognized singer</li>
+    <li>Software developer</li>
+    <li>Award-winning actor</li>
+    <li>Classically-trained pianist</li>
+    <li>Avid biker</li>
+  </ul>
+  <!-- <br> -->
+  <h4>Welcome to my site.</h4>
+  <!-- <blockquote style="padding-left: 10px"> -->
+  <p>I present a <i>collection</i> of my essays, each of which explores in depth <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p>
+  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p> -->
+  <p>All articles are <i>well-researched</i> and <i>candid</i>. Over <code>100,000</code> people have read my writings.
+  </p>
+  <!-- <p></p> -->
+  <!-- </blockquote> -->
 
-    <div class="footer">
+  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
+
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">A few of my favorites</h2>
+  <ul style='text-align: initial' id="favorites">
+    <!-- A bit brute forceeee, but it works....*sigh* -->
+    <li>
+      <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+        class="post-date">21 Mar 2020</span>
+    </li>
+    <li>
+      <a href="/complete-neural-nets">A complete approach to neural networks</a><span
+        class="post-date">2 Jan 2020</span>
+    </li>
+    <li>
+      <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+        2020</span>
+    </li>
+    <li>
+      <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+        class="post-date">14 Feb 2020</span>
+    </li>
+
+
+    <li>
+      <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug
+        2019</span>
+    </li>
+    <li>
+      <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
+    </li>
+  </ul>
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    
+    <li>
+      <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
+    </li>
+    
+    <li>
+      <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
+    </li>
+    
+  </ul>
+</div>
+
+<br />
+<div>
+  <blockquote>
+    <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+  </blockquote>
+</div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<style>
+  #down-arrow {
+    text-align: center;
+    font-size: 4em;
+    padding: .4em;
+  }
+
+  #favorites li {
+    padding: 2px;
+  }
+
+  #home-img {
+    float: left;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  #about-me {
+    margin-left: 18em;
+  }
+
+  #section-title {
+    text-align: center;
+  }
+
+  .post-date {
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+</style>
+
+    <br />
+
+    <div class="footer" style="font-size: smaller;">
       <p>
-        &copy; 2020. <span id='emoji'></span> All rights reserved.
+        &copy; 2020
+
+        <!-- <span id='emoji'></span>  -->
+
+        Daniel Oscar Denenberg.
       </p>
     </div>
     <script>

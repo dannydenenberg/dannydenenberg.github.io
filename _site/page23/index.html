@@ -100,157 +100,183 @@
       <h3 class="masthead-title">
         <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
         
       </h3>
     </div>
 
-    <blockquote>
-  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
-</blockquote>
-<h2>What's New?</h2>
-<ul>
-  
-  <li>
-    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
-  </li>
-  
-  <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
-  </li>
-  
-</ul>
+    <div>
+  <!-- <img id="home-img" src="/goods/danny-canada.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
+  <img id="home-img" src="/goods/home-pic.jpg" width=350 alt="Danny's Bike in Canada" srcset="" />
+  <!-- <img id="home-img" src="/goods/home2.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
 
-<h2>My Favorites</h2>
-<ul>
-  <!-- A bit brute forceeee, but it works....*sigh* -->
-  <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
-      class="post-date">21 Mar 2020</span>
-  </li>
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
-      2020</span>
-  </li>
-  <li>
-    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
-      class="post-date">14 Feb 2020</span>
-  </li>
-
-  <li>
-    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
-      class="post-date">2 Jan 2020</span>
-  </li>
-  <li>
-    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
-  </li>
-  <li>
-    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
-  </li>
-</ul>
-
-<!-- <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/cron-github">
-        Automating Backups with Cron &amp; GitHub
-      </a>
-    </h1>
-
-    <span class="post-date">24 May 2018</span>
-
-    <p>Back when I was using <a href="https://ghost.org/">Ghost</a> as my blogging platform, I had a problem. I wanted to keep my blog backed up, but I was too cheap to pay the extra $1 a month for Digital Ocean to do it for me.</p>
-
-<p>Being me, I found a <em>hacky</em> way around paying.</p>
-
-<p>I wrote a script to zip my ghost folder and push it up to my GitHub in some repo specifically for storing backups. Using <a href="https://en.wikipedia.org/wiki/Cron">cron</a>, I made it run weekly. It worked great! With git’s version control, I could go through my previous backups, so it was just like how Digital Ocean might do it 👍. <!--more--></p>
-
-<p>To do this, make sure git is installed on your Linux/Unix system.</p>
-
-<p>Then set your username and email in the git preferences through the terminal.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
-git config --global user.email "MY_NAME@example.com"
-</code></pre></div></div>
-
-<p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
-</code></pre></div></div>
-
-<p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
-
-<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
-<span class="nb">cd</span> /home/mybackupsrepo <span class="c"># go to the backups repo</span>
-git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <span class="nt">-m</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> git push origin master <span class="c"># commit, push</span>
-<span class="nb">sudo rm</span> <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
-</code></pre></div></div>
-
-<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
-
-<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
-
-<p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># crontab -e</span>
-<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
-<span class="nv">MAILTO</span><span class="o">=</span>root@example.com
-<span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-
-<span class="c"># For details see man 4 crontabs</span>
-
-<span class="c"># Example of job definition:</span>
-<span class="c"># .---------------- minute (0 - 59)</span>
-<span class="c"># |  .------------- hour (0 - 23)</span>
-<span class="c"># |  |  .---------- day of month (1 - 31)</span>
-<span class="c"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
-<span class="c"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
-<span class="c"># |  |  |  |  |</span>
-<span class="c"># *  *  *  *  * user-name  command to be executed</span>
-
-<span class="c"># backup using the rsbu program to the internal 4TB HDD and then 4TB external</span>
-01 01 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /usr/local/bin/rsbu <span class="nt">-vbd1</span> <span class="p">;</span> /usr/local/bin/rsbu <span class="nt">-vbd2</span>
-
-<span class="c"># Set the hardware clock to keep it in sync with the more accurate system clock</span>
-03 05 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /sbin/hwclock <span class="nt">--systohc</span>
-
-<span class="c"># Perform monthly updates on the first of the month</span>
-<span class="c"># 25 04 1 * * /usr/bin/dnf -y update</span>
-</code></pre></div></div>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-  <a class="pagination-item older" href="/page24/"
-    >Older</a
-  >
-    
-  <a class="pagination-item newer" href="/page22/"
-    >Newer</a
-  >
-   
-</div> -->
+<div id="about-me">
+  <h4>A little about me. I'm a...</h4>
+  <ul>
+    <li>Nationally recognized singer</li>
+    <li>Software developer</li>
+    <li>Award-winning actor</li>
+    <li>Classically-trained pianist</li>
+    <li>Avid biker</li>
+  </ul>
+  <!-- <br> -->
+  <h4>Welcome to my site.</h4>
+  <!-- <blockquote style="padding-left: 10px"> -->
+  <p>I present a <i>collection</i> of my essays, each of which explores in depth <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p>
+  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p> -->
+  <p>All articles are <i>well-researched</i> and <i>candid</i>. Over <code>100,000</code> people have read my writings.
+  </p>
+  <!-- <p></p> -->
+  <!-- </blockquote> -->
 
-    <div class="footer">
+  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
+
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">A few of my favorites</h2>
+  <ul style='text-align: initial' id="favorites">
+    <!-- A bit brute forceeee, but it works....*sigh* -->
+    <li>
+      <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+        class="post-date">21 Mar 2020</span>
+    </li>
+    <li>
+      <a href="/complete-neural-nets">A complete approach to neural networks</a><span
+        class="post-date">2 Jan 2020</span>
+    </li>
+    <li>
+      <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+        2020</span>
+    </li>
+    <li>
+      <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+        class="post-date">14 Feb 2020</span>
+    </li>
+
+
+    <li>
+      <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug
+        2019</span>
+    </li>
+    <li>
+      <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
+    </li>
+  </ul>
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    
+    <li>
+      <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
+    </li>
+    
+    <li>
+      <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
+    </li>
+    
+  </ul>
+</div>
+
+<br />
+<div>
+  <blockquote>
+    <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+  </blockquote>
+</div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<style>
+  #down-arrow {
+    text-align: center;
+    font-size: 4em;
+    padding: .4em;
+  }
+
+  #favorites li {
+    padding: 2px;
+  }
+
+  #home-img {
+    float: left;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  #about-me {
+    margin-left: 18em;
+  }
+
+  #section-title {
+    text-align: center;
+  }
+
+  .post-date {
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+</style>
+
+    <br />
+
+    <div class="footer" style="font-size: smaller;">
       <p>
-        &copy; 2020. <span id='emoji'></span> All rights reserved.
+        &copy; 2020
+
+        <!-- <span id='emoji'></span>  -->
+
+        Daniel Oscar Denenberg.
       </p>
     </div>
     <script>

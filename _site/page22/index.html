@@ -100,146 +100,183 @@
       <h3 class="masthead-title">
         <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
         
       </h3>
     </div>
 
-    <blockquote>
-  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
-</blockquote>
-<h2>What's New?</h2>
-<ul>
-  
-  <li>
-    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
-  </li>
-  
-  <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
-  </li>
-  
-</ul>
+    <div>
+  <!-- <img id="home-img" src="/goods/danny-canada.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
+  <img id="home-img" src="/goods/home-pic.jpg" width=350 alt="Danny's Bike in Canada" srcset="" />
+  <!-- <img id="home-img" src="/goods/home2.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
 
-<h2>My Favorites</h2>
-<ul>
-  <!-- A bit brute forceeee, but it works....*sigh* -->
-  <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
-      class="post-date">21 Mar 2020</span>
-  </li>
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
-      2020</span>
-  </li>
-  <li>
-    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
-      class="post-date">14 Feb 2020</span>
-  </li>
-
-  <li>
-    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
-      class="post-date">2 Jan 2020</span>
-  </li>
-  <li>
-    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
-  </li>
-  <li>
-    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
-  </li>
-</ul>
-
-<!-- <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/get-started-typescript">
-        Typescript quickstart
-      </a>
-    </h1>
-
-    <span class="post-date">10 Jun 2018</span>
-
-    <p>Typescript is a programming language that compiles into JavaScript. This means that any valid JS (JavaScript) code is valid TS (Typescript). TS is a language for the developer. If you have every written a bunch of Javascript code and started to wonder, “hey, what was the type of that function parameter, again?”, you understand.</p>
-
-<p>Typescript is “JavaScript that scales” meaning it enforces types on all variables/return values, allows for interface use, and much much more. Typescript also implements some feature that are supposed to come to Javascript in the future.<!--more--></p>
-
-<h2 id="getting-started">Getting Started</h2>
-
-<p>Typescript is a compiled language which means it needs a compiler. You will first need NodeJS installed (TS is almost always used with Node). Then type <code class="highlighter-rouge">npm i -g typescript</code> to install TS globally on your computer.
-If typing <code class="highlighter-rouge">tsc -v</code> works and yields the version number of your TS installation, you’re good to go!</p>
-
-<h2 id="the-basics">The Basics</h2>
-
-<p>All you really need to use Typescript is the compiler. So, create a new file called hello.ts and put this code in it:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">mes</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello, TS 🌏😍</span><span class="dl">"</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">mes</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>As you can see, there is one difference here from vanilla JS – the :string type annotation after the message variable name. The general form for type annotations go like this: <code class="highlighter-rouge">let variableName: type</code>.</p>
-
-<p><strong>Note:</strong> The string type would have been inferred as the type without the annotation, just like in this case, let a = 9, the inerred type would be number.</p>
-
-<p>Now to compile the TS file into JavaScript, run <code class="highlighter-rouge">tsc hello.ts</code>. This generates a new file called <code class="highlighter-rouge">hello.js</code> with the compiled JS code.</p>
-
-<p>Let’s run that: <code class="highlighter-rouge">node hello.js</code>. You should see in the console “Hello, TS ♥️”.
-To learn more about Typescript syntax and cool features, check out the handbook.</p>
-
-<h2 id="workflow-with-node">Workflow with Node</h2>
-
-<p>Because TS is primarily used in NodeJS environments, it is important to know how they work together.</p>
-
-<p>Create a new project with <code class="highlighter-rouge">npm init</code>.</p>
-
-<p>Next, add the TS configure file with <code class="highlighter-rouge">tsc -init</code>. This creates a new file in the root of your project called <code class="highlighter-rouge">tsconfig.json</code>. In it are all sorts of configure variables that you can play with. All we are interested in for the time being is one called outDir. This is the folder that the compiled TS is put into. Find the line where it is defined, uncomment it, and assign it the value of <code class="highlighter-rouge">"./build"</code>.</p>
-
-<p>Now, you can put your TS files anywhere and they will all be compiled into the <code class="highlighter-rouge">./build</code> directory with the command <code class="highlighter-rouge">tsc</code>.</p>
-
-<p>Copy your <code class="highlighter-rouge">hello.ts</code> file into the root of your project and run tsc (just those 3 letters). Now in the build folder, there should be a hello.js file. You can run it with <code class="highlighter-rouge">node build/hello.js</code>.</p>
-
-<p>This is the general workflow for creating TS files, compiling, and running them. Remember, you can name the <code class="highlighter-rouge">outDir</code> directory anything you want!</p>
-
-<h2 id="editors-and-types">Editors and @types</h2>
-
-<p>For editing Typescript, I would highly, highly recommend <a href="https://code.visualstudio.com/">Visual Studio Code</a>. It is the editor I use for almost everything. I used to use <a href="https://atom.io/">Atom</a>, but when I made the switch, I realized just how much better VSC is. It is SUPER fast ⚡️. Has thousands of amazing plugins. Runs on almost every platform.
-For intellisense, VSC’s default Typescript package works extremely well. But, when is comes to working with npm packages in Typescript, you will have to install the type definitions for the package (if they are available). Let’s take express.js for example. The type definition package for express is <code class="highlighter-rouge">@types/express</code>. So, to get autocomplete, intellisense, etc. just install the package with <code class="highlighter-rouge">npm i @types/express</code>.</p>
-
-<p>Without the type definitions installed, the packages have the type any by default.</p>
-
-<p>A great website for finding type definitions for your favorite npm packages is <a href="https://definitelytyped.org">definitelytyped.org</a>. Click on the search and it will take you to TypeSearch where you can find your package’s types and how to install them (it usually is @types/package).
-As an alternative, you could search on <a href="https://yarnpkg.com/lang/en/">Yarn’s</a> website for packages that start with “<code class="highlighter-rouge">@types</code>”.
-Have fun with TS ❤️.</p>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-  <a class="pagination-item older" href="/page23/"
-    >Older</a
-  >
-    
-  <a class="pagination-item newer" href="/page21/"
-    >Newer</a
-  >
-   
-</div> -->
+<div id="about-me">
+  <h4>A little about me. I'm a...</h4>
+  <ul>
+    <li>Nationally recognized singer</li>
+    <li>Software developer</li>
+    <li>Award-winning actor</li>
+    <li>Classically-trained pianist</li>
+    <li>Avid biker</li>
+  </ul>
+  <!-- <br> -->
+  <h4>Welcome to my site.</h4>
+  <!-- <blockquote style="padding-left: 10px"> -->
+  <p>I present a <i>collection</i> of my essays, each of which explores in depth <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p>
+  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p> -->
+  <p>All articles are <i>well-researched</i> and <i>candid</i>. Over <code>100,000</code> people have read my writings.
+  </p>
+  <!-- <p></p> -->
+  <!-- </blockquote> -->
 
-    <div class="footer">
+  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
+
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">A few of my favorites</h2>
+  <ul style='text-align: initial' id="favorites">
+    <!-- A bit brute forceeee, but it works....*sigh* -->
+    <li>
+      <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+        class="post-date">21 Mar 2020</span>
+    </li>
+    <li>
+      <a href="/complete-neural-nets">A complete approach to neural networks</a><span
+        class="post-date">2 Jan 2020</span>
+    </li>
+    <li>
+      <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+        2020</span>
+    </li>
+    <li>
+      <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+        class="post-date">14 Feb 2020</span>
+    </li>
+
+
+    <li>
+      <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug
+        2019</span>
+    </li>
+    <li>
+      <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
+    </li>
+  </ul>
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    
+    <li>
+      <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
+    </li>
+    
+    <li>
+      <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
+    </li>
+    
+  </ul>
+</div>
+
+<br />
+<div>
+  <blockquote>
+    <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+  </blockquote>
+</div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<style>
+  #down-arrow {
+    text-align: center;
+    font-size: 4em;
+    padding: .4em;
+  }
+
+  #favorites li {
+    padding: 2px;
+  }
+
+  #home-img {
+    float: left;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  #about-me {
+    margin-left: 18em;
+  }
+
+  #section-title {
+    text-align: center;
+  }
+
+  .post-date {
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+</style>
+
+    <br />
+
+    <div class="footer" style="font-size: smaller;">
       <p>
-        &copy; 2020. <span id='emoji'></span> All rights reserved.
+        &copy; 2020
+
+        <!-- <span id='emoji'></span>  -->
+
+        Daniel Oscar Denenberg.
       </p>
     </div>
     <script>

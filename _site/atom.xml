@@ -4,7 +4,7 @@
  <title>Danny Denenberg</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-07-28T11:36:00-05:00</updated>
+ <updated>2020-08-12T19:36:55-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
@@ -1109,15 +1109,14 @@ window.location.replace(&quot;https://alligator.io/nodejs/jwt-expressjs/&quot;);
  </entry>
  
  <entry>
-   <title>Complete approach to neural networks (mathy)</title>
+   <title>A complete approach to neural networks</title>
    <link href="http://localhost:4000/complete-neural-nets"/>
    <updated>2020-01-02T00:00:00-06:00</updated>
    <id>http://localhost:4000/complete-guide-to-nn</id>
-   <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;&lt;span class=&quot;message&quot; style=&quot;padding: 0&quot;&gt;
-&lt;strong&gt;Arrgg!&lt;/strong&gt; I’m almost done with this puppy. Almost!
-&lt;/span&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+   <content type="html">&lt;!--
+&gt; &lt;span class=&quot;message&quot; style=&quot;padding: 0&quot;&gt;
+&gt; &lt;strong&gt;Arrgg!&lt;/strong&gt; I'm almost done with this puppy. Almost!
+&gt; &lt;/span&gt; --&gt;
 
 &lt;p&gt;The majority of advances in artificial intelligence in the last half-decade has
 been in the developing technology of &lt;strong&gt;artificial neural networks (ANN).&lt;/strong&gt;&lt;/p&gt;
@@ -1276,7 +1275,7 @@ Wᵢₕ&lt;br /&gt; The weights connecting the hidden and output layers, I will 
 follows: Wₕₒ&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;!!X=\begin{bmatrix}x_1 &amp;amp; x_2\end{bmatrix}!! !!W_{ih} = \begin{bmatrix} w_{11} &amp;amp; w_{12} &amp;amp; w_{13} \\ w_{21} &amp;amp; w_{22} &amp;amp; w_{23}\end{bmatrix}!!&lt;/p&gt;
+&lt;p&gt;!!X=\begin{bmatrix}x&lt;em&gt;1 &amp;amp; x_2\end{bmatrix}!! !!W&lt;/em&gt;{ih} = \begin{bmatrix} w&lt;em&gt;{11} &amp;amp; w&lt;/em&gt;{12} &amp;amp; w&lt;em&gt;{13} \\ w&lt;/em&gt;{21} &amp;amp; w&lt;em&gt;{22} &amp;amp; w&lt;/em&gt;{23}\end{bmatrix}!!&lt;/p&gt;
 
 &lt;p&gt;Just for a quick reference, here is how you multiply matrices:&lt;/p&gt;
 
@@ -1288,7 +1287,7 @@ follows: Wₕₒ&lt;/p&gt;
 product of) the input matrix and the weight matrix. The hidden layer nodes are
 represented by $H$.&lt;/p&gt;
 
-&lt;p&gt;!!H_{weighted-sum}=X \cdot W_{ih}=\begin{bmatrix} (x_1w_{11}+x_2w_{21}) \\ (x_1w_{12}+x_2w_{22}) \\ (x_1w_{13}+x_2w_{23})\end{bmatrix}!!&lt;/p&gt;
+&lt;p&gt;!!H&lt;em&gt;{weighted-sum}=X \cdot W&lt;/em&gt;{ih}=\begin{bmatrix} (x&lt;em&gt;1w&lt;/em&gt;{11}+x&lt;em&gt;2w&lt;/em&gt;{21}) \\ (x&lt;em&gt;1w&lt;/em&gt;{12}+x&lt;em&gt;2w&lt;/em&gt;{22}) \\ (x&lt;em&gt;1w&lt;/em&gt;{13}+x&lt;em&gt;2w&lt;/em&gt;{23})\end{bmatrix}!!&lt;/p&gt;
 
 &lt;h4 id=&quot;step-2&quot;&gt;STEP #2&lt;/h4&gt;
 
@@ -1307,7 +1306,7 @@ unique uses in ANNs).&lt;/p&gt;
 
 &lt;p&gt;Now we can pass our weighted sum matrix through this &lt;strong&gt;non-linear&lt;/strong&gt; activation function and the outputs of this are our values for our hidden layer nodes.&lt;/p&gt;
 
-&lt;p&gt;!!H=\sigma(X\times W_{ih})=\begin{bmatrix} \sigma (x_1w_{11}+x_2w_{21}) \\ \sigma(x_1w_{12}+x_2w_{22}) \\ \sigma (x_1w_{13}+x_2w_{23})\end{bmatrix}=\begin{bmatrix} h_1 \\ h_2 \\ h_3 \end{bmatrix}!!&lt;/p&gt;
+&lt;p&gt;!!H=\sigma(X\times W&lt;em&gt;{ih})=\begin{bmatrix} \sigma (x_1w&lt;/em&gt;{11}+x&lt;em&gt;2w&lt;/em&gt;{21}) \\ \sigma(x&lt;em&gt;1w&lt;/em&gt;{12}+x&lt;em&gt;2w&lt;/em&gt;{22}) \\ \sigma (x&lt;em&gt;1w&lt;/em&gt;{13}+x&lt;em&gt;2w&lt;/em&gt;{23})\end{bmatrix}=\begin{bmatrix} h_1 \\ h_2 \\ h_3 \end{bmatrix}!!&lt;/p&gt;
 
 &lt;h4 id=&quot;step-3&quot;&gt;STEP #3&lt;/h4&gt;
 
@@ -1326,7 +1325,7 @@ matrices.&lt;/p&gt;
 
 &lt;p&gt;And then multiply them to find the weighted sum for the output layer.&lt;/p&gt;
 
-&lt;p&gt;!!Y_{weighted-sum}=H\cdot W_{ho}!! !!= \begin{bmatrix} h_1 &amp;amp; h_2 &amp;amp; h_3 \end{bmatrix} \begin{bmatrix} w_{11} &amp;amp; w_{12} \\ w_{21} &amp;amp; w_{22} \\ w_{31} &amp;amp; w_{32}\end{bmatrix}!! !!= \begin{bmatrix} h_1w_{11} + h_2w_{21}+h_3w_{31} \\ h_1w_{12}+h_2w_{22}+h_3w_{32}\end{bmatrix}!!&lt;/p&gt;
+&lt;p&gt;!!Y&lt;em&gt;{weighted-sum}=H\cdot W&lt;/em&gt;{ho}!! !!= \begin{bmatrix} h&lt;em&gt;1 &amp;amp; h_2 &amp;amp; h_3 \end{bmatrix} \begin{bmatrix} w&lt;/em&gt;{11} &amp;amp; w&lt;em&gt;{12} \\ w&lt;/em&gt;{21} &amp;amp; w&lt;em&gt;{22} \\ w&lt;/em&gt;{31} &amp;amp; w&lt;em&gt;{32}\end{bmatrix}!! !!= \begin{bmatrix} h_1w&lt;/em&gt;{11} + h&lt;em&gt;2w&lt;/em&gt;{21}+h&lt;em&gt;3w&lt;/em&gt;{31} \\ h&lt;em&gt;1w&lt;/em&gt;{12}+h&lt;em&gt;2w&lt;/em&gt;{22}+h&lt;em&gt;3w&lt;/em&gt;{32}\end{bmatrix}!!&lt;/p&gt;
 
 &lt;h4 id=&quot;step-4-final&quot;&gt;STEP #4 (FINAL)&lt;/h4&gt;
 
@@ -1338,7 +1337,7 @@ function.&lt;/p&gt;
 &lt;p&gt;To get the outputs for the entire network, we just have to pass the weighted sum
 for the output layer through our activation function (sigmoid once more).&lt;/p&gt;
 
-&lt;p&gt;!!Y=\sigma (H \cdot W_{ho})=\begin{bmatrix} \sigma (h_1w_{11} + h_2w_{21}+h_3w_{31}) \\ \sigma ( h_1w_{12}+h_2w_{22}+h_3w_{32}) \end{bmatrix}!!&lt;/p&gt;
+&lt;p&gt;!!Y=\sigma (H \cdot W&lt;em&gt;{ho})=\begin{bmatrix} \sigma (h_1w&lt;/em&gt;{11} + h&lt;em&gt;2w&lt;/em&gt;{21}+h&lt;em&gt;3w&lt;/em&gt;{31}) \\ \sigma ( h&lt;em&gt;1w&lt;/em&gt;{12}+h&lt;em&gt;2w&lt;/em&gt;{22}+h&lt;em&gt;3w&lt;/em&gt;{32}) \end{bmatrix}!!&lt;/p&gt;
 
 &lt;p&gt;And that produces the final ‘outputs’ for our ANN.&lt;/p&gt;
 
@@ -3051,287 +3050,6 @@ Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-roug
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole</title>
-   <link href="http://localhost:4000/jekyll-github-pages-poole"/>
-   <updated>2014-02-03T00:00:00-06:00</updated>
-   <id>http://localhost:4000/jekyll-github-pages-poole</id>
-   <content type="html">&lt;p&gt;I recently migrated this website from &lt;a href=&quot;http://wordpress.com&quot;&gt;Wordpress&lt;/a&gt; to &lt;a href=&quot;http://pages.github.com/&quot;&gt;Github pages&lt;/a&gt;
-using &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; and &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;poole&lt;/a&gt;. So far I am really happy with the transition. Over time, I grew to really dislike how heavy-weight Wordpress is. I dislike how WYSIWYG editors make it really hard to see what HTML is being generated and tend to bloat the code that is produced. I found the Wordpress plugin system so confusing that I was afraid to try to customize the layout of anything.&lt;/p&gt;
-
-&lt;p&gt;The process of backing up Wordpress is a huge pain. I was annoyed constantly installing security updates. I hated having to keep an opaque database in order to keep all of my content. And whenever I went in to edit my website, I was always afraid that I would fat-finger change something and have no idea what happened.&lt;/p&gt;
-
-&lt;p&gt;So when I learned about &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, it seemed like a great alternative. I like the idea that my entire blog is a set of static files. Besides its simplicity, it makes backups so much easier and avoids most common security concerns caused by running dynamic websites. I could write my posts in &lt;a href=&quot;http://en.wikipedia.org/wiki/Markdown&quot;&gt;Markdown&lt;/a&gt; which I know from &lt;a href=&quot;https://www.atlassian.com/software/confluence&quot;&gt;Confluence&lt;/a&gt; and &lt;a href=&quot;http://github.com&quot;&gt;GitHub&lt;/a&gt;. Also, Jekyll allows for code examples to be very nicely embedded in the website. Finally, Jekyll is very lightweight and allows for very minimal websites without any bloat.&lt;/p&gt;
-
-&lt;p&gt;The fact that GitHub provides &lt;a href=&quot;http://pages.github.com&quot;&gt;free hosting for Jekyll blogs&lt;/a&gt; is just icing on the cake. It will save me ~$50 per year in hosting. GitHub provides automatic version control of my blog. I can use GitHub’s web editor to write blog posts online. And I can still connect it to my custom domain (&lt;a href=&quot;http://joshualande.com&quot;&gt;joshualande.com&lt;/a&gt;).&lt;/p&gt;
-
-&lt;h2 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h2&gt;
-
-&lt;p&gt;Instead of reading a lot of documentation, I found this really great git repo called &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;poole&lt;/a&gt;. poole provides:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“a clear and concise foundational setup for any Jekyll site. And it has a super minimal look… It does so by furnishing a full vanilla Jekyll install with example templates, pages, posts, and styles.”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://demo.getpoole.com/&quot;&gt;demo.getpoole.com&lt;/a&gt; is a working demo of the poole website that looks like:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/demo_poole_website.png&quot; alt=&quot;The demo pool website&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To get started with my blog, all I had to do was create a new Git repo with the name &lt;a href=&quot;http://joshualande.github.io&quot;&gt;joshualande.github.io&lt;/a&gt;, download the poole repository, and push it to my git repo. A few minutes later the website joshualande.github.io was ready! I only had a few posts on my previous website so I just copied them over manually. But there is &lt;a href=&quot;http://jekyllrb.com/docs/migrations&quot;&gt;a package&lt;/a&gt; for migrating blogs to Jekyll.&lt;/p&gt;
-
-&lt;h2 id=&quot;blog-layout&quot;&gt;Blog Layout&lt;/h2&gt;
-
-&lt;p&gt;The initial state of the poole repository is:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;se&quot;&gt;\$&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt;
-404.html
-CNAME
-LICENSE.md
-README.md
-&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;config.yml
-&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;includes
-&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;layouts
-&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;posts
-about.md
-atom.xml
-index.html
-public&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can view the folder structure on &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;GitHub&lt;/a&gt;.
-When you run Jekyll, it creates a folder called _site with the
-static website inside of it. Every file or folder in the repo will get copied
-into the _site folder unless it begins with an underscore.
-Markdown files will get automatically converted to HTML
-and poole uses the &lt;a href=&quot;http://liquidmarkup.org&quot;&gt;Liquid&lt;/a&gt; templating system to allow
-for somewhat dynamic content on the website.&lt;/p&gt;
-
-&lt;p&gt;The folder &lt;a href=&quot;https://github.com/poole/poole/tree/master/_posts&quot;&gt;_posts&lt;/a&gt; contains all of the blog posts in markdown format.
-The example posts that come with poole are:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;se&quot;&gt;\$&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;posts/
-2013-12-31-whats-jekyll.md
-2014-01-01-example-content.md
-2014-01-02-introducing-poole.md&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/poole/poole/blob/master/index.html&quot;&gt;index.html&lt;/a&gt;
-contains the front page of the blog and
-&lt;a href=&quot;https://github.com/poole/poole/blob/master/about.md&quot;&gt;about.md&lt;/a&gt; is a
-static post in markdown format.
-If you want to have more static files, you can just add them to the
-repo and poole will copy them to the _site folder when rendering the website.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/poole/poole/blob/master/_config.yml&quot;&gt;_config&lt;/a&gt;
-contains general configuration stuff for the website:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;## Setup&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Poole&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;tagline&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Butler'&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;themes&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@mdo.'&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://getpoole.com&lt;/span&gt;
-&lt;span class=&quot;nn&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Finally, the folders &lt;a href=&quot;https://github.com/poole/poole/blob/master/_layouts&quot;&gt;_layouts&lt;/a&gt;
-and &lt;a href=&quot;https://github.com/poole/poole/tree/master/_includes&quot;&gt;_includes&lt;/a&gt;
-contain boiler-plate HTML for building the website.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;s&quot;&gt;$ ls -1 _layouts/&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;default.html&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;page.html&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;post.html&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;$ ls -1 \_includes/&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;head.html&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;I will describe next some tweaks I made to the base website.&lt;/p&gt;
-
-&lt;h2 id=&quot;customizations&quot;&gt;Customizations&lt;/h2&gt;
-
-&lt;p&gt;To get my blog to its current form, I made a few modifications to the base poole layout.&lt;/p&gt;
-
-&lt;p&gt;First, I wanted to create an &lt;a href=&quot;/archive/&quot;&gt;Archive&lt;/a&gt; page which listed all of my blog posts.
-To do this, I created the file &lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/5e5ca6389fbc66be06488b9b7803e0278ee1b89f/archive.md&quot;&gt;archive.md&lt;/a&gt; which shows a dynamic list of all of
-my blog posts:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;---
-
-layout: page
-title: Archive
-
----
-
-## Blog Posts
-
-{% for post in site.posts %}
-
-- {{ post.date | date_to_string }} &lt;span class=&quot;ni&quot;&gt;&amp;amp;raquo;&lt;/span&gt; [ {{ post.title }} ]({{ post.url }})
-  {% endfor %}
-  
-  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Note that the syntax &lt;code class=&quot;highlighter-rouge&quot;&gt;{% for post in site.posts %}&lt;/code&gt; is from the Liquid templating system.&lt;/p&gt;
-
-&lt;p&gt;Next, I wanted to add a navigation bar at the top of the website with links to the &lt;a href=&quot;/about/&quot;&gt;About&lt;/a&gt; page, &lt;a href=&quot;/archive&quot;&gt;Archive&lt;/a&gt; page, and the feed. To do this, I modified the file &lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_config.yml&quot;&gt;_config.yml&lt;/a&gt; to define a dictionary of pages to show in my header:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;pages_list&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  
- &lt;span class=&quot;na&quot;&gt;About&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/about'&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;Archive&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/archive'&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;Feed&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/atom.xml'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;I then modify the file &lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_layouts/default.html&quot;&gt;_layouts/default.html&lt;/a&gt; to loop over this list, creating links to each of the pages:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;masthead-title&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Home&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ site.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
-
-{% for page in site.pages_list %}
-&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;amp;nbsp;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;small&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{{ page[1]  }}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ page[0] }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/small&amp;gt;&lt;/span&gt;
-{% endfor %}
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;disqus-comments&quot;&gt;Disqus Comments&lt;/h2&gt;
-
-&lt;p&gt;I wanted to enable &lt;a href=&quot;http://disqus.com/&quot;&gt;Disqus&lt;/a&gt; comments on the
-blog. To do that, I modified the file &lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_layouts/default.html&quot;&gt;_layouts/default.html&lt;/a&gt; to include the line:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;comments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;I then created a file &lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_includes/comments.html&quot;&gt;_includes/comments.html&lt;/a&gt; which includes the code given to me by Disqus:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% if page.comments %}
-
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Add Disqus comments. --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;cm&quot;&gt;/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_shortname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;USERNAME&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// required: replace example with your forum shortname&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_identifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;{{ site.disqusid }}{{ page.url | replace:'index.html','' }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; _ DON'T EDIT BELOW THIS LINE _ &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;text/javascript&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_shortname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://disqus.com&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dsq-brlink&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;logo-disqus&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Disqus&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
-{% endif %}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;By setting up the code this way, I can enable commenting on a page-by-page basis. All I have to do is set “comments: True” in the YAML header of the post.&lt;/p&gt;
-
-&lt;h2 id=&quot;google-analytics&quot;&gt;Google Analytics&lt;/h2&gt;
-
-&lt;p&gt;Finally, I enabled &lt;a href=&quot;http://www.google.com/analytics&quot;&gt;Google Analytics&lt;/a&gt; on the website. First, I had to register my website through
-Google Analytics. Google gave me this javascript tracking code to embed on every website:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;GoogleAnalyticsObject&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)},&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parentNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;insertBefore&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;//www.google-analytics.com/analytics.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;UA-47674613-1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;joshualande.com&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;pageview&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;I put this code in the file
-&lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_includes/google_analytics.html&quot;&gt;_includes/google_analytics.html&lt;/a&gt;
-Finally, I included this tracking code on all of the pages of my website by modifying the file
-&lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/64d03b883b64dd8aedf30b903ecaae92a282955a/_layouts/default.html&quot;&gt;_layouts/default.html&lt;/a&gt;
-to include the line:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% include google_analytics.html %}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;getting-a-custom-url&quot;&gt;Getting a Custom URL&lt;/h2&gt;
-
-&lt;p&gt;Once I got my blog up to speed on GitHub with the URL &lt;a href=&quot;http://joshualande.github.io&quot;&gt;joshualande.github.io&lt;/a&gt;, it was easy to link my personal domain &lt;a href=&quot;http://joshualande.com&quot;&gt;joshualande.com&lt;/a&gt; to it. I use Namecheap to host my domain, so I followed the instructions &lt;a href=&quot;http://davidensinger.com/2013/03/setting-the-dns-for-github-pages-on-namecheap&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I hope this blog will help you get up to speed quickly with GitHub Pages, Jekyll, and poole.
-If you have any questions about my implementation, you can view my entire website on &lt;a href=&quot;https://github.com/joshualande/joshualande.github.io&quot;&gt;GitHub&lt;/a&gt; or leave a question below.&lt;/p&gt;
-
-&lt;h2 id=&quot;adding-a-custom-twitter-plug-to-the-bottom-of-each-post&quot;&gt;Adding a Custom Twitter Plug To the Bottom of Each Post&lt;/h2&gt;
-
-&lt;p&gt;I was not thrilled by the idea of putting
-big Social Media buttons on my website.
-I felt that they would disrupt the minimal design and layout of my website.
-And after reading
-&lt;a href=&quot;https://news.ycombinator.com/item?id=7232738&quot;&gt;this discussion&lt;/a&gt;
-on &lt;a href=&quot;news.ycombinator.com&quot;&gt;Hacker News&lt;/a&gt;, I decided
-to leave them off.
-But I wanted some lightweight way to
-allow people to share my posts on Twitter if they though
-their followers would appreciate it.
-As a compromise, I decide to add a
-sentence at the end of each blog post saying:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“If you have any questions or comments, please post them below. If
-you liked this post, you can
-&lt;a href=&quot;https://twitter.com/intent/tweet?url=http://localhost:4000/jekyll-github-pages-poole&amp;amp;text=How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole&amp;amp;via=joshualande&quot; target=&quot;_blank&quot;&gt;
-  share it with your followers&lt;/a&gt; 
-or 
-&lt;a href=&quot;https://twitter.com/joshualande&quot;&gt;
-  follow me on Twitter&lt;/a&gt;!
-“&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I felt this was a reasonable compromise between
-utility and obnoxiousness.&lt;/p&gt;
-
-&lt;p&gt;To dynamically generate this sentence on each post
-and automatically create a nice looking Tweet,
-I created a file called
-&lt;a href=&quot;https://github.com/joshualande/joshualande.github.io/blob/8405f035bd7da5306b1a35a4a4632bf698ea4f0a/_includes/twitter_plug.html&quot;&gt;_includes/twitter_plug.html&lt;/a&gt;
-which contains:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; If you liked this post, you can
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&amp;amp;text={{ page.title }}&amp;amp;via=joshualande&quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;target=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_blank&quot;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  share it with your followers&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-or
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://twitter.com/joshualande&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; follow me on Twitter&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;! 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;When you click on “share it with your followers”, it will automatically compose a tweet like:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole http://www.joshualande.com/2014/02/03/jekyll-github-pages-poole/ via @joshualande&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Whenever I want to include the Twitter plug on a post, I just add the liquid tag:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-{% include twitter_plug.html %}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;more-links&quot;&gt;More Links&lt;/h2&gt;
-
-&lt;p&gt;Here are some links which helped me along the way:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The official &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; website, along with detailed &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;documentation&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Documentation by GitHub about hosting static webpages with &lt;a href=&quot;http://pages.github.com&quot;&gt;GitHub pages&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;poole&lt;/a&gt; GitHub repository.&lt;/li&gt;
-  &lt;li&gt;The GitHub repository for my &lt;a href=&quot;http://github.com/joshualande/joshualande.github.io&quot;&gt;personal website&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If you have any questions or comments, please post them below. If
-you liked this post, you can
-&lt;a href=&quot;https://twitter.com/intent/tweet?url=http://localhost:4000/jekyll-github-pages-poole&amp;amp;text=How I Created a Beautiful and Minimal Blog Using Jekyll, Github Pages, and poole&amp;amp;via=joshualande&quot; target=&quot;_blank&quot;&gt;
-  share it with your followers&lt;/a&gt; 
-or 
-&lt;a href=&quot;https://twitter.com/joshualande&quot;&gt;
-  follow me on Twitter&lt;/a&gt;!&lt;/p&gt;
-
 </content>
  </entry>
  

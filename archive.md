@@ -2,12 +2,19 @@
 layout: page
 title: Archive
 ---
+
 ## Blog Posts
+
 {% for post in site.posts %}
 
-- {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
-{% endfor %}
+- <span id='datet'>{{ post.date | date_to_string }}</span> [ {{ post.title }} ]({{ post.url }})
+  {% endfor %}
 
+<style>
+  #datet {
+    color: #9a9a9aa1;
+  }  
+</style>
 <!-- <ul>
   {% for post in site.posts %}
   <li>

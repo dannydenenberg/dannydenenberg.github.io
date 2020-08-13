@@ -4,7 +4,7 @@ title: About
 links: true
 ---
 
-![](/goods/aboutpicture.jpeg)
+<!-- ![](/goods/aboutpicture.jpeg) -->
 
 ---
 

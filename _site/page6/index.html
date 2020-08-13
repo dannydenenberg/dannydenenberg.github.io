@@ -100,361 +100,183 @@
       <h3 class="masthead-title">
         <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">👕 About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">📜 Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">🍯 Feed</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
+         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
         
       </h3>
     </div>
 
-    <blockquote>
-  <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
-</blockquote>
-<h2>What's New?</h2>
-<ul>
-  
-  <li>
-    <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
-  </li>
-  
-  <li>
-    <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
-  </li>
-  
-  <li>
-    <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
-  </li>
-  
-</ul>
+    <div>
+  <!-- <img id="home-img" src="/goods/danny-canada.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
+  <img id="home-img" src="/goods/home-pic.jpg" width=350 alt="Danny's Bike in Canada" srcset="" />
+  <!-- <img id="home-img" src="/goods/home2.jpg" width=350 alt="Danny's Bike in Canada" srcset="" /> -->
 
-<h2>My Favorites</h2>
-<ul>
-  <!-- A bit brute forceeee, but it works....*sigh* -->
-  <li>
-    <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
-      class="post-date">21 Mar 2020</span>
-  </li>
-  <li>
-    <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
-      2020</span>
-  </li>
-  <li>
-    <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
-      class="post-date">14 Feb 2020</span>
-  </li>
-
-  <li>
-    <a href="/complete-neural-nets">Complete approach to neural networks (mathy)</a><span
-      class="post-date">2 Jan 2020</span>
-  </li>
-  <li>
-    <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug 2019</span>
-  </li>
-  <li>
-    <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
-  </li>
-</ul>
-
-<!-- <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/how-hash-functions-work">
-        How hash functions work
-      </a>
-    </h1>
-
-    <span class="post-date">12 Mar 2020</span>
-
-    <p>A hash function is a way to <strong>tell something where to go</strong>.</p>
-
-<p>Here is the function for reference:</p>
-
-<p>!!h(k) \equiv k\ (\textrm{mod}\ m)!!</p>
-
-<p>If you are confused about the $(\textrm{mod}\ m)$ part, I would recommend brushing up on <a href="https://en.wikipedia.org/wiki/Modular_arithmetic">modular arithmetic</a>. It’s not bad at all!</p>
-
-<p>Now, back to the function.</p>
-
-<p>Let me define all of the variables for you. $h$ is the return value (think y=x). $k$ is the object, or ‘thing’ which the function is telling where to go (hence it is the input to the function). And $m$ is the modulus we are working in such that $0 \le h(k) \lt m$, making $h(k)$ the least positive residue of $k$ modulo $m$</p>
-
-<p>Lets say we had some parking lot with 10 spaces.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Currently there are no cars in the lot, but if I were to put one into spot 4 and 8, for example, it would look like this:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>🚙</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>🚖</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Okay, in this situation, the parking lot owner, Sol, (somehow) knows that he won’t ever have more than ten cars in his lot at the same time. Sol also wants to make it easy for people to know where to park and to know where their car is when they need to retrieve it.</p>
-
-<p>Naturally 🙄, Sol uses a hash function to automate this process.</p>
-
-<p>In his hash function, the output $h$ is the space to park in (0-9), $k$ is the license plate number of the car (in this world license plates are strictly numeric), and $m$ is the number of spaces (10)–thus, $h(k)$ will <strong>always</strong> output a number that corresponds to an actual space.</p>
-
-<p><strong>Let’s take Sol’s lot out for a spin</strong>. A car 🚍 pulls up with the license plate 20. Using our hash function, $h(k) \equiv k\ (\textrm{mod}\ m)$, we find $h(20)$ to be 0. So, Sol sends the car to space 0.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>🚍</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Another car 🚙 with the license plate 478 pulls up. Sol tells him to go to spot 8. And another 🚔 with the plate 87263 goes to spot 3.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Space</th>
-      <th>Car</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>🚍</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>🚔</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>🚙</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Now, a car 🚕 pulls up with the license plate #9878. The hash function tells the car to go to space 8, but there is already a car there. This is called a <strong>collision</strong> (when a hash function assigns two different things to the same location).</p>
-
-<h2 id="collision-resolution">Collision resolution</h2>
-
-<p>How can Sol find a free spot available to the new car?</p>
-
-<p>Well, if we were working with memory and not parking lots, one way to resolve the issue would be to create a <strong>linked list</strong> in the spot in memory where both cars go and simply search through that list every time a retrieval was needed or add to that list every time an input was needed.</p>
-
-<p>However, we need to find a <strong>free spot</strong> for the car to go to.</p>
-
-<p>Starting with the original hashing function $h_0(k)=h(k)$, we can define a sequence of spaces $h_1(k),h_2(k),….$. We attempt to place the car (or thing) $k$ at location $h_0(k)$. If this location is taken, we move one location up, $h_1(k)$. If this is taken, we move one more up $h_2(k)$, and so on.</p>
-
-<p>The simplest way to represent this ‘probing sequence’ is like so:</p>
-
-<p>!!h_j(k) \equiv h(k) +j\ (\textrm{mod}\ m), \quad \quad 0 \le h_j(k) \lt m!!</p>
-
-<p>This places the thing $k$ as near as possible to the past location $h(k)$.</p>
-
-<p>This, unfortunately can lead to difficulties, especially with larger possible locations (larger $m$ values). As more common $k$ items begin to get added to memory, the same possible locations are traced out by $h_j(k)$. This not only creates a concept called <em>clustering</em>, where many different items are placed right next to each other, it also can be computationally intensive for Sol or his computer to retrace through the same number of spaces each time simply because similar license plates are clustered together.</p>
-
-<p>To avoid clustering, you can use a collision resolution policy called <em>double hashing</em>.</p>
-
-<p>Using $0 \le h(k) \lt m$, where $m$ is prime, a second hashing function is derived:</p>
-
-<p>!!g(k) \equiv k +1\ (\textrm{mod}\ m-2), \quad \quad 0 \lt g(k) \le m-2!!</p>
-
-<p>In the above function, $(g(k),m)=1$. Our new probing sequence is thus</p>
-
-<p>!!h_j(k) \equiv h(k) +j \cdot g(k)(\textrm{mod}\ m)!!</p>
-
-<p>$j$ runs through the integers $0,1,2…,m-1$ and all possible locations are traced.</p>
-
-<p>The most reasonable distribution of $g(k)$ values occurs when both $m$ and $m-1$ are prime (twin primes).</p>
-
-<p>In addition to the recommended restrictions on the values of $m$ and $m-1$, m should not be a power of base $b$, where $k$ is represented as $k_b$ ($k$ is a number in base $b$), because $(\textrm{mod}\ m)$ would always return the last couple digits of the number and will cluster as $m$ continues to increase in size.</p>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-  <a class="pagination-item older" href="/page7/"
-    >Older</a
-  >
-    
-  <a class="pagination-item newer" href="/page5/"
-    >Newer</a
-  >
-   
-</div> -->
+<div id="about-me">
+  <h4>A little about me. I'm a...</h4>
+  <ul>
+    <li>Nationally recognized singer</li>
+    <li>Software developer</li>
+    <li>Award-winning actor</li>
+    <li>Classically-trained pianist</li>
+    <li>Avid biker</li>
+  </ul>
+  <!-- <br> -->
+  <h4>Welcome to my site.</h4>
+  <!-- <blockquote style="padding-left: 10px"> -->
+  <p>I present a <i>collection</i> of my essays, each of which explores in depth <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p>
+  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p> -->
+  <p>All articles are <i>well-researched</i> and <i>candid</i>. Over <code>100,000</code> people have read my writings.
+  </p>
+  <!-- <p></p> -->
+  <!-- </blockquote> -->
 
-    <div class="footer">
+  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
+
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">A few of my favorites</h2>
+  <ul style='text-align: initial' id="favorites">
+    <!-- A bit brute forceeee, but it works....*sigh* -->
+    <li>
+      <a href="/2020/03/21/go-strings/">Strings in go (and what the heck utf-8 is)</a><span
+        class="post-date">21 Mar 2020</span>
+    </li>
+    <li>
+      <a href="/complete-neural-nets">A complete approach to neural networks</a><span
+        class="post-date">2 Jan 2020</span>
+    </li>
+    <li>
+      <a href="/how-hash-functions-work">How hash functions work</a><span class="post-date">12 Mar
+        2020</span>
+    </li>
+    <li>
+      <a href="/jwt-express">JSON web tokens with Node and Express.js</a><span
+        class="post-date">14 Feb 2020</span>
+    </li>
+
+
+    <li>
+      <a href="/securing-db">Securing your database</a><span class="post-date">5 Aug
+        2019</span>
+    </li>
+    <li>
+      <a href="/recursion">Recursive programming</a><span class="post-date">14 Dec 2018</span>
+    </li>
+  </ul>
+</div>
+
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    
+    <li>
+      <a href="/2020/07/28/babel-nodejs/">How to use ES6 (and beyond) with node.js in 2020</a><span class="post-date">28 Jul 2020</span>
+    </li>
+    
+    <li>
+      <a href="/end-to-end-nodejs">Hey, end-to-end encryption really isn't that hard</a><span class="post-date">03 May 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/04/10/reading-files-in-go/">3 ways to read files in Go</a><span class="post-date">10 Apr 2020</span>
+    </li>
+    
+    <li>
+      <a href="/2020/03/27/fast-jekyll-sites/">Speed up your jekyll web site</a><span class="post-date">27 Mar 2020</span>
+    </li>
+    
+  </ul>
+</div>
+
+<br />
+<div>
+  <blockquote>
+    <p>🔔🌎 See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+  </blockquote>
+</div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<style>
+  #down-arrow {
+    text-align: center;
+    font-size: 4em;
+    padding: .4em;
+  }
+
+  #favorites li {
+    padding: 2px;
+  }
+
+  #home-img {
+    float: left;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  #about-me {
+    margin-left: 18em;
+  }
+
+  #section-title {
+    text-align: center;
+  }
+
+  .post-date {
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+</style>
+
+    <br />
+
+    <div class="footer" style="font-size: smaller;">
       <p>
-        &copy; 2020. <span id='emoji'></span> All rights reserved.
+        &copy; 2020
+
+        <!-- <span id='emoji'></span>  -->
+
+        Daniel Oscar Denenberg.
       </p>
     </div>
     <script>
