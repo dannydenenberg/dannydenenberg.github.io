@@ -1,9 +1,3 @@
----
-title: Songs i know
-layout: page
-permalink: songsiknow
----
-
 ## Modern-ish
 
 - She's always a woman to me (Billy Joel)
@@ -14,7 +8,7 @@ permalink: songsiknow
 
 - Anyone can whistle
 - I don't care much (cabaret)
-- 
+- I am the very model of a modern major general
 
 ## Classical
 - verborgenheit (hugo wolf)
