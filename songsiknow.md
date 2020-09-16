@@ -1,8 +1,14 @@
+---
+layout: page
+title: ""
+---
+
 ## Modern-ish
 
 - She's always a woman to me (Billy Joel)
 - New york state of mind
-- 
+- Blackbird
+- Major tom (david bowie)
 
 ## MT
 
@@ -12,3 +18,5 @@
 
 ## Classical
 - verborgenheit (hugo wolf)
+- Kdyz mne stara matka
+- 
