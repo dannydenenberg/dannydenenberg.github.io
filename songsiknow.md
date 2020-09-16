@@ -21,6 +21,10 @@ title: ""
 - you'll be back (hamilton)
 - for forever (dear evan hanson)
 - It's only a paper moon
+- the impossible dream (la mancha)
+- top hat, white tie and tails
+- music of the night (phantom of the opera)
+- haled's song about love (david yazbek)
 - the king of broadway (the producers--mel brooks)
 
 
