@@ -1,13 +1,14 @@
 ---
 layout: page
 title: Archive
+sidebar: true
 ---
 
-## Blog Posts
+<!-- ## Blog Posts -->
 
 {% for post in site.posts %}
 
-- <span id='datet'>{{ post.date | date_to_string }}</span> [ {{ post.title }} ]({{ post.url }})
+- <span id='datet' style="display: none">{{ post.date | date_to_string }}</span> [ {{ post.title }} ]({{ post.url }})
   {% endfor %}
 
 <style>

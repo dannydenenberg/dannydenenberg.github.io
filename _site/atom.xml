@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Danny Denenberg</title>
+ <title>Danny D.</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-08-13T10:47:12-05:00</updated>
+ <updated>2021-05-11T18:42:41-05:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Danny Denenberg</name>
@@ -24,11 +24,11 @@
 &lt;h3 id=&quot;make-an-empty-node-project&quot;&gt;Make an empty node project&lt;/h3&gt;
 
 &lt;p&gt;Create an empty folder and go into it:&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;$ mkdir TestTestingTest &amp;amp;&amp;amp; cd TestTestingTest&lt;/code&gt;.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ mkdir TestTestingTest &amp;amp;&amp;amp; cd TestTestingTest&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Then make sure you have &lt;a href=&quot;https://yarnpkg.com/&quot;&gt;Yarn&lt;/a&gt; or &lt;a href=&quot;https://www.npmjs.com/&quot;&gt;NPM&lt;/a&gt; as your package manager installed on your computer.&lt;/p&gt;
 
-&lt;p&gt;In the folder, run &lt;code class=&quot;highlighter-rouge&quot;&gt;$ yarn init&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm init&lt;/code&gt; and answer the questions when prompted.&lt;/p&gt;
+&lt;p&gt;In the folder, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ yarn init&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ npm init&lt;/code&gt; and answer the questions when prompted.&lt;/p&gt;
 
 &lt;h3 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h3&gt;
 
@@ -37,13 +37,13 @@
 &lt;p&gt;Install the necessary modules:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;with &lt;strong&gt;Yarn&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ yarn add @babel/cli @babel/core @babel/preset-env express rimraf&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;with &lt;strong&gt;NPM&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm install --save @babel/cli @babel/core @babel/preset-env express rimraf&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;with &lt;strong&gt;Yarn&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ yarn add @babel/cli @babel/core @babel/preset-env express rimraf&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;with &lt;strong&gt;NPM&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ npm install --save @babel/cli @babel/core @babel/preset-env express rimraf&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;/h3&gt;
 
-&lt;p&gt;Create a file in the root directory (of your node project) called &lt;code class=&quot;highlighter-rouge&quot;&gt;.babelrc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Create a file in the root directory (of your node project) called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.babelrc&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Put the following JSON into it:&lt;/p&gt;
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -55,7 +55,7 @@
   &lt;p&gt;^^ This simply specifies the version of JavaScript for babel to compile your code down to.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;In the &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file, add the following to the JSON object:&lt;/p&gt;
+&lt;p&gt;In the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt; file, add the following to the JSON object:&lt;/p&gt;
 
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;echo &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Error: no test specified&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &amp;amp;&amp;amp; exit 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -65,11 +65,11 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;^^ This specifies build and start commands for the node project. On &lt;strong&gt;build&lt;/strong&gt;, Babel, will compile all of your code in the &lt;code class=&quot;highlighter-rouge&quot;&gt;./MY_CODE_DIRECTORY&lt;/code&gt; and place it in the &lt;code class=&quot;highlighter-rouge&quot;&gt;COMPILED_CODE_HERE&lt;/code&gt; folder.&lt;/p&gt;
+  &lt;p&gt;^^ This specifies build and start commands for the node project. On &lt;strong&gt;build&lt;/strong&gt;, Babel, will compile all of your code in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./MY_CODE_DIRECTORY&lt;/code&gt; and place it in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMPILED_CODE_HERE&lt;/code&gt; folder.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;On &lt;strong&gt;start&lt;/strong&gt;, the build command is run and then the entry point of your app is called. In this case, the entry point is &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;.&lt;/p&gt;
+  &lt;p&gt;On &lt;strong&gt;start&lt;/strong&gt;, the build command is run and then the entry point of your app is called. In this case, the entry point is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -81,9 +81,9 @@
 &lt;p&gt;To actually see if this works, let’s write a quick server.&lt;/p&gt;
 
 &lt;p&gt;First, create and enter your code folder by running&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;$ mkdir MY_CODE_DIRECTORY &amp;amp;&amp;amp; cd MY_CODE_DIRECTORY&lt;/code&gt;.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ mkdir MY_CODE_DIRECTORY &amp;amp;&amp;amp; cd MY_CODE_DIRECTORY&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Create the server file with &lt;code class=&quot;highlighter-rouge&quot;&gt;$ touch app.js&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Create the server file with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ touch app.js&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Put the following in that file:&lt;/p&gt;
 &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -100,11 +100,11 @@
 
 &lt;p&gt;As you may know, &lt;strong&gt;line 1&lt;/strong&gt; of the code uses importing syntax from ES6 that is not currently supported in Node.js. We are counting on babel to compile this down to something node can understand!&lt;/p&gt;
 
-&lt;p&gt;Save the file and run &lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm start&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Save the file and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ npm start&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;If you see &lt;code class=&quot;highlighter-rouge&quot;&gt;listening at http://localhost:4040&lt;/code&gt; in your terminal, you’re good to go.&lt;/p&gt;
+&lt;p&gt;If you see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;listening at http://localhost:4040&lt;/code&gt; in your terminal, you’re good to go.&lt;/p&gt;
 
-&lt;p&gt;If you look in your project you’ll notice that the new &lt;code class=&quot;highlighter-rouge&quot;&gt;COMPILED_CODE_HERE&lt;/code&gt; folder was created and in it is &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you look in your project you’ll notice that the new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COMPILED_CODE_HERE&lt;/code&gt; folder was created and in it is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Open that file and you should see that your ES6 import statement has been changed to something like this:&lt;/p&gt;
 &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;use strict&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
@@ -127,17 +127,17 @@
 
 &lt;p&gt;To use this feature, install the plugin with:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ yarn add @babel/plugin-transform-flow-strip-types&lt;/code&gt;&lt;br /&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ yarn add @babel/plugin-transform-flow-strip-types&lt;/code&gt;&lt;br /&gt;
 or&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;$ npm install --save @babel/plugin-transform-flow-strip-types&lt;/code&gt;&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ npm install --save @babel/plugin-transform-flow-strip-types&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Now, add this to your babel config file &lt;code class=&quot;highlighter-rouge&quot;&gt;.babelrc&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Now, add this to your babel config file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.babelrc&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;@babel/plugin-transform-flow-strip-types&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;That’s it!&lt;/p&gt;
 
-&lt;p&gt;Now you can use types like &lt;code class=&quot;highlighter-rouge&quot;&gt;let a: string = 'hey'&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now you can use types like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let a: string = 'hey'&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;faster-reloading-with-nodemon&quot;&gt;Faster reloading with nodemon&lt;/h3&gt;
 
@@ -148,7 +148,7 @@ or&lt;br /&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; nodemon
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Next, add the following &lt;strong&gt;configuration&lt;/strong&gt; to your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; object:&lt;/p&gt;
+&lt;p&gt;Next, add the following &lt;strong&gt;configuration&lt;/strong&gt; to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package.json&lt;/code&gt; object:&lt;/p&gt;
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;&quot;nodemonConfig&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;exec&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;npm start&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;watch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -163,10 +163,10 @@ or&lt;br /&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;^^As the code states, this will &lt;strong&gt;‘watch’&lt;/strong&gt; for changes in the &lt;code class=&quot;highlighter-rouge&quot;&gt;MY_CODE_DIRECTORY&lt;/code&gt; folder and &lt;strong&gt;‘execute’&lt;/strong&gt; the command &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; (as we have previously defined) when it sees that a change has been made.&lt;/p&gt;
+  &lt;p&gt;^^As the code states, this will &lt;strong&gt;‘watch’&lt;/strong&gt; for changes in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MY_CODE_DIRECTORY&lt;/code&gt; folder and &lt;strong&gt;‘execute’&lt;/strong&gt; the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm start&lt;/code&gt; (as we have previously defined) when it sees that a change has been made.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Now, in your development, start by running &lt;code class=&quot;highlighter-rouge&quot;&gt;$ nodemon&lt;/code&gt; in the root of your node project and edit/save any file in &lt;code class=&quot;highlighter-rouge&quot;&gt;MY_CODE_DIRECTORY&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now, in your development, start by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ nodemon&lt;/code&gt; in the root of your node project and edit/save any file in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MY_CODE_DIRECTORY&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;You will see that the server is automatically restarted and your babel code is recompiled.&lt;/p&gt;
 
@@ -179,7 +179,7 @@ or&lt;br /&gt;
    <link href="http://localhost:4000/end-to-end-nodejs"/>
    <updated>2020-05-03T00:00:00-05:00</updated>
    <id>http://localhost:4000/nodejs-end-to-end-encryption</id>
-   <content type="html">&lt;p&gt;End-to-end encryption (&lt;strong&gt;E2EE&lt;/strong&gt;) is “system of communication”&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; in which anyone, save the client, cannot read plaintext&lt;sup id=&quot;fnref:d&quot;&gt;&lt;a href=&quot;#fn:d&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; versions of pieces of data. This is usually a measure taken by some chat or email service to prevent internet service providers or other unauthorized people from reading the plaintext versions of texts sent by users. Not even the server of the application has access to the key to decrypt messages and thus, all messages are stored on the database in encrypted form.&lt;/p&gt;
+   <content type="html">&lt;p&gt;End-to-end encryption (&lt;strong&gt;E2EE&lt;/strong&gt;) is “system of communication”&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; in which anyone, save the client, cannot read plaintext&lt;sup id=&quot;fnref:d&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:d&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; versions of pieces of data. This is usually a measure taken by some chat or email service to prevent internet service providers or other unauthorized people from reading the plaintext versions of texts sent by users. Not even the server of the application has access to the key to decrypt messages and thus, all messages are stored on the database in encrypted form.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Basically, &lt;strong&gt;E2EE&lt;/strong&gt; is a way to make sure the the only person reading messages is &lt;strong&gt;the user&lt;/strong&gt;.&lt;/p&gt;
@@ -187,7 +187,7 @@ or&lt;br /&gt;
 
 &lt;h3 id=&quot;first-off-theoretical-implementation&quot;&gt;First off, theoretical implementation&lt;/h3&gt;
 
-&lt;p&gt;How would the structure of our E2EE chat&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; app look?&lt;/p&gt;
+&lt;p&gt;How would the structure of our E2EE chat&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; app look?&lt;/p&gt;
 
 &lt;p&gt;Well, an app like this will have three basic components to it: a front end, a server (back end), and a database.&lt;/p&gt;
 
@@ -195,7 +195,7 @@ or&lt;br /&gt;
 
 &lt;p&gt;The &lt;strong&gt;server&lt;/strong&gt; will receive all incoming messages, update the pages of all users in the chat with the new message (typically by emitting a new &lt;a href=&quot;https://socket.io/&quot;&gt;socket&lt;/a&gt; event), and store texts on the database.&lt;/p&gt;
 
-&lt;p&gt;In our case, let’s say that each separate chat will have a unique password associated with it. To enter the specific “chat room”&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;, all a user must do is supply the correct password to that room.&lt;/p&gt;
+&lt;p&gt;In our case, let’s say that each separate chat will have a unique password associated with it. To enter the specific “chat room”&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;, all a user must do is supply the correct password to that room.&lt;/p&gt;
 
 &lt;p&gt;Now, for what our app must have to ensure &lt;strong&gt;E2EE&lt;/strong&gt;.&lt;/p&gt;
 
@@ -205,14 +205,14 @@ or&lt;br /&gt;
 
 &lt;p&gt;The idea is that the password will be sent to the server in a hashed form and the messages will be sent in an encrypted form to prevent the server from even being able to decrypt the message using the password. This is because the password that the server has isn’t the one that was used to encrypt the message, it is the hashed version. The message was encrypted using the &lt;strong&gt;NON&lt;/strong&gt;-hashed version of the password (plaintext).&lt;/p&gt;
 
-&lt;p&gt;The &lt;strong&gt;database&lt;/strong&gt; will store the hashed password and encrypted versions of texts ONLY. To tell if a password is correct, the client sends the hashed version of the password the user entered and compares it to the hashed version of the password stored in the database. If they match, the password entered by the user is correct&lt;sup id=&quot;fnref:a&quot;&gt;&lt;a href=&quot;#fn:a&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;database&lt;/strong&gt; will store the hashed password and encrypted versions of texts ONLY. To tell if a password is correct, the client sends the hashed version of the password the user entered and compares it to the hashed version of the password stored in the database. If they match, the password entered by the user is correct&lt;sup id=&quot;fnref:a&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:a&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;practical-example-in-nodejs&quot;&gt;Practical example in node.js&lt;/h3&gt;
 &lt;p&gt;Now for the fun part 🎉.&lt;/p&gt;
 
-&lt;p&gt;The library for encrypting messages that I would recommend is &lt;a href=&quot;https://github.com/brix/crypto-js&quot;&gt;CryptoJS&lt;/a&gt;. For quick use on the client side of things, I would simply use it’s CDN (import the javascript of the library from another URL) and place the &lt;code class=&quot;highlighter-rouge&quot;&gt;script&lt;/code&gt; tag in the head of my HTML page:&lt;/p&gt;
+&lt;p&gt;The library for encrypting messages that I would recommend is &lt;a href=&quot;https://github.com/brix/crypto-js&quot;&gt;CryptoJS&lt;/a&gt;. For quick use on the client side of things, I would simply use it’s CDN (import the javascript of the library from another URL) and place the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;script&lt;/code&gt; tag in the head of my HTML page:&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -241,7 +241,7 @@ or&lt;br /&gt;
 
 &lt;p&gt;Let’s run through a quick example.&lt;/p&gt;
 
-&lt;p&gt;If you want to check that your helper functions work, simply use the property that &lt;code class=&quot;highlighter-rouge&quot;&gt;decrypt(encrypt(x)) = x&lt;/code&gt;. In this example, the &lt;strong&gt;message&lt;/strong&gt; will be &lt;code class=&quot;highlighter-rouge&quot;&gt;hey&lt;/code&gt; and the &lt;strong&gt;key&lt;/strong&gt; will be &lt;code class=&quot;highlighter-rouge&quot;&gt;secret&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;If you want to check that your helper functions work, simply use the property that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;decrypt(encrypt(x)) = x&lt;/code&gt;. In this example, the &lt;strong&gt;message&lt;/strong&gt; will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hey&lt;/code&gt; and the &lt;strong&gt;key&lt;/strong&gt; will be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;secret&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;decrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;hey&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;secret&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;secret&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &quot;hey&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -296,22 +296,22 @@ or&lt;br /&gt;
 
 &lt;h3 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h3&gt;
 
-&lt;div class=&quot;footnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;Direct from &lt;a href=&quot;https://en.wikipedia.org/wiki/End-to-end_encryption&quot;&gt;Wikipedia&lt;/a&gt; (for lack of better terminology) &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Direct from &lt;a href=&quot;https://en.wikipedia.org/wiki/End-to-end_encryption&quot;&gt;Wikipedia&lt;/a&gt; (for lack of better terminology) &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:d&quot;&gt;
-      &lt;p&gt;Whenever I use the word &lt;strong&gt;plaintext&lt;/strong&gt;, I am referring to the human readable form of the text. Like, the actual thing. &lt;a href=&quot;#fnref:d&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:d&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Whenever I use the word &lt;strong&gt;plaintext&lt;/strong&gt;, I am referring to the human readable form of the text. Like, the actual thing. &lt;a href=&quot;#fnref:d&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;Just using a chat app as an example. By the end of the post, it’ll be clear how E2EE can be applied to your other fun projects 🎉! &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Just using a chat app as an example. By the end of the post, it’ll be clear how E2EE can be applied to your other fun projects 🎉! &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot;&gt;
-      &lt;p&gt;This will be our name for a group chat that anyone can enter with the password. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;This will be our name for a group chat that anyone can enter with the password. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:a&quot;&gt;
-      &lt;p&gt;Why? Because the hash of a string is always the same as another hash of the same string. Thus, the only time the hashes would differ would be if the plaintext passwords differed. &lt;a href=&quot;#fnref:a&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:a&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Why? Because the hash of a string is always the same as another hash of the same string. Thus, the only time the hashes would differ would be if the plaintext passwords differed. &lt;a href=&quot;#fnref:a&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -329,7 +329,7 @@ or&lt;br /&gt;
 
 &lt;h3 id=&quot;1-simple-file-reading&quot;&gt;1. Simple file reading&lt;/h3&gt;
 
-&lt;p&gt;For a simple file reading, let’s say when you just want to read it into a variable, you can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;ioutil&lt;/code&gt; library. The code blow demonstrates this.&lt;/p&gt;
+&lt;p&gt;For a simple file reading, let’s say when you just want to read it into a variable, you can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ioutil&lt;/code&gt; library. The code blow demonstrates this.&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;io/ioutil&quot;&lt;/span&gt;
 
@@ -400,23 +400,23 @@ or&lt;br /&gt;
 
 &lt;p&gt;This gem will automatically cache specified parts of the page that don’t need to be reloaded such as sidebars, navigation features, etc.&lt;/p&gt;
 
-&lt;p&gt;To use, include it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; like so:&lt;/p&gt;
+&lt;p&gt;To use, include it in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; like so:&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:jekyll_plugins&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'jekyll-include-cache'&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;And in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; like so:&lt;/p&gt;
+&lt;p&gt;And in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; like so:&lt;/p&gt;
 
 &lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;# - jekyll-commonmark&lt;/span&gt;
   &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jekyll-include-cache&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; to install everything before using it in your site.&lt;/p&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; to install everything before using it in your site.&lt;/p&gt;
 
-&lt;p&gt;To use the caching feature on an included file, instead of saying &lt;code class=&quot;highlighter-rouge&quot;&gt;{\% include foo.html \%}&lt;/code&gt;, simply say &lt;code class=&quot;highlighter-rouge&quot;&gt;{\% include_cached foo.html \%}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To use the caching feature on an included file, instead of saying &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{\% include foo.html \%}&lt;/code&gt;, simply say &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{\% include_cached foo.html \%}&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;3-jekyll-compress-images&quot;&gt;#3. jekyll-compress-images&lt;/h3&gt;
 
@@ -424,14 +424,14 @@ or&lt;br /&gt;
 
 &lt;p&gt;I believe that the feature on cloudflare that allows image compression is a pay-to-play feature, thus this jekyll gem can do it for free every time a build is made.&lt;/p&gt;
 
-&lt;p&gt;Include it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; like so:&lt;/p&gt;
+&lt;p&gt;Include it in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; like so:&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:jekyll_plugins&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'jekyll-compress-images'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/valerijaspasojevic/jekyll-compress-images.git'&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Include it in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; like so:&lt;/p&gt;
+&lt;p&gt;Include it in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; like so:&lt;/p&gt;
 
 &lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jekyll-compress-images&lt;/span&gt;
@@ -464,17 +464,17 @@ or&lt;br /&gt;
 
 &lt;p&gt;Around 1960, &lt;a href=&quot;https://en.wikipedia.org/wiki/ASCII&quot;&gt;ASCII&lt;/a&gt;, the American Standard Code for Information Interchange was released. It uses 7 bits to represent 2^7 or 128 characters. Among these were all english lower and upper case characters, punctuation, the ampersand, numbers, etc. Although this manner of storing textual data seemed to work fine, as computing and the internet began to grow, it was a challenge for other countries, in particular those who didn’t use English regularly, to store their native language in files.&lt;/p&gt;
 
-&lt;p&gt;The solution to this issue was &lt;a href=&quot;http://unicode.org/&quot;&gt;Unicode&lt;/a&gt;, which collected all of the characters in all of the languages of the world with accented letters, control codes, etc. and assigned each character a number or &lt;em&gt;Unicode code point&lt;/em&gt;. In go, this number is called a &lt;code class=&quot;highlighter-rouge&quot;&gt;rune&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The solution to this issue was &lt;a href=&quot;http://unicode.org/&quot;&gt;Unicode&lt;/a&gt;, which collected all of the characters in all of the languages of the world with accented letters, control codes, etc. and assigned each character a number or &lt;em&gt;Unicode code point&lt;/em&gt;. In go, this number is called a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rune&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;As of March 2020, Unicode version 13 holds over 143,000 characters spanning 154 languages and scripts and symbol sets. In go, each &lt;code class=&quot;highlighter-rouge&quot;&gt;rune&lt;/code&gt; is essentially an &lt;code class=&quot;highlighter-rouge&quot;&gt;int32&lt;/code&gt; which is the standard data type for Unicode characters (you can literally write go code like this &lt;code class=&quot;highlighter-rouge&quot;&gt;var r rune = 1424&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;As of March 2020, Unicode version 13 holds over 143,000 characters spanning 154 languages and scripts and symbol sets. In go, each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rune&lt;/code&gt; is essentially an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int32&lt;/code&gt; which is the standard data type for Unicode characters (you can literally write go code like this &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;var r rune = 1424&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;In memory, it is possible that you could represent a bunch of runes simply as a bunch of int32 values (known as utf-32 or ucs-4). But, often you won’t need to have space for the entire 32-bit integer. You certainly won’t if all you are dealing with are English characters.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;This is where utf-8 steps in.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;UTF-8 is a “variable-length encoding of Unicode code points as bytes”&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Basically, it uses between 1 and 4 bytes to represent a rune. The most significant bits (also known as high-order bits, having the highest values, positioned on the left side of the number) dictate how many bytes follow. For example a high-order &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; means 7-bit (exactly like ASCII). A high-order &lt;code class=&quot;highlighter-rouge&quot;&gt;110&lt;/code&gt; means 2 bytes (the second byte will begin with &lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;). A high-order &lt;code class=&quot;highlighter-rouge&quot;&gt;1110&lt;/code&gt; means 3 bytes, &lt;code class=&quot;highlighter-rouge&quot;&gt;11110&lt;/code&gt; means 4.&lt;/p&gt;
+&lt;p&gt;UTF-8 is a “variable-length encoding of Unicode code points as bytes”&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Basically, it uses between 1 and 4 bytes to represent a rune. The most significant bits (also known as high-order bits, having the highest values, positioned on the left side of the number) dictate how many bytes follow. For example a high-order &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt; means 7-bit (exactly like ASCII). A high-order &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;110&lt;/code&gt; means 2 bytes (the second byte will begin with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10&lt;/code&gt;). A high-order &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1110&lt;/code&gt; means 3 bytes, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;11110&lt;/code&gt; means 4.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0xxxxxxx                                | 0-127
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0xxxxxxx                                | 0-127
 110xxxxx 10xxxxxx                       | 128-2047
 1110xxxx 10xxxxxx 10xxxxxx              | 2048-65535
 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx     | 65536-
@@ -482,7 +482,7 @@ or&lt;br /&gt;
 
 &lt;h3 id=&quot;working-in-go&quot;&gt;Working in go&lt;/h3&gt;
 
-&lt;p&gt;In go, a string is an “immutable sequence of bytes”. Strings in Go are almost always encoded in utf-8 encoding and the &lt;code class=&quot;highlighter-rouge&quot;&gt;len(s)&lt;/code&gt; function returns the number of &lt;strong&gt;bytes&lt;/strong&gt; in a string (not the number of characters). The indexing operator &lt;code class=&quot;highlighter-rouge&quot;&gt;s[i]&lt;/code&gt; returns the ith &lt;em&gt;byte&lt;/em&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In go, a string is an “immutable sequence of bytes”. Strings in Go are almost always encoded in utf-8 encoding and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;len(s)&lt;/code&gt; function returns the number of &lt;strong&gt;bytes&lt;/strong&gt; in a string (not the number of characters). The indexing operator &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s[i]&lt;/code&gt; returns the ith &lt;em&gt;byte&lt;/em&gt; of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;There is also a substring operator which returns a completely new string starting at the beginning index and ending one less than the end index:&lt;/p&gt;
 
@@ -492,7 +492,7 @@ or&lt;br /&gt;
 &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// &quot;Bath&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;String concatenation can be performed with the &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; operator or with buffers as you will see in a bit.&lt;/p&gt;
+&lt;p&gt;String concatenation can be performed with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; operator or with buffers as you will see in a bit.&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Airport &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;'s aren't very fun.&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -502,13 +502,13 @@ or&lt;br /&gt;
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;b&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// error on compile: cannot assign to s[0]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Coming from another more dynamic language such as python, ruby, or javascript, the immutability of strings might seem like an annoying nuisance, but it makes it super easy for the computer to copy strings. For example, the string &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; and the substring &lt;code class=&quot;highlighter-rouge&quot;&gt;s[4:]&lt;/code&gt; can share the same underlying memory without worrying about it somehow changing. &lt;strong&gt;No new memory must be allocated&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Coming from another more dynamic language such as python, ruby, or javascript, the immutability of strings might seem like an annoying nuisance, but it makes it super easy for the computer to copy strings. For example, the string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s&lt;/code&gt; and the substring &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s[4:]&lt;/code&gt; can share the same underlying memory without worrying about it somehow changing. &lt;strong&gt;No new memory must be allocated&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;runes-and-utf-8&quot;&gt;Runes and utf-8&lt;/h3&gt;
 
 &lt;p&gt;So, as I said before, utf-8 is a variable-length encoding of characters–it takes 1 to 4 bytes to represent each character instead of each being 4. But, this variability &lt;strong&gt;prevents&lt;/strong&gt; direct access to the n-th character of a string through indexing. However, go still uses them normally to encode strings because of their sweet advantages such as their compatibility with ASCII, ability to decode left to right, and easy searching for specific runes by just using their bytes.&lt;/p&gt;
 
-&lt;p&gt;Recall, the &lt;code class=&quot;highlighter-rouge&quot;&gt;len&lt;/code&gt; function returns the number of bytes in a string, so it could get a bit confusing in this case:&lt;/p&gt;
+&lt;p&gt;Recall, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;len&lt;/code&gt; function returns the number of bytes in a string, so it could get a bit confusing in this case:&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;浴&quot;&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 3&lt;/span&gt;
@@ -533,7 +533,7 @@ or&lt;br /&gt;
 &lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RuneCountInString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 1 ✅&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Converting a &lt;code class=&quot;highlighter-rouge&quot;&gt;[]rune&lt;/code&gt; to a utf-8 encoded string returns the unicode code points of the string.&lt;/p&gt;
+&lt;p&gt;Converting a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[]rune&lt;/code&gt; to a utf-8 encoded string returns the unicode code points of the string.&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;浴室&quot;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;% x&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// e6 b5 b4 e5 ae a4&lt;/span&gt;
@@ -541,13 +541,13 @@ or&lt;br /&gt;
 &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%x&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// [6d74 5ba4]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Convert from &lt;code class=&quot;highlighter-rouge&quot;&gt;[]rune&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; using &lt;code class=&quot;highlighter-rouge&quot;&gt;string(r)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Convert from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[]rune&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string(r)&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;manipulating-strings&quot;&gt;Manipulating strings&lt;/h3&gt;
 
-&lt;p&gt;The main packages to manipulate strings are &lt;code class=&quot;highlighter-rouge&quot;&gt;bytes&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;strings&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;strconv&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;unicode&lt;/code&gt; (some of which you have already seen).&lt;/p&gt;
+&lt;p&gt;The main packages to manipulate strings are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bytes&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strconv&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unicode&lt;/code&gt; (some of which you have already seen).&lt;/p&gt;
 
-&lt;p&gt;Because of the immutability of strings, it can sometimes be useful to use &lt;code class=&quot;highlighter-rouge&quot;&gt;bytes.Buffer&lt;/code&gt; which allows you to use a string buffer (a string that can grow as more is added).&lt;/p&gt;
+&lt;p&gt;Because of the immutability of strings, it can sometimes be useful to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bytes.Buffer&lt;/code&gt; which allows you to use a string buffer (a string that can grow as more is added).&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Buffer&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteByte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -556,7 +556,7 @@ or&lt;br /&gt;
 &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;strings&lt;/code&gt; package has many useful utility functions. A few I have written below.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings&lt;/code&gt; package has many useful utility functions. A few I have written below.&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;substr&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
@@ -566,7 +566,7 @@ or&lt;br /&gt;
 &lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;strconv&lt;/code&gt; has functions for converting integer, floating-point, and boolean values into and out of string representations.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strconv&lt;/code&gt; has functions for converting integer, floating-point, and boolean values into and out of string representations.&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;432&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;strconv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Itoa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// &quot;432&quot;&lt;/span&gt;
@@ -575,16 +575,16 @@ or&lt;br /&gt;
 &lt;span class=&quot;n&quot;&gt;strconv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ParseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;432&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// base 10, up to 64 bits&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;unicode&lt;/code&gt; package has functions like &lt;code class=&quot;highlighter-rouge&quot;&gt;IsDigit&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IsUpper&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IsLetter&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ToUpper&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ToLower&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;IsLower&lt;/code&gt;, and many more run manipulation functions.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unicode&lt;/code&gt; package has functions like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsDigit&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsUpper&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsLetter&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ToUpper&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ToLower&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IsLower&lt;/code&gt;, and many more run manipulation functions.&lt;/p&gt;
 
 &lt;p&gt;Phew! That was a lot.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;div class=&quot;footnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;The Go Programming Language, by Donovan and Kernighan &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;The Go Programming Language, by Donovan and Kernighan &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -875,7 +875,7 @@ or&lt;br /&gt;
 
 &lt;p&gt;First make sure that you have the &lt;a href=&quot;https://go.dev/&quot;&gt;Go programming language&lt;/a&gt; installed on your system.&lt;/p&gt;
 
-&lt;p&gt;On a Mac, it’s as easy as &lt;code class=&quot;highlighter-rouge&quot;&gt;brew install go&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;On a Mac, it’s as easy as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew install go&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Next, set your GOPATH and make public the folder where your installed Go binaries will go:&lt;/p&gt;
 
@@ -883,24 +883,24 @@ or&lt;br /&gt;
 &lt;span class=&quot;nv&quot;&gt;$ PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GOPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# binaries&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Finally, install (by way of &lt;code class=&quot;highlighter-rouge&quot;&gt;go get ...&lt;/code&gt;) the present binary to be able to locally run your presentations.&lt;/p&gt;
+&lt;p&gt;Finally, install (by way of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go get ...&lt;/code&gt;) the present binary to be able to locally run your presentations.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;go get &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; golang.org/x/tools/cmd/present
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;This command will install in your &lt;code class=&quot;highlighter-rouge&quot;&gt;$GOPATH/bin&lt;/code&gt; folder, the executable binary that runs the presentations.&lt;/p&gt;
+&lt;p&gt;This command will install in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$GOPATH/bin&lt;/code&gt; folder, the executable binary that runs the presentations.&lt;/p&gt;
 
-&lt;p&gt;To check that the binary is working properly, type &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; as a command into your terminal and it should output something close to &lt;code class=&quot;highlighter-rouge&quot;&gt;2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To check that the binary is working properly, type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;present&lt;/code&gt; as a command into your terminal and it should output something close to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;And, if you open your web browser to that specified port (in this case &lt;code class=&quot;highlighter-rouge&quot;&gt;http://127.0.0.1:3999&lt;/code&gt;), you should see a landing page like so:&lt;/p&gt;
+&lt;p&gt;And, if you open your web browser to that specified port (in this case &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://127.0.0.1:3999&lt;/code&gt;), you should see a landing page like so:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/goods/presenthomepage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This is a page displaying the brother folders from the one you ran the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; command in.&lt;/p&gt;
+&lt;p&gt;This is a page displaying the brother folders from the one you ran the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;present&lt;/code&gt; command in.&lt;/p&gt;
 
-&lt;p&gt;Now, create a file in your current folder with the extension &lt;code class=&quot;highlighter-rouge&quot;&gt;.slide&lt;/code&gt; and put at the top of the file, this information (of course, with your corresponding unique info):&lt;/p&gt;
+&lt;p&gt;Now, create a file in your current folder with the extension &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.slide&lt;/code&gt; and put at the top of the file, this information (of course, with your corresponding unique info):&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Title of document
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Title of document
 Subtitle of document
 15:04 2 Jan 2006
 Tags: foo, bar, baz
@@ -914,11 +914,11 @@ http://url/
 
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that the date may be written without a time prepended. Also, multiple presenters may be specified, simply separate them by blank lines and then put their corresponding info.&lt;/p&gt;
 
-&lt;p&gt;Now, whenever you want to run your presentation, simply run the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; command in the folder containing your &lt;code class=&quot;highlighter-rouge&quot;&gt;*.slide&lt;/code&gt; file and select it on the webpage the present command sends you to.&lt;/p&gt;
+&lt;p&gt;Now, whenever you want to run your presentation, simply run the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;present&lt;/code&gt; command in the folder containing your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.slide&lt;/code&gt; file and select it on the webpage the present command sends you to.&lt;/p&gt;
 
 &lt;p&gt;After the specified presenters, each of the slides/sections are put separated by blank lines. Following is an example slide:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide or section (must have asterisk)
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide or section (must have asterisk)
 
 Some Text
 
@@ -949,13 +949,13 @@ Further Text, including invocations like:
 Again, more text
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.code&lt;/code&gt; function injects source code from a file by injecting them as HTML-escaped &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks.
-Any line in the program ending with the four characters &lt;code class=&quot;highlighter-rouge&quot;&gt;OMIT&lt;/code&gt; is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.code&lt;/code&gt; function injects source code from a file by injecting them as HTML-escaped &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks.
+Any line in the program ending with the four characters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OMIT&lt;/code&gt; is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.code test.go /START OMIT/,/END OMIT/
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.code test.go /START OMIT/,/END OMIT/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;With some example contents of &lt;code class=&quot;highlighter-rouge&quot;&gt;test.go&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;With some example contents of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.go&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;coolFunction&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;// START OMIT&lt;/span&gt;
@@ -968,11 +968,11 @@ Any line in the program ending with the four characters &lt;code class=&quot;hig
 &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;see_mee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;great&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The information following a &lt;code class=&quot;highlighter-rouge&quot;&gt;.image&lt;/code&gt; function can be a file path OR a url.&lt;/p&gt;
+&lt;p&gt;The information following a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.image&lt;/code&gt; function can be a file path OR a url.&lt;/p&gt;
 
-&lt;p&gt;Parts of the file that begin with a &lt;code class=&quot;highlighter-rouge&quot;&gt;:&lt;/code&gt; (colon) are presenter notes.&lt;/p&gt;
+&lt;p&gt;Parts of the file that begin with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:&lt;/code&gt; (colon) are presenter notes.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Title of slide
 
 Some Text
 
@@ -980,7 +980,7 @@ Some Text
 : Presenter notes (subsequent paragraph(s))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;For other cool features and functionality, visit the &lt;code class=&quot;highlighter-rouge&quot;&gt;present&lt;/code&gt; &lt;a href=&quot;https://pkg.go.dev/golang.org/x/tools/present?tab=doc&quot;&gt;package homepage&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For other cool features and functionality, visit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;present&lt;/code&gt; &lt;a href=&quot;https://pkg.go.dev/golang.org/x/tools/present?tab=doc&quot;&gt;package homepage&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
@@ -1349,7 +1349,7 @@ for the output layer through our activation function (sigmoid once more).&lt;/p&
 logic&lt;/a&gt; evaluator. If it is fed in a 1,0
 it should output 1 for true, 0,0 should output 0 for false, etc.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(1,0) =&amp;gt; 1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(1,0) =&amp;gt; 1
 (1,1) =&amp;gt; 0
 (0,1) =&amp;gt; 1
 (0,0) =&amp;gt; 0
@@ -1632,7 +1632,7 @@ temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, 
 
 &lt;p&gt;Even more difficult for me to understand was rust lifetimes which is how Rust can get around using garbage collection. It is also their solution to the all too well known C++ problem of dangling pointers when a variable is “used after free”. I won’t even attempt to explain that concept here. You should read this article to find more.&lt;/p&gt;
 
-&lt;p&gt;Overall, I would say my experience with Rust was rewarding. I was able to understand its syntax and style guide easily, although some of the concepts were difficult to grasp at first. I don’t know if this is just me, but even the way the language looks when typed is elegant. It uses functional programming techniques commonly used in JavaScript (filtering, mapping, etc) and its syntax keywords are short and too the point (&lt;code class=&quot;highlighter-rouge&quot;&gt;fn&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;mut&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;i32&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;str&lt;/code&gt;, etc.)&lt;/p&gt;
+&lt;p&gt;Overall, I would say my experience with Rust was rewarding. I was able to understand its syntax and style guide easily, although some of the concepts were difficult to grasp at first. I don’t know if this is just me, but even the way the language looks when typed is elegant. It uses functional programming techniques commonly used in JavaScript (filtering, mapping, etc) and its syntax keywords are short and too the point (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fn&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enum&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mut&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i32&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;str&lt;/code&gt;, etc.)&lt;/p&gt;
 
 &lt;p&gt;Some systems developers are lobbying heavily for Rust to be the next C/C++. I don’t know whether that will happen anytime soon, but one thing is for sure: it will continue to grow and mature. It is backed by Mozilla and has a ‘cult’ following that want to kill off C++.&lt;/p&gt;
 
@@ -1658,7 +1658,7 @@ temp0 := \theta _0 \hspace{1mm}- \hspace{1mm}\alpha \frac{\partial J(\theta _0, 
   &lt;li&gt;If the hashes match, the user can access the account. If not, a generic error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 hash(&quot;hellu&quot;) = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
 hash(&quot;danny&quot;) = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1677,7 +1677,7 @@ hash(&quot;danny&quot;) = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fe
 
 &lt;p&gt;A &lt;strong&gt;brute force attack&lt;/strong&gt; goes through every possible combination of characters given a certain length. Even though they will 100% eventually crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying aaa : failed
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying aaa : failed
 Trying aab : failed
 Trying aac : failed
 ...
@@ -1695,7 +1695,7 @@ Trying acc : success!
 
 &lt;p&gt;The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a salt to the passwords BEFORE hashing.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1757,11 +1757,11 @@ The Dos and Don’ts of Salting&lt;/p&gt;
 
 &lt;p&gt;Well, now there is a new issue – we have users that each have their own unique information, but ANYONE who sends a get request to the server with a username of some user can acquire their information! That is SUPER unsafe. To combat this, most websites have a password field for each user (as I’m sure you know) which is kept private. This combination of public and private “keys” is a nice way for users to be able to connect with each other using their public usernames, but keep their info secure with a strong password.&lt;/p&gt;
 
-&lt;p&gt;Let’s implement this in our NodeJS program by first adding a &lt;code class=&quot;highlighter-rouge&quot;&gt;pass&lt;/code&gt; field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called &lt;code class=&quot;highlighter-rouge&quot;&gt;deb&lt;/code&gt; with the password &lt;code class=&quot;highlighter-rouge&quot;&gt;1234&lt;/code&gt; (I am using JavaScript to send the request to our server – make sure the server is running on port &lt;code class=&quot;highlighter-rouge&quot;&gt;4567&lt;/code&gt;):&lt;/p&gt;
+&lt;p&gt;Let’s implement this in our NodeJS program by first adding a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pass&lt;/code&gt; field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deb&lt;/code&gt; with the password &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1234&lt;/code&gt; (I am using JavaScript to send the request to our server – make sure the server is running on port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4567&lt;/code&gt;):&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/12/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Okay, to make sure the &lt;code class=&quot;highlighter-rouge&quot;&gt;fetch()&lt;/code&gt; request worked, look at the data inside of your MongoDB cluster collections in Atlas.&lt;/p&gt;
+&lt;p&gt;Okay, to make sure the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fetch()&lt;/code&gt; request worked, look at the data inside of your MongoDB cluster collections in Atlas.&lt;/p&gt;
 
 &lt;p&gt;Great. The user has a password, but we can still send a get request and get the information without using a password. To password-protect the user info, every time a get request is sent, a password should be sent along with it. The server will then compare the password sent in the get request with the password stored in the database associated with the user the get request was sent for. If they are equivalent, the server will send back the user information. Otherwise, it will send back some sort of an error code for the wrong password.&lt;/p&gt;
 
@@ -1769,25 +1769,25 @@ The Dos and Don’ts of Salting&lt;/p&gt;
 
 &lt;p&gt;To send a password along with the get request, we will use simple HTTP url request parameters. The GET request will look like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://localhost:4567/username?pass=mypassword1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://localhost:4567/username?pass=mypassword1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;One thing to note&lt;/strong&gt; is how to get the query parameters in Express.js (Node.js): &lt;code class=&quot;highlighter-rouge&quot;&gt;req.query.myparam&lt;/code&gt;. Or, in our specific case, &lt;code class=&quot;highlighter-rouge&quot;&gt;req.query.pass&lt;/code&gt; gives the password sent.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;One thing to note&lt;/strong&gt; is how to get the query parameters in Express.js (Node.js): &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req.query.myparam&lt;/code&gt;. Or, in our specific case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;req.query.pass&lt;/code&gt; gives the password sent.&lt;/p&gt;
 
-&lt;p&gt;Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the &lt;code class=&quot;highlighter-rouge&quot;&gt;/user&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;?pass=__ fields&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/user&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?pass=__ fields&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/:user&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`Password: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;To test this, run the Node server. In the browser go to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/dan?pass=abc&lt;/code&gt;. Switch back to the console and you should see the password printed there.&lt;/p&gt;
+&lt;p&gt;To test this, run the Node server. In the browser go to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4567/dan?pass=abc&lt;/code&gt;. Switch back to the console and you should see the password printed there.&lt;/p&gt;
 
-&lt;p&gt;Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the &lt;code class=&quot;highlighter-rouge&quot;&gt;/user&lt;/code&gt;. If that is the same as the URL &lt;code class=&quot;highlighter-rouge&quot;&gt;pass&lt;/code&gt; parameter, we send back the info on the user.&lt;/p&gt;
+&lt;p&gt;Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/user&lt;/code&gt;. If that is the same as the URL &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pass&lt;/code&gt; parameter, we send back the info on the user.&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/10/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;To test this out, restart your server with updated code. Go to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/deb?pass=1234&lt;/code&gt; in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.&lt;/p&gt;
+&lt;p&gt;To test this out, restart your server with updated code. Go to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4567/deb?pass=1234&lt;/code&gt; in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.&lt;/p&gt;
 
 &lt;p&gt;Okay, nice! You have now password protected all get requests to recieve data. There are, however, a couple of issues with this method, one of which is the fact that if your database is compromised, you will have leaked a piece of very sensitive information that users have trusted you with: their password (which is likely being reused on different sites). This is why, instead of being stored as they are, passwords are typically &lt;strong&gt;hashed&lt;/strong&gt; using a &lt;em&gt;one way&lt;/em&gt; function.&lt;/p&gt;
 
@@ -1806,7 +1806,7 @@ The Dos and Don’ts of Salting&lt;/p&gt;
   &lt;li&gt;If the hashes match, the user can access the account. If not, a &lt;strong&gt;generic&lt;/strong&gt; error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 hash(&quot;hellu&quot;) = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
 hash(&quot;danny&quot;) = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1823,7 +1823,7 @@ hash(&quot;danny&quot;) = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fe
 
 &lt;p&gt;A &lt;strong&gt;brute force&lt;/strong&gt; attack goes through every possible combination of characters given a certain length. Even though they will 100% &lt;em&gt;eventually&lt;/em&gt; crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying aaa : failed
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Trying aaa : failed
 Trying aab : failed
 Trying aac : failed
 ...
@@ -1841,7 +1841,7 @@ Trying acc : success!
 
 &lt;p&gt;The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a &lt;em&gt;salt&lt;/em&gt; to the passwords BEFORE hashing.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash(&quot;hello&quot;) = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1891,9 +1891,9 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
 
 &lt;p&gt;We will be using the SHA256 hashing function. How, exactly, hashing functions work is beyond the scope of this article, but if you are interested, see &lt;a href=&quot;https://en.wikipedia.org/wiki/Hash_function&quot;&gt;this&lt;/a&gt; and &lt;a href=&quot;https://gfredericks.com/blog/98&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;First of all, install the dependency for our function: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s crypto&lt;/code&gt;. Also, add the import to the top of the NodeJS file: &lt;code class=&quot;highlighter-rouge&quot;&gt;const crypto = require(&quot;crypto&quot;);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;First of all, install the dependency for our function: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -s crypto&lt;/code&gt;. Also, add the import to the top of the NodeJS file: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;const crypto = require(&quot;crypto&quot;);&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Now add this code to the bottom of the NodeJS file. We will call the function &lt;code class=&quot;highlighter-rouge&quot;&gt;hash&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now add this code to the bottom of the NodeJS file. We will call the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hash&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// hashes strings with sha256 for storing passwords&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -1909,9 +1909,9 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
 &lt;p&gt;There are 3 more feature we need to implement before I can call the database “secure”.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Hash &amp;amp; salt passcodes for new users being stored in response to &lt;code class=&quot;highlighter-rouge&quot;&gt;post&lt;/code&gt; requests&lt;/li&gt;
-  &lt;li&gt;Use the salt to hash and check the passwords when a &lt;code class=&quot;highlighter-rouge&quot;&gt;get&lt;/code&gt; request needs info&lt;/li&gt;
-  &lt;li&gt;Use the salt to check passwords for updating info on the database in response to &lt;code class=&quot;highlighter-rouge&quot;&gt;put&lt;/code&gt; requests.&lt;/li&gt;
+  &lt;li&gt;Hash &amp;amp; salt passcodes for new users being stored in response to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post&lt;/code&gt; requests&lt;/li&gt;
+  &lt;li&gt;Use the salt to hash and check the passwords when a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get&lt;/code&gt; request needs info&lt;/li&gt;
+  &lt;li&gt;Use the salt to check passwords for updating info on the database in response to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;put&lt;/code&gt; requests.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Alrighty, let’s get started!&lt;/p&gt;
@@ -1920,11 +1920,11 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
 
 &lt;p&gt;Passwords need to be hashed and salted before being stored in the database.&lt;/p&gt;
 
-&lt;p&gt;Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s csprng&lt;/code&gt;. Also, add the import in the top of the NodeJS file: &lt;code class=&quot;highlighter-rouge&quot;&gt;const csprng = require('csprng');&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -s csprng&lt;/code&gt;. Also, add the import in the top of the NodeJS file: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;const csprng = require('csprng');&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Here is the &lt;em&gt;well commented&lt;/em&gt; code for the server’s response to POST requests. It uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;hash()&lt;/code&gt; function defined earlier.&lt;/p&gt;
+&lt;p&gt;Here is the &lt;em&gt;well commented&lt;/em&gt; code for the server’s response to POST requests. It uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hash()&lt;/code&gt; function defined earlier.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The user password is sent as the &lt;code class=&quot;highlighter-rouge&quot;&gt;pass&lt;/code&gt; field in the body of the request (contrary to how it was sent before).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The user password is sent as the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pass&lt;/code&gt; field in the body of the request (contrary to how it was sent before).&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/8da5kL1t/8/embedded/js/dark&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
@@ -2016,13 +2016,13 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
 
 &lt;p&gt;After you have created a user with read/write privileges, to actually connect to the database, you need to use a &lt;strong&gt;MongoDB URI&lt;/strong&gt;. This is the web address for connecting to the data. The URI of a database is like the URL of a webpage. By convention, the MongoDB URI is as follows:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mongodb://&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;databasename&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mongodb://&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;databasename&amp;gt;&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;For example, mine would be:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mongodb+srv://danny:secretPassword123@vuecluster5u.gcp.mongodb.net/users&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mongodb+srv://danny:secretPassword123@vuecluster5u.gcp.mongodb.net/users&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The final &lt;code class=&quot;highlighter-rouge&quot;&gt;/users&lt;/code&gt; is called a collection in MongoDB idiom. It is a collection of documents (database entries).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The final &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/users&lt;/code&gt; is called a collection in MongoDB idiom. It is a collection of documents (database entries).&lt;/p&gt;
 
 &lt;p&gt;To get your URI, click on the “Clusters” tab of your project and on your main cluster, click &lt;strong&gt;Connect&lt;/strong&gt;. Select ‘Connect Your Application’.&lt;/p&gt;
 
@@ -2032,35 +2032,35 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/6ikkw2V.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Your connection string (URI) should be under the drivers. To get your real working URI, replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;password&amp;gt;&lt;/code&gt; with your user password, and the &lt;code class=&quot;highlighter-rouge&quot;&gt;/test&lt;/code&gt; after the port number with a collection (database) name you want, eg: &lt;code class=&quot;highlighter-rouge&quot;&gt;/mydb&lt;/code&gt;. There you go! You have your URI. Write it down or copy it in some form because you’ll need it in a bit.&lt;/p&gt;
+&lt;p&gt;Your connection string (URI) should be under the drivers. To get your real working URI, replace the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;password&amp;gt;&lt;/code&gt; with your user password, and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/test&lt;/code&gt; after the port number with a collection (database) name you want, eg: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/mydb&lt;/code&gt;. There you go! You have your URI. Write it down or copy it in some form because you’ll need it in a bit.&lt;/p&gt;
 
 &lt;h2 id=&quot;nodejs-skeleton&quot;&gt;Node.js Skeleton&lt;/h2&gt;
 
 &lt;p&gt;In this section, we are going to set up the minimum Node.js needed to connect to your database (cluster) using the URI and to read/write to it as well.&lt;/p&gt;
 
-&lt;p&gt;To begin, set up a new Node project using npm (create a new directory and run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt; inside of it). If you don’t already have Node.js installed, please &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;install it&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To begin, set up a new Node project using npm (create a new directory and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm init&lt;/code&gt; inside of it). If you don’t already have Node.js installed, please &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;install it&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;After your project is initialized, install the dependencies. For this project, all we are using is &lt;a href=&quot;https://expressjs.com/&quot;&gt;Express.js&lt;/a&gt; and &lt;strong&gt;CORS&lt;/strong&gt;. If you don’t already know, express is one of the most popular ways to create servers in Node. To install it, just run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s express&lt;/code&gt; to install and save express. CORS (&lt;strong&gt;C&lt;/strong&gt;ross &lt;strong&gt;O&lt;/strong&gt;rigin &lt;strong&gt;R&lt;/strong&gt;esource &lt;strong&gt;S&lt;/strong&gt;haring) is a safety feature that we need to bypass to be able to access resources out of localhost (where we are running our server from). To install it, run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s cors&lt;/code&gt;. Now create a new file in the root directory named &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; and put this code in it. I commented it heavily so you can understand what is going on:&lt;/p&gt;
+&lt;p&gt;After your project is initialized, install the dependencies. For this project, all we are using is &lt;a href=&quot;https://expressjs.com/&quot;&gt;Express.js&lt;/a&gt; and &lt;strong&gt;CORS&lt;/strong&gt;. If you don’t already know, express is one of the most popular ways to create servers in Node. To install it, just run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -s express&lt;/code&gt; to install and save express. CORS (&lt;strong&gt;C&lt;/strong&gt;ross &lt;strong&gt;O&lt;/strong&gt;rigin &lt;strong&gt;R&lt;/strong&gt;esource &lt;strong&gt;S&lt;/strong&gt;haring) is a safety feature that we need to bypass to be able to access resources out of localhost (where we are running our server from). To install it, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -s cors&lt;/code&gt;. Now create a new file in the root directory named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt; and put this code in it. I commented it heavily so you can understand what is going on:&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/3/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;After you have read through, the code and know the gist (no pun intended) of what is happening, run the code in &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;. If you configured and installed everything correctly, you should see something almost identical to this:&lt;/p&gt;
+&lt;p&gt;After you have read through, the code and know the gist (no pun intended) of what is happening, run the code in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt;. If you configured and installed everything correctly, you should see something almost identical to this:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/ChaGQj5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Then, open a browser and travel to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4567&lt;/code&gt; and you should see “Home sweet home”.&lt;/p&gt;
+&lt;p&gt;Then, open a browser and travel to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:4567&lt;/code&gt; and you should see “Home sweet home”.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/VEuNLaB.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Opening a web page from a browser makes a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to a server which is one of the 3 HTTP requests (requests made to a server) we will use for our database:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Opening a web page from a browser makes a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to a server which is one of the 3 HTTP requests (requests made to a server) we will use for our database:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; requests fetch resources from a server&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; requests create resources on a server (database)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PUT&lt;/code&gt; requests update resources on a server&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; requests fetch resources from a server&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt; requests create resources on a server (database)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PUT&lt;/code&gt; requests update resources on a server&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;One more thing necessary to know before using our database, is express.js routing parameters. As of now, we are only responding to requests being sent on the base route “/”. Let’s say that we want to respond with user information when a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request is sent with the username being the first route parameter. For example, if I want to get the information stored in the database about the user &lt;code class=&quot;highlighter-rouge&quot;&gt;'danny33'&lt;/code&gt;, I want to be able to send a GET request to &lt;code class=&quot;highlighter-rouge&quot;&gt;https://myserver.com/danny33&lt;/code&gt; to acquire that information.&lt;/p&gt;
+&lt;p&gt;One more thing necessary to know before using our database, is express.js routing parameters. As of now, we are only responding to requests being sent on the base route “/”. Let’s say that we want to respond with user information when a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GET&lt;/code&gt; request is sent with the username being the first route parameter. For example, if I want to get the information stored in the database about the user &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'danny33'&lt;/code&gt;, I want to be able to send a GET request to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://myserver.com/danny33&lt;/code&gt; to acquire that information.&lt;/p&gt;
 
 &lt;p&gt;To create a dynamic route parameter with express, you change the route to be a colon, and then the name of your parameter. Here is how the example above would look (responding to a GET req.):&lt;/p&gt;
 
@@ -2069,25 +2069,25 @@ hash(&quot;hello&quot; + &quot;jHjdbJShdiodb&quot;) = 6f7f167a978166ee23b32c9531
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;So, going to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/dooty&lt;/code&gt; will give back&lt;/p&gt;
+&lt;p&gt;So, going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4567/dooty&lt;/code&gt; will give back&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;[GET REQUEST TO /dooty] Sending back information about the user dooty&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;[GET REQUEST TO /dooty] Sending back information about the user dooty&quot;&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;This express route parameter will only work on the text after the first route slash &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;. So going to &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:4567/dooty/secondparam&lt;/code&gt;will refuse to connect because we haven’t written a response to the request &lt;code class=&quot;highlighter-rouge&quot;&gt;'/:first/:second'&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This express route parameter will only work on the text after the first route slash &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt;. So going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4567/dooty/secondparam&lt;/code&gt;will refuse to connect because we haven’t written a response to the request &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'/:first/:second'&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Now, we are ready to look at how we can connect our MongoDB database to this Node.js and express server we have set up (FYI, this example will include dynamic path parameters). Before, I get to the code, we have to install the Mongo package for Node: &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -s mongodb&lt;/code&gt;. Now you can read through the heavily commented code below to get a sense of how node.js contacts MongoDB for creating, updating, and receiving database documents.&lt;/p&gt;
+&lt;p&gt;Now, we are ready to look at how we can connect our MongoDB database to this Node.js and express server we have set up (FYI, this example will include dynamic path parameters). Before, I get to the code, we have to install the Mongo package for Node: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -s mongodb&lt;/code&gt;. Now you can read through the heavily commented code below to get a sense of how node.js contacts MongoDB for creating, updating, and receiving database documents.&lt;/p&gt;
 
-&lt;p&gt;NOTE: Before running this code below, you MUST replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;const uri = ....&lt;/code&gt; with your URI that you got in the section about &lt;a href=&quot;#database-access&quot;&gt;Database Access&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;NOTE: Before running this code below, you MUST replace the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;const uri = ....&lt;/code&gt; with your URI that you got in the section about &lt;a href=&quot;#database-access&quot;&gt;Database Access&lt;/a&gt;.&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/5/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Run this code, by copying and pasting it into your &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; file in your node project (remember to replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;uri&lt;/code&gt; variable with yours) and running node &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; in your terminal.&lt;/p&gt;
+&lt;p&gt;Run this code, by copying and pasting it into your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt; file in your node project (remember to replace the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uri&lt;/code&gt; variable with yours) and running node &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt; in your terminal.&lt;/p&gt;
 
 &lt;h2 id=&quot;testing-the-code&quot;&gt;Testing the Code&lt;/h2&gt;
 
-&lt;p&gt;To test this code, make sure your &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; is running, open up Chrome (or Firefox), click &lt;code class=&quot;highlighter-rouge&quot;&gt;CMD+OPTION+i&lt;/code&gt; to open up the dev tools pane, and click on the ‘console’ tab to run some JavaScript.&lt;/p&gt;
+&lt;p&gt;To test this code, make sure your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.js&lt;/code&gt; is running, open up Chrome (or Firefox), click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMD+OPTION+i&lt;/code&gt; to open up the dev tools pane, and click on the ‘console’ tab to run some JavaScript.&lt;/p&gt;
 
-&lt;p&gt;First, let’s test creating a new user by sending a &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; request to our server. To send our requests, I will use the JavaScript &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fetch()&lt;/code&gt;&lt;/a&gt; function.
+&lt;p&gt;First, let’s test creating a new user by sending a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt; request to our server. To send our requests, I will use the JavaScript &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fetch()&lt;/code&gt;&lt;/a&gt; function.
 Below, I am creating a new user named ‘dan’ with some properties which can be found in the body property of the fetch.&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/6/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
@@ -2096,19 +2096,19 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
 
 &lt;h2 id=&quot;what-just-happened&quot;&gt;What Just Happened?&lt;/h2&gt;
 
-&lt;p&gt;When you pressed enter, the code sent a post request to your server (the intent was to create a new user with the username ‘dan’). The server connected to your MongoDB Atlas Database using the URI and created a new document on your database with the &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; field “dan”, the &lt;code class=&quot;highlighter-rouge&quot;&gt;eyeColor&lt;/code&gt; field “blue”, the &lt;code class=&quot;highlighter-rouge&quot;&gt;hairColor&lt;/code&gt; field “brown”, and the pass field “mypassword123”.&lt;/p&gt;
+&lt;p&gt;When you pressed enter, the code sent a post request to your server (the intent was to create a new user with the username ‘dan’). The server connected to your MongoDB Atlas Database using the URI and created a new document on your database with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user&lt;/code&gt; field “dan”, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eyeColor&lt;/code&gt; field “blue”, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hairColor&lt;/code&gt; field “brown”, and the pass field “mypassword123”.&lt;/p&gt;
 
 &lt;p&gt;So, theoretically, if everything ran correctly, you should see that user in your MongoDB atlas database online. To test this out, go to your project cluster and click on the “collections” button for the cluster.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/mRfqVqR.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You should be able to see your data there. Click on your collection name (whatever name you used as the last parameter in the URI – &lt;code class=&quot;highlighter-rouge&quot;&gt;/databasename&lt;/code&gt;. For me it was &lt;code class=&quot;highlighter-rouge&quot;&gt;/users&lt;/code&gt;. The newly created user should be sitting right there!&lt;/p&gt;
+&lt;p&gt;You should be able to see your data there. Click on your collection name (whatever name you used as the last parameter in the URI – &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/databasename&lt;/code&gt;. For me it was &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/users&lt;/code&gt;. The newly created user should be sitting right there!&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/FjmGgBK.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;To &lt;em&gt;get&lt;/em&gt; the data about a user, just put the URL for the user, &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4567/dan&lt;/code&gt;, into a browser and the data will be in the body of the site. Easy!&lt;/p&gt;
+&lt;p&gt;To &lt;em&gt;get&lt;/em&gt; the data about a user, just put the URL for the user, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:4567/dan&lt;/code&gt;, into a browser and the data will be in the body of the site. Easy!&lt;/p&gt;
 
-&lt;p&gt;And all you have to do for updating the user data in the database, is update your &lt;code class=&quot;highlighter-rouge&quot;&gt;extraDataToStore&lt;/code&gt; variable to hold the new user data and send the request as ‘put’:&lt;/p&gt;
+&lt;p&gt;And all you have to do for updating the user data in the database, is update your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extraDataToStore&lt;/code&gt; variable to hold the new user data and send the request as ‘put’:&lt;/p&gt;
 
 &lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;//jsfiddle.net/denenberg/5nr6w4mg/8/embedded/js/dark/&quot; allowfullscreen=&quot;allowfullscreen&quot; allowpaymentrequest=&quot;&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
 
@@ -2146,7 +2146,7 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
 
 &lt;p&gt;Now let’s download the code to your local machine by cloning the fork.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone &amp;lt;your-fork-url.git&amp;gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone &amp;lt;your-fork-url.git&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;You should now have a directory for your project that can be opened with your &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;preferred code editor&lt;/a&gt;.&lt;/p&gt;
@@ -2155,7 +2155,7 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
 
 &lt;p&gt;A git repo is just a big tree 🌳. You might have hundreds of people working on the same project and branches ensure that collaboration can happen without complete chaos. Changes on your branch are isolated from the work everybody else is doing.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout -b my-cool-thing
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout -b my-cool-thing
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;At this point you can start making changes to the code.&lt;/p&gt;
@@ -2164,7 +2164,7 @@ Below, I am creating a new user named ‘dan’ with some properties which can b
 
 &lt;p&gt;When you are happy with the changes, you can stage the changes and commit the code.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
 git commit -m &quot;🚀 I made this software better!&quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -2174,7 +2174,7 @@ git commit -m &quot;🚀 I made this software better!&quot;
 
 &lt;p&gt;Let’s push your branch to your fork.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin my-cool-thing
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin my-cool-thing
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;When you go back to Github you should automatically see a button labeled &lt;strong&gt;Create New Pull Request for my-cool-thing&lt;/strong&gt;. Go ahead and push that button. Add additional details as needed and it will show up in the list of PRs once submitted.&lt;/p&gt;
@@ -2259,7 +2259,7 @@ git commit -m &quot;🚀 I made this software better!&quot;
    <link href="http://localhost:4000/installing-node\"/>
    <updated>2019-03-14T00:00:00-05:00</updated>
    <id>http://localhost:4000/installing-node</id>
-   <content type="html">&lt;p&gt;It is likely that you already have &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;NodeJS&lt;/a&gt; installed on your machine. Try running &lt;code class=&quot;highlighter-rouge&quot;&gt;node -v&lt;/code&gt; from the command line. If that does not work or the version is older than &lt;code class=&quot;highlighter-rouge&quot;&gt;8.15&lt;/code&gt;, follow the install instructions below.&lt;/p&gt;
+   <content type="html">&lt;p&gt;It is likely that you already have &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;NodeJS&lt;/a&gt; installed on your machine. Try running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node -v&lt;/code&gt; from the command line. If that does not work or the version is older than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8.15&lt;/code&gt;, follow the install instructions below.&lt;/p&gt;
 
 &lt;h2 id=&quot;node-version-manager-nvm&quot;&gt;Node Version Manager NVM&lt;/h2&gt;
 
@@ -2396,7 +2396,7 @@ Another example: let's suppose I want to index the 6 in the matrix above. It is 
 
 &lt;p&gt;Recursive function have a &lt;strong&gt;base case&lt;/strong&gt; and a &lt;strong&gt;general case&lt;/strong&gt;. The base case typically returns a value but &lt;em&gt;always&lt;/em&gt; doesn’t call the enclosed function. The general case calls the enclosed function (itself). Here is the previously discussed factorial function written in Typescript (so you can see the parameter and return types):&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;// base case: 0! = 1&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -2407,7 +2407,7 @@ Another example: let's suppose I want to index the 6 in the matrix above. It is 
 
 &lt;p&gt;And here is the factorial function programmed iteratively (with loops), not recursively:&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -2418,9 +2418,9 @@ Another example: let's suppose I want to index the 6 in the matrix above. It is 
 
 &lt;p&gt;Take a minute to go through both programs, find how they differ, and try to figure out how the recursive implementation works (that’s how I first got my “Oh! I understand”).&lt;/p&gt;
 
-&lt;p&gt;For now, we are going to backtrack (no pun intended) and take a look at a super simple function called &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom&lt;/code&gt;. This function takes a positive integer as the parameter and counts down to 0 (exluding 0). So if you enter &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom(5)&lt;/code&gt;, it will print:&lt;/p&gt;
+&lt;p&gt;For now, we are going to backtrack (no pun intended) and take a look at a super simple function called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;countDownFrom&lt;/code&gt;. This function takes a positive integer as the parameter and counts down to 0 (exluding 0). So if you enter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;countDownFrom(5)&lt;/code&gt;, it will print:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5
 4
 3
 2
@@ -2450,7 +2450,7 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;To figure out exactly how this function works, we will trace each call using a table. Here is a trace table for the call &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom(3)&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;To figure out exactly how this function works, we will trace each call using a table. Here is a trace table for the call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;countDownFrom(3)&lt;/code&gt;:&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -2489,7 +2489,7 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;This tracing method also shows us the call stack after the function was executed. The call stack is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_(abstract_data_type)&quot;&gt;Stack&lt;/a&gt; (data structure) that function calls get pushed (added) on to after they are called. Stacks are a list of things that can be &lt;em&gt;pushed&lt;/em&gt; to or &lt;em&gt;popped&lt;/em&gt; from. A push adds something to the end of the list and a pop takes that last thing off. Picture a stack like a stack of plates. You can put one on top of the other, but you can’t just take off the bottom one. You first have to take off the top ones or else the stack will collapse. So, because stacks have LIFO (Last In First Out) priority, the most recent function called will ALWAYS be the first to return a value (returning void/nothing counts as a return). When the functions in a recursive call begin to return values and get popped off of the call stack, it is called unwinding. So, the actual FULL (including unwinding) function trace for &lt;code class=&quot;highlighter-rouge&quot;&gt;countDownFrom(3)&lt;/code&gt; would be:&lt;/p&gt;
+&lt;p&gt;This tracing method also shows us the call stack after the function was executed. The call stack is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_(abstract_data_type)&quot;&gt;Stack&lt;/a&gt; (data structure) that function calls get pushed (added) on to after they are called. Stacks are a list of things that can be &lt;em&gt;pushed&lt;/em&gt; to or &lt;em&gt;popped&lt;/em&gt; from. A push adds something to the end of the list and a pop takes that last thing off. Picture a stack like a stack of plates. You can put one on top of the other, but you can’t just take off the bottom one. You first have to take off the top ones or else the stack will collapse. So, because stacks have LIFO (Last In First Out) priority, the most recent function called will ALWAYS be the first to return a value (returning void/nothing counts as a return). When the functions in a recursive call begin to return values and get popped off of the call stack, it is called unwinding. So, the actual FULL (including unwinding) function trace for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;countDownFrom(3)&lt;/code&gt; would be:&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -2546,7 +2546,7 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;If you are interested, here is the trace table for the call &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(4)&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;If you are interested, here is the trace table for the call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;factorial(4)&lt;/code&gt;:&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -2631,18 +2631,18 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 
 &lt;p&gt;My uncle gave me an interesting problem one time: “create a function to tell if a number is even or odd without using the modulus operator”. I came up with a set of functions that uses recursion to bounce a number back and forth until it reaches zero, then the function it lands on when it is at zero returns true or false (even or odd).&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;even&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;odd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;If you call &lt;code class=&quot;highlighter-rouge&quot;&gt;odd(3)&lt;/code&gt; it will return true. &lt;code class=&quot;highlighter-rouge&quot;&gt;odd(4)&lt;/code&gt; returns false. &lt;code class=&quot;highlighter-rouge&quot;&gt;even(3)&lt;/code&gt; returns false. &lt;code class=&quot;highlighter-rouge&quot;&gt;even(4)&lt;/code&gt; returns true!&lt;/p&gt;
+&lt;p&gt;If you call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;odd(3)&lt;/code&gt; it will return true. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;odd(4)&lt;/code&gt; returns false. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;even(3)&lt;/code&gt; returns false. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;even(4)&lt;/code&gt; returns true!&lt;/p&gt;
 
 &lt;p&gt;It’s probably my favorite set of recursive functions because of its simplicity and sheer elegance. Implement it in whatever language you want. It works!&lt;/p&gt;
 
@@ -2652,7 +2652,7 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; ANY, yes ANY recursive program/function can be rewritten iteratively (although it is, at times, more difficult to find than the iterative algorithm).&lt;/p&gt;
 
-&lt;p&gt;The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment’s largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a &lt;code class=&quot;highlighter-rouge&quot;&gt;StackOverflow&lt;/code&gt; error will be thrown.&lt;/p&gt;
+&lt;p&gt;The main drawback of recursion is its memory usage. It is a memory hog. Because recursion relies on function calls stored on the stack, a recursive solution is limited to an environment’s largest possible stack size (how many functions it can hold in RAM). So, before implementing a solution recursively make sure that it will not have to deal with millions of function calls or else a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StackOverflow&lt;/code&gt; error will be thrown.&lt;/p&gt;
 
 &lt;p&gt;Sometimes you can get around this by implementing a more restrictive and selective base case so that more functions are returned early and get popped off of the stack (and thus out of memory) – but not always.&lt;/p&gt;
 
@@ -2672,7 +2672,7 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 
 &lt;p&gt;Sample Input:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;20 30
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;20 30
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~********~~~~~~~********~~~~
 ~~~~****~~~~~~~~~~**~~*~**~~~~
@@ -2695,7 +2695,7 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Sample Output: &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Sample Output: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;And…..here is the code I used to solve the problem (JavaScript):&lt;/p&gt;
 
@@ -2714,8 +2714,8 @@ Now let’s take a look at the recursive solution:&lt;/p&gt;
 
 &lt;h2 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h2&gt;
 
-&lt;p&gt;Typescript is a compiled language which means it needs a compiler. You will first need NodeJS installed (TS is almost always used with Node). Then type &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i -g typescript&lt;/code&gt; to install TS globally on your computer.
-If typing &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; works and yields the version number of your TS installation, you’re good to go!&lt;/p&gt;
+&lt;p&gt;Typescript is a compiled language which means it needs a compiler. You will first need NodeJS installed (TS is almost always used with Node). Then type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i -g typescript&lt;/code&gt; to install TS globally on your computer.
+If typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; works and yields the version number of your TS installation, you’re good to go!&lt;/p&gt;
 
 &lt;h2 id=&quot;the-basics&quot;&gt;The Basics&lt;/h2&gt;
 
@@ -2725,38 +2725,38 @@ If typing &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; wo
 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;As you can see, there is one difference here from vanilla JS – the :string type annotation after the message variable name. The general form for type annotations go like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;let variableName: type&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As you can see, there is one difference here from vanilla JS – the :string type annotation after the message variable name. The general form for type annotations go like this: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let variableName: type&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The string type would have been inferred as the type without the annotation, just like in this case, let a = 9, the inerred type would be number.&lt;/p&gt;
 
-&lt;p&gt;Now to compile the TS file into JavaScript, run &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc hello.ts&lt;/code&gt;. This generates a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.js&lt;/code&gt; with the compiled JS code.&lt;/p&gt;
+&lt;p&gt;Now to compile the TS file into JavaScript, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc hello.ts&lt;/code&gt;. This generates a new file called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hello.js&lt;/code&gt; with the compiled JS code.&lt;/p&gt;
 
-&lt;p&gt;Let’s run that: &lt;code class=&quot;highlighter-rouge&quot;&gt;node hello.js&lt;/code&gt;. You should see in the console “Hello, TS ♥️”.
+&lt;p&gt;Let’s run that: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node hello.js&lt;/code&gt;. You should see in the console “Hello, TS ♥️”.
 To learn more about Typescript syntax and cool features, check out the handbook.&lt;/p&gt;
 
 &lt;h2 id=&quot;workflow-with-node&quot;&gt;Workflow with Node&lt;/h2&gt;
 
 &lt;p&gt;Because TS is primarily used in NodeJS environments, it is important to know how they work together.&lt;/p&gt;
 
-&lt;p&gt;Create a new project with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Create a new project with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm init&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Next, add the TS configure file with &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -init&lt;/code&gt;. This creates a new file in the root of your project called &lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt;. In it are all sorts of configure variables that you can play with. All we are interested in for the time being is one called outDir. This is the folder that the compiled TS is put into. Find the line where it is defined, uncomment it, and assign it the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;./build&quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Next, add the TS configure file with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc -init&lt;/code&gt;. This creates a new file in the root of your project called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt;. In it are all sorts of configure variables that you can play with. All we are interested in for the time being is one called outDir. This is the folder that the compiled TS is put into. Find the line where it is defined, uncomment it, and assign it the value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;./build&quot;&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Now, you can put your TS files anywhere and they will all be compiled into the &lt;code class=&quot;highlighter-rouge&quot;&gt;./build&lt;/code&gt; directory with the command &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now, you can put your TS files anywhere and they will all be compiled into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./build&lt;/code&gt; directory with the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Copy your &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.ts&lt;/code&gt; file into the root of your project and run tsc (just those 3 letters). Now in the build folder, there should be a hello.js file. You can run it with &lt;code class=&quot;highlighter-rouge&quot;&gt;node build/hello.js&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Copy your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hello.ts&lt;/code&gt; file into the root of your project and run tsc (just those 3 letters). Now in the build folder, there should be a hello.js file. You can run it with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node build/hello.js&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;This is the general workflow for creating TS files, compiling, and running them. Remember, you can name the &lt;code class=&quot;highlighter-rouge&quot;&gt;outDir&lt;/code&gt; directory anything you want!&lt;/p&gt;
+&lt;p&gt;This is the general workflow for creating TS files, compiling, and running them. Remember, you can name the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;outDir&lt;/code&gt; directory anything you want!&lt;/p&gt;
 
 &lt;h2 id=&quot;editors-and-types&quot;&gt;Editors and @types&lt;/h2&gt;
 
 &lt;p&gt;For editing Typescript, I would highly, highly recommend &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt;. It is the editor I use for almost everything. I used to use &lt;a href=&quot;https://atom.io/&quot;&gt;Atom&lt;/a&gt;, but when I made the switch, I realized just how much better VSC is. It is SUPER fast ⚡️. Has thousands of amazing plugins. Runs on almost every platform.
-For intellisense, VSC’s default Typescript package works extremely well. But, when is comes to working with npm packages in Typescript, you will have to install the type definitions for the package (if they are available). Let’s take express.js for example. The type definition package for express is &lt;code class=&quot;highlighter-rouge&quot;&gt;@types/express&lt;/code&gt;. So, to get autocomplete, intellisense, etc. just install the package with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm i @types/express&lt;/code&gt;.&lt;/p&gt;
+For intellisense, VSC’s default Typescript package works extremely well. But, when is comes to working with npm packages in Typescript, you will have to install the type definitions for the package (if they are available). Let’s take express.js for example. The type definition package for express is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@types/express&lt;/code&gt;. So, to get autocomplete, intellisense, etc. just install the package with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm i @types/express&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Without the type definitions installed, the packages have the type any by default.&lt;/p&gt;
 
 &lt;p&gt;A great website for finding type definitions for your favorite npm packages is &lt;a href=&quot;https://definitelytyped.org&quot;&gt;definitelytyped.org&lt;/a&gt;. Click on the search and it will take you to TypeSearch where you can find your package’s types and how to install them (it usually is @types/package).
-As an alternative, you could search on &lt;a href=&quot;https://yarnpkg.com/lang/en/&quot;&gt;Yarn’s&lt;/a&gt; website for packages that start with “&lt;code class=&quot;highlighter-rouge&quot;&gt;@types&lt;/code&gt;”.
+As an alternative, you could search on &lt;a href=&quot;https://yarnpkg.com/lang/en/&quot;&gt;Yarn’s&lt;/a&gt; website for packages that start with “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@types&lt;/code&gt;”.
 Have fun with TS ❤️.&lt;/p&gt;
 </content>
  </entry>
@@ -2776,18 +2776,18 @@ Have fun with TS ❤️.&lt;/p&gt;
 
 &lt;p&gt;Then set your username and email in the git preferences through the terminal.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config --global user.name &quot;FIRST_NAME LAST_NAME&quot;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config --global user.name &quot;FIRST_NAME LAST_NAME&quot;
 git config --global user.email &quot;MY_NAME@example.com&quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Next create an empty secret repo in your GitHub and clone it on your machine locally.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/dannydenenberg/mybackupsrepo.git
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/dannydenenberg/mybackupsrepo.git
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use &lt;a href=&quot;https://help.github.com/en/articles/connecting-to-github-with-ssh&quot;&gt;ssh keys&lt;/a&gt; to do this.&lt;/p&gt;
 
-&lt;p&gt;Make sure you have &lt;code class=&quot;highlighter-rouge&quot;&gt;zip&lt;/code&gt; installed with &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt install zip&lt;/code&gt;, then write your bash script looking something like this (example from my Ghost blog):&lt;/p&gt;
+&lt;p&gt;Make sure you have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zip&lt;/code&gt; installed with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt install zip&lt;/code&gt;, then write your bash script looking something like this (example from my Ghost blog):&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 zip /home/mybackupsrepo/mybackup.zip /var/www/ghost &lt;span class=&quot;c&quot;&gt;# zip the folder&lt;/span&gt;
@@ -2796,9 +2796,9 @@ git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&q
 &lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Rf&lt;/span&gt; /home/mybackupsrepo/mybackup.zip &lt;span class=&quot;c&quot;&gt;# clean&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Make it executable: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod +x /home/whereveryoustoredthisbashscript&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Make it executable: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod +x /home/whereveryoustoredthisbashscript&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;And add it to your cronjobs. To edit the cronjobs running, execute &lt;code class=&quot;highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt; (the actual file is stored in &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/spool/cron&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;And add it to your cronjobs. To edit the cronjobs running, execute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt; (the actual file is stored in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/var/spool/cron&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;Here is a quick reference for creating new cronjobs and how to schedule them properly:&lt;/p&gt;
 
@@ -2903,7 +2903,7 @@ git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&q
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/XNXJhXa.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Then I could do a &lt;code class=&quot;highlighter-rouge&quot;&gt;document.querySelector(&amp;lt;&amp;lt;SELECTOR&amp;gt;&amp;gt;).src&lt;/code&gt; and that would give me the URL of the image I want, and I could use that on a web page, for example:&lt;/p&gt;
+&lt;p&gt;Then I could do a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;document.querySelector(&amp;lt;&amp;lt;SELECTOR&amp;gt;&amp;gt;).src&lt;/code&gt; and that would give me the URL of the image I want, and I could use that on a web page, for example:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/QnJblUJ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -2911,45 +2911,45 @@ git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&q
 
 &lt;p&gt;If you don’t already know, &lt;a href=&quot;https://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; is a runtime enviornment that allows JavaScript to be run on the server side. And &lt;a href=&quot;https://github.com/GoogleChrome/puppeteer&quot;&gt;Puppeteer&lt;/a&gt; is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).&lt;/p&gt;
 
-&lt;p&gt;Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; works in the terminal, you’re good to go!&lt;/p&gt;
+&lt;p&gt;Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc -v&lt;/code&gt; works in the terminal, you’re good to go!&lt;/p&gt;
 
-&lt;p&gt;Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a &lt;code class=&quot;highlighter-rouge&quot;&gt;command not found&lt;/code&gt; or something related by running one of the following, I suggest that you look at this article on how to install Node.&lt;/p&gt;
+&lt;p&gt;Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;command not found&lt;/code&gt; or something related by running one of the following, I suggest that you look at this article on how to install Node.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm -v # should be 6.0.0 or higher
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm -v # should be 6.0.0 or higher
 $ node -v # should be 9.0.0 or higher
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Great! Let’s start a new project and install the dependencies:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir Web-Scraping-101 &amp;amp;&amp;amp; cd Web-Scraping-101
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir Web-Scraping-101 &amp;amp;&amp;amp; cd Web-Scraping-101
 $ npm init # go through all defaults
 $ npm i puppeteer # the google npm scraping package
 $ tsc --init # initialize typescript
 $ npm i @types/puppeteer # type declarations
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now open the folder in the text editor of your choice. Edit the &lt;code class=&quot;highlighter-rouge&quot;&gt;outDir&lt;/code&gt; option in the &lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt; file to be &lt;code class=&quot;highlighter-rouge&quot;&gt;./build&lt;/code&gt; and uncomment the line, so it looks like this:&lt;/p&gt;
+&lt;p&gt;Now open the folder in the text editor of your choice. Edit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;outDir&lt;/code&gt; option in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt; file to be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./build&lt;/code&gt; and uncomment the line, so it looks like this:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/y1kZn10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Create a new file in the root of the folder:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ touch app.ts
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ touch app.ts
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;app.ts&lt;/code&gt; add:&lt;/p&gt;
+&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.ts&lt;/code&gt; add:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;console.log(&quot;Twitter, here we come&quot;);
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;console.log(&quot;Twitter, here we come&quot;);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now, to &lt;strong&gt;run this&lt;/strong&gt;, in terminal, write: &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc &amp;amp;&amp;amp; node build/app.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now, to &lt;strong&gt;run this&lt;/strong&gt;, in terminal, write: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc &amp;amp;&amp;amp; node build/app.js&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc&lt;/code&gt; builds all TypeScript files into the outDir directory defined in the config file and &lt;code class=&quot;highlighter-rouge&quot;&gt;node&lt;/code&gt; runs a single JavaScript file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tsc&lt;/code&gt; builds all TypeScript files into the outDir directory defined in the config file and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node&lt;/code&gt; runs a single JavaScript file.&lt;/p&gt;
 
 &lt;p&gt;If you see &lt;em&gt;“Twitter, here we come”&lt;/em&gt; appear in the terminal, you’ve got it working!&lt;/p&gt;
 
 &lt;p&gt;Now, we will start to actually scrape using puppeteer.
-Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-rouge&quot;&gt;app.ts&lt;/code&gt; file:&lt;/p&gt;
+Add this boilerplate puppeteer code to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app.ts&lt;/code&gt; file:&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;puppeteer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;puppeteer&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// import the npm package that we installed&lt;/span&gt;
 
@@ -2985,7 +2985,7 @@ Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-roug
 
 &lt;p&gt;Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.&lt;/p&gt;
 
-&lt;p&gt;First, edit the &lt;code class=&quot;highlighter-rouge&quot;&gt;await page.goto(&quot;https://example.com&quot;)&lt;/code&gt; to be &lt;code class=&quot;highlighter-rouge&quot;&gt;await page.goto(&quot;https://twitter.com&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;First, edit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await page.goto(&quot;https://example.com&quot;)&lt;/code&gt; to be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await page.goto(&quot;https://twitter.com&quot;)&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:&lt;/p&gt;
 
@@ -2999,7 +2999,7 @@ Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-roug
 
 &lt;p&gt;&lt;img src=&quot;https://i.snap.as/Taoa3a3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;To get all of the images from the middle column, I ended up doing this for the &lt;code class=&quot;highlighter-rouge&quot;&gt;page.evaluate()&lt;/code&gt; function:&lt;/p&gt;
+&lt;p&gt;To get all of the images from the middle column, I ended up doing this for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page.evaluate()&lt;/code&gt; function:&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dimensions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// an array of the links to each image&lt;/span&gt;
@@ -3017,7 +3017,7 @@ Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-roug
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the &lt;code class=&quot;highlighter-rouge&quot;&gt;page.evaluate()&lt;/code&gt; function:&lt;/p&gt;
+&lt;p&gt;Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page.evaluate()&lt;/code&gt; function:&lt;/p&gt;
 
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dimensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sources&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -3043,8 +3043,8 @@ Add this boilerplate puppeteer code to the &lt;code class=&quot;highlighter-roug
 !!&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;To write math inline, enclose the math in &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; to start and &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; to end. Ex: &lt;code class=&quot;highlighter-rouge&quot;&gt;$a=\frac{F}{m}$&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;To write display math, enclose the math in double exclamation marks like so: &lt;code class=&quot;highlighter-rouge&quot;&gt;!!a=\frac{F}{m}!!&lt;/code&gt;
+  &lt;li&gt;To write math inline, enclose the math in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt; to start and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt; to end. Ex: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$a=\frac{F}{m}$&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;To write display math, enclose the math in double exclamation marks like so: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;!!a=\frac{F}{m}!!&lt;/code&gt;
     &lt;ul&gt;
       &lt;li&gt;Why not 2 dollar signs you ask? It turns out that before MathJax can even get to the math, if you are using 2 dollar signs the &lt;strong&gt;markdown parser turns it into a script tag&lt;/strong&gt;……SO not ideal 🙄.&lt;/li&gt;
     &lt;/ul&gt;

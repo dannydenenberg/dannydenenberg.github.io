@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en-us">
+
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  gtag('config', 'UA-142322478-3');
-</script>
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <title>
+    
+    Web scraping in node.js 101 &middot; Danny D.
+    
+  </title>
 
-  <link href="http://gmpg.org/xfn/11" rel="profile" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta
-    name="description"
-    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
-  />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
-  
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 
-  <script>
-    (async () => {
-      // redirect from denenberg.us to dannydenenberg.com
-      if (window.location.href.includes("denenberg.us")) {
-        let url = window.location.href;
-        let firstPart = url.slice(0, 8);
-        let lastPart = url.slice(20);
-        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
-        window.location.replace(newUrl);
-      }
-    })();
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+  <!-- MathJax -->
+  <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
       commonHTML: {
-        linebreaks: { automatic: true }
+        linebreaks: {
+          automatic: true
+        }
       },
       tex: {
         inlineMath: [
@@ -61,51 +52,197 @@
     };
   </script>
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
-
-  <title>
-     Web scraping in node.js 101 &middot; Danny Denenberg 
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css" />
-  <link rel="stylesheet" href="/public/css/syntax.css" />
-
-  <!-- Icons -->
-  <link
-    rel="apple-touch-icon-precomposed"
-    sizes="144x144"
-    href="/public/apple-touch-icon-144-precomposed.png"
-  />
-  <link rel="shortcut icon" href="/public/favicon.ico" />
-
   <!-- RSS -->
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="RSS"
-    href="/atom.xml"
-  />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
-
 <body>
-  <div class="container content">
-    <div class="masthead">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
-        
-      </h3>
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Danny D.
+        </a>
+      </h1>
+      <p class="lead">Hey <a>links</a> work.</p>
     </div>
 
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/about/">About</a>
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/archive/">Archive</a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <!-- <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io/archive/v1.lots.of.edits.zip">Download</a>
+      <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v1.lots.of.edits</span>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+  <div class="content container">
     <div class="post">
   <h1 class="post-title">Web scraping in node.js 101</h1>
   <span class="post-date">12 Mar 2018</span>
@@ -123,7 +260,7 @@
 
 <p><img src="https://i.snap.as/XNXJhXa.png" alt="" /></p>
 
-<p>Then I could do a <code class="highlighter-rouge">document.querySelector(&lt;&lt;SELECTOR&gt;&gt;).src</code> and that would give me the URL of the image I want, and I could use that on a web page, for example:</p>
+<p>Then I could do a <code class="language-plaintext highlighter-rouge">document.querySelector(&lt;&lt;SELECTOR&gt;&gt;).src</code> and that would give me the URL of the image I want, and I could use that on a web page, for example:</p>
 
 <p><img src="https://i.snap.as/QnJblUJ.png" alt="" /></p>
 
@@ -131,45 +268,45 @@
 
 <p>If you don’t already know, <a href="https://nodejs.org/">Node.js</a> is a runtime enviornment that allows JavaScript to be run on the server side. And <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> is a ‘headless chrome node API’ written by google (basically, it allows you to write DOM Javascript code on a server).</p>
 
-<p>Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running <code class="highlighter-rouge">tsc -v</code> works in the terminal, you’re good to go!</p>
+<p>Just an FYI, because I love TypeScript, I will be using that for this project. If you want to use TypeScript, please install it on your system. If running <code class="language-plaintext highlighter-rouge">tsc -v</code> works in the terminal, you’re good to go!</p>
 
-<p>Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a <code class="highlighter-rouge">command not found</code> or something related by running one of the following, I suggest that you look at this article on how to install Node.</p>
+<p>Okay, to start off, make sure you have Node.js and NPM (Node Package Manager) installed on your system. If you get a <code class="language-plaintext highlighter-rouge">command not found</code> or something related by running one of the following, I suggest that you look at this article on how to install Node.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm -v # should be 6.0.0 or higher
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm -v # should be 6.0.0 or higher
 $ node -v # should be 9.0.0 or higher
 </code></pre></div></div>
 
 <p>Great! Let’s start a new project and install the dependencies:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir Web-Scraping-101 &amp;&amp; cd Web-Scraping-101
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir Web-Scraping-101 &amp;&amp; cd Web-Scraping-101
 $ npm init # go through all defaults
 $ npm i puppeteer # the google npm scraping package
 $ tsc --init # initialize typescript
 $ npm i @types/puppeteer # type declarations
 </code></pre></div></div>
 
-<p>Now open the folder in the text editor of your choice. Edit the <code class="highlighter-rouge">outDir</code> option in the <code class="highlighter-rouge">tsconfig.json</code> file to be <code class="highlighter-rouge">./build</code> and uncomment the line, so it looks like this:</p>
+<p>Now open the folder in the text editor of your choice. Edit the <code class="language-plaintext highlighter-rouge">outDir</code> option in the <code class="language-plaintext highlighter-rouge">tsconfig.json</code> file to be <code class="language-plaintext highlighter-rouge">./build</code> and uncomment the line, so it looks like this:</p>
 
 <p><img src="https://i.snap.as/y1kZn10.png" alt="" /></p>
 
 <p>Create a new file in the root of the folder:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch app.ts
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch app.ts
 </code></pre></div></div>
 
-<p>In <code class="highlighter-rouge">app.ts</code> add:</p>
+<p>In <code class="language-plaintext highlighter-rouge">app.ts</code> add:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log("Twitter, here we come");
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log("Twitter, here we come");
 </code></pre></div></div>
 
-<p>Now, to <strong>run this</strong>, in terminal, write: <code class="highlighter-rouge">tsc &amp;&amp; node build/app.js</code></p>
+<p>Now, to <strong>run this</strong>, in terminal, write: <code class="language-plaintext highlighter-rouge">tsc &amp;&amp; node build/app.js</code></p>
 
-<p><strong>NOTE:</strong> <code class="highlighter-rouge">tsc</code> builds all TypeScript files into the outDir directory defined in the config file and <code class="highlighter-rouge">node</code> runs a single JavaScript file.</p>
+<p><strong>NOTE:</strong> <code class="language-plaintext highlighter-rouge">tsc</code> builds all TypeScript files into the outDir directory defined in the config file and <code class="language-plaintext highlighter-rouge">node</code> runs a single JavaScript file.</p>
 
 <p>If you see <em>“Twitter, here we come”</em> appear in the terminal, you’ve got it working!</p>
 
 <p>Now, we will start to actually scrape using puppeteer.
-Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.ts</code> file:</p>
+Add this boilerplate puppeteer code to the <code class="language-plaintext highlighter-rouge">app.ts</code> file:</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">puppeteer</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">puppeteer</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// import the npm package that we installed</span>
 
@@ -205,7 +342,7 @@ Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.t
 
 <p>Now that you can see how we can travel to a web page, gather info using DOM manipulation, and bring that info back to the Node js program, we are ready to scrape twitter.</p>
 
-<p>First, edit the <code class="highlighter-rouge">await page.goto("https://example.com")</code> to be <code class="highlighter-rouge">await page.goto("https://twitter.com")</code></p>
+<p>First, edit the <code class="language-plaintext highlighter-rouge">await page.goto("https://example.com")</code> to be <code class="language-plaintext highlighter-rouge">await page.goto("https://twitter.com")</code></p>
 
 <p>Next, we need to be able to get the posts from the middle column (the actual twitter feed). After some investigating, I found this selector is the one that actually selects the div for the middle column feed:</p>
 
@@ -219,7 +356,7 @@ Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.t
 
 <p><img src="https://i.snap.as/Taoa3a3.png" alt="" /></p>
 
-<p>To get all of the images from the middle column, I ended up doing this for the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
+<p>To get all of the images from the middle column, I ended up doing this for the <code class="language-plaintext highlighter-rouge">page.evaluate()</code> function:</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">sources</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// an array of the links to each image</span>
@@ -237,7 +374,7 @@ Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.t
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the <code class="highlighter-rouge">page.evaluate()</code> function:</p>
+<p>Now if I want to compile a list of all of the image sources and print them out to the console, all I have to do is write this outside of the <code class="language-plaintext highlighter-rouge">page.evaluate()</code> function:</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dimensions</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span>
 </code></pre></div></div>
@@ -249,7 +386,7 @@ Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.t
 </div>
 
 <div class="related">
-  <h2>Related Posts 🦚</h2>
+  <h2>Related Posts</h2>
   <ul class="related-posts">
     
     <li>
@@ -281,54 +418,8 @@ Add this boilerplate puppeteer code to the <code class="highlighter-rouge">app.t
     
   </ul>
 </div>
-
-<script src="https://utteranc.es/client.js"
-        repo="dannydenenberg/dannydenenberg.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-
-    <br />
-
-    <div class="footer" style="font-size: smaller;">
-      <p>
-        &copy; 2020
-
-        <!-- <span id='emoji'></span>  -->
-
-        Daniel Oscar Denenberg.
-      </p>
-    </div>
-    <script>
-      let emojiStringToArray = function (str) {
-        split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-        arr = [];
-        for (var i = 0; i < split.length; i++) {
-          char = split[i]
-          if (char !== "") {
-            arr.push(char);
-          }
-        }
-        return arr;
-      };
-
-      function getEmoji() {
-        let emojis = emojiStringToArray('🌎🦕🦖🐔🐧🐳🐬🐃🦒🌴🌲🌺☔️🍇')
-        let index = parseInt(Math.random() * emojis.length - 1);
-        return emojis[index];
-      }
-
-      function putEmojiInSpan(emoji) {
-        let span = document.getElementById('emoji');
-        span.innerHTML = emoji;
-      }
-
-      putEmojiInSpan(getEmoji());
-    </script>
   </div>
+
 </body>
 
 </html>

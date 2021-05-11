@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en-us">
+
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  gtag('config', 'UA-142322478-3');
-</script>
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <title>
+    
+    Securing your database &middot; Danny D.
+    
+  </title>
 
-  <link href="http://gmpg.org/xfn/11" rel="profile" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta
-    name="description"
-    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
-  />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
-  
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 
-  <script>
-    (async () => {
-      // redirect from denenberg.us to dannydenenberg.com
-      if (window.location.href.includes("denenberg.us")) {
-        let url = window.location.href;
-        let firstPart = url.slice(0, 8);
-        let lastPart = url.slice(20);
-        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
-        window.location.replace(newUrl);
-      }
-    })();
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+  <!-- MathJax -->
+  <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
       commonHTML: {
-        linebreaks: { automatic: true }
+        linebreaks: {
+          automatic: true
+        }
       },
       tex: {
         inlineMath: [
@@ -61,51 +52,197 @@
     };
   </script>
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
-
-  <title>
-     Securing your database &middot; Danny Denenberg 
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css" />
-  <link rel="stylesheet" href="/public/css/syntax.css" />
-
-  <!-- Icons -->
-  <link
-    rel="apple-touch-icon-precomposed"
-    sizes="144x144"
-    href="/public/apple-touch-icon-144-precomposed.png"
-  />
-  <link rel="shortcut icon" href="/public/favicon.ico" />
-
   <!-- RSS -->
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="RSS"
-    href="/atom.xml"
-  />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
-
 <body>
-  <div class="container content">
-    <div class="masthead">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
-        
-      </h3>
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Danny D.
+        </a>
+      </h1>
+      <p class="lead">Hey <a>links</a> work.</p>
     </div>
 
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/about/">About</a>
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/archive/">Archive</a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <!-- <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io/archive/v1.lots.of.edits.zip">Download</a>
+      <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v1.lots.of.edits</span>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+  <div class="content container">
     <div class="post">
   <h1 class="post-title">Securing your database</h1>
   <span class="post-date">05 Aug 2019</span>
@@ -121,11 +258,11 @@
 
 <p>Well, now there is a new issue – we have users that each have their own unique information, but ANYONE who sends a get request to the server with a username of some user can acquire their information! That is SUPER unsafe. To combat this, most websites have a password field for each user (as I’m sure you know) which is kept private. This combination of public and private “keys” is a nice way for users to be able to connect with each other using their public usernames, but keep their info secure with a strong password.</p>
 
-<p>Let’s implement this in our NodeJS program by first adding a <code class="highlighter-rouge">pass</code> field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called <code class="highlighter-rouge">deb</code> with the password <code class="highlighter-rouge">1234</code> (I am using JavaScript to send the request to our server – make sure the server is running on port <code class="highlighter-rouge">4567</code>):</p>
+<p>Let’s implement this in our NodeJS program by first adding a <code class="language-plaintext highlighter-rouge">pass</code> field to each user holding their unique password. This doesn’t change any code so far on the server side, but let’s use this idea to create a new user called <code class="language-plaintext highlighter-rouge">deb</code> with the password <code class="language-plaintext highlighter-rouge">1234</code> (I am using JavaScript to send the request to our server – make sure the server is running on port <code class="language-plaintext highlighter-rouge">4567</code>):</p>
 
 <iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/12/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
 
-<p>Okay, to make sure the <code class="highlighter-rouge">fetch()</code> request worked, look at the data inside of your MongoDB cluster collections in Atlas.</p>
+<p>Okay, to make sure the <code class="language-plaintext highlighter-rouge">fetch()</code> request worked, look at the data inside of your MongoDB cluster collections in Atlas.</p>
 
 <p>Great. The user has a password, but we can still send a get request and get the information without using a password. To password-protect the user info, every time a get request is sent, a password should be sent along with it. The server will then compare the password sent in the get request with the password stored in the database associated with the user the get request was sent for. If they are equivalent, the server will send back the user information. Otherwise, it will send back some sort of an error code for the wrong password.</p>
 
@@ -133,25 +270,25 @@
 
 <p>To send a password along with the get request, we will use simple HTTP url request parameters. The GET request will look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:4567/username?pass=mypassword1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:4567/username?pass=mypassword1
 </code></pre></div></div>
 
-<p><strong>One thing to note</strong> is how to get the query parameters in Express.js (Node.js): <code class="highlighter-rouge">req.query.myparam</code>. Or, in our specific case, <code class="highlighter-rouge">req.query.pass</code> gives the password sent.</p>
+<p><strong>One thing to note</strong> is how to get the query parameters in Express.js (Node.js): <code class="language-plaintext highlighter-rouge">req.query.myparam</code>. Or, in our specific case, <code class="language-plaintext highlighter-rouge">req.query.pass</code> gives the password sent.</p>
 
-<p>Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the <code class="highlighter-rouge">/user</code> and <code class="highlighter-rouge">?pass=__ fields</code>.</p>
+<p>Here is some example code of how the request URL parameters can be used in a program (this is just the get request part). It will print out the password to the console when a get request is made with the <code class="language-plaintext highlighter-rouge">/user</code> and <code class="language-plaintext highlighter-rouge">?pass=__ fields</code>.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/:user</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Password: </span><span class="p">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">pass</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
-<p>To test this, run the Node server. In the browser go to <code class="highlighter-rouge">localhost:4567/dan?pass=abc</code>. Switch back to the console and you should see the password printed there.</p>
+<p>To test this, run the Node server. In the browser go to <code class="language-plaintext highlighter-rouge">localhost:4567/dan?pass=abc</code>. Switch back to the console and you should see the password printed there.</p>
 
-<p>Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the <code class="highlighter-rouge">/user</code>. If that is the same as the URL <code class="highlighter-rouge">pass</code> parameter, we send back the info on the user.</p>
+<p>Now that we have URL parameters working, we need to not send back the user data in the response unless the password is correct. To do this, within the get request, we will get the password associated with the <code class="language-plaintext highlighter-rouge">/user</code>. If that is the same as the URL <code class="language-plaintext highlighter-rouge">pass</code> parameter, we send back the info on the user.</p>
 
 <iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/10/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
 
-<p>To test this out, restart your server with updated code. Go to <code class="highlighter-rouge">localhost:4567/deb?pass=1234</code> in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.</p>
+<p>To test this out, restart your server with updated code. Go to <code class="language-plaintext highlighter-rouge">localhost:4567/deb?pass=1234</code> in your browser. You should recieve deb’s user id, etc. Try typing a different password and you will get the error message.</p>
 
 <p>Okay, nice! You have now password protected all get requests to recieve data. There are, however, a couple of issues with this method, one of which is the fact that if your database is compromised, you will have leaked a piece of very sensitive information that users have trusted you with: their password (which is likely being reused on different sites). This is why, instead of being stored as they are, passwords are typically <strong>hashed</strong> using a <em>one way</em> function.</p>
 
@@ -170,7 +307,7 @@
   <li>If the hashes match, the user can access the account. If not, a <strong>generic</strong> error message is sent back such as “Entered invalid credentials” so hackers can’t trace the error to the username or password specifically.</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 hash("hellu") = 3937f988aeb57b6fd75b9c71bf17b9658ec97823bab613df438389b0c896b724
 hash("danny") = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
 </code></pre></div></div>
@@ -187,7 +324,7 @@ hash("danny") = 668e2b73ac556a2f051304702da290160b29bad3392ddcc72074fefbee80c55a
 
 <p>A <strong>brute force</strong> attack goes through every possible combination of characters given a certain length. Even though they will 100% <em>eventually</em> crack any given password, it is difficult to use this method because of how computationally expensive it is. Some passwords that are even fairly short in length can take thousands of years (literally) to crack using brute force.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying aaa : failed
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying aaa : failed
 Trying aab : failed
 Trying aac : failed
 ...
@@ -205,7 +342,7 @@ Trying acc : success!
 
 <p>The reason lookup tables, dictionary attacks, and brute force attacks can work is because the passwords are hashed the same way each time. We can randomize the hash by prepending or appending a random string called a <em>salt</em> to the passwords BEFORE hashing.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e412045858d938d11470831f
 </code></pre></div></div>
 
@@ -255,9 +392,9 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
 
 <p>We will be using the SHA256 hashing function. How, exactly, hashing functions work is beyond the scope of this article, but if you are interested, see <a href="https://en.wikipedia.org/wiki/Hash_function">this</a> and <a href="https://gfredericks.com/blog/98">this</a>.</p>
 
-<p>First of all, install the dependency for our function: <code class="highlighter-rouge">npm i -s crypto</code>. Also, add the import to the top of the NodeJS file: <code class="highlighter-rouge">const crypto = require("crypto");</code></p>
+<p>First of all, install the dependency for our function: <code class="language-plaintext highlighter-rouge">npm i -s crypto</code>. Also, add the import to the top of the NodeJS file: <code class="language-plaintext highlighter-rouge">const crypto = require("crypto");</code></p>
 
-<p>Now add this code to the bottom of the NodeJS file. We will call the function <code class="highlighter-rouge">hash</code>.</p>
+<p>Now add this code to the bottom of the NodeJS file. We will call the function <code class="language-plaintext highlighter-rouge">hash</code>.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hashes strings with sha256 for storing passwords</span>
 <span class="kd">function</span> <span class="nx">hash</span><span class="p">(</span><span class="nx">pwd</span><span class="p">)</span> <span class="p">{</span>
@@ -273,9 +410,9 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
 <p>There are 3 more feature we need to implement before I can call the database “secure”.</p>
 
 <ol>
-  <li>Hash &amp; salt passcodes for new users being stored in response to <code class="highlighter-rouge">post</code> requests</li>
-  <li>Use the salt to hash and check the passwords when a <code class="highlighter-rouge">get</code> request needs info</li>
-  <li>Use the salt to check passwords for updating info on the database in response to <code class="highlighter-rouge">put</code> requests.</li>
+  <li>Hash &amp; salt passcodes for new users being stored in response to <code class="language-plaintext highlighter-rouge">post</code> requests</li>
+  <li>Use the salt to hash and check the passwords when a <code class="language-plaintext highlighter-rouge">get</code> request needs info</li>
+  <li>Use the salt to check passwords for updating info on the database in response to <code class="language-plaintext highlighter-rouge">put</code> requests.</li>
 </ol>
 
 <p>Alrighty, let’s get started!</p>
@@ -284,11 +421,11 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
 
 <p>Passwords need to be hashed and salted before being stored in the database.</p>
 
-<p>Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: <code class="highlighter-rouge">npm i -s csprng</code>. Also, add the import in the top of the NodeJS file: <code class="highlighter-rouge">const csprng = require('csprng');</code></p>
+<p>Before I can give you the code, you have to install the dependency for generating Cryptographically Secure Pseudo-Random passwords. We will use a library called ‘csprng’. Install it: <code class="language-plaintext highlighter-rouge">npm i -s csprng</code>. Also, add the import in the top of the NodeJS file: <code class="language-plaintext highlighter-rouge">const csprng = require('csprng');</code></p>
 
-<p>Here is the <em>well commented</em> code for the server’s response to POST requests. It uses the <code class="highlighter-rouge">hash()</code> function defined earlier.</p>
+<p>Here is the <em>well commented</em> code for the server’s response to POST requests. It uses the <code class="language-plaintext highlighter-rouge">hash()</code> function defined earlier.</p>
 
-<p><strong>NOTE:</strong> The user password is sent as the <code class="highlighter-rouge">pass</code> field in the body of the request (contrary to how it was sent before).</p>
+<p><strong>NOTE:</strong> The user password is sent as the <code class="language-plaintext highlighter-rouge">pass</code> field in the body of the request (contrary to how it was sent before).</p>
 
 <iframe width="100%" height="300" src="//jsfiddle.net/denenberg/8da5kL1t/8/embedded/js/dark" allowfullscreen="allowfullscreen" allowpaymentrequest="" frameborder="0"></iframe>
 
@@ -315,7 +452,7 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
 </div>
 
 <div class="related">
-  <h2>Related Posts 🦚</h2>
+  <h2>Related Posts</h2>
   <ul class="related-posts">
     
     <li>
@@ -347,54 +484,8 @@ hash("hello" + "jHjdbJShdiodb") = 6f7f167a978166ee23b32c9531ce5dc23ae8fc26e41204
     
   </ul>
 </div>
-
-<script src="https://utteranc.es/client.js"
-        repo="dannydenenberg/dannydenenberg.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-
-    <br />
-
-    <div class="footer" style="font-size: smaller;">
-      <p>
-        &copy; 2020
-
-        <!-- <span id='emoji'></span>  -->
-
-        Daniel Oscar Denenberg.
-      </p>
-    </div>
-    <script>
-      let emojiStringToArray = function (str) {
-        split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-        arr = [];
-        for (var i = 0; i < split.length; i++) {
-          char = split[i]
-          if (char !== "") {
-            arr.push(char);
-          }
-        }
-        return arr;
-      };
-
-      function getEmoji() {
-        let emojis = emojiStringToArray('🌎🦕🦖🐔🐧🐳🐬🐃🦒🌴🌲🌺☔️🍇')
-        let index = parseInt(Math.random() * emojis.length - 1);
-        return emojis[index];
-      }
-
-      function putEmojiInSpan(emoji) {
-        let span = document.getElementById('emoji');
-        span.innerHTML = emoji;
-      }
-
-      putEmojiInSpan(getEmoji());
-    </script>
   </div>
+
 </body>
 
 </html>

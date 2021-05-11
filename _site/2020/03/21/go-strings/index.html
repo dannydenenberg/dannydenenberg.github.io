@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en-us">
+
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  gtag('config', 'UA-142322478-3');
-</script>
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <title>
+    
+    Strings in go (and what the heck utf-8 is) &middot; Danny D.
+    
+  </title>
 
-  <link href="http://gmpg.org/xfn/11" rel="profile" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta
-    name="description"
-    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
-  />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
-  
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 
-  <script>
-    (async () => {
-      // redirect from denenberg.us to dannydenenberg.com
-      if (window.location.href.includes("denenberg.us")) {
-        let url = window.location.href;
-        let firstPart = url.slice(0, 8);
-        let lastPart = url.slice(20);
-        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
-        window.location.replace(newUrl);
-      }
-    })();
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+  <!-- MathJax -->
+  <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
       commonHTML: {
-        linebreaks: { automatic: true }
+        linebreaks: {
+          automatic: true
+        }
       },
       tex: {
         inlineMath: [
@@ -61,51 +52,197 @@
     };
   </script>
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
-
-  <title>
-     Strings in go (and what the heck utf-8 is) &middot; Danny Denenberg 
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css" />
-  <link rel="stylesheet" href="/public/css/syntax.css" />
-
-  <!-- Icons -->
-  <link
-    rel="apple-touch-icon-precomposed"
-    sizes="144x144"
-    href="/public/apple-touch-icon-144-precomposed.png"
-  />
-  <link rel="shortcut icon" href="/public/favicon.ico" />
-
   <!-- RSS -->
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="RSS"
-    href="/atom.xml"
-  />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
-
 <body>
-  <div class="container content">
-    <div class="masthead">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
-        
-      </h3>
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Danny D.
+        </a>
+      </h1>
+      <p class="lead">Hey <a>links</a> work.</p>
     </div>
 
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/about/">About</a>
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/archive/">Archive</a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <!-- <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io/archive/v1.lots.of.edits.zip">Download</a>
+      <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v1.lots.of.edits</span>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+  <div class="content container">
     <div class="post">
   <h1 class="post-title">Strings in go (and what the heck utf-8 is)</h1>
   <span class="post-date">21 Mar 2020</span>
@@ -119,17 +256,17 @@
 
 <p>Around 1960, <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>, the American Standard Code for Information Interchange was released. It uses 7 bits to represent 2^7 or 128 characters. Among these were all english lower and upper case characters, punctuation, the ampersand, numbers, etc. Although this manner of storing textual data seemed to work fine, as computing and the internet began to grow, it was a challenge for other countries, in particular those who didn’t use English regularly, to store their native language in files.</p>
 
-<p>The solution to this issue was <a href="http://unicode.org/">Unicode</a>, which collected all of the characters in all of the languages of the world with accented letters, control codes, etc. and assigned each character a number or <em>Unicode code point</em>. In go, this number is called a <code class="highlighter-rouge">rune</code>.</p>
+<p>The solution to this issue was <a href="http://unicode.org/">Unicode</a>, which collected all of the characters in all of the languages of the world with accented letters, control codes, etc. and assigned each character a number or <em>Unicode code point</em>. In go, this number is called a <code class="language-plaintext highlighter-rouge">rune</code>.</p>
 
-<p>As of March 2020, Unicode version 13 holds over 143,000 characters spanning 154 languages and scripts and symbol sets. In go, each <code class="highlighter-rouge">rune</code> is essentially an <code class="highlighter-rouge">int32</code> which is the standard data type for Unicode characters (you can literally write go code like this <code class="highlighter-rouge">var r rune = 1424</code>).</p>
+<p>As of March 2020, Unicode version 13 holds over 143,000 characters spanning 154 languages and scripts and symbol sets. In go, each <code class="language-plaintext highlighter-rouge">rune</code> is essentially an <code class="language-plaintext highlighter-rouge">int32</code> which is the standard data type for Unicode characters (you can literally write go code like this <code class="language-plaintext highlighter-rouge">var r rune = 1424</code>).</p>
 
 <p>In memory, it is possible that you could represent a bunch of runes simply as a bunch of int32 values (known as utf-32 or ucs-4). But, often you won’t need to have space for the entire 32-bit integer. You certainly won’t if all you are dealing with are English characters.</p>
 
 <p><strong>This is where utf-8 steps in.</strong></p>
 
-<p>UTF-8 is a “variable-length encoding of Unicode code points as bytes”<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. Basically, it uses between 1 and 4 bytes to represent a rune. The most significant bits (also known as high-order bits, having the highest values, positioned on the left side of the number) dictate how many bytes follow. For example a high-order <code class="highlighter-rouge">0</code> means 7-bit (exactly like ASCII). A high-order <code class="highlighter-rouge">110</code> means 2 bytes (the second byte will begin with <code class="highlighter-rouge">10</code>). A high-order <code class="highlighter-rouge">1110</code> means 3 bytes, <code class="highlighter-rouge">11110</code> means 4.</p>
+<p>UTF-8 is a “variable-length encoding of Unicode code points as bytes”<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. Basically, it uses between 1 and 4 bytes to represent a rune. The most significant bits (also known as high-order bits, having the highest values, positioned on the left side of the number) dictate how many bytes follow. For example a high-order <code class="language-plaintext highlighter-rouge">0</code> means 7-bit (exactly like ASCII). A high-order <code class="language-plaintext highlighter-rouge">110</code> means 2 bytes (the second byte will begin with <code class="language-plaintext highlighter-rouge">10</code>). A high-order <code class="language-plaintext highlighter-rouge">1110</code> means 3 bytes, <code class="language-plaintext highlighter-rouge">11110</code> means 4.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xxxxxxx                                | 0-127
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0xxxxxxx                                | 0-127
 110xxxxx 10xxxxxx                       | 128-2047
 1110xxxx 10xxxxxx 10xxxxxx              | 2048-65535
 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx     | 65536-
@@ -137,7 +274,7 @@
 
 <h3 id="working-in-go">Working in go</h3>
 
-<p>In go, a string is an “immutable sequence of bytes”. Strings in Go are almost always encoded in utf-8 encoding and the <code class="highlighter-rouge">len(s)</code> function returns the number of <strong>bytes</strong> in a string (not the number of characters). The indexing operator <code class="highlighter-rouge">s[i]</code> returns the ith <em>byte</em> of <code class="highlighter-rouge">s</code>.</p>
+<p>In go, a string is an “immutable sequence of bytes”. Strings in Go are almost always encoded in utf-8 encoding and the <code class="language-plaintext highlighter-rouge">len(s)</code> function returns the number of <strong>bytes</strong> in a string (not the number of characters). The indexing operator <code class="language-plaintext highlighter-rouge">s[i]</code> returns the ith <em>byte</em> of <code class="language-plaintext highlighter-rouge">s</code>.</p>
 
 <p>There is also a substring operator which returns a completely new string starting at the beginning index and ending one less than the end index:</p>
 
@@ -147,7 +284,7 @@
 <span class="n">s</span><span class="p">[</span><span class="o">:</span><span class="m">4</span><span class="p">]</span> <span class="c">// "Bath"</span>
 </code></pre></div></div>
 
-<p>String concatenation can be performed with the <code class="highlighter-rouge">+</code> operator or with buffers as you will see in a bit.</p>
+<p>String concatenation can be performed with the <code class="language-plaintext highlighter-rouge">+</code> operator or with buffers as you will see in a bit.</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">:=</span> <span class="s">"Airport "</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s">"'s aren't very fun."</span>
 </code></pre></div></div>
@@ -157,13 +294,13 @@
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"b"</span> <span class="c">// error on compile: cannot assign to s[0]</span>
 </code></pre></div></div>
 
-<p>Coming from another more dynamic language such as python, ruby, or javascript, the immutability of strings might seem like an annoying nuisance, but it makes it super easy for the computer to copy strings. For example, the string <code class="highlighter-rouge">s</code> and the substring <code class="highlighter-rouge">s[4:]</code> can share the same underlying memory without worrying about it somehow changing. <strong>No new memory must be allocated</strong>.</p>
+<p>Coming from another more dynamic language such as python, ruby, or javascript, the immutability of strings might seem like an annoying nuisance, but it makes it super easy for the computer to copy strings. For example, the string <code class="language-plaintext highlighter-rouge">s</code> and the substring <code class="language-plaintext highlighter-rouge">s[4:]</code> can share the same underlying memory without worrying about it somehow changing. <strong>No new memory must be allocated</strong>.</p>
 
 <h3 id="runes-and-utf-8">Runes and utf-8</h3>
 
 <p>So, as I said before, utf-8 is a variable-length encoding of characters–it takes 1 to 4 bytes to represent each character instead of each being 4. But, this variability <strong>prevents</strong> direct access to the n-th character of a string through indexing. However, go still uses them normally to encode strings because of their sweet advantages such as their compatibility with ASCII, ability to decode left to right, and easy searching for specific runes by just using their bytes.</p>
 
-<p>Recall, the <code class="highlighter-rouge">len</code> function returns the number of bytes in a string, so it could get a bit confusing in this case:</p>
+<p>Recall, the <code class="language-plaintext highlighter-rouge">len</code> function returns the number of bytes in a string, so it could get a bit confusing in this case:</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="s">"浴"</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// 3</span>
@@ -188,7 +325,7 @@
 <span class="n">utf8</span><span class="o">.</span><span class="n">RuneCountInString</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// 1 ✅</span>
 </code></pre></div></div>
 
-<p>Converting a <code class="highlighter-rouge">[]rune</code> to a utf-8 encoded string returns the unicode code points of the string.</p>
+<p>Converting a <code class="language-plaintext highlighter-rouge">[]rune</code> to a utf-8 encoded string returns the unicode code points of the string.</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="s">"浴室"</span>
 <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"% x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="c">// e6 b5 b4 e5 ae a4</span>
@@ -196,13 +333,13 @@
 <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="c">// [6d74 5ba4]</span>
 </code></pre></div></div>
 
-<p>Convert from <code class="highlighter-rouge">[]rune</code> to <code class="highlighter-rouge">string</code> using <code class="highlighter-rouge">string(r)</code>.</p>
+<p>Convert from <code class="language-plaintext highlighter-rouge">[]rune</code> to <code class="language-plaintext highlighter-rouge">string</code> using <code class="language-plaintext highlighter-rouge">string(r)</code>.</p>
 
 <h3 id="manipulating-strings">Manipulating strings</h3>
 
-<p>The main packages to manipulate strings are <code class="highlighter-rouge">bytes</code>, <code class="highlighter-rouge">strings</code>, <code class="highlighter-rouge">strconv</code>, and <code class="highlighter-rouge">unicode</code> (some of which you have already seen).</p>
+<p>The main packages to manipulate strings are <code class="language-plaintext highlighter-rouge">bytes</code>, <code class="language-plaintext highlighter-rouge">strings</code>, <code class="language-plaintext highlighter-rouge">strconv</code>, and <code class="language-plaintext highlighter-rouge">unicode</code> (some of which you have already seen).</p>
 
-<p>Because of the immutability of strings, it can sometimes be useful to use <code class="highlighter-rouge">bytes.Buffer</code> which allows you to use a string buffer (a string that can grow as more is added).</p>
+<p>Because of the immutability of strings, it can sometimes be useful to use <code class="language-plaintext highlighter-rouge">bytes.Buffer</code> which allows you to use a string buffer (a string that can grow as more is added).</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">buf</span> <span class="n">bytes</span><span class="o">.</span><span class="n">Buffer</span>
 <span class="n">buf</span><span class="o">.</span><span class="n">WriteByte</span><span class="p">(</span><span class="sc">'a'</span><span class="p">)</span>
@@ -211,7 +348,7 @@
 <span class="k">var</span> <span class="n">s</span> <span class="kt">string</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">strings</code> package has many useful utility functions. A few I have written below.</p>
+<p>The <code class="language-plaintext highlighter-rouge">strings</code> package has many useful utility functions. A few I have written below.</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">Contains</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">substr</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>
 <span class="k">func</span> <span class="n">Count</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">int</span>
@@ -221,7 +358,7 @@
 <span class="k">func</span> <span class="n">Join</span><span class="p">(</span><span class="n">a</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="n">sep</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">strconv</code> has functions for converting integer, floating-point, and boolean values into and out of string representations.</p>
+<p>The <code class="language-plaintext highlighter-rouge">strconv</code> has functions for converting integer, floating-point, and boolean values into and out of string representations.</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">:=</span> <span class="m">432</span>
 <span class="n">strconv</span><span class="o">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c">// "432"</span>
@@ -230,16 +367,16 @@
 <span class="n">strconv</span><span class="o">.</span><span class="n">ParseInt</span><span class="p">(</span><span class="s">"432"</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">64</span><span class="p">)</span> <span class="c">// base 10, up to 64 bits</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">unicode</code> package has functions like <code class="highlighter-rouge">IsDigit</code>, <code class="highlighter-rouge">IsUpper</code>, <code class="highlighter-rouge">IsLetter</code>, <code class="highlighter-rouge">ToUpper</code>, <code class="highlighter-rouge">ToLower</code>, <code class="highlighter-rouge">IsLower</code>, and many more run manipulation functions.</p>
+<p>The <code class="language-plaintext highlighter-rouge">unicode</code> package has functions like <code class="language-plaintext highlighter-rouge">IsDigit</code>, <code class="language-plaintext highlighter-rouge">IsUpper</code>, <code class="language-plaintext highlighter-rouge">IsLetter</code>, <code class="language-plaintext highlighter-rouge">ToUpper</code>, <code class="language-plaintext highlighter-rouge">ToLower</code>, <code class="language-plaintext highlighter-rouge">IsLower</code>, and many more run manipulation functions.</p>
 
 <p>Phew! That was a lot.</p>
 
 <hr />
 
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>The Go Programming Language, by Donovan and Kernighan <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>The Go Programming Language, by Donovan and Kernighan <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -247,7 +384,7 @@
 </div>
 
 <div class="related">
-  <h2>Related Posts 🦚</h2>
+  <h2>Related Posts</h2>
   <ul class="related-posts">
     
     <li>
@@ -279,54 +416,8 @@
     
   </ul>
 </div>
-
-<script src="https://utteranc.es/client.js"
-        repo="dannydenenberg/dannydenenberg.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-
-    <br />
-
-    <div class="footer" style="font-size: smaller;">
-      <p>
-        &copy; 2020
-
-        <!-- <span id='emoji'></span>  -->
-
-        Daniel Oscar Denenberg.
-      </p>
-    </div>
-    <script>
-      let emojiStringToArray = function (str) {
-        split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-        arr = [];
-        for (var i = 0; i < split.length; i++) {
-          char = split[i]
-          if (char !== "") {
-            arr.push(char);
-          }
-        }
-        return arr;
-      };
-
-      function getEmoji() {
-        let emojis = emojiStringToArray('🌎🦕🦖🐔🐧🐳🐬🐃🦒🌴🌲🌺☔️🍇')
-        let index = parseInt(Math.random() * emojis.length - 1);
-        return emojis[index];
-      }
-
-      function putEmojiInSpan(emoji) {
-        let span = document.getElementById('emoji');
-        span.innerHTML = emoji;
-      }
-
-      putEmojiInSpan(getEmoji());
-    </script>
   </div>
+
 </body>
 
 </html>

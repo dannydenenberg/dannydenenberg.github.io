@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+<div>
+   <h1>Knitting Rows Table</h1>
+   What's the name? <input type="text" id="name" /> <br/>
+   How many rows? <input type="number" id="rows" /> <br/>
+   How many columns? <input type="number" id="cols" />
+   
+   <input type="submit" id="button"/>
+   
+   <br/>
+   <br/>
+   <div id="table-container">
+     
+     
+   </div>
+   
+   <button id="print">
+   Print
+   </button>
+</div>
+
+<script>
+
+let spaces = "&nbsp;".repeat(10)
+
+$("#button").on('click', (e) => {
+	e.preventDefault();
+  
+	let rows = $("#rows").val();
+  let cols = $("#cols").val()
+  
+  let container = $("#table-container");
+  
+  makeTable(container, rows, cols);
+  
+
+  
+  console.log(`ROWS:${rows}, COLS: ${cols}`)
+})
+
+$("#print").on('click', (e) => {
+	e.preventDefault();
+  
+  printDiv();
+});
+
+function printDiv() 
+{
+
+  var divToPrint=document.getElementById('table-container');
+
+  var newWin=window.open('','Print-Window');
+
+  newWin.document.open();
+
+  newWin.document.write(`<html><style>table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}</style><body onload="window.print()">`+divToPrint.innerHTML+'</body></html>');
+
+  newWin.document.close();
+
+  setTimeout(function(){newWin.close();},10);
+
+}
+
+function makeTable(container, rows, cols) {
+    var table = $("<table/>").addClass('CSSTableGenerator');
+    
+    for (let i=0;i<=rows;i++) {
+    	let row = $("<tr/>");
+      row.append($("<th/>").html(`Row ${i+1} ${spaces}`));
+      for (let k=0;k<=cols;k++) {
+				row.append($("<td/>").html(`${spaces}`))
+      }
+      
+      table.append(row)
+    }
+    
+    container.append($("<h1/>").html($("#name").val()))
+    
+    return container.append(table);
+}
+
+</script>
+</body>
+</html>

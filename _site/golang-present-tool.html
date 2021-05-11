@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en-us">
+
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  gtag('config', 'UA-142322478-3');
-</script>
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <title>
+    
+    Golang presentation tool usage &middot; Danny D.
+    
+  </title>
 
-  <link href="http://gmpg.org/xfn/11" rel="profile" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta
-    name="description"
-    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
-  />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
-  
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 
-  <script>
-    (async () => {
-      // redirect from denenberg.us to dannydenenberg.com
-      if (window.location.href.includes("denenberg.us")) {
-        let url = window.location.href;
-        let firstPart = url.slice(0, 8);
-        let lastPart = url.slice(20);
-        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
-        window.location.replace(newUrl);
-      }
-    })();
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+  <!-- MathJax -->
+  <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
       commonHTML: {
-        linebreaks: { automatic: true }
+        linebreaks: {
+          automatic: true
+        }
       },
       tex: {
         inlineMath: [
@@ -61,51 +52,197 @@
     };
   </script>
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
-
-  <title>
-     Golang presentation tool usage &middot; Danny Denenberg 
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css" />
-  <link rel="stylesheet" href="/public/css/syntax.css" />
-
-  <!-- Icons -->
-  <link
-    rel="apple-touch-icon-precomposed"
-    sizes="144x144"
-    href="/public/apple-touch-icon-144-precomposed.png"
-  />
-  <link rel="shortcut icon" href="/public/favicon.ico" />
-
   <!-- RSS -->
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="RSS"
-    href="/atom.xml"
-  />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
-
 <body>
-  <div class="container content">
-    <div class="masthead">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
-        
-      </h3>
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Danny D.
+        </a>
+      </h1>
+      <p class="lead">Hey <a>links</a> work.</p>
     </div>
 
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/about/">About</a>
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/archive/">Archive</a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <!-- <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io/archive/v1.lots.of.edits.zip">Download</a>
+      <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v1.lots.of.edits</span>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+  <div class="content container">
     <div class="post">
   <h1 class="post-title">Golang presentation tool usage</h1>
   <span class="post-date">11 Mar 2020</span>
@@ -115,7 +252,7 @@
 
 <p>First make sure that you have the <a href="https://go.dev/">Go programming language</a> installed on your system.</p>
 
-<p>On a Mac, it’s as easy as <code class="highlighter-rouge">brew install go</code>.</p>
+<p>On a Mac, it’s as easy as <code class="language-plaintext highlighter-rouge">brew install go</code>.</p>
 
 <p>Next, set your GOPATH and make public the folder where your installed Go binaries will go:</p>
 
@@ -123,24 +260,24 @@
 <span class="nv">$ PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$GOPATH</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">"</span> <span class="c"># binaries</span>
 </code></pre></div></div>
 
-<p>Finally, install (by way of <code class="highlighter-rouge">go get ...</code>) the present binary to be able to locally run your presentations.</p>
+<p>Finally, install (by way of <code class="language-plaintext highlighter-rouge">go get ...</code>) the present binary to be able to locally run your presentations.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>go get <span class="nt">-u</span> golang.org/x/tools/cmd/present
 </code></pre></div></div>
 
-<p>This command will install in your <code class="highlighter-rouge">$GOPATH/bin</code> folder, the executable binary that runs the presentations.</p>
+<p>This command will install in your <code class="language-plaintext highlighter-rouge">$GOPATH/bin</code> folder, the executable binary that runs the presentations.</p>
 
-<p>To check that the binary is working properly, type <code class="highlighter-rouge">present</code> as a command into your terminal and it should output something close to <code class="highlighter-rouge">2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999</code></p>
+<p>To check that the binary is working properly, type <code class="language-plaintext highlighter-rouge">present</code> as a command into your terminal and it should output something close to <code class="language-plaintext highlighter-rouge">2020/03/11 12:58:42 Open your web browser and visit http://127.0.0.1:3999</code></p>
 
-<p>And, if you open your web browser to that specified port (in this case <code class="highlighter-rouge">http://127.0.0.1:3999</code>), you should see a landing page like so:</p>
+<p>And, if you open your web browser to that specified port (in this case <code class="language-plaintext highlighter-rouge">http://127.0.0.1:3999</code>), you should see a landing page like so:</p>
 
 <p><img src="/goods/presenthomepage.png" alt="" /></p>
 
-<p>This is a page displaying the brother folders from the one you ran the <code class="highlighter-rouge">present</code> command in.</p>
+<p>This is a page displaying the brother folders from the one you ran the <code class="language-plaintext highlighter-rouge">present</code> command in.</p>
 
-<p>Now, create a file in your current folder with the extension <code class="highlighter-rouge">.slide</code> and put at the top of the file, this information (of course, with your corresponding unique info):</p>
+<p>Now, create a file in your current folder with the extension <code class="language-plaintext highlighter-rouge">.slide</code> and put at the top of the file, this information (of course, with your corresponding unique info):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Title of document
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Title of document
 Subtitle of document
 15:04 2 Jan 2006
 Tags: foo, bar, baz
@@ -154,11 +291,11 @@ http://url/
 
 <p><strong>Note</strong> that the date may be written without a time prepended. Also, multiple presenters may be specified, simply separate them by blank lines and then put their corresponding info.</p>
 
-<p>Now, whenever you want to run your presentation, simply run the <code class="highlighter-rouge">present</code> command in the folder containing your <code class="highlighter-rouge">*.slide</code> file and select it on the webpage the present command sends you to.</p>
+<p>Now, whenever you want to run your presentation, simply run the <code class="language-plaintext highlighter-rouge">present</code> command in the folder containing your <code class="language-plaintext highlighter-rouge">*.slide</code> file and select it on the webpage the present command sends you to.</p>
 
 <p>After the specified presenters, each of the slides/sections are put separated by blank lines. Following is an example slide:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide or section (must have asterisk)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide or section (must have asterisk)
 
 Some Text
 
@@ -189,13 +326,13 @@ Further Text, including invocations like:
 Again, more text
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">.code</code> function injects source code from a file by injecting them as HTML-escaped <code class="highlighter-rouge">&lt;pre&gt;</code> blocks.
-Any line in the program ending with the four characters <code class="highlighter-rouge">OMIT</code> is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:</p>
+<p>The <code class="language-plaintext highlighter-rouge">.code</code> function injects source code from a file by injecting them as HTML-escaped <code class="language-plaintext highlighter-rouge">&lt;pre&gt;</code> blocks.
+Any line in the program ending with the four characters <code class="language-plaintext highlighter-rouge">OMIT</code> is deleted from the source before inclusion. This makes injecting specific code snippets easy like so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.code test.go /START OMIT/,/END OMIT/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.code test.go /START OMIT/,/END OMIT/
 </code></pre></div></div>
 
-<p>With some example contents of <code class="highlighter-rouge">test.go</code>:</p>
+<p>With some example contents of <code class="language-plaintext highlighter-rouge">test.go</code>:</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coolFunction</span> <span class="o">:=</span> <span class="n">boop</span><span class="p">()</span>
 <span class="c">// START OMIT</span>
@@ -208,11 +345,11 @@ Any line in the program ending with the four characters <code class="highlighter
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">see_mee</span> <span class="o">:=</span> <span class="n">great</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p>The information following a <code class="highlighter-rouge">.image</code> function can be a file path OR a url.</p>
+<p>The information following a <code class="language-plaintext highlighter-rouge">.image</code> function can be a file path OR a url.</p>
 
-<p>Parts of the file that begin with a <code class="highlighter-rouge">:</code> (colon) are presenter notes.</p>
+<p>Parts of the file that begin with a <code class="language-plaintext highlighter-rouge">:</code> (colon) are presenter notes.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Title of slide
 
 Some Text
 
@@ -220,12 +357,12 @@ Some Text
 : Presenter notes (subsequent paragraph(s))
 </code></pre></div></div>
 
-<p>For other cool features and functionality, visit the <code class="highlighter-rouge">present</code> <a href="https://pkg.go.dev/golang.org/x/tools/present?tab=doc">package homepage</a>.</p>
+<p>For other cool features and functionality, visit the <code class="language-plaintext highlighter-rouge">present</code> <a href="https://pkg.go.dev/golang.org/x/tools/present?tab=doc">package homepage</a>.</p>
 
 </div>
 
 <div class="related">
-  <h2>Related Posts 🦚</h2>
+  <h2>Related Posts</h2>
   <ul class="related-posts">
     
     <li>
@@ -257,54 +394,8 @@ Some Text
     
   </ul>
 </div>
-
-<script src="https://utteranc.es/client.js"
-        repo="dannydenenberg/dannydenenberg.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-
-    <br />
-
-    <div class="footer" style="font-size: smaller;">
-      <p>
-        &copy; 2020
-
-        <!-- <span id='emoji'></span>  -->
-
-        Daniel Oscar Denenberg.
-      </p>
-    </div>
-    <script>
-      let emojiStringToArray = function (str) {
-        split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-        arr = [];
-        for (var i = 0; i < split.length; i++) {
-          char = split[i]
-          if (char !== "") {
-            arr.push(char);
-          }
-        }
-        return arr;
-      };
-
-      function getEmoji() {
-        let emojis = emojiStringToArray('🌎🦕🦖🐔🐧🐳🐬🐃🦒🌴🌲🌺☔️🍇')
-        let index = parseInt(Math.random() * emojis.length - 1);
-        return emojis[index];
-      }
-
-      function putEmojiInSpan(emoji) {
-        let span = document.getElementById('emoji');
-        span.innerHTML = emoji;
-      }
-
-      putEmojiInSpan(getEmoji());
-    </script>
   </div>
+
 </body>
 
 </html>

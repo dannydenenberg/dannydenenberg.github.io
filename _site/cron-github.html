@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en-us">
+
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142322478-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  gtag('config', 'UA-142322478-3');
-</script>
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <title>
+    
+    Automating Backups with Cron &amp; GitHub &middot; Danny D.
+    
+  </title>
 
-  <link href="http://gmpg.org/xfn/11" rel="profile" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta
-    name="description"
-    content="Danny Denenberg's web site. Singer, open-source dev, native Omahan."
-  />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
-  
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144"
+    href="/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 
-  <script>
-    (async () => {
-      // redirect from denenberg.us to dannydenenberg.com
-      if (window.location.href.includes("denenberg.us")) {
-        let url = window.location.href;
-        let firstPart = url.slice(0, 8);
-        let lastPart = url.slice(20);
-        let newUrl = firstPart + "dannydenenberg.com" + lastPart;
-        window.location.replace(newUrl);
-      }
-    })();
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script
-    id="MathJax-script"
-    async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-  ></script>
+  <!-- MathJax -->
+  <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
       commonHTML: {
-        linebreaks: { automatic: true }
+        linebreaks: {
+          automatic: true
+        }
       },
       tex: {
         inlineMath: [
@@ -61,51 +52,197 @@
     };
   </script>
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1"
-  />
-
-  <title>
-     Automating Backups with Cron &amp; GitHub &middot; Danny Denenberg 
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css" />
-  <link rel="stylesheet" href="/public/css/syntax.css" />
-
-  <!-- Icons -->
-  <link
-    rel="apple-touch-icon-precomposed"
-    sizes="144x144"
-    href="/public/apple-touch-icon-144-precomposed.png"
-  />
-  <link rel="shortcut icon" href="/public/favicon.ico" />
-
   <!-- RSS -->
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title="RSS"
-    href="/atom.xml"
-  />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
-
 <body>
-  <div class="container content">
-    <div class="masthead">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">Danny Denenberg</a>
 
-         &nbsp;&nbsp;&nbsp;<small><a href="/about/">About</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/archive">Archive</a></small>
-         &nbsp;&nbsp;&nbsp;<small><a href="/atom.xml">Feed</a></small>
-        
-      </h3>
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Danny D.
+        </a>
+      </h1>
+      <p class="lead">Hey <a>links</a> work.</p>
     </div>
 
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/about/">About</a>
+      
+      
+      
+      
+      
+      
+      
+      <a class="sidebar-nav-item"
+        href="/archive/">Archive</a>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <!-- <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io/archive/v1.lots.of.edits.zip">Download</a>
+      <a class="sidebar-nav-item" href="github.com/dannydenenberg/dannydenenberg.github.io">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v1.lots.of.edits</span>
+    </nav>
+
+    <p>&copy; 2021. All rights reserved.</p>
+  </div>
+</div>
+
+  <div class="content container">
     <div class="post">
   <h1 class="post-title">Automating Backups with Cron &amp; GitHub</h1>
   <span class="post-date">24 May 2018</span>
@@ -119,18 +256,18 @@
 
 <p>Then set your username and email in the git preferences through the terminal.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "FIRST_NAME LAST_NAME"
 git config --global user.email "MY_NAME@example.com"
 </code></pre></div></div>
 
 <p>Next create an empty secret repo in your GitHub and clone it on your machine locally.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/dannydenenberg/mybackupsrepo.git
 </code></pre></div></div>
 
 <p>Make sure you can stay authenticated on your local device (you don’t have to enter your password to GitHub on every push up). You can use <a href="https://help.github.com/en/articles/connecting-to-github-with-ssh">ssh keys</a> to do this.</p>
 
-<p>Make sure you have <code class="highlighter-rouge">zip</code> installed with <code class="highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
+<p>Make sure you have <code class="language-plaintext highlighter-rouge">zip</code> installed with <code class="language-plaintext highlighter-rouge">sudo apt install zip</code>, then write your bash script looking something like this (example from my Ghost blog):</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 zip /home/mybackupsrepo/mybackup.zip /var/www/ghost <span class="c"># zip the folder</span>
@@ -139,9 +276,9 @@ git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <
 <span class="nb">sudo rm</span> <span class="nt">-Rf</span> /home/mybackupsrepo/mybackup.zip <span class="c"># clean</span>
 </code></pre></div></div>
 
-<p>Make it executable: <code class="highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
+<p>Make it executable: <code class="language-plaintext highlighter-rouge">chmod +x /home/whereveryoustoredthisbashscript</code></p>
 
-<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="highlighter-rouge">/var/spool/cron</code>).</p>
+<p>And add it to your cronjobs. To edit the cronjobs running, execute <code class="language-plaintext highlighter-rouge">crontab -e</code> (the actual file is stored in <code class="language-plaintext highlighter-rouge">/var/spool/cron</code>).</p>
 
 <p>Here is a quick reference for creating new cronjobs and how to schedule them properly:</p>
 
@@ -174,7 +311,7 @@ git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <
 </div>
 
 <div class="related">
-  <h2>Related Posts 🦚</h2>
+  <h2>Related Posts</h2>
   <ul class="related-posts">
     
     <li>
@@ -206,54 +343,8 @@ git add <span class="nb">.</span> <span class="o">&amp;&amp;</span> git commit <
     
   </ul>
 </div>
-
-<script src="https://utteranc.es/client.js"
-        repo="dannydenenberg/dannydenenberg.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
-
-    <br />
-
-    <div class="footer" style="font-size: smaller;">
-      <p>
-        &copy; 2020
-
-        <!-- <span id='emoji'></span>  -->
-
-        Daniel Oscar Denenberg.
-      </p>
-    </div>
-    <script>
-      let emojiStringToArray = function (str) {
-        split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-        arr = [];
-        for (var i = 0; i < split.length; i++) {
-          char = split[i]
-          if (char !== "") {
-            arr.push(char);
-          }
-        }
-        return arr;
-      };
-
-      function getEmoji() {
-        let emojis = emojiStringToArray('🌎🦕🦖🐔🐧🐳🐬🐃🦒🌴🌲🌺☔️🍇')
-        let index = parseInt(Math.random() * emojis.length - 1);
-        return emojis[index];
-      }
-
-      function putEmojiInSpan(emoji) {
-        let span = document.getElementById('emoji');
-        span.innerHTML = emoji;
-      }
-
-      putEmojiInSpan(getEmoji());
-    </script>
   </div>
+
 </body>
 
 </html>

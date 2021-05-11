@@ -2,6 +2,7 @@
 layout: page
 title: About
 links: true
+sidebar: true
 ---
 
 <!-- ![](/goods/aboutpicture.jpeg) -->
@@ -38,5 +39,3 @@ Interested in the [theme of this website](https://github.com/dannydenenberg/dann
 ### Let's get in touch
 
 If you have any questions, feel free to open a [new issue](https://github.com/dannydenenberg/ama) or email me at `danny@denenberg.com`.
-
-{% include links.html %}
