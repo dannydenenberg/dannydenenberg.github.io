@@ -17,7 +17,7 @@ Just to clear up any would-be confusion, Danny **is** related to some other Dene
 
 He's **also a writer** for [Alligator.io](https://alligator.io/author/danny-denenberg), and his posts have been published in a few Medium publications such as [BecomingHuman.ai](https://becominghuman.ai/@DannyDenenberg), [Better Programming, and The Startup](https://medium.com/@DannyDenenberg). Interestingly enough, one of his posts has been [translated into Russian](https://bulldogjob.pl/news/801-rust-oczami-programisty-javascript) 🤨🎉...
 
-**Want to see a cool pic?** Perhaps, [my favorite image](/goods/dadwithgatesandbuffet.png) of my dad.
+**Want to see a cool pic?** Perhaps, [my favorite image](https://dannydenenberg.com/goods/dadwithgatesandbuffet.png) of my dad.
 
 ---
 
