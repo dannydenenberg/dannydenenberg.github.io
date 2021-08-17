@@ -3,6 +3,175 @@ layout: default
 title: Home
 ---
 
+<div id="about-me">
+  <!-- <br> -->
+  <h2>Welcome to my site.</h2>
+  <!-- <blockquote style="padding-left: 10px"> -->
+  <p>I present a collection of my essays, each of which explores
+    select
+    areas
+    of
+    Computer Science.</p>
+  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
+      select</strong>
+    areas
+    of
+    Computer Science.</p> -->
+  <p>All articles are well-researched and candid. <div style="display:none;">Over <code>100,000</code> people have read
+      my writings.</div>
+  </p>
+
+  <!-- <h3>A little about me. I'm...</h3>
+  <ul>
+    <li>Currently on a gap year before Harvard (matriculating in 2022)<img id="school-logo" src="/goods/harvahd.png" />
+    </li>
+    <li>A software developer </li>
+    <li>An award-winning actor and singer<img id="school-logo" src="/goods/central.png" /></li>
+    <li>A classically-trained pianist</li>
+    <li>A Bikram yogi 🧘‍♀️</li>
+  </ul> -->
+
+  <!-- <p></p> -->
+  <!-- </blockquote> -->
+
+  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
+
+</div>
+
+<!-- <div id="photo-div">
+  <img id="home-img" src="/goods/dannyseniorphoto.jpeg" width=350 alt="Danny's Bike in Canada" srcset="" />
+
+</div> -->
+
+
+<!-- <br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div>
+<br /> -->
+<br>
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">A few of my favorites.</h2>
+  <ul style='text-align: initial' id="favorites">
+    <!-- A bit brute forceeee, but it works....*sigh* -->
+    <li>
+      <a href="{% post_url 2020-03-21-go-strings %}">Strings in go (and what the heck utf-8 is)</a><span
+        class="post-date">21 Mar 2020</span>
+    </li>
+    <li>
+      <a href="{% post_url 2020-01-02-complete-guide-to-nn %}">A complete approach to neural networks</a><span
+        class="post-date">2 Jan 2020</span>
+    </li>
+    <li>
+      <a href="{% post_url 2020-03-12-hash-function %}">How hash functions work</a><span class="post-date">12 Mar
+        2020</span>
+    </li>
+    <li>
+      <a href="{% post_url 2020-02-14-jwt-expressjs %}">JSON web tokens with Node and Express.js</a><span
+        class="post-date">14 Feb 2020</span>
+    </li>
+
+
+    <li>
+      <a href="{% post_url 2019-08-05-securing-db %}">Securing your database</a><span class="post-date">5 Aug
+        2019</span>
+    </li>
+    <li>
+      <a href="{% post_url 2018-12-14-recursion %}">Recursive programming</a><span class="post-date">14 Dec 2018</span>
+    </li>
+  </ul>
+</div>
+<!-- 
+<br />
+<div id='down-arrow'>
+  <span>&darr;</span>
+</div> -->
+<br />
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    {% for post in site.posts limit:4 %}
+    <li>
+      <a href="{{post.url}}">{{post.title}}</a><span class="post-date">{{ post.date | date_to_string }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<br />
+<div>
+  <div class="message">
+    <p>> See a <strong>full list</strong> of posts in <a href="/archive">the archive.</a></p>
+  </div>
+</div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<style>
+  #down-arrow {
+    text-align: center;
+    font-size: 4em;
+    padding: .4em;
+  }
+
+  #favorites li {
+    padding: 2px;
+  }
+
+  #home-img {
+    float: left;
+    width: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    #about-me {
+      /* margin-left: 18em; */
+    }
+  }
+
+  #school-logo {
+    float: right;
+    width: 39px;
+  }
+
+
+  #section-title {
+    /* text-align: center; */
+  }
+
+  .post-date {
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+  }
+
+  #photo-div {
+    /* width: 515px; */
+  }
+</style>
+<!-- ---
+layout: default
+title: Home
+---
+
 <div class="posts">
   {% for post in paginator.posts %}
   <div class="post">
@@ -34,4 +203,4 @@ title: Home
   {% else %}
     <span class="pagination-item newer">Newer</span>
   {% endif %}
-</div>
+</div> -->

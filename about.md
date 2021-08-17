@@ -3,31 +3,12 @@ layout: page
 title: About
 ---
 
-![Here I am at the 2013 Rose Bowl.](/assets/stanford_rosebowl_photo_2013-e1361222975696-940x689.jpg)
+![Here I am with my co-counselors.](/goods/yogasanborn.jpeg)
 
-I am a Senior Data Scientist at [Twitter](http://twitter.com) working on
-their analytics team. I have always been fascinated by technology
-and especially tools for analysing and interpreting information.
-I want to use this website to help teach people new skills.
-Recently, I have written about 
-[Jekyll]({% post_url 2014-02-03-jekyll-github-pages-poole %}) and
-[Apache Pig]({% post_url 2014-02-11-cube-rollup-pig-data-science %}).
+I just finished working for [Sanborn](https://www.sanbornwesterncamps.com/) as a camp counselor in Colorado. I led 13-year-olds up 14,000 foot mountains, took them on 4-day camping trips, mitigated interpersonal disputes, held nightly meetings for two months, and cleaned more dishes and toilets than I care to discuss.
 
-Before working at Twitter, I was a Data Science Fellow at the
-[Insight Data Science Fellowship](http://insightdatascience.com).
-Before that, I got a PhD in physics from [Stanford
-University](http://stanford.edu) studying [pulsar wind
-Nebulae](http://en.wikipedia.org/wiki/Pulsar_wind_nebula).  I have
-written about my PhD research experience 
-[here]({% post_url 2013-02-14-searching-pulsar-wind-nebulae-kipac %}), and software I helped
-develop during my PhD [here]({% post_url 2013-02-01-pointlike-fitting-package %}).
+Currently I am on a gap year before attending [Harvard](https://college.harvard.edu/) where I will most likely study Computer Science as my concentration. Secondaries I am considering are Jewish studies, government, and music--we will see what I choose!
 
-Before that, I was an undergraduate at [Marlboro
-College](http://www.marlboro.edu/) in Vermont.  I wrote about my
-undergraduate research
-[here]({% post_url 2013-02-14-physics-marlboro-college-vermont %}), as
-well as my research during two undergraduate physics internships
-[here]({% post_url 2013-02-14-health-impact-solar-particle-events-sstorm %}), and
-[here]({% post_url 2013-02-12-simulating-deep-lens-survey-davis %}).
+I love love love music and piano and singing and I'll talk your ear off about Joplin rags and Bach piano concertos if you let me. And if you can't tell by the photo, I'm also a [Bikram](https://en.wikipedia.org/wiki/Bikram_Yoga) yogi. There's nothing else like it!
 
-If you like my website, you can follow me on twitter [@joshualande](https://twitter.com/joshualande).
+If you like my website, you can follow me on instagram [@dannydenenberg](https://instagram.com/dannydenenberg).

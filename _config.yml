@@ -1,38 +1,38 @@
 # Dependencies
-markdown:         kramdown
+markdown: kramdown
 kramdown:
   extensions: ["tables"]
 
-highlighter:         true
+highlighter: true
 
 # Permalinks
-permalink:        pretty
+permalink: pretty
 
 # Setup
-title:            Joshua Lande
-tagline:          'Data Science, Apache Pig, Hadoop, Blogging, Tweets, Astrophysics'
-url:              http://www.joshualande.com
-shorturl:         joshualande.com
+title: Danny Denenberg
+tagline: ""
+url: http://www.dannydenenberg.com
+shorturl: dannydenenberg.com
 
 author:
-  name:           'Joshua Lande'
-  url:            https://twitter.com/joshualande
+  name: "Danny Denenberg"
+  url: https://instagram.com/dannydenenberg
 
-paginate:         1
+paginate: 1
 
 # Custom vars
-version:          1.0.0
+version: 1.0.0
 
 github:
-  repo:           github.com/joshualande/joshualande.github.io
+  repo: github.com/dannydenenberg/dannydenenberg.github.io
 
 # This is the list of pages to include in the header of the website.
-pages_list:       
-  About: '/about/'
-  Archive: '/archive/'
-  Feed: '/atom.xml'
+pages_list:
+  About: "/about/"
+  Archive: "/archive/"
+  Feed: "/atom.xml"
 
-# Allow URL Redirects: 
+# Allow URL Redirects:
 #  * https://help.github.com/articles/redirects-on-github-pages
 gems:
   - jekyll-redirect-from
