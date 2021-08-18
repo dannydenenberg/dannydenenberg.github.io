@@ -156,7 +156,7 @@ second layer becomes much more obvious.
 > Wᵢₕ<br> The weights connecting the hidden and output layers, I will denote as
 > follows: Wₕₒ
 
-!!X=\begin{bmatrix}x*1 & x_2\end{bmatrix}!! !!W*{ih} = \begin{bmatrix} w*{11} & w*{12} & w*{13} \\\ w*{21} & w*{22} & w*{23}\end{bmatrix}!!
+!!X=\begin{bmatrix}x_1 & x_2\end{bmatrix}!! !!W_{ih} = \begin{bmatrix} w_{11} & w_{12} & w_{13} \\\ w_{21} & w_{22} & w_{23}\end{bmatrix}!!
 
 Just for a quick reference, here is how you multiply matrices:
 
@@ -185,7 +185,7 @@ For a quick reference, here is the definition for our sigmoid function:
 
 Now we can pass our weighted sum matrix through this **non-linear** activation function and the outputs of this are our values for our hidden layer nodes.
 
-!!H=\sigma(X\times W*{ih})=\begin{bmatrix} \sigma (x_1w*{11}+x*2w*{21}) \\\ \sigma(x*1w*{12}+x*2w*{22}) \\\ \sigma (x*1w*{13}+x*2w*{23})\end{bmatrix}=\begin{bmatrix} h_1 \\\ h_2 \\\ h_3 \end{bmatrix}!!
+!!H=\sigma(X\times W_{ih})=\begin{bmatrix} \sigma (x_1w\_{11}+x_2w\_{21}) \\\ \sigma(x_1w_{12}+x*2w_{22}) \\\ \sigma (x\_1w\\\_{13}+x\\\_2w\_{23})\end{bmatrix}=\begin{bmatrix} h_1 \\\ h_2 \\\ h_3 \end{bmatrix}!!
 
 #### STEP #3
 
@@ -202,7 +202,7 @@ TK hidden layer and weights as matrices math
 
 And then multiply them to find the weighted sum for the output layer.
 
-!!Y*{weighted-sum}=H\cdot W*{ho}!! !!= \begin{bmatrix} h*1 & h_2 & h_3 \end{bmatrix} \begin{bmatrix} w*{11} & w*{12} \\\ w*{21} & w*{22} \\\ w*{31} & w*{32}\end{bmatrix}!! !!= \begin{bmatrix} h_1w*{11} + h*2w*{21}+h*3w*{31} \\\ h*1w*{12}+h*2w*{22}+h*3w*{32}\end{bmatrix}!!
+!!Y_{weighted-sum}=H \cdot W_{ho}!! !!= \begin{bmatrix} h_1 & h_2 & h_3 \end{bmatrix} \begin{bmatrix} w_{11} & w_{12} \\\ w_{21} & w_{22} \\\ w_{31} & w_{32}\end{bmatrix}!! !!= \begin{bmatrix} h_1w_{11} + h_2w_{21}+h_3w_{31} \\\ h_1w_{12}+h*2w_{22}+h_3w_{32}\end{bmatrix}!!
 
 #### STEP #4 (FINAL)
 
@@ -212,7 +212,7 @@ And then multiply them to find the weighted sum for the output layer.
 To get the outputs for the entire network, we just have to pass the weighted sum
 for the output layer through our activation function (sigmoid once more).
 
-!!Y=\sigma (H \cdot W*{ho})=\begin{bmatrix} \sigma (h_1w*{11} + h*2w*{21}+h*3w*{31}) \\\ \sigma ( h*1w*{12}+h*2w*{22}+h*3w*{32}) \end{bmatrix}!!
+!!Y=\sigma (H \cdot W_{ho})=\begin{bmatrix} \sigma (h_1w_{11} + h_2w_{21}+h_3w_{31}) \\\ \sigma ( h_1w_{12}+h_2w_{22}+h_3w_{32}) \end{bmatrix}!!
 
 And that produces the final ‘outputs’ for our ANN.
 
