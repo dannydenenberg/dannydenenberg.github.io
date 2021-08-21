@@ -3,7 +3,8 @@ markdown: kramdown
 kramdown:
   extensions: ["tables"]
 
-highlighter: true
+# highlighter: true
+highlighter: rouge
 
 # Permalinks
 permalink: pretty
@@ -19,6 +20,15 @@ author:
   url: https://instagram.com/dannydenenberg
 
 paginate: 1
+
+sass:
+  sass_dir: _sass
+  style: :compressed
+
+plugins:
+  - jekyll-gist
+  - jekyll-paginate
+  - jekyll-seo-tag
 
 # Custom vars
 version: 1.0.0
