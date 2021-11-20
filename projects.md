@@ -3,7 +3,9 @@ layout: page
 title: Projects
 ---
 
-PAGE UNDER CONSTRUCTION. 
+## 🦁 Roar
+[[source](https://github.com/dannydenenberg/roar)]
+- A Twitter clone that allows you to edit tweets or "roars".
 
 ## 📈 Faux Market 
 [[demo](https://faux-market.herokuapp.com/)][[source](https://github.com/dannydenenberg/stock-trading)] 
