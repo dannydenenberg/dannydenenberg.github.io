@@ -3,59 +3,35 @@ layout: default
 title: Home
 ---
 
-<div id="about-me">
+<div id="about-me" style="text-align: center;">
   <!-- <br> -->
-  <h2>Welcome to my site.</h2>
-  <!-- <blockquote style="padding-left: 10px"> -->
-  <p>I present a collection of my essays, each of which explores
-    select
-    areas
-    of
-    Computer Science.</p>
-  <!-- <p>Below is a <u><i>collection</i> of essays</u> I wrote each of which goes in depth into <strong>highly
-      select</strong>
-    areas
-    of
-    Computer Science.</p> -->
-  <p>All articles are well-researched and candid. <div style="display:none;">Over <code>100,000</code> people have read
-      my writings.</div>
+  <h1>Hey,</h1>
+
+  I appreciate you visiting my home page.
+  <p><br style="line-height: 1.5em;"/>Here are some things I've written about topics I enjoy. 
+    <br/>
+    Take a look at my <a href="/projects">projects</a> and full list of <a href="/posts">posts</a> for more.
+    <br/>
+    <br/>
+    <span style='font-family: "Permanent Marker"; font-size: xx-large;'>-Danny Denenberg</span>
+    <br/><br/>
+    <span style="font-family: monospace;">danny [at] denenberg [dot] com</span>
   </p>
 
-  <div>
-    <div class="message">
-      <p>> See a <strong>full list</strong> of posts in <a href="/listings">the archive.</a></p>
-    </div>
-  </div>
+</div>
 
-  <!-- <h3>A little about me. I'm...</h3>
-  <ul>
-    <li>Currently on a gap year before Harvard (matriculating in 2022)<img id="school-logo" src="/goods/harvahd.png" />
+<hr>
+
+<div id="section-title">
+  <h2 style="padding-bottom: 10px;">What's new?</h2>
+  <ul style='text-align: initial' id="favorites">
+    {% for post in site.posts limit:4 %}
+    <li>
+      <a href="{{post.url}}">{{post.title}}</a><span class="post-date">{{ post.date | date_to_string }}</span>
     </li>
-    <li>A software developer </li>
-    <li>An award-winning actor and singer<img id="school-logo" src="/goods/central.png" /></li>
-    <li>A classically-trained pianist</li>
-    <li>A Bikram yogi 🧘‍♀️</li>
-  </ul> -->
-
-  <!-- <p></p> -->
-  <!-- </blockquote> -->
-
-  <!-- <p>Here I share my knowledge on select areas of Computer Science. I gather the data to save you hours.</p> -->
-
+    {% endfor %}
+  </ul>
 </div>
-
-<!-- <div id="photo-div">
-  <img id="home-img" src="/goods/dannyseniorphoto.jpeg" width=350 alt="Danny's Bike in Canada" srcset="" />
-
-</div> -->
-
-
-<!-- <br />
-<div id='down-arrow'>
-  <span>&darr;</span>
-</div>
-<br /> -->
-
 
 <div id="section-title">
   <h2 style="padding-bottom: 10px;">A few of my favorites.</h2>
@@ -95,16 +71,6 @@ title: Home
 </div> -->
 
 
-<div id="section-title">
-  <h2 style="padding-bottom: 10px;">What's new?</h2>
-  <ul style='text-align: initial' id="favorites">
-    {% for post in site.posts limit:4 %}
-    <li>
-      <a href="{{post.url}}">{{post.title}}</a><span class="post-date">{{ post.date | date_to_string }}</span>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
 
 <br />
 

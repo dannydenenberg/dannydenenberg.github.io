@@ -4,8 +4,9 @@
 
   <body>
     <div class="container content">
+      <!--
       <div class="masthead">
-        <h3 class="masthead-title">
+        <h2 class="masthead-title">
           <a href="/" title="Home">{{ site.title }}</a>
 
           <br class="mobile-break" />
@@ -15,20 +16,67 @@
                 display: none;
               }
             }
+
+           
           </style>
 
-          {% for page in site.pages_list %} &nbsp;&nbsp;&nbsp;<small
-            ><a href="{{ page[1]  }}">{{ page[0] }}</a></small
-          >
+          {% for page in site.pages_list %} &nbsp;&nbsp;&nbsp;
+  
+          <span style="">
+          <small>
+            <a href="{{ page[1]  }}">{{ page[0] }}</a>
+          </small>
+        </span>
           {% endfor %}
         </h3>
       </div>
+      -->
+
+      <!-- ***************** NEW MINIMALIST METHOD OF NAV: ***************** -->
+      <div class="masthead">
+
+        {% if page.url != "/" %}
+        < <span id="sitepageitem"><a href="/">home</a></span>
+        {% endif %}
+        
+        {% for p in site.pages_list %} 
+        {% if page.url == p[1] %}
+        <span id="sitepageitem">{{ p[0] }}</span>
+        {% else %}
+        <span id="sitepageitem"><a href="{{ p[1]  }}">{{ p[0] }}</a></span> 
+        {% endif %}
+        
+        {% endfor %}
+        
+      </div>
+
+      <hr>
+
+      <style>
+        #sitepageitem:after {
+              content: "\00a0 | ";
+        }
+        hr {
+    position: relative;
+    margin: 1.5rem 0;
+    /* border: 0; */
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #fff;
+}
+hr {
+    width: 100px;
+    height: 1px;
+    margin: 2rem auto 2rem auto !important;
+    background-color: var(--hr-color);
+    /* border: 0; */
+}
+      </style>
 
       {{ content }} {% include comments.html %}
 
       <div class="footer">
         <p>
-          &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+          &copy; {{ site.time | date: '%Y' }}. Made with ❤️. 
           <a href="https://github.com/dannydenenberg">Github</a>
         </p>
       </div>

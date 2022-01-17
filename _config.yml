@@ -38,11 +38,11 @@ github:
 
 # This is the list of pages to include in the header of the website.
 pages_list:
-  Resume: "/danny's resume.pdf"
-  About: "/about/"
-  Listings: "/listings/"
-  Projects: "/projects/"
-  Feed: "/atom.xml"
+  about: "/about/"
+  resume: "/danny's resume.pdf"
+  # Posts: "/posts/"
+  # Projects: "/projects/"
+  # Feed: "/atom.xml"
 
 # Allow URL Redirects:
 #  * https://help.github.com/articles/redirects-on-github-pages
