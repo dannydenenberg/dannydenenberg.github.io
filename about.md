@@ -8,26 +8,26 @@ title: About
 <hr/>
 
 <div class="row">
-  <div class="column1">Begin.</div>
+  <div class="column1">Begin.</div> <br class="mobile-break" />
   <div class="column2">I was born in Omaha, NE during a snowy January, a day after J.R.R. Tolkien’s eleventy-first birthday. The oldest of five in a big Jewish family, my childhood included much kvelling and kvetching over my meshugenah siblings.</div>
 </div>
-
+          
 <br/>
 
 <div class="row">
-  <div class="column1">Music.</div>
+  <div class="column1">Music.</div> <br class="mobile-break" />
   <div class="column2">My love affair. I used to sing myself to sleep when I was 2, 3, 4 years old. It’s turned into theater and vocal competitions and classical piano and guitar and even singing for Katy Perry (you can ask me about that one later).</div>
 </div>
 <br/>
 <div class="row">
-  <div class="column1">School.</div>
+  <div class="column1">School.</div> <br class="mobile-break" />
   <div class="column2">
   Harvard University, concentrating in (probably) CS with secondaries in (maybe) Music and (perhaps) Jewish Studies.<br/><br/>
    Graduated Central High in 2021. Go eagles!</div>
 </div>
 <br/>
 <div class="row">
-  <div class="column1">Now.</div>
+  <div class="column1">Now.</div> <br class="mobile-break" />
   <div class="column2">On a year off before college. I will be living in Tel Aviv starting late January working as a Data Scientist Intern for Big ID. 
   
   <br/><br/>I just finished being <a href="https://en.wikipedia.org/wiki/Hal_France">Hal France</a>’s musical assistant at the University of Nebraska at Omaha.
@@ -38,7 +38,7 @@ I worked at Sanborn Western Camps for three months this past summer as an Outdoo
 
 <br/>
 <div class="row">
-  <div class="column1">Thank you for reading.</div>
+  <div class="column1">Thank you for reading.</div> <br class="mobile-break" />
   <div class="column2"></div>
 </div> 
 
@@ -75,4 +75,12 @@ If you like my website, you can follow me on instagram [@dannydenenberg](https:/
   display: table;
   clear: both;
 }
+
+@media screen and (min-width: 600px) {
+ .mobile-break {
+    display: none;
+ }
+}
+
+           
 </style>
