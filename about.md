@@ -28,7 +28,7 @@ title: About
 <br/>
 <div class="row">
   <div class="column1">Now.</div> <br class="mobile-break" />
-  <div class="column2">On a year off before college. I will be living in Tel Aviv starting late January working as a Data Scientist Intern for Big ID. 
+  <div class="column2">On a year off before college. I am living in Tel Aviv working as a Data Science Intern for <a href="https://bigid.com/">Big ID</a>. 
   
   <br/><br/>I just finished being <a href="https://en.wikipedia.org/wiki/Hal_France">Hal France</a>’s musical assistant at the University of Nebraska at Omaha.
 <br/><br/>

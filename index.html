@@ -3,14 +3,13 @@ layout: default
 title: Home
 ---
 
-<div id="about-me" style="text-align: center;">
-  <!-- <br> -->
+<!-- <div id="about-me" style="">
   <h1>Hey,</h1>
 
   I appreciate you visiting my home page.
   <p><br style="line-height: 1.5em;"/>Here are some things I've written about topics I enjoy. 
     <br/>
-    Take a look at my <a href="/projects">projects</a> and full list of <a href="/posts">posts</a> for more.
+    Take a look at my <a href="/projects">projects</a> for more.
     <br/>
     <br/>
     <span style='font-family: "Permanent Marker"; font-size: xx-large;'>-Danny Denenberg</span>
@@ -18,11 +17,23 @@ title: Home
     <span style="font-family: monospace;">danny [at] denenberg [dot] com</span>
   </p>
 
-</div>
+</div> -->
 
-<hr>
+<!-- <hr> -->
 
-<div id="section-title">
+<h1>Latest Posts</h1>
+
+{% assign postsByYearMonth = site.posts | group_by_exp: "post", "post.date | date: '%B %Y'" %}
+{% for yearMonth in postsByYearMonth %}
+  <h2>{{ yearMonth.name }}</h2>
+  <ul>
+    {% for post in yearMonth.items %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
+<!-- <div id="section-title">
   <h2 style="padding-bottom: 10px;">What's new?</h2>
   <ul style='text-align: initial' id="favorites">
     {% for post in site.posts limit:4 %}
@@ -36,7 +47,6 @@ title: Home
 <div id="section-title">
   <h2 style="padding-bottom: 10px;">A few of my favorites.</h2>
   <ul style='text-align: initial' id="favorites">
-    <!-- A bit brute forceeee, but it works....*sigh* -->
     <li>
       <a href="{% post_url 2020-03-21-go-strings %}">Strings in go (and what the heck utf-8 is)</a><span
         class="post-date">21 Mar 2020</span>
@@ -63,7 +73,7 @@ title: Home
       <a href="{% post_url 2018-12-14-recursion %}">Recursive programming</a><span class="post-date">14 Dec 2018</span>
     </li>
   </ul>
-</div>
+</div> -->
 <!-- 
 <br />
 <div id='down-arrow'>
