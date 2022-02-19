@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Permanent Marker';
-  src: url("/goods/PermanentMarker-Regular.ttf") format('truetype');
+  font-family: 'Inter';
+  src: url("/goods/Inter/Inter-Regular.ttf") format('truetype');
 }
 
 :root {
@@ -35,10 +35,11 @@
   --blue-400: #4dabf7;
   --yellow-100: #fff3bf;
 
-  --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --body-font: "PT Serif", Georgia, "Times New Roman", serif;
+  // --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  //   "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  //   "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  // --body-font: "PT Serif", Georgia, "Times New Roman", serif;
+  --body-font: Inter, serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --body-font-size: 20px;
   --body-line-height: 1.5;
   --body-color: var(--gray-700);
@@ -64,10 +65,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-color: var(--dark-poole-002);
-    --body-bg: var(--dark-poole-001);
+    // --body-color: var(--dark-poole-002);
+    // --body-bg: var(--dark-poole-001);
+    --body-color: #abb2bf;
+    --body-bg: #282c34;
 
-    --heading-color: #fff;
+    --heading-color: #dee2e6;
 
     --link-color: var(--blue-300);
     --link-hover-color: var(--blue-400);
@@ -76,6 +79,10 @@
 
     --code-bg: var(--gray-900) !important;
   }
+
+  // h1, h2, h3, h4, h5, h6 {
+  //   color: #dee2e6
+  // }
 
 }
 

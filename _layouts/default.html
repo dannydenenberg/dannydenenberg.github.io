@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-  {% include head.html %} {% include google_analytics.html %}
+{% include head.html %} {% include google_analytics.html %}
 
-  <body>
-    <div class="container content">
-      
-      <div class="masthead">
-        <h2 class="masthead-title">
-          <a href="/" title="Home">{{ site.title }}</a>
+<body>
+  <div class="container content">
 
-          <br class="mobile-break" />
-          <style>
-            @media screen and (min-width: 600px) {
-              .mobile-break {
-                display: none;
-              }
+    <div class="masthead">
+      <h2 class="masthead-title">
+        <a href="/" title="Home">{{ site.title }}</a>
+
+        <br class="mobile-break" />
+
+        <div id="nav-system">
+          {% for page in site.pages_list %} &nbsp;&nbsp;&nbsp;
+
+          <span style="">
+            <small>
+              <a href="{{ page[1]  }}">{{ page[0] }}</a>
+            </small>
+          </span>
+
+          {% endfor %}
+        </div>
+
+        <style>
+          @media screen and (min-width: 600px) {
+            .mobile-break {
+              display: none;
             }
 
-           
-          </style>
-
-          {% for page in site.pages_list %} &nbsp;&nbsp;&nbsp;
-  
-          <span style="">
-          <small>
-            <a href="{{ page[1]  }}">{{ page[0] }}</a>
-          </small>
-        </span>
-          {% endfor %}
+            #nav-system {
+              float: left;
+            }
+          }
+          
+          #nav-system {
+            float: right;
+          }
+        </style>
         </h3>
-      </div>
-     
+    </div>
 
-      <!-- ***************** NEW MINIMALIST METHOD OF NAV: ***************** -->
-      <!-- <div class="masthead">
+
+    <!-- ***************** NEW MINIMALIST METHOD OF NAV: ***************** -->
+    <!-- <div class="masthead">
 
         {% if page.url != "/" %}
         < <span id="sitepageitem"><a href="/">home</a></span>
@@ -50,36 +60,39 @@
         
       </div> -->
 
-      <hr>
+    <hr>
 
-      <style>
-        #sitepageitem:after {
-              content: "\00a0 | ";
-        }
-        hr {
-    position: relative;
-    margin: 1.5rem 0;
-    /* border: 0; */
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #fff;
-}
-hr {
-    width: 100px;
-    height: 1px;
-    margin: 2rem auto 2rem auto !important;
-    background-color: var(--hr-color);
-    /* border: 0; */
-}
-      </style>
+    <style>
+      #sitepageitem:after {
+        content: "\00a0 | ";
+      }
 
-      {{ content }} {% include comments.html %}
+      hr {
+        position: relative;
+        margin: 1.5rem 0;
+        /* border: 0; */
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #fff;
+      }
 
-      <div class="footer">
-        <p>
-          &copy; {{ site.time | date: '%Y' }}. Made with ❤️. 
-          <a href="https://github.com/dannydenenberg">Github</a>
-        </p>
-      </div>
+      hr {
+        width: 100px;
+        height: 1px;
+        margin: 2rem auto 2rem auto !important;
+        background-color: var(--hr-color);
+        /* border: 0; */
+      }
+    </style>
+
+    {{ content }} {% include comments.html %}
+
+    <div class="footer">
+      <p>
+        &copy; {{ site.time | date: '%Y' }}. Made with ❤️.
+        <a href="https://github.com/dannydenenberg">Github</a>
+      </p>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

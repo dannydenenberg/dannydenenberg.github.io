@@ -21,14 +21,23 @@ title: Home
 
 <!-- <hr> -->
 
-<h1>Latest Posts</h1>
+<!-- <h1>Latest Posts</h1> -->
 
 {% assign postsByYearMonth = site.posts | group_by_exp: "post", "post.date | date: '%B %Y'" %}
 {% for yearMonth in postsByYearMonth %}
   <h2>{{ yearMonth.name }}</h2>
   <ul>
     {% for post in yearMonth.items %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      <li><a href="{{ post.url }}">{{ post.title }}</a>
+      <span style="float: right;" class="reading-time" title="Estimated read time">
+        {% assign words = post.content | number_of_words %}
+        {% if words < 360 %}
+            1 min
+        {% else %}
+            {{ words | divided_by:180 }} mins
+        {% endif %}
+    </span>
+  </li>
     {% endfor %}
   </ul>
 {% endfor %}
