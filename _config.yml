@@ -39,7 +39,7 @@ github:
 # This is the list of pages to include in the header of the website.
 pages_list:
   About: "/about/"
-  Resume: "/danny's resume.pdf"
+  # Resume: "/danny's resume.pdf"
   # Projects: "/projects/"
   # Feed: "/atom.xml"
 
